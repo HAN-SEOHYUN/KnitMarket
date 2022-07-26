@@ -13,8 +13,7 @@ public class TestController {
         return "뜨개장터 테스트";
     }
 
-    @GetMapping("/test")//localhost:8086
-    @ResponseBody
+    @GetMapping("/test/show")//localhost:8086
     public String TestWriteForm(){
        return "TestWrite";
     }
