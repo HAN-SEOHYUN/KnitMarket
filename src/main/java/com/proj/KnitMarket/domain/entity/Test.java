@@ -1,13 +1,11 @@
-package com.proj.KnitMarket.domain;
+package com.proj.KnitMarket.domain.entity;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor
@@ -17,11 +15,14 @@ public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int no;
+
     private String title;
 
+    private String content;
+
     @Builder
-    public Test(int no, String title) {
-        this.no = no;
+    public Test(String title, String content) {
         this.title = title;
+        this.content = content;
     }
 }
