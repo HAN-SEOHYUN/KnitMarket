@@ -18,14 +18,13 @@ class TestControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("/post요청시 출력")
-    void test()throws Exception {
-        // expected
-        mockMvc.perform(get("/")) //해당 url 로 요청함
-                .andExpect(status().isOk()) // 응답 status 를 ok 로 테스트
-                .andExpect(content().string("HELLO WORLD")) //content() ~로 내용등록
-                .andDo(print()); //http 요청에 대한 summary 를 남겨주는 print 메서드
-    }
+    @DisplayName("test get 요청 시 출력")
+    void test2()throws Exception{
 
+        mockMvc.perform(get("/test"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("TestWrite"))
+                .andDo(print());
+    }
 
 }
