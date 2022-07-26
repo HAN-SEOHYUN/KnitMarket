@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class TestController {
 
-   /*@GetMapping("/")
+   @GetMapping("/")
     @ResponseBody
     public String test(){
         return "뜨개장터 테스트";
-    }*/
+    }
 
     @GetMapping("/test")//localhost:8086
+    @ResponseBody
     public String TestWriteForm(){
-
        return "TestWrite";
     }
 }
