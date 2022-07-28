@@ -1,0 +1,11 @@
+.hotItemDiv {
+    flex: 0 0 75%;
+    max-width: 75%;
+    border: 1px solid black;
+    height: 1000px;
+}
+img#logo {
+    width: 206px;
+}
+
+header.header {margin-bottom: 37px;}
