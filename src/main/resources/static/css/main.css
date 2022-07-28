@@ -4,4 +4,8 @@
     border: 1px solid black;
     height: 1000px;
 }
+img#logo {
+    width: 206px;
+}
 
+header.header {margin-bottom: 37px;}
