@@ -1,7 +1,5 @@
 package com.proj.KnitMarket.controller;
 
-import com.proj.KnitMarket.dto.TestDto;
-import com.proj.KnitMarket.service.TestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,7 +13,7 @@ public class IndexController {
     @GetMapping("/knitmarket")
     public String test() {
 
-        return "index";
+        return "index.mustache";
     }
 
 }
