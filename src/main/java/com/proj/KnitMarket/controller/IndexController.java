@@ -6,14 +6,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@Controller
 @RequiredArgsConstructor
+@Controller
 public class IndexController {
 
     @GetMapping("/knitmarket")
-    public String test() {
+    public String index() {
 
-        return "index.mustache";
+        log.info("indexController!!");
+
+        return "index";
     }
 
 }
+
+
+
