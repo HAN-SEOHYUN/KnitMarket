@@ -1,11 +1,6 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <div th:replace="/fragments/top.html :: fragment-head"></div>
-</head>
-<body>
+{{>layout/header}}
 
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="/layout/top.mustache :: fragment-header"></header>
 
 <!--페이지소스 시작-->
 <section class="hero">
@@ -45,8 +40,4 @@
 <!--페이지소스 끝-->
 
 
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
-
-
-</body>
-</html>
+{{>layout/footer}}
