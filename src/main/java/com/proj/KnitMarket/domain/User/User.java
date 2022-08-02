@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.domain.User;
 
+import com.proj.KnitMarket.domain.Cart.Cart;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +23,18 @@ public class User {
     private String hp;
     private String email;
     private String addressId;
-    private String accountBank;
-    private String accountNo;
+    private String accountBank; //은행
+    private String accountNo; //계좌번호
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart; //장바구니
+
+
+
+
+
+
+
 
 
     @Builder
