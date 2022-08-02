@@ -1,4 +1,10 @@
-{{>layout/top}}
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="/fragments/top.html :: fragment-header"></header>
+
+<!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/user/login.css" type="text/css">
 
 <section class="hero">
@@ -51,7 +57,7 @@
                             <div class ="social-img">
                                 <img src="/img/Google.png" alt="구글로고">
                             </div>
-                            <div id="btn-google" class="login-btn"><a href="#" style="color: black;">구글 로그인</a></div>
+                            <div id="btn-google" class="login-btn"><a href="/oauth2/authorization/google" style="color: black;">구글 로그인</a></div>
 
 
                         </div>
@@ -67,4 +73,8 @@
     </div>
 </section>
 
-{{>layout/bottom}}
+<!--페이지소스 끝-->
+<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+
+</body>
+</html>
