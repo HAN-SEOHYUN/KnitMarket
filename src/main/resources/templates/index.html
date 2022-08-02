@@ -1,5 +1,8 @@
-{{>layout/top}}
-
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="/fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <section class="hero">
     <div class="container">
@@ -36,6 +39,7 @@
     </div>
 </section>
 <!--페이지소스 끝-->
+<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
 
-
-{{>layout/bottom}}
+</body>
+</html>
