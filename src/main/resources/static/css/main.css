@@ -1,8 +1,9 @@
 .hotItemDiv {
-    flex: 0 0 75%;
-    max-width: 75%;
-    border: 1px solid black;
-    height: 1000px;
+    flex: 0 0 100%;
+    max-width: 100%;
+    border: 1px solid #000000;
+    height:700px;
+    position: relative;
 }
 img#logo {
     width: 206px;
