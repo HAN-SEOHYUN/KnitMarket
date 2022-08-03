@@ -7,11 +7,22 @@
 <section class="hero">
     <div class="container">
         <div class="row">
-            <div class ="hotItemDiv">
+            <!--상품목록시작-->
+            <div class="item-wrapper-div">
 
 
+                <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,5)}">
+                    <img src="/img/4VIXXZ3LKFCRPAQ4GU5YMANFYI.jpg" class="card-img-top" alt="상품사진">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
 
 
+                </div>
+                <!--상품목록 끝-->
             </div>
         </div>
     </div>
