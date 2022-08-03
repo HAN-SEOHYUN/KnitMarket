@@ -7,33 +7,22 @@
 <section class="hero">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
-                <div class="hero__categories">
-                    <div class="hero__categories__all">
-                        <i class="fa fa-bars"></i>
-                        <span>All departments</span>
+            <!--상품목록시작-->
+            <div class="item-wrapper-div">
+
+
+                <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,5)}">
+                    <img src="/img/4VIXXZ3LKFCRPAQ4GU5YMANFYI.jpg" class="card-img-top" alt="상품사진">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <ul>
-                        <li><a href="#">테스트</a></li>
-                        <li><a href="#">Vegetables</a></li>
-                        <li><a href="#">Fruit & Nut Gifts</a></li>
-                        <li><a href="#">Fresh Berries</a></li>
-                        <li><a href="#">Ocean Foods</a></li>
-                        <li><a href="#">Butter & Eggs</a></li>
-                        <li><a href="#">Fastfood</a></li>
-                        <li><a href="#">Fresh Onion</a></li>
-                        <li><a href="#">Papayaya & Crisps</a></li>
-                        <li><a href="#">Oatmeal</a></li>
-                        <li><a href="#">Fresh Bananas</a></li>
-                    </ul>
+
+
                 </div>
-            </div>
-
-            <div class ="hotItemDiv">
-
-
-
-
+                <!--상품목록 끝-->
             </div>
         </div>
     </div>
