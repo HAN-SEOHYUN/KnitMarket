@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="/fragments/top.html :: fragment-header"></header>
+<!--페이지소스 시작-->
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <!--상품목록시작-->
+            <div class="item-wrapper-div">
+
+                <div class="item-wrapper-top">
+                    <div class="search-area">
+                        <select><option>옵션</option></select>&nbsp;
+                        <input type="text" class="search-keyword">&nbsp;
+                        <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
+                    </div>
+                    <div class="button-area"><button type="button" class="btn btn-outline-secondary" id="register-btn">상품등록</button></div>
+
+
+                </div>
+                <div class="item-wrapper-body">
+
+                    <form th:action="@{/knitmarket/register}" th:object="${item}" method="post" enctype="multipart/form-data">
+                        <div class="product-info">
+                            <div class="product-info-div" id="product-name-div">
+                                <label for="itemName">상품명</label>
+                                <input type="text" id="itemName" th:field="*{itemName}">
+                            </div>
+                            <div class="product-info-div" id="product-seller-div">
+                                <label for="seller">판매자</label>
+                                <input type="text" id="seller" >
+                            </div>
+                            <div class="product-info-div" id="product-price-div">
+                                <label for="price">상품가격</label>
+                                <input type="text" id="price" th:field="*{price}">
+                            </div>
+                            <div class="product-info-div" id="product-desc-div">
+                                <label for="itemDesc">상품설명</label>
+                                <textarea id="itemDesc" th:field="*{itemDesc}"></textarea>
+                            </div>
+                            <div>
+                                <input type="file" class="form-control" id="file">
+                            </div>
+                        </div>
+                        <button class="btn-primary" type="submit">
+                            전송
+                        </button>
+
+                    </form>
+
+
+
+
+                </div>
+                <!--상품목록 끝-->
+            </div>
+        </div>
+    </div>
+</section>
+<!--페이지소스 끝-->
+<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+
+</body>
+</html>

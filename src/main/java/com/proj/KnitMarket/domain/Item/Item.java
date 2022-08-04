@@ -1,6 +1,7 @@
 package com.proj.KnitMarket.domain.Item;
 
 import com.proj.KnitMarket.domain.User.User;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,12 +35,23 @@ public class Item {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate regTime; //상품 등록 시간
 
-    private String imgName; //상품이미지이름
-    private String imgPath; //상품이미지경로
+    @Column(nullable = true)
+    private Long fileId; //파일 entity id
 
     @PrePersist // DB에 INSERT 되기 직전에 실행. 즉 DB에 값을 넣으면 자동으로 실행됨
     public void regTime() {
         this.regTime = LocalDate.now();
     }
 
+    @Builder
+    public Item(Long id, String itemName, User seller, int price, String itemDesc, int sellStatus, LocalDate regTime, Long fileId) {
+        this.id = id;
+        this.itemName = itemName;
+        this.seller = seller;
+        this.price = price;
+        this.itemDesc = itemDesc;
+        this.sellStatus = sellStatus;
+        this.regTime = regTime;
+        this.fileId = fileId;
+    }
 }
