@@ -4,21 +4,43 @@
 <body>
 <header th:replace="/fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
+<link rel="stylesheet" href="/css/seller/register.css" type="text/css">
+
 <section class="hero">
     <div class="container">
         <div class="row">
             <!--상품목록시작-->
             <div class="item-wrapper-div">
 
-
-                <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,5)}">
-                    <img src="/img/4VIXXZ3LKFCRPAQ4GU5YMANFYI.jpg" class="card-img-top" alt="상품사진">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class="item-wrapper-top">
+                    <div class="search-area">
+                        <select><option>옵션</option></select>&nbsp;
+                        <input type="text" class="search-keyword">&nbsp;
+                        <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
                     </div>
+                    <div class="button-area"><button type="button" class="btn btn-outline-secondary" id="register-btn">상품등록</button></div>
+
+
+                </div>
+                <div class="item-wrapper-body">
+
+                    <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,2)}">
+                        <img src="/img/4VIXXZ3LKFCRPAQ4GU5YMANFYI.jpg" class="card-img-top" alt="상품사진">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                                the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+
+                </div>
+                <div class="item-wrapper-bottom">
+
+
+                </div>
+
+
+
 
 
                 </div>
