@@ -15,9 +15,4 @@ public class ItemRequest {
     private User seller;
     private int price;
     private String itemDesc;
-    private int sellStatus;
-    private LocalDate regTime;
-    private Long fileId;
-
-
 }

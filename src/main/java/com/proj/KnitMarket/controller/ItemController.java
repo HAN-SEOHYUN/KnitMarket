@@ -41,22 +41,14 @@ public class ItemController {
     @PostMapping("/register")
     public String saveFormRequests(@ModelAttribute("item") ItemRequest itemRequest) throws IOException {
         String itemName = itemRequest.getItemName();
-        User seller = itemRequest.getSeller();
         int price = itemRequest.getPrice();
         String itemDesc = itemRequest.getItemDesc();
-        int sellStatus = itemRequest.getSellStatus();
-        LocalDate regTime = itemRequest.getRegTime();
-        Long fileId = itemRequest.getFileId();
 
 
         ItemDto itemDto = ItemDto.builder()
                 .itemName(itemName)
-                .seller(seller)
                 .price(price)
                 .itemDesc(itemDesc)
-                .sellStatus(sellStatus)
-                .regTime(regTime)
-                .fileId(fileId)
                 .build();
 
         if (itemRequest.getFile() != null) {
