@@ -22,6 +22,7 @@ public class ItemDto {
 
     public Item toEntity(){
         return Item.builder()
+                .id(this.id)
                 .itemName(this.itemName)
                 .seller(this.seller)
                 .price(this.price)
@@ -33,7 +34,8 @@ public class ItemDto {
     }
 
     @Builder
-    public ItemDto(String itemName, User seller, int price, String itemDesc, int sellStatus, LocalDate regTime, Long fileId) {
+    public ItemDto(Long id, String itemName, User seller, int price, String itemDesc, int sellStatus, LocalDate regTime, Long fileId) {
+        this.id = id;
         this.itemName = itemName;
         this.seller = seller;
         this.price = price;

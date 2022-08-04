@@ -44,7 +44,8 @@ public class Item {
     }
 
     @Builder
-    public Item(String itemName, User seller, int price, String itemDesc, int sellStatus, LocalDate regTime, Long fileId) {
+    public Item(Long id, String itemName, User seller, int price, String itemDesc, int sellStatus, LocalDate regTime, Long fileId) {
+        this.id = id;
         this.itemName = itemName;
         this.seller = seller;
         this.price = price;
