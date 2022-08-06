@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name="item")
 @Entity
 public class Item extends BaseEntity {
@@ -28,8 +28,13 @@ public class Item extends BaseEntity {
    // private SellStatus sellStatus; //상품 판매 상태 (0 : 판매중 / 1 : 품절)
 
     @Builder
-    public Item(Long id,String itemName, int price, String itemDesc) {
-        this.id=id;
+    public Item(String itemName, int price, String itemDesc) {
+        this.itemName = itemName;
+        this.price = price;
+        this.itemDesc = itemDesc;
+    }
+
+    public void update(String itemName, int price, String itemDesc){
         this.itemName = itemName;
         this.price = price;
         this.itemDesc = itemDesc;
