@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,19 +20,16 @@ public class ItemController {
     private String uploadDir;
 
 
-    @GetMapping("/register")
-    public String itemForm(Model model, ItemDto itemDto) {
-        model.addAttribute("item",itemDto);
+    @GetMapping(value="/register")
+    public String itemForm(ItemDto itemDto) {
+
         return "item/register";
     }
 
     @PostMapping(value = "/register")
-    public String itemAdd(@Valid ItemDto itemDto, BindingResult bindingResult,Model model) throws Exception {
-        log.info("상품등록 컨트롤러!");
-
-           long temp= itemService.save(itemDto);
-           log.info("상품번호={}",temp);
-
-        return "redirect:/register";
+    public String save(ItemDto itemDto) {
+        Long itemId = itemService.save(itemDto);
+        log.info("상품번호 ={}",itemId);
+        return "redirect:/knitmarket";
     }
 }
