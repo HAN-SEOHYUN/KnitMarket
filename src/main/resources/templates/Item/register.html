@@ -1,10 +1,35 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/top.html :: fragment-head"></head>
+<script type="text/javascript">
+    $(function (){
+        alert("sadf");
+        var data = {
+            itemName: $('#itemName').val(),
+            itemDesc: $('#itemDesc').val(),
+            price: $('#price').val()
+        };
+        $('#save_Btn').click(function(){
+            alert("하");
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/v1/register',
+                dataType: 'json',
+                contentType:'application/json; charset=utf-8',
+                data: JSON.stringify(data)
+            }).done(function() {
+                alert('상품이 등록되었습니다.');
+                window.location.href = '/';
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        });
+    });
+</script>
 <body>
 <header th:replace="/fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
-
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -23,7 +48,7 @@
                 </div>
                 <div class="item-wrapper-body">
 
-                    <form th:action="@{/knitmarket/register}" method="post" enctype="multipart/form-data">
+                    <form>
                         <div class="product-info">
                             <div class="product-info-div" id="product-name-div">
                                 <label for="itemName">상품명</label>
@@ -45,7 +70,7 @@
                                 <input type="file" class="form-control" id="file">
                             </div>-->
                         </div>
-                        <button class="btn-primary" type="submit">
+                        <button class="btn-primary" type="submit" id="save_Btn">
                             전송
                         </button>
 
@@ -62,6 +87,5 @@
 </section>
 <!--페이지소스 끝-->
 <footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
-
 </body>
 </html>
