@@ -1,6 +1,5 @@
 package com.proj.KnitMarket.Service;
 
-import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Item.ItemRepository;
 import com.proj.KnitMarket.dto.ItemDto;
 import lombok.RequiredArgsConstructor;
@@ -10,15 +9,13 @@ import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
-@Transactional
 public class ItemService {
 
     private final ItemRepository itemRepository;
 
-    public Long save(ItemDto itemDto)throws Exception{
-        Item item= itemDto.createItem();
-        itemRepository.save(item);
-        return item.getId();
+    @Transactional //db 트랜잭션 자동으로 commit 해줌
+    public Long save(ItemDto itemDto){
+        return itemRepository.save(itemDto.toEntity()).getId();
     }
 
 }

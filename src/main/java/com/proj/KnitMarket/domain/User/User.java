@@ -1,13 +1,6 @@
 package com.proj.KnitMarket.domain.User;
 
 import com.proj.KnitMarket.Constant.Role;
-import com.proj.KnitMarket.domain.Address.Address;
-import com.proj.KnitMarket.domain.Cart.Cart;
-import com.proj.KnitMarket.domain.Item.Item;
-import com.proj.KnitMarket.domain.OrderInfo.OrderInfo;
-import com.proj.KnitMarket.domain.OrderItems.OrderItems;
-import com.proj.KnitMarket.domain.Sell.Sell;
-import com.proj.KnitMarket.domain.SellItems.SellItems;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +27,9 @@ public class User {
     private String hp; //전화번호
     private String email; //이메일
 
-    @Embedded
+/*    @Embedded
     @Column(nullable = true)
-    private Address address; //주소번호
+    private Address address; //주소번호*/
 
     private String accountBank; //은행
     private String accountNo; //계좌번호
@@ -44,11 +37,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role; // 회원유형 (일반회원 / 판매자)
 
-    @OneToMany(mappedBy = "user")
+/*    @OneToMany(mappedBy = "user")
     private List<OrderInfo> order = new ArrayList<>(); // 구매자의 주문정보
 
     @OneToMany(mappedBy = "user")
-    private List<OrderItems> orderItem = new ArrayList<>(); // 구매자의 주문상세정보
+    private List<OrderItems> orderItem = new ArrayList<>(); // 구매자의 주문상세정보*/
 /*
     @OneToMany(mappedBy = "seller")
     private List<Sell> sell = new ArrayList<>(); // 판매자의 판매정보
@@ -62,7 +55,7 @@ public class User {
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private LocalDate regDate; // 가입일
 
-    @Builder
+  /*  @Builder
     public User(long id, String name, String hp, String email, Address address, String accountBank, String accountNo, Role role, List<OrderInfo> order, List<OrderItems> orderItem, LocalDate regDate) {
         this.id = id;
         this.name = name;
@@ -75,6 +68,6 @@ public class User {
         this.order = order;
         this.orderItem = orderItem;
         this.regDate = regDate;
-    }
+    }*/
 }
 

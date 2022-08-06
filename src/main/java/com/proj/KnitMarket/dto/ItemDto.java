@@ -2,37 +2,40 @@ package com.proj.KnitMarket.dto;
 
 import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.Item.Item;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.lang.Nullable;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Getter @Setter
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 public class ItemDto {
     private Long id;
-
-    @NotNull(message = "상품명은 필수입력값입니다")
     private String itemName;
-    @NotNull(message = "가격은 필수입력값입니다")
     private int price;
-    @NotNull(message = "상품설명은 필수입력값입니다")
     private String itemDesc;
 
-    @Nullable
-    private SellStatus sellStatus;
+    //private SellStatus sellStatus;
 
-    private static ModelMapper modelMapper = new ModelMapper();
-
-    public Item createItem(){
-        return modelMapper.map(this,Item.class);
+    public Item toEntity(){
+        Item item = Item.builder()
+                .id(id)
+                .itemName(itemName)
+                .price(price)
+                .itemDesc(itemDesc)
+                .build();
+        return item;
     }
 
-    public static ItemDto of(Item item){
-        return modelMapper.map(item,ItemDto.class);
+    @Builder
+    public ItemDto(Long id, String itemName, int price, String itemDesc) {
+        this.id = id;
+        this.itemName = itemName;
+        this.price = price;
+        this.itemDesc = itemDesc;
     }
-
-
-
 }
