@@ -15,7 +15,7 @@ public class ItemService {
 
     //@Transactional : db 트랜잭션 자동으로 commit 해줌
     @Transactional //아이템 등록
-    public Long save(final ItemRequestDto itemDto){
+    public Long save(ItemRequestDto itemDto){
         return itemRepository.save(itemDto.toEntity()).getId();
     }
 

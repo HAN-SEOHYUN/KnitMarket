@@ -4,24 +4,22 @@ import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
+
 @Slf4j
 @RequiredArgsConstructor
-@Controller
-@RequestMapping("/knitmarket")
+@RestController
+@RequestMapping("/api/v1")
 public class ItemController {
 
     private ItemService itemService;
 
-    @GetMapping(value="/register")
-    public String itemForm() {
-        return "item/register";
-    }
-
     @PostMapping(value = "/register")
-    public String save(ItemRequestDto itemDto) {
+    public String save(@RequestBody ItemRequestDto itemDto) {
         log.info("아이템={}", itemDto.toString());
 
         Long itemId = itemService.save(itemDto);
