@@ -1,21 +1,25 @@
 $(function (){
-    var data = {
-        itemName: $('#itemName').val(),
-        itemDesc: $('#itemDesc').val(),
-        price: $('#price').val()
-    };
-    $('#saveBtn').click(function(){
+    alert("footer");
+
+    $('#save_Btn').click(function(){
+        var data = {
+            "itemName":$('#itemName').val(),
+            "itemDesc": $('#itemDesc').val(),
+            "price": $('#price').val()
+        };
+
+        alert("제이쿼리정상작동");
         $.ajax({
             type: 'POST',
-            url: '/api/v1/register',
+            url: '/knitmarket/register',
             dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
-        }).done(function() {
-            alert('상품이 등록되었습니다.');
-            window.location.href = '/';
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function (res) {
+                alert("등록성공");
+            }
         });
+
     });
 });
+

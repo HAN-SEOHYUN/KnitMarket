@@ -1,32 +1,6 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/top.html :: fragment-head"></head>
-<script type="text/javascript">
-    $(function (){
-        alert("sadf");
-        var data = {
-            itemName: $('#itemName').val(),
-            itemDesc: $('#itemDesc').val(),
-            price: $('#price').val()
-        };
-        $('#save_Btn').click(function(){
-            alert("하");
-
-            $.ajax({
-                type: 'POST',
-                url: '/api/v1/register',
-                dataType: 'json',
-                contentType:'application/json; charset=utf-8',
-                data: JSON.stringify(data)
-            }).done(function() {
-                alert('상품이 등록되었습니다.');
-                window.location.href = '/';
-            }).fail(function (error) {
-                alert(JSON.stringify(error));
-            });
-        });
-    });
-</script>
 <body>
 <header th:replace="/fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
@@ -70,7 +44,7 @@
                                 <input type="file" class="form-control" id="file">
                             </div>-->
                         </div>
-                        <button class="btn-primary" type="submit" id="save_Btn">
+                        <button class="btn-primary" id="save_Btn">
                             전송
                         </button>
 
@@ -86,6 +60,8 @@
     </div>
 </section>
 <!--페이지소스 끝-->
+
 <footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/register.js}"></script>
 </body>
 </html>
