@@ -13,18 +13,19 @@ import java.awt.*;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1")
 public class ItemController {
 
-    private ItemService itemService;
+    private final ItemService itemService;
 
-    @PostMapping(value = "/register")
-    public String save(@RequestBody ItemRequestDto itemDto) {
+    @PostMapping(value = "/knitmarket/register")
+    @ResponseBody
+    public Long save(@RequestBody ItemRequestDto itemDto) {
         log.info("아이템={}", itemDto.toString());
 
         Long itemId = itemService.save(itemDto);
 
         log.info("상품번호 ={}",itemId);
-        return "redirect:/knitmarket";
+
+        return itemId;
     }
 }
