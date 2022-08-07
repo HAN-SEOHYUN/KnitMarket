@@ -1,20 +1,18 @@
-package com.proj.KnitMarket.domain.User;
+package com.proj.KnitMarket.domain.Member;
 
 import com.proj.KnitMarket.Constant.Role;
-import lombok.Builder;
+import com.proj.KnitMarket.domain.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-public class User {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,15 +25,18 @@ public class User {
     private String hp; //전화번호
     private String email; //이메일
 
-/*    @Embedded
+    /*
+    @Enumerated(EnumType.STRING)
+    private Role role; // 회원유형 (일반회원 / 판매자)
+
+    @Embedded
     @Column(nullable = true)
-    private Address address; //주소번호*/
+    private Address address; //주소번호
 
     private String accountBank; //은행
     private String accountNo; //계좌번호
 
-    @Enumerated(EnumType.STRING)
-    private Role role; // 회원유형 (일반회원 / 판매자)
+
 
 /*    @OneToMany(mappedBy = "user")
     private List<OrderInfo> order = new ArrayList<>(); // 구매자의 주문정보
@@ -51,9 +52,6 @@ public class User {
 
     @OneToMany(mappedBy = "seller")
     private List <Item> item = new ArrayList<>(); // 판매자가 판매중인 상품들*/
-
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
-    private LocalDate regDate; // 가입일
 
   /*  @Builder
     public User(long id, String name, String hp, String email, Address address, String accountBank, String accountNo, Role role, List<OrderInfo> order, List<OrderItems> orderItem, LocalDate regDate) {
