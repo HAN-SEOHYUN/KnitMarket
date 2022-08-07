@@ -1,13 +1,10 @@
 package com.proj.KnitMarket.domain.Item;
 
-import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
-import com.proj.KnitMarket.domain.User.User;
+import com.proj.KnitMarket.domain.Member.Member;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -24,6 +21,10 @@ public class Item extends BaseEntity {
     private int price; //상품가격
 
     private String itemDesc; //상품 상세 설명
+
+/*    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="member_id")
+    private Member member; //상품 등록자*/
 
    // private SellStatus sellStatus; //상품 판매 상태 (0 : 판매중 / 1 : 품절)
 
