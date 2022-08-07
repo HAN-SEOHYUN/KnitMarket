@@ -14,12 +14,11 @@ public class ItemRequestDto {
     //private SellStatus sellStatus;
 
     public Item toEntity(){
-        Item item = Item.builder()
+       return Item.builder()
                 .itemName(itemName)
                 .price(price)
                 .itemDesc(itemDesc)
                 .build();
-        return item;
     }
 
     @Builder
