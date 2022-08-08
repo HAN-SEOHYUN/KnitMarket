@@ -2,6 +2,7 @@ package com.proj.KnitMarket.domain.Member;
 
 import com.proj.KnitMarket.Constant.Role;
 import com.proj.KnitMarket.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 public class Member extends BaseEntity {
 
     @Id
+    @Column(name="member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id; // 회원번호
 
@@ -53,19 +55,11 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "seller")
     private List <Item> item = new ArrayList<>(); // 판매자가 판매중인 상품들*/
 
-  /*  @Builder
-    public User(long id, String name, String hp, String email, Address address, String accountBank, String accountNo, Role role, List<OrderInfo> order, List<OrderItems> orderItem, LocalDate regDate) {
-        this.id = id;
+    @Builder
+    public Member(String name, String hp, String email) {
         this.name = name;
         this.hp = hp;
         this.email = email;
-        this.address = address;
-        this.accountBank = accountBank;
-        this.accountNo = accountNo;
-        this.role = role;
-        this.order = order;
-        this.orderItem = orderItem;
-        this.regDate = regDate;
-    }*/
+    }
 }
 
