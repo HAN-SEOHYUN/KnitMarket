@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.controller;
 import com.proj.KnitMarket.Service.ItemService;
+import com.proj.KnitMarket.domain.Member.Member;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
