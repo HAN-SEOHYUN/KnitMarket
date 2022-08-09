@@ -18,20 +18,15 @@ public class ItemRequestDto {
 
     public Item toEntity() {
         return Item.builder()
-                .member(member)
                 .itemName(itemName)
                 .price(price)
                 .itemDesc(itemDesc)
                 .build();
     }
 
-    public void setMember(Member member){
-        this.member=member;
-    }
 
     @Builder
-    public ItemRequestDto(Member member, String itemName, String itemDesc, int price) {
-        this.member = member;
+    public ItemRequestDto(String itemName, String itemDesc, int price) {
         this.price = price;
         this.itemDesc = itemDesc;
         this.itemName = itemName;

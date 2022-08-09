@@ -22,18 +22,17 @@ public class Item extends BaseEntity {
 
     private String itemDesc; //상품 상세 설명
 
-    @ManyToOne(fetch = FetchType.LAZY)
+   /* @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="member_id")
-    private Member member; //상품 등록자
+    private Member member; //상품 등록자*/
 
    // private SellStatus sellStatus; //상품 판매 상태 (0 : 판매중 / 1 : 품절)
 
     @Builder
-    public Item(Member member,String itemName, int price, String itemDesc) {
+    public Item(String itemName, int price, String itemDesc) {
         this.itemName = itemName;
         this.price = price;
         this.itemDesc = itemDesc;
-        this.member = member;
     }
 
     public void update(String itemName, int price, String itemDesc){

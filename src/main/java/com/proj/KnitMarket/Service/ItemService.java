@@ -19,14 +19,4 @@ public class ItemService {
         return itemRepository.save(itemDto.toEntity()).getId();
     }
 
-    //아이템 수정
-/*    @Transactional
-    public Long update(final Long id, final BoardRequestDto params) {
-
-        Board entity = boardRepository.findById(id).orElseThrow(() -> new CustomException(ErrorCode.POSTS_NOT_FOUND));
-        entity.update(params.getTitle(), params.getContent(), params.getWriter());
-        return id;
-    }*/
-
-
 }
