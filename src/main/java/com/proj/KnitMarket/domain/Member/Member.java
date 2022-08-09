@@ -24,8 +24,8 @@ public class Member extends BaseEntity {
     private String name; //이름
 
     @Column
-    private String hp; //전화번호
     private String email; //이메일
+   // private String hp; //전화번호
 
     /*
     @Enumerated(EnumType.STRING)
@@ -56,10 +56,11 @@ public class Member extends BaseEntity {
     private List <Item> item = new ArrayList<>(); // 판매자가 판매중인 상품들*/
 
     @Builder
-    public Member(String name, String hp, String email) {
+    public Member(String name, String email) {
         this.name = name;
-        this.hp = hp;
         this.email = email;
     }
+
+
 }
 
