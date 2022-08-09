@@ -1,7 +1,6 @@
 package com.proj.KnitMarket.controller;
 
 
-import com.proj.KnitMarket.Service.KakaoLoginService;
 import com.proj.KnitMarket.domain.Member.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/knitmarket")
 public class LoginController {
-
-    private final KakaoLoginService kakaoSerivce;
-    private final Member member;
 
     @GetMapping("/login")
     public String login_get() {
