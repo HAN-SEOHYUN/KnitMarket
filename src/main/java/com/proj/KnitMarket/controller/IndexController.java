@@ -5,17 +5,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
 public class IndexController {
 
+    private final HttpSession httpSession;
+
     @GetMapping("/knitmarket")
     public String index() {
 
-        log.info("indexController!!");
 
         return "index";
+    }
+
+    @GetMapping(value="/knitmarket/register")
+    public String itemForm() {
+        return "item/register";
     }
 
 }
