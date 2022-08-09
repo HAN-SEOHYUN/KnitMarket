@@ -1,8 +1,6 @@
 /**
  * 
  */
- 
- 
 window.Kakao.init('17794c6c3763c9ee2f66e9d03e0b9c5b'); // 인증요청
 
       function kakaoLogin() {
