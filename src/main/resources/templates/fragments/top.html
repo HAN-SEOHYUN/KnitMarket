@@ -1,12 +1,13 @@
 <!doctype html>
-<html lang="ko">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="description" content="Ogani Template"/>
-    <meta name="keywords" content="Ogani, unica, creative, html"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="fragment-head">
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>index</title>
+    <title>뜨개장터</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="/css/main.css" type="text/css">
 </head>
 <body>
-
+<header class="header" th:fragment="fragment-header">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -30,17 +31,17 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li><a href="#">이용방법</a></li>
+                        <li><a href="#">사이트소개</a>
                             <ul class="header__menu__dropdown">
-                                <li><a href="#">테스트</a></li>
-                                <li><a href="#">Shoping Cart</a></li>
-                                <li><a href="#">Check Out</a></li>
-                                <li><a href="#">Blog Details</a></li>
+                                <li><a href="#">a</a></li>
+                                <li><a href="#">b</a></li>
+                                <li><a href="#">c</a></li>
+                                <li><a href="#">d</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">장터가기</a></li>
+                        <li><a href="#">연락처</a></li>
                     </ul>
                 </nav>
             </div>
@@ -58,3 +59,5 @@
         </div>
     </div>
 </header>
+</body>
+</html>

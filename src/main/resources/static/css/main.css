@@ -1,11 +1,42 @@
-.hotItemDiv {
-    flex: 0 0 75%;
-    max-width: 75%;
-    border: 1px solid black;
-    height: 1000px;
+.item-wrapper-div {
+    flex: 0 0 100%;
+    max-width: 100%;
+    border: 1px solid #000000;
+    height:700px;
+    position: relative;
 }
 img#logo {
     width: 206px;
 }
 
 header.header {margin-bottom: 37px;}
+
+.item-wrapper-top {
+    display: flex;
+    border: 1px solid black;
+    height: 7%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-wrapper-body {
+    border: 1px solid black;
+    height: 86%;
+}
+
+.item-wrapper-bottom {
+    border: 1px solid black;
+    height: 7%;
+}
+
+.button-area {
+    margin: 10px;
+}
+
+.search-area {
+    margin: 10px;
+}
+
+input.search-keyword {
+    height: 33px;
+}
