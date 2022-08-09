@@ -20,7 +20,7 @@ public class KakaoLoginService {
 
     //카카오 auth url 접근하여 발급받은 인가코드(authorize_code)를 주고 access token 을 발급받는 메서드
     //카카오에서 post 방식으로 RestApiKey 와 redirectUri 를 제출하라고 해서 json / gson 이용
-    public String getAccessToken (String authorize_code) {
+    public String getAccessToken (String authorize_code,String role) {
         String access_Token = "";
         String refresh_Token = "";
         String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -38,7 +38,7 @@ public class KakaoLoginService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=0a9af639b0425e40c10ad4d291ce4637");
-            sb.append("&redirect_uri=http://localhost:8086/knitmarket/kakaoLogin/requestToken");
+            sb.append("&redirect_uri=http://localhost:8086/knitmarket/kakaoLogin/requestToken_"+role);
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
