@@ -1,7 +1,6 @@
 package com.proj.KnitMarket.dto;
 
 import com.proj.KnitMarket.domain.Item.Item;
-import com.proj.KnitMarket.domain.Member.Member;
 import lombok.*;
 
 @Getter
@@ -11,7 +10,6 @@ public class ItemRequestDto {
     private String itemName;
     private int price;
     private String itemDesc;
-    private Member member;
 
     //private SellStatus sellStatus;
 

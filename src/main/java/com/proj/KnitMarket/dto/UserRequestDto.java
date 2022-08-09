@@ -1,24 +1,25 @@
 package com.proj.KnitMarket.dto;
 
-import com.proj.KnitMarket.domain.Member.Member;
+import com.proj.KnitMarket.Constant.Role;
+import com.proj.KnitMarket.domain.Member.User;
 import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class MemberRequestDto {
+public class UserRequestDto {
     private String email;
     private String name;
 
-    public Member toEntity(){
-        return Member.builder()
+    public User toEntity(){
+        return User.builder()
                 .email(email)
                 .name(name)
                 .build();
     }
 
     @Builder
-    public MemberRequestDto(String email, String name) {
+    public UserRequestDto(String email, String name) {
         this.email = email;
         this.name = name;
     }
