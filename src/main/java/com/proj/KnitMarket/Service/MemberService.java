@@ -18,4 +18,8 @@ public class MemberService {
         return memberRepository.save(memberDto.toEntity()).getId();
     }
 
+    @Transactional
+    public boolean existsByEmail(String email){
+        return memberRepository.existsByEmail(email);
+    }
 }
