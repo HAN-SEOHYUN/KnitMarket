@@ -1,7 +1,6 @@
 package com.proj.KnitMarket.domain.Item;
 
 import com.proj.KnitMarket.domain.BaseEntity;
-import com.proj.KnitMarket.domain.Member.Member;
 import lombok.*;
 
 import javax.persistence.*;
