@@ -34,7 +34,7 @@ public class LoginController {
 
     //http://localhost:8086/knitmarket/kakaoLogin/requestToken
     @RequestMapping(value = "/kakaoLogin/requestToken")
-    public String kakaoLoginRequestToken(@RequestParam("code")String code, Model model,
+    public String kakaoLoginRequestToken(@RequestParam("code") String code, Model model,
                                          HttpServletRequest request) {
 
         log.info("카카오로그인컨트롤러 code ={}", code);
@@ -46,24 +46,26 @@ public class LoginController {
 
         //user email과 name, kakaoId 받아오기
         HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-        log.info("userInfo={}",userInfo);
+        log.info("userInfo={}", userInfo);
 
-        String name = (String)userInfo.get("name");
-        String email = (String)userInfo.get("email");
-        String socialLoginKey = (String)userInfo.get("socialLoginKey");
+        String name = (String) userInfo.get("name");
+        String email = (String) userInfo.get("email");
+        String socialLoginKey = (String) userInfo.get("socialLoginKey");
 
-        MemberRequestDto memberRequestDto = new MemberRequestDto(email, name);
+        //db 중복 확인
+        if (!memberService.existsByEmail(email)) {
+            MemberRequestDto memberRequestDto = new MemberRequestDto(email, name);
 
-        Long memberId = memberService.save(memberRequestDto);
+            Long memberId = memberService.save(memberRequestDto);
 
-        log.info("회원가입회원번호 ={}",memberId);
+            log.info("신규회원가입 회원번호={}", memberId);
+        }else{
+            log.info("기존회원 로그인");
+        }
+
 
         return "/";
     }
-
-
-
-
 
 
 }
