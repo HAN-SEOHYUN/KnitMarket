@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -14,12 +16,13 @@ public class ItemController {
 
     @PostMapping(value = "/knitmarket/register")
     @ResponseBody
-    public Long save(@RequestBody ItemRequestDto itemDto) {
-        log.info("아이템={}", itemDto.toString());
+    public Long save(@RequestBody ItemRequestDto itemDto, HttpSession httpSession) {
+        log.info("등록 아이템={}", itemDto.toString());
+        String email = (String)httpSession.getAttribute("email");
 
-        Long itemId = itemService.save(itemDto);
+        Long itemId = itemService.save(itemDto,email);
 
-        log.info("상품번호 ={}",itemId);
+        log.info("등록된 상품번호 ={}",itemId);
 
         return itemId;
     }
