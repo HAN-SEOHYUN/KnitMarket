@@ -49,7 +49,7 @@ public class LoginController {
 
         //user email과 name, kakaoId 받아오기
         HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-        log.info("userInfo={}", userInfo);//
+        log.info("userInfo={}", userInfo);//여기까지 log에 찍힘
 
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
@@ -57,6 +57,7 @@ public class LoginController {
 
         UserRequestDto userRequestDto;
         UserResponseDto userResponseDto = userService.findByEmail(email); // userDto 조회
+        log.info("userResponseDto={}",userResponseDto);
         Long memberId;
         //db 중복 확인
         if (userResponseDto==null) { //신규가입
@@ -67,6 +68,7 @@ public class LoginController {
 
         }else{ //기존회원로그인
             memberId = userService.findByEmail(email).getId();
+            log.info("기존회원 회원번호 ={}",memberId);
         }
 
         //세션저장
