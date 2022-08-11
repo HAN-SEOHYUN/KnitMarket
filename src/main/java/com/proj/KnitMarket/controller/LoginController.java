@@ -74,8 +74,9 @@ public class LoginController {
         HttpSession session=request.getSession();
         session.setAttribute("id", sellerId);
         session.setAttribute("email", email);
-        //session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
+        session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
         session.setAttribute("name", name);
+        session.setAttribute("role",role);
 
         model.addAttribute("url","/knitmarket");
         model.addAttribute("msg","성공");
@@ -121,14 +122,35 @@ public class LoginController {
         HttpSession session=request.getSession();
         session.setAttribute("id", userId);
         session.setAttribute("email", email);
-        //session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
+        session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
         session.setAttribute("name", name);
+        session.setAttribute("role",role);
 
         model.addAttribute("url","/knitmarket");
         model.addAttribute("msg","성공");
 
         return "/common/message";
     }
+
+    //로그아웃
+    @RequestMapping(value="/logout")
+    public String logout(HttpSession session, Model model) {
+        kakao.kakaoLogout((String)session.getAttribute("access_Token"));
+        session.removeAttribute("access_Token");
+        session.removeAttribute("id");
+        session.removeAttribute("email");
+        session.removeAttribute("name");
+        session.removeAttribute("role");
+
+        String url = "/", msg ="로그아웃되었습니다";
+
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+
+        return "/common/message";
+    }
+
+
 
 
 }

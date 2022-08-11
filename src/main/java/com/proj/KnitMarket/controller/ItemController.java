@@ -14,9 +14,15 @@ public class ItemController {
 
     private final ItemService itemService;
 
+    @GetMapping(value = "/knitmarket/register")
+    public String item_register_get(){
+        return "/knitmarket/register";
+
+    }
+
     @PostMapping(value = "/knitmarket/register")
     @ResponseBody
-    public Long save(@RequestBody ItemRequestDto itemDto, HttpSession httpSession) {
+    public Long item_register_post(@RequestBody ItemRequestDto itemDto, HttpSession httpSession) {
         log.info("등록 아이템={}", itemDto.toString());
         String email = (String)httpSession.getAttribute("email");
 
