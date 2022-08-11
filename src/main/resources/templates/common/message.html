@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    var message = [[${msg}]];
+    alert(message);
+
+    location.replace([[${url}]]);
+
+    /*]]>*/
+
+</script>
