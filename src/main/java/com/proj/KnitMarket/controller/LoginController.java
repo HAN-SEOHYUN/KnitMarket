@@ -57,6 +57,9 @@ public class LoginController {
 
         UserRequestDto userRequestDto = null;
         Long userId;
+        String url="";
+        String msg="";
+
         //db 중복 확인
         if (!userService.existsByEmail(email)) { //신규가입
             userRequestDto = new UserRequestDto(email, name);
@@ -76,7 +79,10 @@ public class LoginController {
         //session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
         session.setAttribute("name", name);
 
-        return "/";
+        model.addAttribute("url","/knitmarket/index");
+        model.addAttribute("msg","성공");
+
+        return "/common/message";
     }
 
 
