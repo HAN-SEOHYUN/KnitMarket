@@ -20,13 +20,6 @@ public class IndexController {
 
         return "index";
     }
-
-    @GetMapping(value="/knitmarket/register")
-    public String itemForm() {
-        return "item/register";
-    }
-
 }
-
 
 

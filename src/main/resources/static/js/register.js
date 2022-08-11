@@ -1,5 +1,4 @@
 $(function (){
-    alert("footer");
 
     $('#save_Btn').click(function(){
         var data = {
