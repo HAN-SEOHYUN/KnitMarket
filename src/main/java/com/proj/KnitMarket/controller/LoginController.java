@@ -35,7 +35,7 @@ public class LoginController {
 
     //http://localhost:8086/knitmarket/kakaoLogin/requestToken/user
     @RequestMapping(value = "/kakaoLogin/requestToken_user") // 일반회원로그인
-    public String kakaoLoginRequestToken(@RequestParam("code") String code, Model model,
+    public String kakaoLoginRequestToken_user(@RequestParam("code") String code, Model model,
                                          HttpServletRequest request) {
 
         log.info("카카오로그인컨트롤러 code ={}", code);
@@ -55,25 +55,23 @@ public class LoginController {
         String email = (String) userInfo.get("email");
         String socialLoginKey = (String) userInfo.get("socialLoginKey");
 
-        UserRequestDto userRequestDto;
-        UserResponseDto userResponseDto = userService.findByEmail(email); // userDto 조회
-        log.info("userResponseDto={}",userResponseDto);
-        Long memberId;
+        UserRequestDto userRequestDto = null;
+        Long userId;
         //db 중복 확인
-        if (userResponseDto==null) { //신규가입
+        if (!userService.existsByEmail(email)) { //신규가입
             userRequestDto = new UserRequestDto(email, name);
-            memberId = userService.save(userRequestDto);
+            userId = userService.save(userRequestDto);
 
-            log.info("신규회원가입 회원번호={}", memberId);
+            log.info("신규회원가입 회원번호={}", userId);
 
         }else{ //기존회원로그인
-            memberId = userService.findByEmail(email).getId();
-            log.info("기존회원 회원번호 ={}",memberId);
+            userId = userService.findByEmail(email).getId();
+            log.info("기존회원 회원번호 ={}",userId);
         }
 
         //세션저장
         HttpSession session=request.getSession();
-        session.setAttribute("id", memberId);
+        session.setAttribute("id", userId);
         session.setAttribute("email", email);
         //session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
         session.setAttribute("name", name);
