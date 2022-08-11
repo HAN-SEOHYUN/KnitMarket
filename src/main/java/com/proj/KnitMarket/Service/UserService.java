@@ -26,4 +26,9 @@ public class UserService {
          User entity= userRepository.findByEmail(email);
         return new UserResponseDto(entity);
     }
+
+    @Transactional
+    public boolean existsByEmail(String email){
+        return userRepository.existsByEmail(email);
+    }
 }
