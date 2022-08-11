@@ -17,3 +17,15 @@ $(function () {
 
 
 });
+
+function checkOnlyOne(element) {
+
+    const checkboxes
+        = document.getElementsByName("checkbox_role");
+
+    checkboxes.forEach((cb) => {
+        cb.checked = false;
+    })
+
+    element.checked = true;
+}
