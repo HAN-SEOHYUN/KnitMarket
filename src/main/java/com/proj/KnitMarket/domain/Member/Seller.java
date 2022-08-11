@@ -1,11 +1,15 @@
 package com.proj.KnitMarket.domain.Member;
 
 import com.proj.KnitMarket.domain.BaseEntity;
+import com.proj.KnitMarket.domain.Item.Item;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.core.annotation.Order;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -39,15 +43,16 @@ public class Seller extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private List<OrderItems> orderItem = new ArrayList<>(); // 구매자의 주문상세정보*/
-/*
-    @OneToMany(mappedBy = "seller")
+
+/*    @OneToMany(mappedBy = "seller")
     private List<Sell> sell = new ArrayList<>(); // 판매자의 판매정보
 
     @OneToMany(mappedBy = "seller")
-    private List<SellItems> sellerItem = new ArrayList<>(); // 판매자의 판매상세정보
+    private List<SellItems> sellerItem = new ArrayList<>(); // 판매자의 판매상세정보*/
 
-    @OneToMany(mappedBy = "seller")
-    private List <Item> item = new ArrayList<>(); // 판매자가 판매중인 상품들*/
+    @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @OrderBy("id asc")
+    private List<Item> item = new ArrayList<>(); // 판매자가 판매중인 상품들
 
     @Builder
     public Seller(String name, String email) {
