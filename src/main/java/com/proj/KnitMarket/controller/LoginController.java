@@ -5,7 +5,6 @@ import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.dto.SellerRequestDto;
 import com.proj.KnitMarket.dto.UserRequestDto;
-import com.proj.KnitMarket.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
