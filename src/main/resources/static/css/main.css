@@ -54,7 +54,7 @@ input.search-keyword {
     padding: 20px;
 }
 
-.header__cart {
+.dropdown {
     width: 30px;
     display: inline-block;
     padding: 20px;
@@ -62,10 +62,6 @@ input.search-keyword {
 
 .col-lg-3 {
     display: -webkit-inline-box;
-}
-
-.header__cart > a {
-    color: #000000;
 }
 
 .login-div > a {
