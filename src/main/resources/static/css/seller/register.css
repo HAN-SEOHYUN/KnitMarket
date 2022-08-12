@@ -1,0 +1,22 @@
+.item-form-div {
+    width: 700px;
+    margin: auto;
+    margin-top: 50px;
+}
+
+.product-info > div {
+    margin-top: 30px;
+}
+
+.product-info {
+    margin-bottom: 44px;
+}
+
+.item-wrapper-top-title {
+    align-content: space-between;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 25px;
+    font-family: sans-serif;
+    font-weight: bold;
+}

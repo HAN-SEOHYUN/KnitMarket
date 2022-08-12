@@ -4,6 +4,8 @@
 <body>
 <header th:replace="/fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
+<link rel="stylesheet" href="/css/seller/register.css" type="text/css">
+
 <section class="hero">
     <div class="container">
         <div class="row">
@@ -11,47 +13,66 @@
             <div class="item-wrapper-div">
 
                 <div class="item-wrapper-top">
-                    <div class="search-area">
-                        <select><option>옵션</option></select>&nbsp;
+                    <div class ="item-wrapper-top-title">상품정보를 입력해주세요</div>
+                    <!--<div class="search-area">
+                        <select>
+                            <option>옵션</option>
+                        </select>&nbsp;
                         <input type="text" class="search-keyword">&nbsp;
                         <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
                     </div>
-                    <div class="button-area"><button type="button" class="btn btn-outline-secondary" id="register-btn">상품등록</button></div>
+                    <div class="button-area">
+                        <button type="button" class="btn btn-outline-secondary" id="register-btn">상품등록</button>
+                    </div>-->
 
 
                 </div>
                 <div class="item-wrapper-body">
+                    <div class="item-form-div">
+                        <form>
+                            <div class="product-info">
 
-                    <form>
-                        <div class="product-info">
-                            <div class="product-info-div" id="product-name-div">
-                                <label for="itemName">상품명</label>
-                                <input type="text" id="itemName" name="itemName">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">상품명</span>
+                                    <input type="text" id="itemName" name="itemName" class="form-control"
+                                           aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-default">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">판매자</span>
+                                    <input type="text" id="seller" name = "seller" th:value="${session.name}" readonly
+                                           class="form-control" aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-default">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">상품금액</span>
+                                    <input type="text" id="price" name="price" class="form-control"
+                                           aria-label="Sizing example input"
+                                           aria-describedby="inputGroup-sizing-default">
+                                </div>
+
+                                <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="itemDesc"
+                                          style="height: 100px" name="itemDesc"></textarea>
+                                    <label for="itemDesc">상품 설명</label>
+                                </div>
+                                <!--
+                                       <div class="product-info-div" id="product-desc-div">
+                                           <label for="itemDesc">상품설명</label>
+                                           <textarea id="itemDesc" name ="itemDesc"></textarea>
+                                       </div>-->
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">상품 사진</label>
+                                    <input class="form-control" type="file" id="formFile">
+                                </div>
                             </div>
-                            <div class="product-info-div" id="product-seller-div">
-                                <label for="seller">판매자</label>
-                                <input type="text" id="seller" th:value="${session.name}" readonly>
-                            </div>
-                            <div class="product-info-div" id="product-price-div">
-                                <label for="price">상품가격</label>
-                                <input type="text" id="price" name ="price">
-                            </div>
-                            <div class="product-info-div" id="product-desc-div">
-                                <label for="itemDesc">상품설명</label>
-                                <textarea id="itemDesc" name ="itemDesc"></textarea>
-                            </div>
-                           <!-- <div>
-                                <input type="file" class="form-control" id="file">
-                            </div>-->
-                        </div>
-                        <button class="btn-primary" id="save_Btn">
-                            전송
-                        </button>
-
-                    </form>
+                            <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
 
 
-
+                        </form>
+                    </div>
 
                 </div>
                 <!--상품목록 끝-->
