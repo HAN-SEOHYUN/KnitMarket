@@ -17,4 +17,10 @@
     $(".loader").fadeOut();
     $("#preloder").delay(200).fadeOut("slow");
   });
+
+  $(document).ready(function() {
+    $(".dropdown-menu").dropdown();
+  });
+
+
 })(jQuery);
