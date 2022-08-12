@@ -4,6 +4,7 @@ import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Item.ItemRepository;
 import com.proj.KnitMarket.domain.Member.Seller;
 import com.proj.KnitMarket.domain.Member.SellerRepository;
+import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,10 +20,11 @@ public class ItemService {
 
     //@Transactional : db 트랜잭션 자동으로 commit 해줌
     @Transactional //아이템 등록
-    public Long save(ItemRequestDto itemDto,String email){
+    public Long save(ItemRequestDto itemDto, String email, FileRequestDto fileDto){
         Seller seller = sellerRepository.findByEmail(email);
 
         itemDto.setSeller(seller);
+
 
         Item item = itemDto.toEntity();
 
