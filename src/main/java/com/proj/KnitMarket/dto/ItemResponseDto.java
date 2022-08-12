@@ -1,7 +1,7 @@
 package com.proj.KnitMarket.dto;
 
+import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.domain.Item.Item;
-import com.proj.KnitMarket.domain.Member.Seller;
 import lombok.Getter;
 
 @Getter
@@ -11,6 +11,7 @@ public class ItemResponseDto {
     private int price;
     private String itemDesc;
     private String sellerName;
+    private FileEntity file;
 
     //entity=>dto
     public ItemResponseDto(Item entity){
@@ -19,6 +20,7 @@ public class ItemResponseDto {
         this.itemDesc=entity.getItemDesc();
         this.price=entity.getPrice();
         this.sellerName = entity.getSeller().getName();
+        this.file = entity.getFile();
     }
 
 }
