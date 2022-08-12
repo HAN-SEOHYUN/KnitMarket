@@ -78,7 +78,7 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
-        model.addAttribute("url","/knitmarket");
+        model.addAttribute("url","/knitmarket/");
         model.addAttribute("msg","성공");
 
         return "/common/message";
@@ -126,7 +126,7 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
-        model.addAttribute("url","/knitmarket");
+        model.addAttribute("url","/knitmarket/");
         model.addAttribute("msg","성공");
 
         return "/common/message";
@@ -142,7 +142,7 @@ public class LoginController {
         session.removeAttribute("name");
         session.removeAttribute("role");
 
-        String url = "/", msg ="로그아웃되었습니다";
+        String url = "/knitmarket/", msg ="로그아웃되었습니다";
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);

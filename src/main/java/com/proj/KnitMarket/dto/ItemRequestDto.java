@@ -14,6 +14,7 @@ public class ItemRequestDto {
     private String itemDesc;
     private Seller seller;
 
+
     //private SellStatus sellStatus;
 
 //dto => entity
