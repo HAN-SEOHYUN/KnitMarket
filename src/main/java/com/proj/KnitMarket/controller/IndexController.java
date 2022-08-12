@@ -10,15 +10,22 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/knitmarket")
 public class IndexController {
 
     private final HttpSession httpSession;
 
-    @GetMapping("/knitmarket")
+    @GetMapping("/")
     public String index() {
 
-
         return "index";
+    }
+
+
+    @GetMapping(value = "/register")
+    public String item_register_get(){
+        return "/item/register";
+
     }
 }
 
