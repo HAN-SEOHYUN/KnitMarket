@@ -7,7 +7,6 @@ $(function (){
             "price": $('#price').val()
         };
 
-        alert("제이쿼리정상작동");
         $.ajax({
             type: 'POST',
             url: '/knitmarket/register',
@@ -15,7 +14,11 @@ $(function (){
             contentType: 'application/json',
             data: JSON.stringify(data),
             success: function (res) {
-                alert("등록성공");
+                //등록된 상품 상세보기로 이동하기
+
+                alert("상품이 등록되었습니다3");
+                let url ="/knitmarket/"; //detail?id=${res}
+                location.replace(url);
             }
         });
 

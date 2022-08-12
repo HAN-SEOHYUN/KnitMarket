@@ -10,17 +10,13 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/knitmarket")
 public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping(value = "/knitmarket/register")
-    public String item_register_get(){
-        return "/knitmarket/register";
 
-    }
-
-    @PostMapping(value = "/knitmarket/register")
+    @PostMapping(value = "/register")
     @ResponseBody
     public Long item_register_post(@RequestBody ItemRequestDto itemDto, HttpSession httpSession) {
         log.info("등록 아이템={}", itemDto.toString());
