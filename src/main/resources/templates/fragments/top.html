@@ -35,30 +35,22 @@
                     <ul>
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="#">이용방법</a></li>
-                        <li><a href="#">사이트소개</a>
-                            <ul class="header__menu__dropdown">
-                                <li><a href="#">a</a></li>
-                                <li><a href="#">b</a></li>
-                                <li><a href="#">c</a></li>
-                                <li><a href="#">d</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="#">사이트소개</a></li>
                         <li><a href="#">장터가기</a></li>
                         <li><a href="#">연락처</a></li>
                     </ul>
                 </nav>
             </div>
-            <a th:href="@{/knitmarket/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
-            <th:block th:unless="${session.id eq null}">
-                <label>[[${session.name}]] 님</label>
-                <a th:href="@{/knitmarket/logout}" style="text-align: right;">로그아웃</a>
-            </th:block>
             <div class="col-lg-3">
+                <div class = "login-div">
+                    <a th:href="@{/knitmarket/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
+                    <th:block th:unless="${session.id eq null}">
+                        <label>[[${session.name}]] 님</label>
+                        <a th:href="@{/knitmarket/logout}" style="text-align: right;">로그아웃</a>
+                    </th:block>
+                </div>
                 <div class="header__cart">
-                    <ul>
-                        <li><a href="#"><i class="fa fa-solid fa-user"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
-                    </ul>
+                    <a href="#" th:placeholder="내정보"><i class="fa fa-solid fa-user"></i></a>
                 </div>
             </div>
 
