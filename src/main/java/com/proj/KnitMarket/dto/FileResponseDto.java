@@ -14,7 +14,6 @@ public class FileResponseDto {
         this.id=entity.getId();
         this.orginFileName = entity.getOrginFileName();
         this.filePath = entity.getFilePath();
-        this.itemId=entity.getItem().getId();
     }
 
 }
