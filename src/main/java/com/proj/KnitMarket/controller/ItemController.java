@@ -1,7 +1,9 @@
 package com.proj.KnitMarket.controller;
+
 import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
+import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -24,40 +26,50 @@ public class ItemController {
     private final ItemService itemService;
     private final FileService fileService;
 
-    public String uploadDir= ConstUtil.UPLOAD_IMG_PATH_TEST;
+    public String uploadDir = ConstUtil.UPLOAD_IMG_PATH_TEST; //이미지 저장할 폴더
 
     @GetMapping(value = "/register")
-    public String item_register_get(Model model){
-        model.addAttribute("item",new ItemRequestDto());
+    public String item_register_get(Model model) {
+        model.addAttribute("item", new ItemRequestDto());
         return "item/register";
     }
 
     @PostMapping(value = "/register")
-    public Long item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession) throws IOException{
-        log.info("등록 아이템={}", itemDto.toString());
-        log.info("이미지정보 ={}",itemDto.getFile().getOriginalFilename().toString());
-        String email = (String)httpSession.getAttribute("email");
+    public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model) throws IOException {
+        log.info("ItemRequestDto={}", itemDto.toString());
+        String email = (String) httpSession.getAttribute("email");
 
-        if(itemDto.getFile()!=null){
+        String url = "";
+        String msg = "";
+
+        if (itemDto.getFile() != null) {
             log.info("이미지 有");
             MultipartFile file = itemDto.getFile();
             String filePath = uploadDir + file.getOriginalFilename();
             file.transferTo(new File(filePath));
-            log.info("file.getOriginalFilenaem={}",file.getOriginalFilename());
-            log.info("filePath={}",filePath);
+            log.info("file.getOriginalFilenaem={}", file.getOriginalFilename());
+            log.info("filePath={}", filePath);
 
             FileRequestDto fileDto = FileRequestDto.builder()
                     .orginFileName(file.getOriginalFilename())
-                    .filePath(uploadDir+file.getOriginalFilename())
+                    .filePath(uploadDir + file.getOriginalFilename())
                     .build();
-            long savedFileId = fileService.save(fileDto);
-            log.info("첨부이미지 id={}",savedFileId);
+
+            Long itemId = itemService.save(itemDto, email, fileDto);
+
+            log.info("상품번호 ={}", itemId);
+
+            url = "/knitmarket/";
+            msg = "상품등록이 완료되었습니다";
+        } else {
+            url = "/knitmarket/";
+            msg = "상품등록에 실패했습니다 상품 정보를 확인해주세요 ! ";
+
         }
 
-        Long itemId = itemService.save(itemDto,email);
+        model.addAttribute("url", url);
+        model.addAttribute("msg", msg);
 
-        log.info("등록된 상품번호 ={}",itemId);
-
-        return itemId;
+        return "/common/message";
     }
 }

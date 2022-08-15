@@ -5,7 +5,6 @@ import com.proj.KnitMarket.domain.Member.Seller;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.File;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,7 +26,8 @@ public class Item extends BaseEntity {
     @JoinColumn(name="seller_id")
     private Seller seller; //상품 등록자
 
-    @OneToOne(mappedBy = "item", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="fileEntity_id")
     private FileEntity file;
 
    // private SellStatus sellStatus; //상품 판매 상태 (0 : 판매중 / 1 : 품절)
