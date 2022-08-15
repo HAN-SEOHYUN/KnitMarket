@@ -11,14 +11,12 @@ import lombok.*;
 public class FileRequestDto {
     private String orginFileName;
     private String filePath;
-    private Item item;
 
 
     public FileEntity toEntity(){
         return FileEntity.builder()
                 .orginFileName(orginFileName)
                 .filePath(filePath)
-                .item(item)
                 .build();
     }
 
