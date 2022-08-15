@@ -29,12 +29,12 @@
                 </div>
                 <div class="item-wrapper-body">
                     <div class="item-form-div">
-                        <form>
+                        <form enctype="multipart/form-data" th:action th:object="${item}" method="post">
                             <div class="product-info">
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">상품명</span>
-                                    <input type="text" id="itemName" name="itemName" class="form-control"
+                                    <input type="text" id="itemName" name="itemName" class="form-control" th:field="*{itemName}"
                                            aria-label="Sizing example input"
                                            aria-describedby="inputGroup-sizing-default">
                                 </div>
@@ -49,13 +49,13 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">상품금액</span>
                                     <input type="text" id="price" name="price" class="form-control"
-                                           aria-label="Sizing example input"
+                                           aria-label="Sizing example input" th:field="*{price}"
                                            aria-describedby="inputGroup-sizing-default">
                                 </div>
 
                                 <div class="form-floating">
                                 <textarea class="form-control" placeholder="Leave a comment here" id="itemDesc"
-                                          style="height: 100px" name="itemDesc"></textarea>
+                                          style="height: 100px" name="itemDesc" th:field="*{itemDesc}"></textarea>
                                     <label for="itemDesc">상품 설명</label>
                                 </div>
                                 <!--
@@ -65,7 +65,7 @@
                                        </div>-->
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">상품 사진</label>
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" id="formFile" name="file" th:field="*{file}>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
