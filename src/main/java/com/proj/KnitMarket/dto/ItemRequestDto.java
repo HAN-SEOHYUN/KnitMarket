@@ -28,16 +28,18 @@ public class ItemRequestDto {
                 .price(price)
                 .itemDesc(itemDesc)
                 .seller(seller)
+                .file(fileEntity)
                 .build();
     }
 
 
     @Builder
-    public ItemRequestDto(String itemName, String itemDesc, int price, Seller seller) {
+    public ItemRequestDto(String itemName, String itemDesc, int price, Seller seller, FileEntity file) {
         this.price = price;
         this.itemDesc = itemDesc;
         this.itemName = itemName;
         this.seller = seller;
+        this.fileEntity = file;
     }
 
 }
