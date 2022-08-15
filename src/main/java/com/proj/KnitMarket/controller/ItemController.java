@@ -1,12 +1,13 @@
 package com.proj.KnitMarket.controller;
+import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
 import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,14 +24,18 @@ public class ItemController {
     private final ItemService itemService;
     private final FileService fileService;
 
-    @Value(("${image.path}"))
-    private String uploadDir;
+    public String uploadDir= ConstUtil.UPLOAD_IMG_PATH_TEST;
 
+    @GetMapping(value = "/register")
+    public String item_register_get(Model model){
+        model.addAttribute("item",new ItemRequestDto());
+        return "item/register";
+    }
 
     @PostMapping(value = "/register")
-    @ResponseBody
-    public Long item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession) throws IOException {
+    public Long item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession) throws IOException{
         log.info("등록 아이템={}", itemDto.toString());
+        log.info("이미지정보 ={}",itemDto.getFile().getOriginalFilename().toString());
         String email = (String)httpSession.getAttribute("email");
 
         if(itemDto.getFile()!=null){
@@ -46,7 +51,7 @@ public class ItemController {
                     .filePath(uploadDir+file.getOriginalFilename())
                     .build();
             long savedFileId = fileService.save(fileDto);
-            log.info("savedFileId={}",savedFileId);
+            log.info("첨부이미지 id={}",savedFileId);
         }
 
         Long itemId = itemService.save(itemDto,email);
