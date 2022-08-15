@@ -1,8 +1,10 @@
 package com.proj.KnitMarket.dto;
 
+import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Member.Seller;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -13,6 +15,8 @@ public class ItemRequestDto {
     private int price;
     private String itemDesc;
     private Seller seller;
+    private MultipartFile file;
+    private FileEntity fileEntity;
 
 
     //private SellStatus sellStatus;

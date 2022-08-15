@@ -19,18 +19,17 @@ public class FileEntity{
     private Long id;
 
     private String orginFileName;
-    private String fileName;
+
     private String filePath;
 
     @OneToOne
     @JoinColumn(name="itme_id")
-    private Item item; //파일
+    private Item item; //파일*/
 
     @Builder
-    public FileEntity(Long id, String orginFileName, String fileName, String filePath, Item item) {
+    public FileEntity(Long id, String orginFileName, String filePath,Item item) {
         this.id = id;
         this.orginFileName = orginFileName;
-        this.fileName = fileName;
         this.filePath = filePath;
         this.item = item;
     }

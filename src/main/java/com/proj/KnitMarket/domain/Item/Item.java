@@ -33,11 +33,12 @@ public class Item extends BaseEntity {
    // private SellStatus sellStatus; //상품 판매 상태 (0 : 판매중 / 1 : 품절)
 
     @Builder
-    public Item(String itemName, int price, String itemDesc,Seller seller) {
+    public Item(String itemName, int price, String itemDesc,Seller seller,FileEntity file) {
         this.itemName = itemName;
         this.price = price;
         this.itemDesc = itemDesc;
         this.seller = seller;
+        this.file = file;
     }
 
     public void update(String itemName, int price, String itemDesc){
