@@ -2,12 +2,8 @@ package com.proj.KnitMarket.Service;
 
 import com.proj.KnitMarket.domain.Member.Seller;
 import com.proj.KnitMarket.domain.Member.SellerRepository;
-import com.proj.KnitMarket.domain.Member.User;
-import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.dto.SellerRequestDto;
 import com.proj.KnitMarket.dto.SellerResponseDto;
-import com.proj.KnitMarket.dto.UserRequestDto;
-import com.proj.KnitMarket.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
