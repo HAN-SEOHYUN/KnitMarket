@@ -1,3 +1,4 @@
+/*
 $(function (){
     $('#save_Btn').click(function(){
         var data = {
@@ -24,3 +25,4 @@ $(function (){
     });
 });
 
+*/
