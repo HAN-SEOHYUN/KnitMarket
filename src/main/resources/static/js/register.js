@@ -1,5 +1,4 @@
 $(function (){
-
     $('#save_Btn').click(function(){
         var data = {
             "itemName":$('#itemName').val(),
@@ -12,7 +11,7 @@ $(function (){
             url: '/knitmarket/register',
             dataType: 'json',
             contentType: 'application/json',
-            data: JSON.stringify(data),
+            data: JSON.stringify(data),formData,
             success: function (res) {
                 //등록된 상품 상세보기로 이동하기
 
