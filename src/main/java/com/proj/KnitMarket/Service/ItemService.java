@@ -7,8 +7,12 @@ import com.proj.KnitMarket.domain.Item.ItemRepository;
 import com.proj.KnitMarket.domain.Member.Seller;
 import com.proj.KnitMarket.domain.Member.SellerRepository;
 import com.proj.KnitMarket.dto.FileRequestDto;
+import com.proj.KnitMarket.dto.ItemListDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
+import com.proj.KnitMarket.dto.ItemSearchDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -36,6 +40,12 @@ public class ItemService {
         Item item = itemDto.toEntity();
 
         return itemRepository.save(itemDto.toEntity()).getId();
+    }
+
+    // index 상품목록
+    @Transactional
+    public Page<ItemListDto> getIndexPage(ItemSearchDto itemSearchDto, Pageable pageable){
+        return itemRepository.getIndexPage(itemSearchDto,pageable);
     }
 
 }
