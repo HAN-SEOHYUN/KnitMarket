@@ -1,6 +1,7 @@
 package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Service.ItemService;
+import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -18,10 +20,14 @@ import java.util.Optional;
 public class IndexController { //상품목록
 
     private final HttpSession httpSession;
+    private final ItemService itemService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        List<ItemResponseDto> itemDtoList = itemService.getItemList();
 
+
+        model.addAttribute("itemList",itemDtoList);
         return "index";
     }
 
