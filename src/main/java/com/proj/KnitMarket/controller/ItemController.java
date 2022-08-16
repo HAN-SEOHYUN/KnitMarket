@@ -66,10 +66,12 @@ public class ItemController {
             msg = "상품등록에 실패했습니다 상품 정보를 확인해주세요 ! ";
 
         }
-
         model.addAttribute("url", url);
         model.addAttribute("msg", msg);
-
         return "/common/message";
     }
+
+
+
+
 }
