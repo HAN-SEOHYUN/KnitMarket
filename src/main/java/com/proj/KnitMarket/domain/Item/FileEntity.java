@@ -20,8 +20,6 @@ public class FileEntity{
 
     private String filePath;
 
-
-
     @Builder
     public FileEntity(Long id, String orginFileName, String filePath) {
         this.id = id;
