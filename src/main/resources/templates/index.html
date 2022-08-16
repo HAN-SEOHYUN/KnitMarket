@@ -25,13 +25,11 @@
                 <!--상품목록시작-->
                 <div class="item-wrapper-body">
 
-                    <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,6)}">
-                        <img src="/img/4VIXXZ3LKFCRPAQ4GU5YMANFYI.jpg" class="card-img-top" alt="상품사진">
+                    <div class="card" style="width: 18rem;" th:each="item : ${itemList}">
+                        <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" class="card-img-top" th:alt="${item.itemName}">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of
-                                the card's content.</p>
+                            <h5 class="card-title" th:text="${item.itemName}"></h5>
+                            <p class="card-text" th:text="${item.price}"></p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                     </div>
