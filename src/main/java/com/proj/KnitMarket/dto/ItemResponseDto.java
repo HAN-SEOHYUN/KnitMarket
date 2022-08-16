@@ -11,7 +11,7 @@ public class ItemResponseDto {
     private int price;
     private String itemDesc;
     private String sellerName;
-    private FileEntity file;
+    private String filePath;
 
     //entity=>dto
     public ItemResponseDto(Item entity){
@@ -20,7 +20,7 @@ public class ItemResponseDto {
         this.itemDesc=entity.getItemDesc();
         this.price=entity.getPrice();
         this.sellerName = entity.getSeller().getName();
-        this.file = entity.getFile();
+        this.filePath = entity.getFile().getFilePath();
     }
 
 }

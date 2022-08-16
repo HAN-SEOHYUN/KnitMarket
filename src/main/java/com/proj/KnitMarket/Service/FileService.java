@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 @Service
 public class FileService {
     private final FileEntityRepository fileRepository;
-    private final ItemRepository itemRepository;
 
     @Transactional
     public FileEntity save(FileRequestDto fileRequestDto){
