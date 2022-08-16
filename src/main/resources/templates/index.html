@@ -17,13 +17,11 @@
                         <input type="text" class="search-keyword">&nbsp;
                         <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
                     </div>
-                    <div class="button-area"><button type="button" class="btn btn-outline-secondary" id="register-btn" th:onclick="|location.href='@{/knitmarket/register}'|">상품등록</button></div>
-
 
                 </div>
                 <div class="item-wrapper-body">
 
-                    <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,2)}">
+                    <div class="card" style="width: 18rem;" th:each="num:${#numbers.sequence(1,6)}">
                         <img src="/img/4VIXXZ3LKFCRPAQ4GU5YMANFYI.jpg" class="card-img-top" alt="상품사진">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
