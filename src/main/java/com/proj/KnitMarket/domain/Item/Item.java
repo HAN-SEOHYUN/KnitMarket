@@ -1,10 +1,13 @@
 package com.proj.KnitMarket.domain.Item;
 
+import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Member.Seller;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -30,15 +33,17 @@ public class Item extends BaseEntity {
     @JoinColumn(name="fileEntity_id")
     private FileEntity file;
 
-   // private SellStatus sellStatus; //상품 판매 상태 (0 : 판매중 / 1 : 품절)
+    @Enumerated(EnumType.STRING)
+   private SellStatus sellStatus; //상품 판매 상태
 
     @Builder
-    public Item(String itemName, int price, String itemDesc,Seller seller,FileEntity file) {
+    public Item(String itemName, int price, String itemDesc,Seller seller,FileEntity file,SellStatus sellStatus) {
         this.itemName = itemName;
         this.price = price;
         this.itemDesc = itemDesc;
         this.seller = seller;
         this.file = file;
+        this.sellStatus = sellStatus;
     }
 
     public void update(String itemName, int price, String itemDesc){

@@ -67,6 +67,14 @@
                                     <label for="formFile" class="form-label">상품 사진</label>
                                     <input class="form-control" type="file" id="formFile" th:field="*{file}">
                                 </div>
+
+                                <div class="form-group">
+                                    <select th:field="*{sellStatus}" class="form-select" aria-label="Disabled select example">
+                                        <option value="SELL">판매중</option>
+                                        <option value="SOLD_OUT">픔절</option>
+                                    </select>
+                                </div>
+
                             </div>
                             <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
 

@@ -28,10 +28,6 @@ header.header {
     align-items: center;
 }
 
-.item-wrapper-body {
-    border: 1px solid black;
-    height: 86%;
-}
 
 .item-wrapper-bottom {
     border: 1px solid black;
@@ -73,3 +69,15 @@ input.search-keyword {
 .login-div > a:hover {
     color: #970f42;
 }
+
+.card {
+    display: inline-block;
+    margin: 41px;
+}
+
+.item-wrapper-body {
+    height: 86%;
+    overflow: scroll;
+}
+
+
