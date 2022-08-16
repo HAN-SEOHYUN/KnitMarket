@@ -1,6 +1,5 @@
 package com.proj.KnitMarket.dto;
 
-import com.proj.KnitMarket.Constant.Role;
 import com.proj.KnitMarket.domain.Member.User;
 import lombok.*;
 

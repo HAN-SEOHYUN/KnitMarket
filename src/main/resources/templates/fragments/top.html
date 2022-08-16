@@ -37,7 +37,13 @@
                         <li><a href="#">이용방법</a></li>
                         <li><a href="#">사이트소개</a></li>
                         <li><a href="#">장터가기</a></li>
-                        <li><a href="#">연락처</a></li>
+                        <li> <!-- 세션 role 이 seller 면 '상품등록' 아니라면 '연락처' -->
+                            <a th:href="@{/knitmarket/register}" th:if="${session.role}=='seller'">상품등록</a> <!--타임리프 문자열비교-->
+                            <th:block th:unless="${session.role}=='seller'">
+                                <a th:href="@{/knitmarket/}">연락처</a>
+                            </th:block>
+
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -45,7 +51,7 @@
                 <div class="login-div">
                     <a th:href="@{/knitmarket/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
                     <th:block th:unless="${session.id eq null}">
-                        <label>[[${session.name}]] 님</label>
+                        <label>[[${session.name}]] 님 &nbsp;</label>
                         <a th:href="@{/knitmarket/logout}" style="text-align: right;">로그아웃</a>
                     </th:block>
                 </div> <!--<i class="fa fa-solid fa-user"></i>-->
