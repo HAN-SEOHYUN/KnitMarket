@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="/fragments/top.html :: fragment-header"></header>
+<!--페이지소스 시작-->
+<link rel="stylesheet" href="/css/detail.css" type="text/css">
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <!--상품목록시작-->
+            <div class="item-detail-wrapper-div">
+                <div class = "detail-div" id="detail-img-div"></div>
+                <div class = "detail-div" id="detail-info-div"></div>
+
+            </div>
+            <!--상품목록 끝-->
+        </div>
+    </div>
+    </div>
+</section>
+<!--페이지소스 끝-->
+
+<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/detail.js}"></script>
+</body>
+</html>
