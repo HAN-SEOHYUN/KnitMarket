@@ -1,0 +1,13 @@
+.item-detail-wrapper-div {
+    flex: 0 0 100%;
+    max-width: 100%;
+    border: 1px solid #000000;
+    height: 700px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.detail-div {
+    flex: 1 1;
+    border: 1px solid black;
+}

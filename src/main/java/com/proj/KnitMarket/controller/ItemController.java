@@ -3,7 +3,6 @@ package com.proj.KnitMarket.controller;
 import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
-import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +46,7 @@ public class ItemController {
             MultipartFile file = itemDto.getFile();
             String filePath = uploadDir + file.getOriginalFilename();
             file.transferTo(new File(filePath));
-            log.info("file.getOriginalFilenaem={}", file.getOriginalFilename());
+            log.info("file.getOriginalFilename={}", file.getOriginalFilename());
             log.info("filePath={}", filePath);
 
             FileRequestDto fileDto = FileRequestDto.builder()
@@ -70,6 +69,13 @@ public class ItemController {
         model.addAttribute("msg", msg);
         return "/common/message";
     }
+
+    @GetMapping(value = "/detail")
+    public String item_detail_get() {
+
+        return "item/detail";
+    }
+
 
 
 
