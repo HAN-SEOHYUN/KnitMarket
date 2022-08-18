@@ -22,4 +22,15 @@ div#detail-wrapper-div > div {
     border: solid 1px black;
 }
 
+.detail-img-div {
+    vertical-align: middle;
+    text-align: center;
+}
+
+img {
+    max-width: 420px;
+    max-height: 420px;
+}
+
+
 
