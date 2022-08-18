@@ -33,6 +33,8 @@
                                 <div class="card-body">
                                     <h5 class="card-title" th:text="${item.itemName}"></h5>
                                     <p class="card-text" th:text="${item.price}"></p>
+                                    <span class="sold_out_span"
+                                          th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">품절</span>
                                 </div>
                             </div>
                         </a>

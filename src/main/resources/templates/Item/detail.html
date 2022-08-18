@@ -17,7 +17,8 @@
                         
                     </div>
                     <div class="detail-info-div">
-                        <input type="text" id="id" th:value="${item.id}">
+                        <input type="text" id="itemId" th:value="${item.id}">
+                        <input type="text" id="sellerId" th:value="${item.sellerId}">
                         <div class="detail-info-div-1">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">상품명</span>
@@ -51,11 +52,10 @@
 
                         </div><!--1-->
 
-                <!--        <span th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}>이미 판매된 상품입니다</span>-->
-
                         <div class="detail-info-div-2">
                             <button type="button" class="btn btn-outline-success">장바구니</button>
                             <button type="button" class="btn btn-outline-danger">구매하기</button>
+                            <button type="submit" class="btn btn-outline-dark" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})" th:formaction="@{'/knitmarket/register' + ${item.id} }">수정하기</button>
                         </div>
 
                     </div>
