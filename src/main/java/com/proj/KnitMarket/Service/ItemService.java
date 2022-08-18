@@ -52,6 +52,7 @@ public class ItemService {
                     .orginFileName(item.getFile().getOrginFileName())
                     .price(item.getPrice())
                     .sellerName(item.getSeller().getName())
+                    .sellStatus(item.getSellStatus())
                     .build();
 
             itemDtoList.add(responseDto);

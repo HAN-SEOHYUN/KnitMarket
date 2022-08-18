@@ -70,6 +70,8 @@ public class ItemController {
         return "/common/message";
     }
 
+
+    //상품상세
     @GetMapping(value = "/detail")
     public String item_detail_get() {
 
