@@ -7,13 +7,19 @@
     flex-wrap: wrap;
 }
 
-.detail-div {
+div#detail-wrapper-div {
+    height: 500px;
+    border: 1px solid black;
+    width: 100%;
+}
+
+div#detail-wrapper-div {
+    display: flex;
+}
+
+div#detail-wrapper-div > div {
     flex: 1 1;
-    border: 1px solid black;
+    border: solid 1px black;
 }
 
-div#detail-info-div {flex-direction: column;}
 
-.detail-info-div1 {
-    border: 1px solid black;
-}
