@@ -11,3 +11,9 @@
     flex: 1 1;
     border: 1px solid black;
 }
+
+div#detail-info-div {flex-direction: column;}
+
+.detail-info-div1 {
+    border: 1px solid black;
+}

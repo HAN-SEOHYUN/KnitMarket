@@ -4,14 +4,12 @@ import com.proj.KnitMarket.Service.ItemService;
 import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,6 +24,7 @@ public class IndexController { //상품목록
     public String index(Model model) {
         List<ItemResponseDto> itemDtoList = itemService.getItemList();
         model.addAttribute("itemList",itemDtoList);
+        log.info("sellStatus={}",itemDtoList.toString());
         return "index";
     }
 
