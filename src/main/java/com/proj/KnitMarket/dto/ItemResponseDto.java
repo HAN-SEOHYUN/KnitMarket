@@ -14,6 +14,7 @@ public class ItemResponseDto {
     private int price;
     private String itemDesc;
     private String sellerName;
+    private Long sellerId;
     private String orginFileName;
     private SellStatus sellStatus;
     private LocalDateTime regTime; // 등록시간
@@ -26,13 +27,14 @@ public class ItemResponseDto {
         this.itemDesc=entity.getItemDesc();
         this.price=entity.getPrice();
         this.sellerName = entity.getSeller().getName();
+        this.sellerId = entity.getSeller().getId();
         this.orginFileName = entity.getFile().getOrginFileName();
         this.sellStatus = entity.getSellStatus();
         this.regTime = entity.getRegTime();
     }
 
     @Builder
-    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus, LocalDateTime regTime) {
+    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus, LocalDateTime regTime,Long sellerId) {
         this.id = id;
         this.itemName = itemName;
         this.price = price;
@@ -41,5 +43,6 @@ public class ItemResponseDto {
         this.orginFileName = orginFileName;
         this.sellStatus = sellStatus;
         this.regTime = regTime;
+        this.sellerId = sellerId;
     }
 }

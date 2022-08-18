@@ -28,15 +28,22 @@ public class ItemController {
 
     public String uploadDir = ConstUtil.UPLOAD_IMG_PATH_TEST; //이미지 저장할 폴더
 
+    //상품등록_get
     @GetMapping(value = "/register")
     public String item_register_get(Model model) {
         model.addAttribute("item", new ItemRequestDto());
         return "item/register";
     }
 
+    //상품수정_get
+    @GetMapping(value = "/register/{itemId}")
+    public String item_update_get(Model model) {
+        model.addAttribute("item", new ItemRequestDto());
+        return "item/register";
+    }
+
     @PostMapping(value = "/register")
     public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model) throws IOException {
-        log.info("ItemRequestDto={}", itemDto.toString());
         String email = (String) httpSession.getAttribute("email");
 
         String url = "";
