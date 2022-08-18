@@ -56,6 +56,7 @@ public class ItemService {
                     .sellerName(item.getSeller().getName())
                     .sellStatus(item.getSellStatus())
                     .regTime(item.getRegTime())
+                    .sellerId(item.getSeller().getId())
                     .build();
 
             itemDtoList.add(responseDto);
@@ -77,6 +78,7 @@ public class ItemService {
                 .sellerName(item.getSeller().getName())
                 .sellStatus(item.getSellStatus())
                 .regTime(item.getRegTime())
+                .sellerId(item.getSeller().getId())
                 .build();
 
         return itemResponseDto;
