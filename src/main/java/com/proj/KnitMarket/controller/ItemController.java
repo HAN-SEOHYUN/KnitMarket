@@ -5,6 +5,7 @@ import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
 import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
+import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -72,8 +73,11 @@ public class ItemController {
 
 
     //상품상세
-    @GetMapping(value = "/detail")
-    public String item_detail_get() {
+    @GetMapping(value = "/detail/{id}")
+    //http://localhost:8086/knitmarket/detail?id=28
+    public String item_detail_get(Model model, @PathVariable("id")Long id) {
+        ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
+        model.addAttribute("item",itemResponseDto);
 
         return "item/detail";
     }

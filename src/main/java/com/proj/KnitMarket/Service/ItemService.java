@@ -12,9 +12,11 @@ import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -53,6 +55,7 @@ public class ItemService {
                     .price(item.getPrice())
                     .sellerName(item.getSeller().getName())
                     .sellStatus(item.getSellStatus())
+                    .regTime(item.getRegTime())
                     .build();
 
             itemDtoList.add(responseDto);
@@ -60,5 +63,27 @@ public class ItemService {
 
         return itemDtoList;
     }
+
+    //상품상세
+    @Transactional
+    public ItemResponseDto getItemDetail(Long id){
+        Item item = itemRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        ItemResponseDto itemResponseDto = ItemResponseDto.builder()
+                .id(item.getId())
+                .itemName(item.getItemName())
+                .itemDesc(item.getItemDesc())
+                .orginFileName(item.getFile().getOrginFileName())
+                .price(item.getPrice())
+                .sellerName(item.getSeller().getName())
+                .sellStatus(item.getSellStatus())
+                .regTime(item.getRegTime())
+                .build();
+
+        return itemResponseDto;
+
+
+    }
+
+
 
 }
