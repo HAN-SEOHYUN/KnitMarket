@@ -5,6 +5,8 @@ import com.proj.KnitMarket.domain.Item.Item;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
+
 @Getter
 public class ItemResponseDto {
     private Long id;
@@ -13,7 +15,9 @@ public class ItemResponseDto {
     private String itemDesc;
     private String sellerName;
     private String orginFileName;
-    private SellStatus sellStatus; // 가져올땐 비교를 위해서 int 로
+    private SellStatus sellStatus;
+    private LocalDateTime regTime; // 등록시간
+
 
     //entity=>dto
     public ItemResponseDto(Item entity){
@@ -24,10 +28,11 @@ public class ItemResponseDto {
         this.sellerName = entity.getSeller().getName();
         this.orginFileName = entity.getFile().getOrginFileName();
         this.sellStatus = entity.getSellStatus();
+        this.regTime = entity.getRegTime();
     }
 
     @Builder
-    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus) {
+    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus, LocalDateTime regTime) {
         this.id = id;
         this.itemName = itemName;
         this.price = price;
@@ -35,5 +40,6 @@ public class ItemResponseDto {
         this.sellerName = sellerName;
         this.orginFileName = orginFileName;
         this.sellStatus = sellStatus;
+        this.regTime = regTime;
     }
 }

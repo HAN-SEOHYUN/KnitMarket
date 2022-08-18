@@ -25,14 +25,20 @@
                 <!--상품목록시작-->
                 <div class="item-wrapper-body">
 
-                    <div class="card" style="width: 18rem;" th:each="item : ${itemList}">
-                        <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" class="card-img-top" th:alt="${item.itemName}">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${item.itemName}"></h5>
-                            <p class="card-text" th:text="${item.price}"></p>
-                            <span class ="sold_out_span"  th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">품절</span>
-                        </div>
-                    </div>
+                    <th:block th:each="item : ${itemList}">
+                        <a th:href="@{'/knitmarket/detail/'+${item.id}}">
+                            <div class="card" style="width: 18rem;">
+                                <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" class="card-img-top"
+                                     th:alt="${item.itemName}">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${item.itemName}"></h5>
+                                    <p class="card-text" th:text="${item.price}"></p>
+                                </div>
+                            </div>
+                        </a>
+                    </th:block>
+
+
                 </div>
                 <!--상품목록 끝-->
 
