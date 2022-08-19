@@ -12,13 +12,14 @@
             <!--상품상세시작-->
             <div class="item-detail-wrapper-div">
                 <div class="detail-div" id="detail-wrapper-div">
+
                     <div class="detail-img-div">
                         <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" alt="${item.itemName}">
                         
                     </div>
                     <div class="detail-info-div">
-                        <input type="text" id="itemId" th:value="${item.id}">
-                        <input type="text" id="sellerId" th:value="${item.sellerId}">
+                        <input type="hidden" id="itemId" th:value="${item.id}">
+                        <input type="hidden" id="sellerId" th:value="${item.sellerId}">
                         <div class="detail-info-div-1">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">상품명</span>
@@ -55,7 +56,9 @@
                         <div class="detail-info-div-2">
                             <button type="button" class="btn btn-outline-success">장바구니</button>
                             <button type="button" class="btn btn-outline-danger">구매하기</button>
-                            <button type="submit" class="btn btn-outline-dark" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})" th:formaction="@{'/knitmarket/register' + ${item.id} }">수정하기</button>
+                            <form role="form" method="get">
+                            <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-outline-dark" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">수정하기</button>
+                            </form>
                         </div>
 
                     </div>
