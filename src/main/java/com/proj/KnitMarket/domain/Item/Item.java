@@ -3,6 +3,7 @@ package com.proj.KnitMarket.domain.Item;
 import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Member.Seller;
+import com.proj.KnitMarket.dto.ItemRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -35,7 +36,8 @@ public class Item extends BaseEntity {
    private SellStatus sellStatus; //상품 판매 상태
 
     @Builder
-    public Item(String itemName, int price, String itemDesc,Seller seller,FileEntity file,SellStatus sellStatus) {
+    public Item(String itemName, int price, String itemDesc,Seller seller,FileEntity file,SellStatus sellStatus, Long id) {
+        this.id = id;
         this.itemName = itemName;
         this.price = price;
         this.itemDesc = itemDesc;
@@ -44,9 +46,10 @@ public class Item extends BaseEntity {
         this.sellStatus = sellStatus;
     }
 
-    public void update(String itemName, int price, String itemDesc){
-        this.itemName = itemName;
-        this.price = price;
-        this.itemDesc = itemDesc;
+    public void update(ItemRequestDto itemRequestDto){
+        this.itemName = itemRequestDto.getItemName();
+        this.price = itemRequestDto.getPrice();
+        this.itemDesc = itemRequestDto.getItemDesc();
+        this.sellStatus = itemRequestDto.getSellStatus();
     }
 }

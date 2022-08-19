@@ -3,17 +3,22 @@ package com.proj.KnitMarket.controller;
 import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
+import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.dto.FileRequestDto;
+import com.proj.KnitMarket.dto.FileResponseDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 
@@ -35,15 +40,10 @@ public class ItemController {
         return "item/register";
     }
 
-    //상품수정_get
-    @GetMapping(value = "/register/{itemId}")
-    public String item_update_get(Model model) {
-        model.addAttribute("item", new ItemRequestDto());
-        return "item/register";
-    }
 
     @PostMapping(value = "/register")
     public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model) throws IOException {
+        log.info("상품등록컨트롤러");
         String email = (String) httpSession.getAttribute("email");
 
         String url = "";
@@ -82,15 +82,31 @@ public class ItemController {
     //상품상세
     @GetMapping(value = "/detail/{id}")
     //http://localhost:8086/knitmarket/detail?id=28
-    public String item_detail_get(Model model, @PathVariable("id")Long id) {
+    public String item_detail_get(Model model, @PathVariable("id") Long id) {
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
-        model.addAttribute("item",itemResponseDto);
+
+        model.addAttribute("item", itemResponseDto);
 
         return "item/detail";
     }
 
 
+    //상품수정_get
+    @GetMapping(value = "/register/{itemId}")
+    public String item_update_get(Model model, @PathVariable(name = "itemId") Long itemId) {
+        log.info("itemId ={}",itemId);
+        ItemRequestDto itemRequestDto = itemService.getUpdateItem(itemId);
+        model.addAttribute("item", itemRequestDto);
+        return "item/register";
+    }
 
+    @PostMapping(value = "/register/{itemId}")
+    public void item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) {
+        log.info("상품수정컨트롤러");
+        log.info("수정정보 itemRequestDto={}",itemRequestDto.toString());
 
+        itemService.updateItem(itemId,itemRequestDto);
+
+    }
 
 }
