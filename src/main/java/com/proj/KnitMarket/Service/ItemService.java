@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -82,8 +83,30 @@ public class ItemService {
                 .build();
 
         return itemResponseDto;
+    }
+
+    //수정상품조회
+    @Transactional
+    public ItemRequestDto getUpdateItem(Long id){
+        Item item = itemRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        ItemRequestDto itemRequestDto = ItemRequestDto.builder()
+                .id(item.getId())
+                .itemName(item.getItemName())
+                .itemDesc(item.getItemDesc())
+                .price(item.getPrice())
+                .seller(item.getSeller())
+                .sellStatus(item.getSellStatus())
+                .build();
+
+                return itemRequestDto;
+
+    }
 
 
+    public Long updateItem(Long itemId,ItemRequestDto itemRequestDto){ //id = null
+
+        itemRequestDto.setId(itemId);
+        return itemRepository.save(itemRequestDto.toEntity()).getId();
     }
 
 

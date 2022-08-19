@@ -14,18 +14,6 @@
 
                 <div class="item-wrapper-top">
                     <div class ="item-wrapper-top-title">상품정보를 입력해주세요</div>
-                    <!--<div class="search-area">
-                        <select>
-                            <option>옵션</option>
-                        </select>&nbsp;
-                        <input type="text" class="search-keyword">&nbsp;
-                        <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
-                    </div>
-                    <div class="button-area">
-                        <button type="button" class="btn btn-outline-secondary" id="register-btn">상품등록</button>
-                    </div>-->
-
-
                 </div>
                 <div class="item-wrapper-body">
                     <div class="item-form-div">
@@ -58,12 +46,8 @@
                                           style="height: 100px" th:field="*{itemDesc}"></textarea>
                                     <label for="itemDesc">상품 설명</label>
                                 </div>
-                                <!--
-                                       <div class="product-info-div" id="product-desc-div">
-                                           <label for="itemDesc">상품설명</label>
-                                           <textarea id="itemDesc" name ="itemDesc"></textarea>
-                                       </div>-->
-                                <div class="mb-3">
+
+                               <div class="mb-3">
                                     <label for="formFile" class="form-label">상품 사진</label>
                                     <input class="form-control" type="file" id="formFile" th:field="*{file}">
                                 </div>
@@ -76,8 +60,13 @@
                                 </div>
 
                             </div>
-                            <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
 
+                            <div th:if="${#strings.isEmpty(item.itemName)}">
+                                <button th:formaction="@{/knitmarket/register}" type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
+                            </div>
+                            <div th:unless="${#strings.isEmpty(item.itemName)}">
+                                <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
+                            </div>
 
                         </form>
                     </div>

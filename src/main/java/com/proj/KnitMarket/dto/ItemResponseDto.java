@@ -1,13 +1,17 @@
 package com.proj.KnitMarket.dto;
 
 import com.proj.KnitMarket.Constant.SellStatus;
+import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.domain.Item.Item;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 public class ItemResponseDto {
     private Long id;
     private String itemName;
@@ -18,6 +22,7 @@ public class ItemResponseDto {
     private String orginFileName;
     private SellStatus sellStatus;
     private LocalDateTime regTime; // 등록시간
+    private MultipartFile file;
 
 
     //entity=>dto
