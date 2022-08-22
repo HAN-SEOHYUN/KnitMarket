@@ -102,8 +102,9 @@ public class ItemController {
     }
 
     @PostMapping(value = "/register/{itemId}")
-    public Long item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) throws IOException {
-        return itemService.updateItem(itemId,itemRequestDto);
+    public String item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) throws IOException {
+        itemService.updateItem(itemId,itemRequestDto);
+        return "/knitmarket/";
 
     }
 
