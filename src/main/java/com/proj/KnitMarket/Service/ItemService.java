@@ -10,6 +10,7 @@ import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class ItemService {
@@ -102,11 +104,14 @@ public class ItemService {
 
     }
 
+    //상품수정
+    public Long updateItem(Long itemId,ItemRequestDto itemRequestDto)throws  IOException{ //id = null
+        Item item = itemRepository.findItemById(itemId);
+        item.updateItem(itemRequestDto);
+        itemRepository.save(item);
+        log.info("item={}",item.getItemDesc());
 
-    public Long updateItem(Long itemId,ItemRequestDto itemRequestDto){ //id = null
-
-        itemRequestDto.setId(itemId);
-        return itemRepository.save(itemRequestDto.toEntity()).getId();
+        return item.getId();
     }
 
 
