@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.Service;
 
+import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.domain.Item.FileEntityRepository;
 import com.proj.KnitMarket.domain.Item.Item;
@@ -12,9 +13,11 @@ import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +33,11 @@ public class ItemService {
     private final FileEntityRepository fileRepository;
     private final FileService fileService;
 
+    public String uploadDir = ConstUtil.UPLOAD_IMG_PATH_TEST; //이미지 저장할 폴더
+
     //@Transactional : db 트랜잭션 자동으로 commit 해줌
     @Transactional //아이템 등록
-    public Long save(ItemRequestDto itemDto, String email, FileRequestDto fileRequestDto){
+    public Long save(ItemRequestDto itemDto, String email, FileRequestDto fileRequestDto) {
         Seller seller = sellerRepository.findByEmail(email);
         FileEntity file = fileService.save(fileRequestDto); // file 저장
 
@@ -45,11 +50,11 @@ public class ItemService {
 
     // index 상품목록
     @Transactional
-    public List<ItemResponseDto> getItemList(){
+    public List<ItemResponseDto> getItemList() {
         List<Item> items = itemRepository.findAll();
         List<ItemResponseDto> itemDtoList = new ArrayList<>();
 
-        for(Item item : items){
+        for (Item item : items) {
             ItemResponseDto responseDto = ItemResponseDto.builder()
                     .id(item.getId())
                     .itemName(item.getItemName())
@@ -70,7 +75,7 @@ public class ItemService {
 
     //상품상세
     @Transactional
-    public ItemResponseDto getItemDetail(Long id){
+    public ItemResponseDto getItemDetail(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ItemResponseDto itemResponseDto = ItemResponseDto.builder()
                 .id(item.getId())
@@ -89,7 +94,7 @@ public class ItemService {
 
     //수정상품조회
     @Transactional
-    public ItemRequestDto getUpdateItem(Long id){
+    public ItemRequestDto getUpdateItem(Long id) {
         Item item = itemRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         ItemRequestDto itemRequestDto = ItemRequestDto.builder()
                 .id(item.getId())
@@ -100,20 +105,33 @@ public class ItemService {
                 .sellStatus(item.getSellStatus())
                 .build();
 
-                return itemRequestDto;
+        return itemRequestDto;
 
     }
 
     //상품수정
-    public Long updateItem(Long itemId,ItemRequestDto itemRequestDto)throws  IOException{ //id = null
+    @Transactional
+    public Long updateItem(Long itemId, ItemRequestDto itemRequestDto) throws IOException { //id = null
         Item item = itemRepository.findItemById(itemId);
+
+        if (itemRequestDto.getFile() != null) {
+            MultipartFile file = itemRequestDto.getFile();
+            String filePath = uploadDir + file.getOriginalFilename();
+            file.transferTo(new File(filePath));
+
+            FileRequestDto fileRequestDto = FileRequestDto.builder()
+                    .orginFileName(file.getOriginalFilename())
+                    .filePath(uploadDir + file.getOriginalFilename())
+                    .build();
+
+            FileEntity fileEntity = fileService.save(fileRequestDto); // file 저장
+            itemRequestDto.setFileEntity(fileEntity);
+        }
         item.updateItem(itemRequestDto);
         itemRepository.save(item);
-        log.info("item={}",item.getItemDesc());
-
+        log.info("수정된 itemId={}", itemId);
         return item.getId();
     }
-
 
 
 }
