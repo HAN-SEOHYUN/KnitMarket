@@ -37,14 +37,27 @@ public class ItemService {
 
     //@Transactional : db 트랜잭션 자동으로 commit 해줌
     @Transactional //아이템 등록
-    public Long save(ItemRequestDto itemDto, String email, FileRequestDto fileRequestDto) {
+    public Long save(ItemRequestDto itemDto, String email) throws IOException {
+
         Seller seller = sellerRepository.findByEmail(email);
-        FileEntity file = fileService.save(fileRequestDto); // file 저장
 
-        itemDto.setFileEntity(file);
-        itemDto.setSeller(seller);
+        if (itemDto.getFile() != null) {
+
+            MultipartFile file = itemDto.getFile();
+            String filePath = uploadDir + file.getOriginalFilename();
+            file.transferTo(new File(filePath));
+
+            FileRequestDto fileDto = FileRequestDto.builder()
+                    .orginFileName(file.getOriginalFilename())
+                    .filePath(uploadDir + file.getOriginalFilename())
+                    .build();
+
+            FileEntity fileEntity = fileService.save(fileDto);
+            itemDto.setFileEntity(fileEntity);
+            itemDto.setSeller(seller);
+
+        }
         Item item = itemDto.toEntity();
-
         return itemRepository.save(itemDto.toEntity()).getId();
     }
 
@@ -115,6 +128,7 @@ public class ItemService {
         Item item = itemRepository.findItemById(itemId);
 
         if (itemRequestDto.getFile() != null) {
+            log.info("이미지 첨부 O");
             MultipartFile file = itemRequestDto.getFile();
             String filePath = uploadDir + file.getOriginalFilename();
             file.transferTo(new File(filePath));
@@ -126,10 +140,12 @@ public class ItemService {
 
             FileEntity fileEntity = fileService.save(fileRequestDto); // file 저장
             itemRequestDto.setFileEntity(fileEntity);
+            item.updateItem(itemRequestDto);
+        } else if(itemRequestDto.getFile() == null)  {
+            log.info("이미지 첨부 X");
+            item.updateItemWithoutFile(itemRequestDto); //이미지첨부 안하면 이전 이미지 그대로 사용
         }
-        item.updateItem(itemRequestDto);
         itemRepository.save(item);
-        log.info("수정된 itemId={}", itemId);
         return item.getId();
     }
 

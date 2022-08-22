@@ -53,4 +53,11 @@ public class Item extends BaseEntity {
         this.sellStatus = itemRequestDto.getSellStatus();
         this.file = itemRequestDto.getFileEntity();
     }
+
+    public void updateItemWithoutFile(ItemRequestDto itemRequestDto){
+        this.itemName = itemRequestDto.getItemName();
+        this.price = itemRequestDto.getPrice();
+        this.itemDesc = itemRequestDto.getItemDesc();
+        this.sellStatus = itemRequestDto.getSellStatus();
+    }
 }
