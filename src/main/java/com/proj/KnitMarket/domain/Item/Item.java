@@ -46,7 +46,7 @@ public class Item extends BaseEntity {
         this.sellStatus = sellStatus;
     }
 
-    public void update(ItemRequestDto itemRequestDto){
+    public void updateItem(ItemRequestDto itemRequestDto){
         this.itemName = itemRequestDto.getItemName();
         this.price = itemRequestDto.getPrice();
         this.itemDesc = itemRequestDto.getItemDesc();

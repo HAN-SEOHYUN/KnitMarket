@@ -4,6 +4,7 @@ import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
 import com.proj.KnitMarket.domain.Item.FileEntity;
+import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.dto.FileRequestDto;
 import com.proj.KnitMarket.dto.FileResponseDto;
 import com.proj.KnitMarket.dto.ItemRequestDto;
@@ -101,11 +102,8 @@ public class ItemController {
     }
 
     @PostMapping(value = "/register/{itemId}")
-    public void item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) {
-        log.info("상품수정컨트롤러");
-        log.info("수정정보 itemRequestDto={}",itemRequestDto.toString());
-
-        itemService.updateItem(itemId,itemRequestDto);
+    public Long item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) throws IOException {
+        return itemService.updateItem(itemId,itemRequestDto);
 
     }
 
