@@ -46,37 +46,9 @@ public class ItemController {
     public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model) throws IOException {
         log.info("상품등록컨트롤러");
         String email = (String) httpSession.getAttribute("email");
+        Long itemId = itemService.save(itemDto, email);
 
-        String url = "";
-        String msg = "";
-
-        if (itemDto.getFile() != null) {
-            log.info("이미지 有");
-            MultipartFile file = itemDto.getFile();
-            String filePath = uploadDir + file.getOriginalFilename();
-            file.transferTo(new File(filePath));
-            log.info("file.getOriginalFilename={}", file.getOriginalFilename());
-            log.info("filePath={}", filePath);
-
-            FileRequestDto fileDto = FileRequestDto.builder()
-                    .orginFileName(file.getOriginalFilename())
-                    .filePath(uploadDir + file.getOriginalFilename())
-                    .build();
-
-            Long itemId = itemService.save(itemDto, email, fileDto);
-
-            log.info("상품번호 ={}", itemId);
-
-            url = "/knitmarket/";
-            msg = "상품등록이 완료되었습니다";
-        } else {
-            url = "/knitmarket/";
-            msg = "상품등록에 실패했습니다 상품 정보를 확인해주세요 ! ";
-
-        }
-        model.addAttribute("url", url);
-        model.addAttribute("msg", msg);
-        return "/common/message";
+        return "/knitmarket/";
     }
 
 
