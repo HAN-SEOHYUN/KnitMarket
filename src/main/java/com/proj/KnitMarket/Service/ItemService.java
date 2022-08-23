@@ -12,6 +12,7 @@ import com.proj.KnitMarket.dto.ItemRequestDto;
 import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -147,6 +148,20 @@ public class ItemService {
         }
         itemRepository.save(item);
         return item.getId();
+    }
+
+    //상품삭제
+    @Transactional
+    public ItemResponseDto deleteItem(Long id){
+        Item item = itemRepository.findItemById(id);
+        ItemResponseDto itemResponseDto = getItemDetail(id);
+
+        itemResponseDto.setDeleted(true);
+
+        item.deleteItem(itemResponseDto);
+        itemRepository.save(item);
+
+        return itemResponseDto;
     }
 
 
