@@ -3,7 +3,6 @@ package com.proj.KnitMarket.controller;
 import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
-import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -80,17 +79,21 @@ public class ItemController {
     public String item_delete_get(@PathVariable("itemId") Long id,HttpSession httpSession,Model model){
         Long sellerId = (Long) httpSession.getAttribute("id");
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
-
-        if(sellerId == itemResponseDto.getSellerId()){ // 현재 로그인된 계정과 판매자 계정이 일치한다면
-            log.info("deleteItem 메서드 실행 !");
-           itemResponseDto= itemService.deleteItem(id);
-        }
-        log.info("삭제여부={}",itemResponseDto.isDeleted());
         String url = "/knitmarket/", msg ="삭제가 완료되었습니다";
 
+        if(sellerId == itemResponseDto.getSellerId()) { // 현재 로그인된 계정과 판매자 계정이 일치한다면
+            log.info("deleteItem 메서드 실행 !");
+            itemResponseDto = itemService.deleteItem(id);
+        }else{
+            msg = "삭제권한이 없습니다";
+        }
+        log.info("삭제여부={}",itemResponseDto.isDeleted());
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
     }
+
+
+
 
 }
