@@ -28,6 +28,7 @@ public class ItemController {
     @GetMapping(value = "/register")
     public String item_register_get(Model model) {
         model.addAttribute("item", new ItemRequestDto());
+
         return "item/register";
     }
 
@@ -38,7 +39,11 @@ public class ItemController {
         String email = (String) httpSession.getAttribute("email");
         Long itemId = itemService.save(itemDto, email);
 
-        return "/knitmarket/";
+        String url = "/knitmarket/", msg ="상품등록이 완료되었습니다";
+
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return "/common/message";
     }
 
     //상품상세_get
@@ -63,12 +68,16 @@ public class ItemController {
     @PostMapping(value = "/register/{itemId}")
     public String item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) throws IOException {
         itemService.updateItem(itemId,itemRequestDto);
-        return "index";
+        String url = "/knitmarket/", msg ="수정이 완료되었습니다";
+
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return "/common/message";
     }
 
     //상품삭제_get
     @GetMapping(value = "/delete/{itemId}")
-    public String item_delete_get(@PathVariable("itemId") Long id,HttpSession httpSession){
+    public String item_delete_get(@PathVariable("itemId") Long id,HttpSession httpSession,Model model){
         Long sellerId = (Long) httpSession.getAttribute("id");
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
 
@@ -76,7 +85,11 @@ public class ItemController {
            itemResponseDto= itemService.deleteItem(id);
         }
         log.info("삭제여부={}",itemResponseDto.isDeleted());
-        return "index";
+        String url = "/knitmarket/", msg ="삭제가 완료되었습니다";
+
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return "/common/message";
     }
 
 }
