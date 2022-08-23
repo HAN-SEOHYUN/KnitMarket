@@ -4,13 +4,14 @@ import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Member.Seller;
 import com.proj.KnitMarket.dto.ItemRequestDto;
+import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name="item")
+@Table(name = "item")
 @Entity
 public class Item extends BaseEntity {
 
@@ -25,18 +26,20 @@ public class Item extends BaseEntity {
     private String itemDesc; //상품 상세 설명
 
     @ManyToOne
-    @JoinColumn(name="seller_id")
+    @JoinColumn(name = "seller_id")
     private Seller seller; //상품 등록자
 
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="fileEntity_id")
+    @JoinColumn(name = "fileEntity_id")
     private FileEntity file;
 
     @Enumerated(EnumType.STRING)
-   private SellStatus sellStatus; //상품 판매 상태
+    private SellStatus sellStatus; //상품 판매 상태
+
+    private boolean isDeleted = Boolean.FALSE;
 
     @Builder
-    public Item(String itemName, int price, String itemDesc,Seller seller,FileEntity file,SellStatus sellStatus, Long id) {
+    public Item(String itemName, int price, String itemDesc, Seller seller, FileEntity file, SellStatus sellStatus, Long id,boolean isDeleted) {
         this.id = id;
         this.itemName = itemName;
         this.price = price;
@@ -44,9 +47,10 @@ public class Item extends BaseEntity {
         this.seller = seller;
         this.file = file;
         this.sellStatus = sellStatus;
+        this.isDeleted = isDeleted;
     }
 
-    public void updateItem(ItemRequestDto itemRequestDto){
+    public void updateItem(ItemRequestDto itemRequestDto) {
         this.itemName = itemRequestDto.getItemName();
         this.price = itemRequestDto.getPrice();
         this.itemDesc = itemRequestDto.getItemDesc();
@@ -54,10 +58,14 @@ public class Item extends BaseEntity {
         this.file = itemRequestDto.getFileEntity();
     }
 
-    public void updateItemWithoutFile(ItemRequestDto itemRequestDto){
+    public void updateItemWithoutFile(ItemRequestDto itemRequestDto) {
         this.itemName = itemRequestDto.getItemName();
         this.price = itemRequestDto.getPrice();
         this.itemDesc = itemRequestDto.getItemDesc();
         this.sellStatus = itemRequestDto.getSellStatus();
+    }
+
+    public void deleteItem(ItemResponseDto itemResponseDto){
+        this.isDeleted = itemResponseDto.isDeleted();
     }
 }
