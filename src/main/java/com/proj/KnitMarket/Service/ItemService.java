@@ -156,7 +156,8 @@ public class ItemService {
         Item item = itemRepository.findItemById(id);
         ItemResponseDto itemResponseDto = getItemDetail(id);
 
-        itemResponseDto.setDeleted(true);
+        itemResponseDto.setDeleted(Boolean.TRUE);
+        log.info("service 삭제여부={}",itemResponseDto.isDeleted());
 
         item.deleteItem(itemResponseDto);
         itemRepository.save(item);
