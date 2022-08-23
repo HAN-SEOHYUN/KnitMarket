@@ -7,7 +7,9 @@ import com.proj.KnitMarket.dto.SellerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -29,4 +31,7 @@ public class SellerService {
     public boolean existsByEmail(String email){
         return sellerRepository.existsByEmail(email);
     }
+
+
+
 }

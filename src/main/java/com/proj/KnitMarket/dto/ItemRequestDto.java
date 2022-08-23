@@ -21,6 +21,7 @@ public class ItemRequestDto {
     private MultipartFile file; //file
     private FileEntity fileEntity;
     private SellStatus sellStatus;
+    private boolean isDeleted;
 
 //dto => entity
     public Item toEntity() {
@@ -32,11 +33,12 @@ public class ItemRequestDto {
                 .seller(seller)
                 .file(fileEntity)
                 .sellStatus(sellStatus)
+                .isDeleted(isDeleted)
                 .build();
     }
 
     @Builder
-    public ItemRequestDto(String itemName, String itemDesc, int price, Seller seller, FileEntity file,SellStatus sellStatus,Long id) {
+    public ItemRequestDto(String itemName, String itemDesc, int price, Seller seller, FileEntity file,SellStatus sellStatus,Long id, boolean isDeleted) {
         this.id = id;
         this.price = price;
         this.itemDesc = itemDesc;
@@ -44,5 +46,6 @@ public class ItemRequestDto {
         this.seller = seller;
         this.fileEntity = file;
         this.sellStatus = sellStatus;
+        this.isDeleted = isDeleted;
     }
 }

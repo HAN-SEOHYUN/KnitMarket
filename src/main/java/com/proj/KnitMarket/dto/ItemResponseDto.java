@@ -23,7 +23,7 @@ public class ItemResponseDto {
     private SellStatus sellStatus;
     private LocalDateTime regTime; // 등록시간
     private MultipartFile file;
-
+    private boolean isDeleted;
 
     //entity=>dto
     public ItemResponseDto(Item entity){
@@ -36,10 +36,11 @@ public class ItemResponseDto {
         this.orginFileName = entity.getFile().getOrginFileName();
         this.sellStatus = entity.getSellStatus();
         this.regTime = entity.getRegTime();
+        this.isDeleted = entity.isDeleted();
     }
 
     @Builder
-    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus, LocalDateTime regTime,Long sellerId) {
+    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus, LocalDateTime regTime,Long sellerId, boolean isDeleted) {
         this.id = id;
         this.itemName = itemName;
         this.price = price;
@@ -49,5 +50,6 @@ public class ItemResponseDto {
         this.sellStatus = sellStatus;
         this.regTime = regTime;
         this.sellerId = sellerId;
+        this.isDeleted = isDeleted;
     }
 }
