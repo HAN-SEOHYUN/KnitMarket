@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "item")
 @Entity
-@Where(clause = "is_deleted = false")
+@Where(clause = "is_deleted = false and sell_status = 'SELL'")
 public class Item extends BaseEntity {
 
     @Id
