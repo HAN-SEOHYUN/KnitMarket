@@ -82,6 +82,7 @@ public class ItemController {
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
 
         if(sellerId == itemResponseDto.getSellerId()){ // 현재 로그인된 계정과 판매자 계정이 일치한다면
+            log.info("deleteItem 메서드 실행 !");
            itemResponseDto= itemService.deleteItem(id);
         }
         log.info("삭제여부={}",itemResponseDto.isDeleted());

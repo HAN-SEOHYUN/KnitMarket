@@ -6,6 +6,7 @@ import com.proj.KnitMarket.domain.Member.Seller;
 import com.proj.KnitMarket.dto.ItemRequestDto;
 import com.proj.KnitMarket.dto.ItemResponseDto;
 import lombok.*;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "item")
 @Entity
+@Where(clause = "is_deleted = false")
 public class Item extends BaseEntity {
 
     @Id
