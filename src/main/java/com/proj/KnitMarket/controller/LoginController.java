@@ -16,6 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+/*
+        session.setAttribute("id", userId);
+        session.setAttribute("email", email);
+        session.setAttribute("access_Token",access_Token); //로그아웃때 필요한 accessToken
+        session.setAttribute("name", name);
+        session.setAttribute("role",role);
+* */
+
 
 @Slf4j
 @RequiredArgsConstructor

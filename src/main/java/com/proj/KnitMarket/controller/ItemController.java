@@ -3,24 +3,14 @@ package com.proj.KnitMarket.controller;
 import com.proj.KnitMarket.Constant.ConstUtil;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
-import com.proj.KnitMarket.domain.Item.FileEntity;
-import com.proj.KnitMarket.domain.Item.Item;
-import com.proj.KnitMarket.dto.FileRequestDto;
-import com.proj.KnitMarket.dto.FileResponseDto;
-import com.proj.KnitMarket.dto.ItemRequestDto;
-import com.proj.KnitMarket.dto.ItemResponseDto;
+import com.proj.KnitMarket.Service.SellerService;
+import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-import java.io.File;
 import java.io.IOException;
 
 @Slf4j
@@ -41,7 +31,7 @@ public class ItemController {
         return "item/register";
     }
 
-
+    //상품등록_post
     @PostMapping(value = "/register")
     public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model) throws IOException {
         log.info("상품등록컨트롤러");
@@ -51,18 +41,14 @@ public class ItemController {
         return "/knitmarket/";
     }
 
-
-    //상품상세
+    //상품상세_get
     @GetMapping(value = "/detail/{id}")
     //http://localhost:8086/knitmarket/detail?id=28
     public String item_detail_get(Model model, @PathVariable("id") Long id) {
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
-
         model.addAttribute("item", itemResponseDto);
-
         return "item/detail";
     }
-
 
     //상품수정_get
     @GetMapping(value = "/register/{itemId}")
@@ -73,11 +59,24 @@ public class ItemController {
         return "item/register";
     }
 
+    //상품수정_post
     @PostMapping(value = "/register/{itemId}")
     public String item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) throws IOException {
         itemService.updateItem(itemId,itemRequestDto);
-        return "/knitmarket/";
+        return "index";
+    }
 
+    //상품삭제_get
+    @GetMapping(value = "/delete/{itemId}")
+    public String item_delete_get(@PathVariable("itemId") Long id,HttpSession httpSession){
+        Long sellerId = (Long) httpSession.getAttribute("id");
+        ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
+
+        if(sellerId == itemResponseDto.getSellerId()){ // 현재 로그인된 계정과 판매자 계정이 일치한다면
+           itemResponseDto= itemService.deleteItem(id);
+        }
+        log.info("삭제여부={}",itemResponseDto.isDeleted());
+        return "index";
     }
 
 }
