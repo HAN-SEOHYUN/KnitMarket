@@ -28,44 +28,30 @@ public class CartService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
 
-    //cart 만들기 (member 만 넣어서)
-    //근데이제 이미  cart 가 있으면 안만듦
+    //회원번호와 아이템번호 넣으면 장바구니에 상품을 추가해주는 메서드
     @Transactional
     public Cart save(Long userId, Long itemId) {
         log.info("cartService");
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-        log.info("user ={}",user.getName());
-
-        CartDto cartDto = CartDto.builder()
-                .user(user)
-                .build();
-        Cart cart = cartRepository.save(cartDto.toEntity());
-        log.info("cartUser = {}", cart.getUser().getId());
-
-        //item 받아서 cartItem 만들기
         Item item = itemRepository.findItemById(itemId);
-        log.info("item= {}",item.getId()); //item= 34
+
+        Cart cart = cartRepository.findCartByUser_Id(userId);
+        log.info("cartId={}",cart.getId());
 
         CartItemDto cartItemDto = CartItemDto.builder()
                 .cart(cart)
                 .item(item)
                 .build();
 
-        log.info("cartItem_id={}",cartItemDto.getId()); //cartItem_id=null
-
-        //cartItem 만든거 cartItemList 에 넣기
+        //장바구니에 아이템이 존재하면 추가하지않는 메서드 추가
         CartItem cartItem = cartItemRepository.save(cartItemDto.toEntity());
 
-        //만든 리스트 만들어놓은 cart에 add하기
-        List<CartItem> cartItemList = new ArrayList<>();
-        cartItemList.add(cartItem);
-        CartDto cartDto1 = cartDto.builder()
-                .cartItemList(cartItemList)
-                .user(cart.getUser())
-                .id(cart.getId())
-                .build();
+        List<CartItem> cartItemList = cartItemRepository.findByCart_Id(cart.getId());
 
-        Cart cart1 = cartRepository.save(cartDto1.toEntity());
+        log.info("cartItemList={}",cartItemList.toString());
+
+        cartItemList.add(cartItem);
+
         return cart;
     }
 }

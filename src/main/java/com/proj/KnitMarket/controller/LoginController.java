@@ -1,8 +1,13 @@
 package com.proj.KnitMarket.controller;
 
+import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.KakaoLoginService;
 import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.Service.UserService;
+import com.proj.KnitMarket.domain.Member.User;
+import com.proj.KnitMarket.domain.Order.Cart;
+import com.proj.KnitMarket.domain.Order.CartRepository;
+import com.proj.KnitMarket.dto.CartDto;
 import com.proj.KnitMarket.dto.SellerRequestDto;
 import com.proj.KnitMarket.dto.UserRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +39,7 @@ public class LoginController {
     private final KakaoLoginService kakao;
     private final UserService userService;
     private final SellerService sellerService;
+    private final CartRepository cartRepository;
 
     @GetMapping("/login")
     public String login_get() {
@@ -117,9 +123,17 @@ public class LoginController {
         //db 중복 확인
         if (!userService.existsByEmail(email)) { //신규가입
             userRequestDto = new UserRequestDto(email, name);
-            userId = userService.save(userRequestDto);
+            User user = userService.save(userRequestDto);
+            userId = user.getId();
 
             log.info("신규회원가입 회원번호={}", userId);
+
+            //장바구니 생성
+            CartDto createCartDto = CartDto.builder()
+                    .user(user)
+                    .build();
+
+            Cart cart = cartRepository.save(createCartDto.toEntity());
 
         }else{ //기존회원로그인
             userId = userService.findByEmail(email).getId();
@@ -135,7 +149,7 @@ public class LoginController {
         session.setAttribute("role",role);
 
         model.addAttribute("url","/knitmarket/");
-        model.addAttribute("msg","성공");
+        model.addAttribute("msg","로그인되었습니다");
 
         return "/common/message";
     }
