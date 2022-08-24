@@ -24,13 +24,15 @@ public class CartController {
     //장바구니 추가
     @GetMapping(value ="/cart/{itemId}")
     public String cart_add_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
-        Long userId = (Long) httpSession.getAttribute("id");
-
         log.info("CartController");
-
-        Cart cart = cartService.save(userId, itemId);
-
+        Long userId = (Long) httpSession.getAttribute("id");
         String msg ="장바구니에 추가되었습니다", url ="/knitmarket/";
+        if(userId==null){
+            msg ="로그인 후 장바구니 이용이 가능합니다";
+            url = "/knitmarket/login";
+        }else{
+            Cart cart = cartService.save(userId, itemId);
+        }
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
