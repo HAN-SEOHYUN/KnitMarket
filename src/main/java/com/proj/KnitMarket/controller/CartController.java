@@ -30,7 +30,7 @@ public class CartController {
 
         Cart cart = cartService.save(userId, itemId);
 
-        String url ="장바구니에 추가되었습니다", msg ="";
+        String msg ="장바구니에 추가되었습니다", url ="";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
