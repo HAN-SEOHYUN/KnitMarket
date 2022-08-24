@@ -54,9 +54,9 @@
                         </div><!--1-->
 
                         <div class="detail-info-div-2">
-                            <button type="button" class="btn btn-outline-success">장바구니</button>
-                            <button type="button" class="btn btn-outline-danger">구매하기</button>
                             <form role="form" method="get">
+                            <button th:formaction="@{'/knitmarket/cart/' + ${item.id} }" type="submit" class="btn btn-outline-success" >장바구니</button>
+                            <button type="button" class="btn btn-outline-danger">구매하기</button>
                             <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-outline-dark" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">수정하기</button>
                             <button th:formaction="@{'/knitmarket/delete/' + ${item.id} }" type="submit" class="btn btn-outline-secondary" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">삭제하기</button>
                             </form>
