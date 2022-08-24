@@ -41,21 +41,25 @@ public class CartService {
         Cart cart = cartRepository.save(cartDto.toEntity());
         log.info("cartUser = {}", cart.getUser().getId());
 
-        /*//cartItemList가 이미있는지 없는지 확인해야함
+        //cartItemList가 이미있는지 없는지 확인해야함
         List<CartItem> cartItemList = cart.getCartItemList();
 
         //item 받아서 cartItem 만들기
         Item item = itemRepository.findItemById(itemId);
+        log.info("item= {}",item.getId()); //item= 34
+
         CartItemDto cartItemDto = CartItemDto.builder()
                 .cart(cart)
                 .item(item)
                 .build();
 
+        log.info("cartItem_id={}",cartItemDto.getId()); //cartItem_id=null
+
         //cartItem 만든거 cartItemList 에 넣기
         CartItem cartItem = cartItemRepository.save(cartItemDto.toEntity());
 
         //만든 리스트 만들어놓은 cart에 add하기
-        cartItemList.add(cartItem);*/
+        cartItemList.add(cartItem);
 
         return cart;
     }
