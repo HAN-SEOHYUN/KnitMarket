@@ -5,6 +5,7 @@ import com.proj.KnitMarket.domain.Item.ItemRepository;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.domain.Order.Cart;
+import com.proj.KnitMarket.domain.Order.CartItem;
 import com.proj.KnitMarket.domain.Order.CartItemRepository;
 import com.proj.KnitMarket.domain.Order.CartRepository;
 import com.proj.KnitMarket.dto.CartDto;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -27,34 +29,40 @@ public class CartService {
 
     //cart 만들기 (member 만 넣어서)
     //근데이제 이미  cart 가 있으면 안만듦
-    @Transactional Long save(Long userId, Long itemId){
+    @Transactional
+    public Cart save(Long userId, Long itemId) {
+        log.info("cartService");
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        log.info("user ={}",user.getName());
 
         CartDto cartDto = CartDto.builder()
                 .user(user)
                 .build();
-        Long cartId = cartRepository.save(cartDto.toEntity()).getId();
+        Cart cart = cartRepository.save(cartDto.toEntity());
+        log.info("cartUser = {}", cart.getUser().getId());
+
+        //cartItemList가 이미있는지 없는지 확인해야함
+        List<CartItem> cartItemList = cart.getCartItemList();
 
         //item 받아서 cartItem 만들기
         Item item = itemRepository.findItemById(itemId);
+        log.info("item= {}",item.getId()); //item= 34
+
         CartItemDto cartItemDto = CartItemDto.builder()
-                .cart(cartDto.toEntity())
+                .cart(cart)
                 .item(item)
                 .build();
 
-        Long cartItemId = cartItemRepository.save(cartItemDto.toEntity()).getId();
+        log.info("cartItem_id={}",cartItemDto.getId()); //cartItem_id=null
 
         //cartItem 만든거 cartItemList 에 넣기
-        //cartItemList가 이미있는지 없는지 확인해야함
-
+        CartItem cartItem = cartItemRepository.save(cartItemDto.toEntity());
 
         //만든 리스트 만들어놓은 cart에 add하기
+        cartItemList.add(cartItem);
 
-
-        return userId;
+        return cart;
     }
-
-
 
 
 }

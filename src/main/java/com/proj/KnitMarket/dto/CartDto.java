@@ -16,7 +16,6 @@ public class CartDto {
 
     public Cart toEntity(){
         return Cart.builder()
-                .id(id)
                 .user(user)
                 .cartItemList(cartItemList)
                 .build();

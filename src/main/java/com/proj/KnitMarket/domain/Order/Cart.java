@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -24,14 +25,15 @@ public class Cart extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @Nullable
     private User user;
 
-    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL)
+    @Nullable
     private List<CartItem> cartItemList = new ArrayList<>();
 
     @Builder
-    public Cart(Long id,User user,List<CartItem> cartItemList){
-        this.id = id;
+    public Cart(User user,List<CartItem> cartItemList){
         this.user = user;
         this.cartItemList = cartItemList;
     }
