@@ -87,7 +87,7 @@ public class LoginController {
         session.setAttribute("role",role);
 
         model.addAttribute("url","/knitmarket/");
-        model.addAttribute("msg","성공");
+        model.addAttribute("msg","로그인 되었습니다");
 
         return "/common/message";
     }
