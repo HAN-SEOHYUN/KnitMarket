@@ -1,7 +1,6 @@
 package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Service.CartService;
-import com.proj.KnitMarket.domain.Order.Cart;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,7 +30,11 @@ public class CartController {
             msg ="로그인 후 장바구니 이용이 가능합니다";
             url = "/knitmarket/login";
         }else{
-            Cart cart = cartService.save(userId, itemId);
+            boolean addSuccess = cartService.save(userId, itemId);
+            if(!addSuccess){
+                msg ="장바구니에 이미 존재하는 상품입니다";
+            }
+
         }
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);

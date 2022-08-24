@@ -8,7 +8,6 @@ import com.proj.KnitMarket.domain.Order.Cart;
 import com.proj.KnitMarket.domain.Order.CartItem;
 import com.proj.KnitMarket.domain.Order.CartItemRepository;
 import com.proj.KnitMarket.domain.Order.CartRepository;
-import com.proj.KnitMarket.dto.CartDto;
 import com.proj.KnitMarket.dto.CartItemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -30,28 +28,35 @@ public class CartService {
 
     //회원번호와 아이템번호 넣으면 장바구니에 상품을 추가해주는 메서드
     @Transactional
-    public Cart save(Long userId, Long itemId) {
+    public boolean save(Long userId, Long itemId) {
         log.info("cartService");
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         Item item = itemRepository.findItemById(itemId);
 
         Cart cart = cartRepository.findCartByUser_Id(userId);
-        log.info("cartId={}",cart.getId());
+        log.info("cartId={}", cart.getId());
 
-        CartItemDto cartItemDto = CartItemDto.builder()
-                .cart(cart)
-                .item(item)
-                .build();
+        boolean isItemExist = cartItemRepository.existsCartItemByCart_IdAndItem_Id(cart.getId(), itemId);
 
-        //장바구니에 아이템이 존재하면 추가하지않는 메서드 추가
-        CartItem cartItem = cartItemRepository.save(cartItemDto.toEntity());
+        log.info("isItemExist={}",isItemExist);
+        boolean addSuccess;
 
-        List<CartItem> cartItemList = cartItemRepository.findByCart_Id(cart.getId());
+        if (!isItemExist) { //장바구니에 해당 상품이 없으면 추가
+            CartItemDto cartItemDto = CartItemDto.builder()
+                    .cart(cart)
+                    .item(item)
+                    .build();
 
-        log.info("cartItemList={}",cartItemList.toString());
+            CartItem cartItem = cartItemRepository.save(cartItemDto.toEntity());
 
-        cartItemList.add(cartItem);
+            List<CartItem> cartItemList = cartItemRepository.findByCart_Id(cart.getId());
 
-        return cart;
+            cartItemList.add(cartItem);
+
+            addSuccess = true;
+        } else { // 이미존재하면 false 반환
+            addSuccess = false;
+        }
+        return addSuccess;
     }
 }
