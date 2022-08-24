@@ -30,11 +30,10 @@ public class CartController {
 
         Cart cart = cartService.save(userId, itemId);
 
-        String msg ="장바구니에 추가되었습니다", url ="";
+        String msg ="장바구니에 추가되었습니다", url ="/knitmarket/";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
-
     }
 
 }

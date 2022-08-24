@@ -22,7 +22,8 @@ public class CartDto {
     }
 
     @Builder
-    public CartDto(User user, List<CartItem> cartItemList){
+    public CartDto(Long id,User user, List<CartItem> cartItemList){
+        this.id = id;
         this.user = user;
         this.cartItemList = cartItemList;
     }
