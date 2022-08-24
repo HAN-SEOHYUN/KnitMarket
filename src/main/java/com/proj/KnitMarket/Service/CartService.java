@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -41,9 +42,6 @@ public class CartService {
         Cart cart = cartRepository.save(cartDto.toEntity());
         log.info("cartUser = {}", cart.getUser().getId());
 
-        //cartItemList가 이미있는지 없는지 확인해야함
-        List<CartItem> cartItemList = cart.getCartItemList();
-
         //item 받아서 cartItem 만들기
         Item item = itemRepository.findItemById(itemId);
         log.info("item= {}",item.getId()); //item= 34
@@ -59,10 +57,15 @@ public class CartService {
         CartItem cartItem = cartItemRepository.save(cartItemDto.toEntity());
 
         //만든 리스트 만들어놓은 cart에 add하기
+        List<CartItem> cartItemList = new ArrayList<>();
         cartItemList.add(cartItem);
+        CartDto cartDto1 = cartDto.builder()
+                .cartItemList(cartItemList)
+                .user(cart.getUser())
+                .id(cart.getId())
+                .build();
 
+        Cart cart1 = cartRepository.save(cartDto1.toEntity());
         return cart;
     }
-
-
 }
