@@ -1,6 +1,7 @@
 package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Service.CartService;
+import com.proj.KnitMarket.dto.CartItemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -18,12 +20,15 @@ import javax.servlet.http.HttpSession;
 public class CartController {
 
     private final CartService cartService;
+    private final HttpSession httpSession;
 
 
     @GetMapping("/cartlist")
-    public String cart_list_get(){
-
-
+    public String cart_list_get(Model model){
+        Long userId = (Long)httpSession.getAttribute("id");
+        List <CartItemDto> cartItemDtoList = cartService.getCartItemList(userId);
+        log.info("cartItemList={}",cartItemDtoList.size());
+        model.addAttribute("cartList",cartItemDtoList);
         return "cart/list";
     }
 
