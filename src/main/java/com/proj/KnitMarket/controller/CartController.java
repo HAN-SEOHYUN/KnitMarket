@@ -19,7 +19,15 @@ public class CartController {
 
     private final CartService cartService;
 
-    //AJAX로 들어올꺼임
+
+    @GetMapping("/cartlist")
+    public String cart_list_get(){
+
+
+        return "cart/list";
+    }
+
+
     //장바구니 추가
     @GetMapping(value ="/cart/{itemId}")
     public String cart_add_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
