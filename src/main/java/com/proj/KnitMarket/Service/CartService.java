@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -58,5 +59,23 @@ public class CartService {
             addSuccess = false;
         }
         return addSuccess;
+    }
+
+    @Transactional
+    public List<CartItemDto> getCartItemList(Long userId){
+        Long cartId = cartRepository.findCartByUser_Id(userId).getId();
+        List<CartItem> cartItems = cartItemRepository.findByCart_Id(cartId);
+        List<CartItemDto> cartItemDtoList = new ArrayList<>();
+
+        for(CartItem cartItem : cartItems){
+            CartItemDto cartItemDto = CartItemDto.builder()
+                    .id(cartItem.getId())
+                    .cart(cartItem.getCart())
+                    .item(cartItem.getItem())
+                    .build();
+
+            cartItemDtoList.add(cartItemDto);
+        }
+        return cartItemDtoList;
     }
 }
