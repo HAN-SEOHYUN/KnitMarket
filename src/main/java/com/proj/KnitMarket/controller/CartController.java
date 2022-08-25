@@ -27,7 +27,6 @@ public class CartController {
     public String cart_list_get(Model model){
         Long userId = (Long)httpSession.getAttribute("id");
         List <CartItemDto> cartItemDtoList = cartService.getCartItemList(userId);
-        log.info("cartItemList={}",cartItemDtoList.size());
         model.addAttribute("cartList",cartItemDtoList);
         return "cart/list";
     }
