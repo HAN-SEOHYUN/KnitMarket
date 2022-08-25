@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 /*
 CartItem은 Cart가 먼저 생성이되어야 생성될 수 있고,
@@ -34,9 +35,10 @@ public class CartItem extends BaseEntity {
     private Item item;
 
     @Builder
-    public CartItem(Long id,Cart cart, Item item){
+    public CartItem(Long id, Cart cart, Item item, LocalDateTime regTime){
         this.id=id;
         this.cart = cart;
         this.item = item;
+        this.setRegTime(regTime);
     }
 }
