@@ -72,6 +72,7 @@ public class CartService {
                     .id(cartItem.getId())
                     .cart(cartItem.getCart())
                     .item(cartItem.getItem())
+                    .regTime(cartItem.getRegTime())
                     .build();
 
             cartItemDtoList.add(cartItemDto);
