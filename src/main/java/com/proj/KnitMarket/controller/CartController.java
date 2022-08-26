@@ -22,7 +22,7 @@ public class CartController {
     private final CartService cartService;
     private final HttpSession httpSession;
 
-
+    //장바구니 목록
     @GetMapping("/cartlist")
     public String cart_list_get(Model model){
         Long userId = (Long)httpSession.getAttribute("id");
@@ -33,7 +33,7 @@ public class CartController {
 
 
     //장바구니 추가
-    @GetMapping(value ="/cart/{itemId}")
+    @GetMapping(value ="/cartAdd/{itemId}")
     public String cart_add_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
         log.info("CartController");
         Long userId = (Long) httpSession.getAttribute("id");
@@ -46,8 +46,20 @@ public class CartController {
             if(!addSuccess){
                 msg ="장바구니에 이미 존재하는 상품입니다";
             }
-
         }
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return "/common/message";
+    }
+
+    //장바구니 삭제
+    @GetMapping(value = "/cartRemove/{cartItemId}")
+    public String cart_remove_get(@PathVariable("cartItemId")Long cartItemId, Model model){
+        log.info("cartRemoveController cartItemId={}",cartItemId);
+
+        cartService.cartRemove(cartItemId);
+
+        String url = "/knitmarket/cartlist", msg ="삭제되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
