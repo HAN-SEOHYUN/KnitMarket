@@ -68,6 +68,7 @@ public class CartController {
     //장바구니 삭제 (여러개)
     @GetMapping(value ="/cartRemoveList/{cartItemIdList}")
     public String cart_remove_list_get(@PathVariable List<Long> cartItemIdList,Model model){
+        log.info("cartRemoveList={}",cartItemIdList.size());
         for(Long cartItemId : cartItemIdList){
             cartService.cartRemove(cartItemId);
         }

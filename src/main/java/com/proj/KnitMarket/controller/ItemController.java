@@ -1,8 +1,10 @@
 package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Constant.ConstUtil;
+import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
+import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -20,6 +23,7 @@ public class ItemController {
 
     private final ItemService itemService;
     private final FileService fileService;
+    private final SellerService sellerService;
 
     public String uploadDir = ConstUtil.UPLOAD_IMG_PATH_TEST; //이미지 저장할 폴더
 
@@ -93,7 +97,14 @@ public class ItemController {
         return "/common/message";
     }
 
-
-
+    //내 상품 (판매자가 게시한 상품 목록 조회)
+    @GetMapping(value = "/myItem")
+    public String myItem_list_get(Model model,HttpSession httpSession){
+        Long sellerId = (Long)httpSession.getAttribute("id");
+        List<ItemResponseDto> itemResponseDtoList = sellerService.getMyItemList(sellerId);
+        log.info("itemResponseDtoList={}",itemResponseDtoList.size());
+        model.addAttribute("myItemList",itemResponseDtoList);
+        return "seller/myItem";
+    }
 
 }
