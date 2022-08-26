@@ -16,8 +16,8 @@
                 <div class="cart-list-wrapper-body">
                     <div class="cart-list-card-wrapper">
                         <!--상품Card 시작-->
-                        <th:block th:each="cartItem : ${cartList}">
-                            <div class="card mb-3" style="max-width: 540px;">
+                        <th:block th:each="cartItem : ${cartList}" class ="each-card-wrapper">
+                            <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
                                         <img th:src="@{/uploadImg/} + ${cartItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${cartItem.item.itemName}">
@@ -32,6 +32,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id='xWrap' style='display:inline-block'>
+                                <a th:href="@{'/knitmarket/cartRemove/' + ${cartItem.id} }" id='delBtn' th:onclick ="return confirm('장바구니에서 삭제하시겠습니까 ?');">
+                                <i class='fa-solid fa-xmark'></i></a>
+                            </div>
+
                         </th:block>
                         <!--card 끝-->
                     </div>
@@ -48,5 +53,6 @@
 <!--페이지소스 끝-->
 
 <footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/cartList.js}"></script>
 </body>
 </html>

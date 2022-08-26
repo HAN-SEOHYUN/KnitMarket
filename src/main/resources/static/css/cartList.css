@@ -3,13 +3,14 @@
     max-width: 100%;
     border: 1px solid #000000;
     position: relative;
+    overflow: hidden;
     height:auto;
 }
 
 .cart-list-wrapper-top {
     display: flex;
     border: 1px solid black;
-    height: 7%;
+    height: 70px;
     justify-content: space-between;
     align-items: center;
 }
@@ -20,6 +21,14 @@
 
 .cart-list-wrapper-footer {
     border: 1px solid black;
-    height: 7%;
+    height: auto;
 }
+
+.card.mb-3 {width: 80%;height: auto;}
+
+img.img-fluid.rounded-start {
+    object-fit: contain;
+}
+
+.col-md-4 {width: 200px;height: 200px;}
 
