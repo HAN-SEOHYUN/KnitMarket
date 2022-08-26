@@ -4,6 +4,10 @@ a {
     text-decoration: none;
 }
 
+a:hover{
+    color:black;
+}
+
 .item-wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
