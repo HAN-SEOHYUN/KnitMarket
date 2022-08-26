@@ -52,7 +52,7 @@ public class CartController {
         return "/common/message";
     }
 
-    //장바구니 삭제
+    //장바구니 삭제 (한개)
     @GetMapping(value = "/cartRemove/{cartItemId}")
     public String cart_remove_get(@PathVariable("cartItemId")Long cartItemId, Model model){
         log.info("cartRemoveController cartItemId={}",cartItemId);
@@ -64,5 +64,19 @@ public class CartController {
         model.addAttribute("msg",msg);
         return "/common/message";
     }
+
+    //장바구니 삭제 (여러개)
+    @GetMapping(value ="/cartRemoveList/{cartItemIdList}")
+    public String cart_remove_list_get(@PathVariable List<Long> cartItemIdList,Model model){
+        for(Long cartItemId : cartItemIdList){
+            cartService.cartRemove(cartItemId);
+        }
+
+        String url = "/knitmarket/cartlist", msg ="삭제되었습니다";
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return"/common/message";
+    }
+
 
 }
