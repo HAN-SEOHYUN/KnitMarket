@@ -28,7 +28,7 @@ header.header {
 .item-wrapper-top {
     display: flex;
     border: 1px solid black;
-    height: 7%;
+    height: 70px;
     justify-content: space-between;
     align-items: center;
 }
@@ -36,7 +36,7 @@ header.header {
 
 .item-wrapper-bottom {
     border: 1px solid black;
-    height: 7%;
+    height: 70px;
 }
 
 .button-area {
