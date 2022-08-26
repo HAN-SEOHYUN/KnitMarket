@@ -17,6 +17,7 @@
                     <div class="myItem-card-wrapper">
                         <!--상품Card 시작-->
                         <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper">
+                            <a th:href="@{'/knitmarket/detail/'+${myItem.id}}">
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
@@ -40,8 +41,9 @@
 
                             <div class="옆에 추가할 것">
 
-
+                            </a>
                             </div>
+
                         </th:block>
                         <!--card 끝-->
                     </div>
