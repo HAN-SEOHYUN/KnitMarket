@@ -43,7 +43,6 @@
                                 <span class="input-group-text">등록일</span>
                                 <input type="text" class="form-control" aria-label="Username"
                                        aria-describedby="basic-addon1" th:value="${#temporals.format(item.getRegTime(),'yyyy-MM-dd')}">
-
                             </div>
 
                             <div class="input-group">
@@ -55,15 +54,17 @@
 
                         <div class="detail-info-div-2">
                             <form role="form" method="get">
-                            <th:block th:if="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
+                            <th:block th:if="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL} and (${session.role}=='user')">
                                 <button th:formaction="@{'/knitmarket/cartAdd/' + ${item.id} }" type="submit" class="btn btn-outline-success" >장바구니</button>
                                 <button type="button" class="btn btn-outline-danger">구매하기</button>
                             </th:block>
-                            <div th:unless="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
+                            <div th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
                                 <h5>품절된 상품입니다</h5>
                             </div>
-                            <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-outline-dark" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">수정하기</button>
-                            <button th:formaction="@{'/knitmarket/delete/' + ${item.id} }" type="submit" class="btn btn-outline-secondary" th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">삭제하기</button>
+                            <th:block th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">
+                                <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-outline-dark">수정하기</button>
+                                <button th:formaction="@{'/knitmarket/delete/' + ${item.id} }" type="submit" class="btn btn-outline-secondary">삭제하기</button>
+                            </th:block>
                             </form>
                         </div>
 
