@@ -3,6 +3,50 @@
     max-width: 100%;
     border: 1px solid #000000;
     height: 700px;
-    display: flex;
+    display: block;
     flex-wrap: wrap;
+}
+
+div#mypage-row {
+    display: block;
+}
+
+.mypage-info-wrapper-div {
+    width: 70%;
+    height: auto;
+    padding: 20px;
+    margin: auto;
+}
+
+.mypage-info-wrapper-div > div {
+    width: 60%;
+    border: 1px solid black;
+    height: auto;
+    padding: 27px;
+    margin: auto;
+    margin-top: 80px;
+    border-radius: 27px;
+}
+
+.mypage-info-wrapper-div h5 {
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-family: inherit;
+}
+
+.mypage-info-wrapper-div label {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mypage-info-wrapper-div span {
+    font-size: 19px;
+    margin-left: 14px;
+}
+
+.btn-div {
+    margin-top: 1px;
+    margin-bottom: -5px;
+    text-align: right;
 }

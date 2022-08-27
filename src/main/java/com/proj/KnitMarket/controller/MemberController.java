@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
@@ -16,5 +17,13 @@ public class MemberController {
     public String mypage_get(){
         log.info("내정보");
         return "user/mypage";
+    }
+
+    @PostMapping(value = "/address")
+    public String mypage_address_post(){
+
+
+
+        return"";
     }
 }

@@ -60,7 +60,7 @@
                         <i class="fa fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">내정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/knitmarket/mypage}">내정보</a></li>
                         <li><a class="dropdown-item" th:href="@{/knitmarket/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
                         <th:block th:unless="${session.role=='user'}">
                             <a class="dropdown-item" th:href="@{/knitmarket/myItem}">내상품</a>
