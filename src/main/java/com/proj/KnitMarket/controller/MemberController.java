@@ -23,17 +23,18 @@ public class MemberController {
     private final UserService userService;
 
     @GetMapping(value="/mypage")
-    public String mypage_get(Model model){
-        log.info("내정보");
-
-        model.addAttribute("address",new AddressDto());
+    public String mypage_get(Model model,HttpSession httpSession){
+        Long userId = (Long)httpSession.getAttribute("id");
+        AddressDto addressDto = userService.getAddress(userId);
+        model.addAttribute("address",addressDto);
         return "user/mypage";
     }
 
     //주소등록
     @PostMapping(value = "/address")
-    public String mypage_address_post(@ModelAttribute("") AddressDto addressDto,Model model) throws IOException {
-        Long addressId = userService.save_address(addressDto);
+    public String mypage_address_post(@ModelAttribute("") AddressDto addressDto,Model model,HttpSession httpSession) throws IOException {
+        Long userId = (Long)httpSession.getAttribute("id");
+        Long addressId = userService.save_address(addressDto,userId);
         log.info("addressId={}",addressId);
 
         String url = "/knitmarket/mypage", msg ="주소등록이 완료되었습니다";
@@ -42,4 +43,5 @@ public class MemberController {
         model.addAttribute("msg",msg);
         return "/common/message";
     }
+
 }
