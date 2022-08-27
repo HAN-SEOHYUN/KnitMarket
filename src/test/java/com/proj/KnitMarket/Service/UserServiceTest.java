@@ -66,7 +66,6 @@ class UserServiceTest {
         assertNotNull(addressDto);
         assertEquals(1L,addressRepository.count());
         assertEquals("주소",addressDto.getAddress());
-
     }
 
 }

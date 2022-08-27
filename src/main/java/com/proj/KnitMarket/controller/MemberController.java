@@ -2,6 +2,7 @@ package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.dto.AddressDto;
+import com.proj.KnitMarket.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,8 +26,10 @@ public class MemberController {
     @GetMapping(value="/mypage")
     public String mypage_get(Model model,HttpSession httpSession){
         Long userId = (Long)httpSession.getAttribute("id");
+        UserResponseDto userResponseDto = userService.findById(userId);
         AddressDto addressDto = userService.getAddress(userId);
         model.addAttribute("address",addressDto);
+        model.addAttribute("user",userResponseDto);
         return "user/mypage";
     }
 
