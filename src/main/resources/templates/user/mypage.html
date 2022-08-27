@@ -66,11 +66,11 @@
                                                 <label for="enterMethod" class="col-form-label">공동현관 출입방법</label>
                                                 <input type="text" class="form-control" th:field="*{enterMethod}" id="enterMethod">
                                             </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                                <button type="submit" class="btn btn-primary" id="save_btn" th:formaction="@{/knitmarket/address}">등록</button>
+                                            </div>
                                         </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                        <button type="submit" class="btn btn-primary" id="save_btn" th:formaction="@{/knitmarket/address}">등록</button>
                                     </div>
                                 </div>
                             </div>
