@@ -15,12 +15,13 @@
 
                 <div class="member-information-div">
                     <h5>내 정보</h5>
-                    <div class="member-information"><label for="name">이름</label><span id="name">한서현</span></div>
-                    <div class="member-information"><label for="email">이메일</label><span id="email" class="user-information">000312@daum.net</span></div>
+                    <div class="member-information"><label for="name">이름</label>
+                        <span id="name" th:text="${user.name}"></span></div>
+                    <div class="member-information"><label for="email">이메일</label>
+                        <span id="email" class="user-information" th:text="${user.email}"></span></div>
                 </div>
                 <!---->
                 <div class="member-second-information-div">
-
                     <div class="address-info">
                         <div class="user-address-info">
                             <h5>내 주소</h5>
