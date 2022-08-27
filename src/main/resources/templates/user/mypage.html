@@ -24,18 +24,31 @@
                     <div class="address-info">
                         <div class="user-address-info">
                             <h5>내 주소</h5>
-                            <div class="user-address"><label for="address-span">주소</label><span id="address-span" class="user-information">서울시</span></div>
-                            <div class="user-address"><label for="addressDetail-span">상세주소</label><span id="addressDetail-span" class="user-information">신촌동</span></div>
-                            <div class="user-address"><label for="zipcode-span">우편번호</label><span id="zipcode-span" class="user-information">12345</span></div>
-                            <div class="user-address"><label for="enterMethod-span">출입방법</label><span id="enterMethod-span" class="user-information">출입문 어쩌구</span></div>
+                            <th:block th:if="${address.id}!=null">
+                            <div class="user-address"><label for="address-span">주소</label>
+                                <span id="address-span" class="user-information" th:text="${address.address}"></span></div>
+                            <div class="user-address"><label for="addressDetail-span">상세주소</label>
+                                <span id="addressDetail-span" class="user-information" th:text="${address.addressDetail}"></span></div>
+                            <div class="user-address"><label for="zipcode-span">우편번호</label>
+                                <span id="zipcode-span" class="user-information" th:text="${address.zipcode}"></span></div>
+                            <div class="user-address"><label for="enterMethod-span">출입방법</label>
+                                <span id="enterMethod-span" class="user-information" th:text="${address.enterMethod}"></span></div>
                                 <div class="btn-div">
-                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                        data-bs-whatever="@mdo">주소등록
-                                </button>
                                     <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                         data-bs-whatever="@mdo">주소수정
                                 </button>
                                 </div>
+                            </th:block>
+                            <th:block th:if="${address.id}==null">
+                                <div class="user-address">
+                                    <span id="address-empty-span" class="user-information">등록된 주소가 없습니다</span></div>
+                                <div class="btn-div">
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            data-bs-whatever="@mdo">주소등록
+                                    </button>
+                                </div>
+                            </th:block>
+
                         </div>
                         <!--모달시작-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

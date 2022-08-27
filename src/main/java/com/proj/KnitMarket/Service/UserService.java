@@ -22,7 +22,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
 
-    @Transactional //회원등록
+    @Transactional
     public User save(UserRequestDto userDto) {
         return userRepository.save(userDto.toEntity());
     }
@@ -40,12 +40,30 @@ public class UserService {
 
     //주소등록
     @Transactional
-    public Long save_address(AddressDto addressDto)throws IOException{
-        Long userId = (Long)httpSession.getAttribute("id");
+    public Long save_address(AddressDto addressDto,Long userId)throws IOException{
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
-
         addressDto.setUser(user);
-
         return addressRepository.save(addressDto.toEntity()).getId();
     }
+
+    //주소조회
+    public AddressDto getAddress(Long userId){
+        Address address = addressRepository.findByUser_Id(userId);
+        AddressDto addressDto = new AddressDto();
+        if(address!=null){
+            addressDto = AddressDto.builder()
+                    .id(address.getId())
+                    .user(address.getUser())
+                    .address(address.getAddress())
+                    .addressDetail(address.getAddressDetail())
+                    .zipcode(address.getZipcode())
+                    .enterMethod(address.getEnterMethod())
+                    .build();
+        }
+
+        return addressDto;
+    }
+
+
+
 }
