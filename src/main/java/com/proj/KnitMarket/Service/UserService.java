@@ -34,6 +34,12 @@ public class UserService {
     }
 
     @Transactional
+    public UserResponseDto findById(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        return new UserResponseDto(user);
+    }
+
+    @Transactional
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }

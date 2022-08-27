@@ -15,12 +15,13 @@
 
                 <div class="member-information-div">
                     <h5>내 정보</h5>
-                    <div class="member-information"><label for="name">이름</label><span id="name">한서현</span></div>
-                    <div class="member-information"><label for="email">이메일</label><span id="email" class="user-information">000312@daum.net</span></div>
+                    <div class="member-information"><label for="name">이름</label>
+                        <span id="name" th:text="${user.name}"></span></div>
+                    <div class="member-information"><label for="email">이메일</label>
+                        <span id="email" class="user-information" th:text="${user.email}"></span></div>
                 </div>
                 <!---->
                 <div class="member-second-information-div">
-
                     <div class="address-info">
                         <div class="user-address-info">
                             <h5>내 주소</h5>
@@ -56,7 +57,7 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">주소등록</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">주소를 입력하세요</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                     </div>
@@ -81,7 +82,8 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                                <button type="submit" class="btn btn-primary" id="save_btn" th:formaction="@{/knitmarket/address}">등록</button>
+                                                <button type="submit" th:if="${#strings.isEmpty(address.id)}" class="btn btn-primary" id="save_btn" th:formaction="@{/knitmarket/address}" >등록</button>
+                                                <button type="submit" th:unless="${#strings.isEmpty(address.id)}" class="btn btn-primary" id="update_btn" th:formaction="@{'/knitmarket/address/' + ${address.id} }">수정</button>
                                             </div>
                                         </form>
                                     </div>
