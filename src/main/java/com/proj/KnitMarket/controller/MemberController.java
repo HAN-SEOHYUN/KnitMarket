@@ -1,7 +1,9 @@
 package com.proj.KnitMarket.controller;
 
+import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.dto.AddressDto;
+import com.proj.KnitMarket.dto.SellerResponseDto;
 import com.proj.KnitMarket.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,14 +21,23 @@ import java.io.IOException;
 public class MemberController {
 
     private final UserService userService;
+    private final SellerService sellerService;
 
     @GetMapping(value="/mypage")
     public String mypage_get(Model model,HttpSession httpSession){
-        Long userId = (Long)httpSession.getAttribute("id");
-        UserResponseDto userResponseDto = userService.findById(userId);
-        AddressDto addressDto = userService.getAddress(userId);
-        model.addAttribute("address",addressDto);
-        model.addAttribute("user",userResponseDto);
+        String role = (String)httpSession.getAttribute("role");
+        Long memberId = (Long)httpSession.getAttribute("id");
+        if(role=="user"){
+            UserResponseDto userResponseDto = userService.findById(memberId);
+            AddressDto addressDto = userService.getAddress(memberId);
+
+            model.addAttribute("address",addressDto);
+            model.addAttribute("member",userResponseDto);
+        }else {
+            SellerResponseDto sellerResponseDto = sellerService.findById(memberId);
+            model.addAttribute("member",sellerResponseDto);
+
+        }
         return "user/mypage";
     }
 

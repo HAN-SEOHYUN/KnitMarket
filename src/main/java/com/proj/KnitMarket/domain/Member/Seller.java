@@ -26,29 +26,9 @@ public class Seller extends BaseEntity {
 
     @Column
     private String email; //이메일
-    // private String hp; //전화번호
 
-/*
-    @Embedded
-    @Column(nullable = true)
-    private Address address; //주소번호
-
-    private String accountBank; //은행
-    private String accountNo; //계좌번호
-
-
-
-/*    @OneToMany(mappedBy = "user")
-    private List<OrderInfo> order = new ArrayList<>(); // 구매자의 주문정보
-
-    @OneToMany(mappedBy = "user")
-    private List<OrderItems> orderItem = new ArrayList<>(); // 구매자의 주문상세정보*/
-
-/*    @OneToMany(mappedBy = "seller")
-    private List<Sell> sell = new ArrayList<>(); // 판매자의 판매정보
-
-    @OneToMany(mappedBy = "seller")
-    private List<SellItems> sellerItem = new ArrayList<>(); // 판매자의 판매상세정보*/
+    @Column
+    private String store; //가게이름
 
     @OneToMany(mappedBy = "seller", fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @OrderBy("id asc")
