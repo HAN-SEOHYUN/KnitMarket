@@ -53,6 +53,7 @@ public class UserService {
     }
 
     //주소조회
+    @Transactional
     public AddressDto getAddress(Long userId){
         Address address = addressRepository.findByUser_Id(userId);
         AddressDto addressDto = new AddressDto();
@@ -68,6 +69,17 @@ public class UserService {
         }
 
         return addressDto;
+    }
+
+    @Transactional
+    public Long updateAddress(Long addressId, AddressDto addressDto){
+        Address address = addressRepository.findById(addressId).orElseThrow(EntityNotFoundException::new);
+        Long userId = (Long)httpSession.getAttribute("id");
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+        addressDto.setUser(user);
+        address.updateAddress(addressDto);
+        addressRepository.save(address);
+        return address.getId();
     }
 
 

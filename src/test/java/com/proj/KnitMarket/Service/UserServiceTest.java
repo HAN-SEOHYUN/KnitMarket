@@ -23,6 +23,8 @@ class UserServiceTest {
     @Autowired
     private AddressRepository addressRepository;
 
+
+
     @BeforeEach
     void clean(){
         addressRepository.deleteAll();
@@ -66,6 +68,43 @@ class UserServiceTest {
         assertNotNull(addressDto);
         assertEquals(1L,addressRepository.count());
         assertEquals("주소",addressDto.getAddress());
+    }
+
+    @Test
+    @DisplayName("주소수정")
+    void test3(){
+        //given
+        User user = userRepository.findById(3L).orElseThrow(EntityNotFoundException::new);
+        Address address = Address.builder()
+                .addressDetail("주소 수정 전")
+                .address("주소수정테스트")
+                .enterMethod("없음")
+                .zipcode("12345")
+                .user(user)
+                .build();
+        Long addressId = addressRepository.save(address).getId();
+
+        Address savedAddress = addressRepository.findById(addressId).orElseThrow(() -> new RuntimeException("저장된 주소가 없습니다. addressId=" + address.getId()));
+
+        AddressDto addressDto = AddressDto.builder()
+                .id(savedAddress.getId())
+                .addressDetail("주소수정됨")
+                .address("주소수정테스트")
+                .enterMethod("없음")
+                .zipcode("12345")
+                .user(user)
+                .build();
+
+        savedAddress.updateAddress(addressDto);
+
+        //when
+        addressRepository.save(savedAddress);
+
+        //then
+        Address changedAddress = addressRepository
+                .findById(addressId).orElseThrow(() -> new RuntimeException("주소가 존재하지 않습니다. addressId=" + address.getId()));
+        assertEquals("주소수정됨", changedAddress.getAddressDetail());
+
     }
 
 }
