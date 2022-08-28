@@ -1,6 +1,7 @@
 package com.proj.KnitMarket.domain.Member;
 
 import com.proj.KnitMarket.domain.BaseEntity;
+import com.proj.KnitMarket.dto.AddressDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,5 +34,13 @@ public class Address extends BaseEntity {
         this.addressDetail = addressDetail;
         this.zipcode = zipcode;
         this.enterMethod = enterMethod;
+    }
+
+    public void updateAddress(AddressDto addressDto){
+        this.user = addressDto.getUser();
+        this.address = addressDto.getAddress();
+        this.addressDetail = addressDto.getAddressDetail();
+        this.zipcode = addressDto.getZipcode();
+        this.enterMethod = addressDto.getEnterMethod();
     }
 }
