@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -35,16 +32,28 @@ public class MemberController {
 
     //주소등록
     @PostMapping(value = "/address")
-    public String mypage_address_post(@ModelAttribute("") AddressDto addressDto,Model model,HttpSession httpSession) throws IOException {
+    public String mypage_address_post(@ModelAttribute("address") AddressDto addressDto,Model model,HttpSession httpSession) throws IOException {
         Long userId = (Long)httpSession.getAttribute("id");
         Long addressId = userService.save_address(addressDto,userId);
-        log.info("addressId={}",addressId);
+        log.info("저장된 addressId={}",addressId);
 
         String url = "/knitmarket/mypage", msg ="주소등록이 완료되었습니다";
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
+    }
+
+    //주소수정
+    @PostMapping(value = "/address/{addressId}")
+    public String address_update_post(@ModelAttribute("address") AddressDto addressDto ,
+                                      Model model, @PathVariable(name="addressId")Long addressId){
+        log.info("수정 예정 addressId={}",addressId);
+        userService.updateAddress(addressId,addressDto);
+        String url ="/knitmarket/mypage", msg="주소수정이 완료되었습니다";
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return"/common/message";
     }
 
 }
