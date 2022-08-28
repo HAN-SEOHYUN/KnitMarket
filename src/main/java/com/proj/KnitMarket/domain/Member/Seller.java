@@ -2,6 +2,7 @@ package com.proj.KnitMarket.domain.Member;
 
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Item.Item;
+import com.proj.KnitMarket.dto.AddressDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,4 +40,10 @@ public class Seller extends BaseEntity {
         this.name = name;
         this.email = email;
     }
+
+    public void updateStore(String store){
+        this.store = store;
+    }
+
+
 }
