@@ -10,8 +10,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class SellerRequestDto {
+    private Long id;
     private String email;
     private String name;
+    private String store;
 
     public Seller toEntity(){
         return Seller.builder()

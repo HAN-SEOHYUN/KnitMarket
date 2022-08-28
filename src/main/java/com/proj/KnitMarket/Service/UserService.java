@@ -71,6 +71,7 @@ public class UserService {
         return addressDto;
     }
 
+    //주소수정
     @Transactional
     public Long updateAddress(Long addressId, AddressDto addressDto){
         Address address = addressRepository.findById(addressId).orElseThrow(EntityNotFoundException::new);
