@@ -36,11 +36,18 @@ public class SellerService {
     }
 
     @Transactional
+    public SellerResponseDto findById(Long sellerId){
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(EntityNotFoundException::new);
+        return new SellerResponseDto(seller);
+    }
+
+    @Transactional
     public boolean existsByEmail(String email) {
         return sellerRepository.existsByEmail(email);
     }
 
     //판매자가 게시한 상품 조회 (삭제된 상품 제외)
+    @Transactional
     public List<ItemResponseDto> getMyItemList(Long sellerId) {
         List<Item> itemLists = itemRepository.findBySeller_Id(sellerId);
         List<ItemResponseDto> itemResponseDtoList = new ArrayList<>();
@@ -58,4 +65,6 @@ public class SellerService {
         }
         return itemResponseDtoList;
     }
+
+
 }

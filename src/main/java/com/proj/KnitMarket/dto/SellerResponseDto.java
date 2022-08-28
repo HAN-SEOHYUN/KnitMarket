@@ -12,6 +12,7 @@ public class SellerResponseDto {
     private String email;
     private String name;
     private List<ItemResponseDto> items;
+    private String store;
 
     //entity to DTO
     public SellerResponseDto(Seller entity){
@@ -19,6 +20,7 @@ public class SellerResponseDto {
         this.email=entity.getEmail();
         this.name=entity.getName();
         this.items = entity.getItem().stream().map(ItemResponseDto::new).collect(Collectors.toList());
+        this.store = entity.getStore();
     }
 
 }

@@ -16,12 +16,14 @@
                 <div class="member-information-div">
                     <h5>내 정보</h5>
                     <div class="member-information"><label for="name">이름</label>
-                        <span id="name" th:text="${user.name}"></span></div>
+                        <span id="name" th:text="${member.name}"></span></div>
                     <div class="member-information"><label for="email">이메일</label>
-                        <span id="email" class="user-information" th:text="${user.email}"></span></div>
+                        <span id="email" class="user-information" th:text="${member.email}"></span></div>
                 </div>
                 <!---->
                 <div class="member-second-information-div">
+                    <!--사용자 시작-->
+                    <th:block th:if="${session.role}=='user'">
                     <div class="address-info">
                         <div class="user-address-info">
                             <h5>내 주소</h5>
@@ -40,6 +42,8 @@
                                 </button>
                                 </div>
                             </th:block>
+
+
                             <th:block th:if="${address.id}==null">
                                 <div class="user-address">
                                     <span id="address-empty-span" class="user-information">등록된 주소가 없습니다</span></div>
@@ -49,7 +53,6 @@
                                     </button>
                                 </div>
                             </th:block>
-
                         </div>
                         <!--모달시작-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -92,6 +95,60 @@
                         </div>
                         <!--모달 끝-->
                     </div>
+                    </th:block>
+                    <!--사용자 끝-->
+                    <th:block th:unless="${session.role}=='user'">
+                        <div class="seller-store-info">
+                            <h5>가게명</h5>
+
+                            <th:block th:if="${member.store}!=null">
+                                <div class="seller-store-information"><label for="name">가게명</label>
+                                    <span id="store" th:text="${member.store}"></span></div>
+                            </th:block>
+
+                            <th:block th:if="${member.store}==null">
+                                <div class="user-address">
+                                    <span id="store-empty-span" class="user-information">등록된 상호명이 없습니다</span></div>
+                                <div class="btn-div">
+                                    <button type="submit" th:if="${#strings.isEmpty(member.store)}" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                            data-bs-whatever="@fat" th:formaction="@{/knitmarket/store}">등록
+                                    </button>
+                                </div>
+                            </th:block>
+
+                            <!--모달시작-->
+                            <div class="modal fade" tabindex="-1" id="exampleModal1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">상호명을 입력해주세요</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="recipient-name" class="col-form-label">가게이름</label>
+                                                    <input type="text" class="form-control" id="recipient-name">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                                                    <button type="button" class="btn btn-primary">등록하기</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--모달끝-->
+
+
+                        </div>
+
+                    </th:block>
+
+
+
+
 
                 </div>
             </div>
