@@ -97,21 +97,28 @@
                     </div>
                     </th:block>
                     <!--사용자 끝-->
+
                     <th:block th:unless="${session.role}=='user'">
                         <div class="seller-store-info">
                             <h5>가게명</h5>
 
                             <th:block th:if="${member.store}!=null">
-                                <div class="seller-store-information"><label for="name">가게명</label>
-                                    <span id="store" th:text="${member.store}"></span></div>
+                                <div class="seller-store-information"><label for="store">가게명</label>
+                                    <span id="store" th:text="${member.store}"></span>
+                                </div>
+                                <div class="btn-div">
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                            data-bs-whatever="@fat">수정하기
+                                    </button>
+                                </div>
                             </th:block>
 
                             <th:block th:if="${member.store}==null">
                                 <div class="user-address">
                                     <span id="store-empty-span" class="user-information">등록된 상호명이 없습니다</span></div>
                                 <div class="btn-div">
-                                    <button type="submit" th:if="${#strings.isEmpty(member.store)}" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal1"
-                                            data-bs-whatever="@fat" th:formaction="@{/knitmarket/store}">등록
+                                    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                            data-bs-whatever="@fat">등록하기
                                     </button>
                                 </div>
                             </th:block>
@@ -125,14 +132,14 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form>
+                                            <form th:action method="post">
                                                 <div class="mb-3">
                                                     <label for="recipient-name" class="col-form-label">가게이름</label>
-                                                    <input type="text" class="form-control" id="recipient-name">
+                                                    <input type="text" class="form-control" id="recipient-name" th:field="*{store}" name ="store">
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                                                    <button type="button" class="btn btn-primary">등록하기</button>
+                                                    <button type="button" class="btn btn-primary" th:formaction="@{'/knitmarket/store}'+${member.id}">등록</button>
                                                 </div>
                                             </form>
                                         </div>

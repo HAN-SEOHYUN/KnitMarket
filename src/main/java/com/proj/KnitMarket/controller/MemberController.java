@@ -5,8 +5,10 @@ import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.dto.AddressDto;
 import com.proj.KnitMarket.dto.SellerResponseDto;
 import com.proj.KnitMarket.dto.UserResponseDto;
+import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +38,6 @@ public class MemberController {
         }else {
             SellerResponseDto sellerResponseDto = sellerService.findById(memberId);
             model.addAttribute("member",sellerResponseDto);
-
         }
         return "user/mypage";
     }
@@ -67,4 +68,16 @@ public class MemberController {
         return"/common/message";
     }
 
+    //가게명 수정
+    @PostMapping(value="/store/{sellerId}")
+    public String store_save_post(@RequestParam("store")String store, Model model, @PathVariable(name ="sellerId")Long sellerId){
+        log.info("store={}",store);
+        log.info("sellerId={}",sellerId);
+        sellerService.updateStore(sellerId, store);
+
+        String url ="/knitmarket/mypage", msg="가게명이 업데이트 되었습니다";
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+        return "/common/message";
+    }
 }

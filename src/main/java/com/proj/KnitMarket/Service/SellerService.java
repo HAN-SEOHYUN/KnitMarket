@@ -66,5 +66,14 @@ public class SellerService {
         return itemResponseDtoList;
     }
 
+    //가게명 등록
+    @Transactional
+    public void updateStore(Long sellerId, String store){
+        Seller seller = sellerRepository.findById(sellerId).orElseThrow(EntityNotFoundException::new);
+        seller.updateStore(store);
+        sellerRepository.save(seller);
+    }
+
+
 
 }
