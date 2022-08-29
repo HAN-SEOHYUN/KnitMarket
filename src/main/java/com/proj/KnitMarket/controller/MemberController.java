@@ -37,8 +37,13 @@ public class MemberController {
             model.addAttribute("member",userResponseDto);
         }else {
             SellerResponseDto sellerResponseDto = sellerService.findById(memberId);
+            log.info("sellerResponseDto={}",sellerResponseDto.getName());
+
             model.addAttribute("member",sellerResponseDto);
+            model.addAttribute("store",sellerResponseDto.getStore());
+
         }
+
         return "user/mypage";
     }
 

@@ -20,10 +20,11 @@ div#mypage-row {
 
 .mypage-info-wrapper-div > div {
     width: 60%;
-    border: 1px solid black;
+    border: 2px solid #b9ada8;
     height: auto;
     padding: 27px;
     margin: auto;
+    box-shadow: 2px 2px 2px 4px #80808029;
     margin-top: 80px;
     border-radius: 27px;
 }
@@ -50,3 +51,62 @@ div#mypage-row {
     margin-bottom: -5px;
     text-align: right;
 }
+
+.mypage-wrapper-div {
+    flex: 0 0 100%;
+    max-width: 100%;
+    border: 1px solid #000000;
+    height: 700px;
+    display: block;
+    flex-wrap: wrap;
+}
+
+div#mypage-row {
+    display: block;
+}
+
+.mypage-info-wrapper-div {
+    width: 70%;
+    height: auto;
+    padding: 20px;
+    margin: auto;
+}
+
+.mypage-info-wrapper-div > div {
+    width: 60%;
+    border: 2px solid #b9ada8;
+    height: auto;
+    padding: 27px;
+    margin: auto;
+    box-shadow: 2px 2px 2px 4px #80808029;
+    margin-top: 80px;
+    border-radius: 27px;
+}
+
+.mypage-info-wrapper-div h5 {
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-family: inherit;
+    color: #000000b0;
+}
+
+.mypage-info-wrapper-div label {
+    color: #000000b0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.mypage-info-wrapper-div span {
+    color: #00000087;
+    font-size: 19px;
+    margin-left: 14px;
+}
+
+.btn-div {
+    margin-top: 1px;
+    margin-bottom: -5px;
+    text-align: right;
+}
+
+
