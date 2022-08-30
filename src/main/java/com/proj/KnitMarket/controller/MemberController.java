@@ -5,10 +5,8 @@ import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.dto.AddressDto;
 import com.proj.KnitMarket.dto.SellerResponseDto;
 import com.proj.KnitMarket.dto.UserResponseDto;
-import com.sun.xml.internal.ws.developer.MemberSubmissionEndpointReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,22 +27,29 @@ public class MemberController {
     public String mypage_get(Model model,HttpSession httpSession){
         String role = (String)httpSession.getAttribute("role");
         Long memberId = (Long)httpSession.getAttribute("id");
+
         if(role=="user"){
             UserResponseDto userResponseDto = userService.findById(memberId);
             AddressDto addressDto = userService.getAddress(memberId);
 
-            model.addAttribute("address",addressDto);
             model.addAttribute("member",userResponseDto);
-        }else {
+            model.addAttribute("address",addressDto);
+            return "user/mypage";
+
+            }else if(role=="seller") {
             SellerResponseDto sellerResponseDto = sellerService.findById(memberId);
-            log.info("sellerResponseDto={}",sellerResponseDto.getName());
+            log.info("name={}",sellerResponseDto.getName());
+            log.info("store={}",sellerResponseDto.getStore());
+            log.info("email={}",sellerResponseDto.getEmail());
 
-            model.addAttribute("member",sellerResponseDto);
+            model.addAttribute("name",sellerResponseDto.getName());
             model.addAttribute("store",sellerResponseDto.getStore());
+            model.addAttribute("email",sellerResponseDto.getEmail());
+            model.addAttribute("id",sellerResponseDto.getId());
 
+            return "seller/mypage";
         }
-
-        return "user/mypage";
+        return "index";
     }
 
     //주소등록
