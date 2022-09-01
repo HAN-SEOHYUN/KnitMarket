@@ -5,7 +5,6 @@
 <header th:replace="/fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/mypage.css" type="text/css">
-
 <section class="hero">
     <div class="container">
         <div class="row" id="mypage-row">
@@ -15,7 +14,7 @@
 
                     <div class="member-information-div">
                         <h5>내 정보</h5>
-                        <div class="member-information"><label for="name">이&nbsp;&nbsp;&nbsp;&nbsp;름</label>
+                        <div class="member-information"><label for="name">이름</label>
                             <span id="name" th:text="${member.name}"></span></div>
                         <div class="member-information"><label for="email">이메일</label>
                             <span id="email" class="user-information" th:text="${member.email}"></span></div>
@@ -23,107 +22,169 @@
                     <!---->
                     <div class="member-second-information-div">
                         <!--사용자 시작-->
-
-                        <div class="address-info">
-                            <div class="user-address-info">
-                                <h5>내 주소</h5>
-                                <th:block th:if="${address.id}!=null">
-                                    <div class="user-address"><label for="address-span">주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</label>
-                                        <span id="address-span" class="user-information"
-                                              th:text="${address.address}"></span></div>
-                                    <div class="user-address"><label for="addressDetail-span">상세주소</label>
-                                        <span id="addressDetail-span" class="user-information"
-                                              th:text="${address.addressDetail}"></span></div>
-                                    <div class="user-address"><label for="zipcode-span">우편번호</label>
-                                        <span id="zipcode-span" class="user-information"
-                                              th:text="${address.zipcode}"></span></div>
-                                    <div class="user-address"><label for="enterMethod-span">출입방법</label>
-                                        <span id="enterMethod-span" class="user-information"
-                                              th:text="${address.enterMethod}"></span></div>
-                                    <div class="btn-div">
-                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal"
-                                                data-bs-whatever="@mdo">주소수정
-                                        </button>
-                                    </div>
-                                </th:block>
-
-
-                                <th:block th:if="${address.id}==null">
-                                    <div class="user-address">
-                                        <span id="address-empty-span" class="user-information">등록된 주소가 없습니다</span></div>
-                                    <div class="btn-div">
-                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal"
-                                                data-bs-whatever="@mdo">주소등록
-                                        </button>
-                                    </div>
-                                </th:block>
-                            </div>
-                            <!--모달시작-->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                 aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">주소를 입력하세요</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
+                        <th:block th:if="${session.role}=='user'">
+                            <div class="address-info">
+                                <div class="user-address-info">
+                                    <h5>내 주소</h5>
+                                    <th:block th:if="${address.id}!=null">
+                                        <div class="user-address"><label for="address-span">주소</label>
+                                            <span id="address-span" class="user-information"
+                                                  th:text="${address.address}"></span></div>
+                                        <div class="user-address"><label for="addressDetail-span">상세주소</label>
+                                            <span id="addressDetail-span" class="user-information"
+                                                  th:text="${address.addressDetail}"></span></div>
+                                        <div class="user-address"><label for="zipcode-span">우편번호</label>
+                                            <span id="zipcode-span" class="user-information"
+                                                  th:text="${address.zipcode}"></span></div>
+                                        <div class="user-address"><label for="enterMethod-span">출입방법</label>
+                                            <span id="enterMethod-span" class="user-information"
+                                                  th:text="${address.enterMethod}"></span></div>
+                                        <div class="btn-div">
+                                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"
+                                                    data-bs-whatever="@mdo">주소수정
+                                            </button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form th:action th:object="${address}" method="post">
-                                                <div class="mb-3">
-                                                    <label for="zipcode" class="col-form-label">우편번호</label>
-                                                    <input type="text" class="form-control" th:field="*{zipcode}"
-                                                           id="zipcode">
-                                                    <input type="Button" value="우편번호 찾기" id="btnZipcode"
-                                                           onclick="execZipcode()">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="address" class="col-form-label">주소</label>
-                                                    <input type="text" class="form-control" th:field="*{address}"
-                                                           id="address">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="addressDetail" class="col-form-label">상세주소</label>
-                                                    <input type="text" class="form-control" th:field="*{addressDetail}"
-                                                           id="addressDetail">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="enterMethod" class="col-form-label">공동현관 출입방법</label>
-                                                    <input type="text" class="form-control" th:field="*{enterMethod}"
-                                                           id="enterMethod">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">취소
-                                                    </button>
-                                                    <button type="submit" th:if="${#strings.isEmpty(address.id)}"
-                                                            class="btn btn-primary" id="save_btn"
-                                                            th:formaction="@{/knitmarket/address}">등록
-                                                    </button>
-                                                    <button type="submit" th:unless="${#strings.isEmpty(address.id)}"
-                                                            class="btn btn-primary" id="update_btn"
-                                                            th:formaction="@{'/knitmarket/address/' + ${address.id} }">
-                                                        수정
-                                                    </button>
-                                                </div>
-                                            </form>
+                                    </th:block>
+                                    <th:block th:if="${address.id}==null">
+                                        <div class="user-address">
+                                            <span id="address-empty-span" class="user-information">등록된 주소가 없습니다</span>
+                                        </div>
+                                        <div class="btn-div">
+                                            <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"
+                                                    data-bs-whatever="@mdo">주소등록
+                                            </button>
+                                        </div>
+                                    </th:block>
+                                </div>
+                                <!--모달시작-->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">주소를 입력하세요</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form th:action th:object="${address}" method="post">
+                                                    <div class="mb-3">
+                                                        <label for="zipcode" class="col-form-label">우편번호</label>
+                                                        <input type="text" class="form-control" th:field="*{zipcode}"
+                                                               id="zipcode">
+                                                        <input type="Button" value="우편번호 찾기" id="btnZipcode"
+                                                               onclick="execZipcode()">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="address" class="col-form-label">주소</label>
+                                                        <input type="text" class="form-control" th:field="*{address}"
+                                                               id="address">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="addressDetail" class="col-form-label">상세주소</label>
+                                                        <input type="text" class="form-control"
+                                                               th:field="*{addressDetail}" id="addressDetail">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="enterMethod" class="col-form-label">공동현관
+                                                            출입방법</label>
+                                                        <input type="text" class="form-control"
+                                                               th:field="*{enterMethod}" id="enterMethod">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">취소
+                                                        </button>
+                                                        <button type="submit" th:if="${#strings.isEmpty(address.id)}"
+                                                                class="btn btn-primary" id="save_btn"
+                                                                th:formaction="@{/knitmarket/address}">등록
+                                                        </button>
+                                                        <button type="submit"
+                                                                th:unless="${#strings.isEmpty(address.id)}"
+                                                                class="btn btn-primary" id="update_btn"
+                                                                th:formaction="@{'/knitmarket/address/' + ${address.id} }">
+                                                            수정
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!--모달 끝-->
                             </div>
-                            <!--모달 끝-->
-                        </div>
+                        </th:block>
                         <!--사용자 끝-->
+
+                        <th:block th:unless="${session.role}=='user'">
+                            <div class="seller-store-info">
+                                <h5>가게명</h5>
+
+                                <th:block th:if="${member.store}!=null">
+                                    <div class="seller-store-information"><label for="store">가게명</label>
+                                        <span id="store" th:text="${member.store}"></span>
+                                    </div>
+                                    <div class="btn-div">
+                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal1"
+                                                data-bs-whatever="@fat">수정하기
+                                        </button>
+                                    </div>
+                                </th:block>
+
+                                <th:block th:if="${member.store}==null">
+                                    <div class="user-address">
+                                        <span id="store-empty-span" class="user-information">등록된 상호명이 없습니다</span></div>
+                                    <div class="btn-div">
+                                        <button type="button" class="btn btn-dark" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal1"
+                                                data-bs-whatever="@fat">등록하기
+                                        </button>
+                                    </div>
+                                </th:block>
+
+                                <!--모달시작-->
+                                <div class="modal fade" tabindex="-1" id="exampleModal1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">상호명을 입력해주세요</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form th:action method="post" th:object="${member}">
+                                                    <div class="mb-3">
+                                                        <label for="recipient-name" class="col-form-label">가게이름</label>
+                                                        <input type="text" class="form-control" id="recipient-name"
+                                                               th:field="*{store}" name="store">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">닫기
+                                                        </button>
+                                                        <button type="submit" class="btn btn-primary"
+                                                                th:formaction="@{'/knitmarket/store/'+${member.id}}">등록
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--모달끝-->
+
+
+                            </div>
+
+                        </th:block>
                     </div>
                 </div>
             </div>
         </div><!--장바구니목록 끝-->
     </div>
 </section>
-<!--페이지소스 끝-->
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
-<script type="text/javascript" th:src="@{/js/mypage.js}"></script>
-</body>
-</html>
