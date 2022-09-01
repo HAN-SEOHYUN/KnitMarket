@@ -34,22 +34,13 @@ public class MemberController {
 
             model.addAttribute("member",userResponseDto);
             model.addAttribute("address",addressDto);
-            return "user/mypage";
 
-            }else if(role=="seller") {
+        }else if(role=="seller") {
             SellerResponseDto sellerResponseDto = sellerService.findById(memberId);
-            log.info("name={}",sellerResponseDto.getName());
-            log.info("store={}",sellerResponseDto.getStore());
-            log.info("email={}",sellerResponseDto.getEmail());
+            model.addAttribute("member",sellerResponseDto);
 
-            model.addAttribute("name",sellerResponseDto.getName());
-            model.addAttribute("store",sellerResponseDto.getStore());
-            model.addAttribute("email",sellerResponseDto.getEmail());
-            model.addAttribute("id",sellerResponseDto.getId());
-
-            return "seller/mypage";
         }
-        return "index";
+        return "user/mypage";
     }
 
     //주소등록
