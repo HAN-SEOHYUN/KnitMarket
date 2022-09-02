@@ -88,5 +88,8 @@ body {
     background: #fcf2e442;
 }
 
+.row > .wrapper-div {
+    min-height: 580px;
+}
 
 
