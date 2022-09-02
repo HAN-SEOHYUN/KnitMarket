@@ -44,6 +44,4 @@ public class Seller extends BaseEntity {
     public void updateStore(String store){
         this.store = store;
     }
-
-
 }
