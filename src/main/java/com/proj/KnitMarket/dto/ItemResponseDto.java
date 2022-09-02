@@ -3,6 +3,7 @@ package com.proj.KnitMarket.dto;
 import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.domain.Item.Item;
+import com.proj.KnitMarket.domain.Member.Seller;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +18,7 @@ public class ItemResponseDto {
     private String itemName;
     private int price;
     private String itemDesc;
-    private String sellerName;
-    private Long sellerId;
+    private Seller seller;
     private String orginFileName;
     private SellStatus sellStatus;
     private LocalDateTime regTime; // 등록시간
@@ -31,8 +31,7 @@ public class ItemResponseDto {
         this.itemName=entity.getItemName();
         this.itemDesc=entity.getItemDesc();
         this.price=entity.getPrice();
-        this.sellerName = entity.getSeller().getName();
-        this.sellerId = entity.getSeller().getId();
+        this.seller = entity.getSeller();
         this.orginFileName = entity.getFile().getOrginFileName();
         this.sellStatus = entity.getSellStatus();
         this.regTime = entity.getRegTime();
@@ -40,16 +39,15 @@ public class ItemResponseDto {
     }
 
     @Builder
-    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String sellerName, String orginFileName,SellStatus sellStatus, LocalDateTime regTime,Long sellerId, boolean isDeleted) {
+    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String orginFileName,SellStatus sellStatus, LocalDateTime regTime, boolean isDeleted, Seller seller) {
         this.id = id;
         this.itemName = itemName;
         this.price = price;
         this.itemDesc = itemDesc;
-        this.sellerName = sellerName;
         this.orginFileName = orginFileName;
         this.sellStatus = sellStatus;
         this.regTime = regTime;
-        this.sellerId = sellerId;
         this.isDeleted = isDeleted;
+        this.seller = seller;
     }
 }

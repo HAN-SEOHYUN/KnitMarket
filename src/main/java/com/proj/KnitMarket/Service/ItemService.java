@@ -75,10 +75,9 @@ public class ItemService {
                     .itemDesc(item.getItemDesc())
                     .orginFileName(item.getFile().getOrginFileName())
                     .price(item.getPrice())
-                    .sellerName(item.getSeller().getName())
+                    .seller(item.getSeller())
                     .sellStatus(item.getSellStatus())
                     .regTime(item.getRegTime())
-                    .sellerId(item.getSeller().getId())
                     .build();
 
             itemDtoList.add(responseDto);
@@ -97,10 +96,9 @@ public class ItemService {
                 .itemDesc(item.getItemDesc())
                 .orginFileName(item.getFile().getOrginFileName())
                 .price(item.getPrice())
-                .sellerName(item.getSeller().getName())
+                .seller(item.getSeller())
                 .sellStatus(item.getSellStatus())
                 .regTime(item.getRegTime())
-                .sellerId(item.getSeller().getId())
                 .build();
 
         return itemResponseDto;

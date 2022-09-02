@@ -19,7 +19,7 @@
                     </div>
                     <div class="detail-info-div">
                         <input type="hidden" id="itemId" th:value="${item.id}">
-                        <input type="hidden" id="sellerId" th:value="${item.sellerId}">
+                        <input type="hidden" id="sellerId" th:value="${item.seller.id}">
                         <div class="detail-info-div-1">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">상품명</span>
@@ -36,7 +36,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">판매자</span>
                                 <input type="text" class="form-control" aria-label="Username"
-                                       aria-describedby="basic-addon1" th:value="${item.sellerName}">
+                                       aria-describedby="basic-addon1" th:value="${item.seller.name}">
                             </div>
 
                             <div class="input-group mb-3">
@@ -61,7 +61,7 @@
                             <div th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
                                 <h5>품절된 상품입니다</h5>
                             </div>
-                            <th:block th:if="(${session.role}=='seller') and (${item.sellerId}==${session.id})">
+                            <th:block th:if="(${session.role}=='seller') and (${item.seller.id}==${session.id})">
                                 <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-outline-dark">수정하기</button>
                                 <button th:formaction="@{'/knitmarket/delete/' + ${item.id} }" type="submit" class="btn btn-outline-secondary">삭제하기</button>
                             </th:block>
