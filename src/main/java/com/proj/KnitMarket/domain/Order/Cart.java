@@ -36,6 +36,4 @@ public class Cart extends BaseEntity {
         this.cartItemList = cartItemList;
     }
 
-
-
 }
