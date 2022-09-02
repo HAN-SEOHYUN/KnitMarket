@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="/fragments/top.html :: fragment-header"></header>
+<!--페이지소스 시작-->
+<link rel="stylesheet" href="/css/order.css" type="text/css">
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <!--주문시작-->
+            <div class="wrapper-div">
+                <div class="order-list-wrapper-top">
+                </div>
+                <div class="order-list-wrapper-body">
+                    <div class="order-list-card-wrapper">
+                        <!--상품Card 시작-->
+                        <th:block class ="each-card-wrapper" >
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="/img/LOGO.png" class="img-fluid rounded-start">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">상품명</h5>
+                                            <p class="card-text" >상품가격</p>
+                                            <p class="card-text"><small class="text-muted">상품가격</small></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id='xWrap' style='display:inline-block'>
+                                <a href ='#' id='delBtn'>
+                                    <i class='fa-solid fa-xmark'></i></a>
+                            </div>
+                            <div id='checkboxWrap' style='display:inline-block'>
+                                <input type="checkbox" name="delCheckbox">
+                            </div>
+
+                        </th:block>
+                        <!--card 끝-->
+                    </div>
+                    <div class="order-list-wrapper-footer">
+                        <!--주문상품 정보-->
+                        <button type="button" class="btn btn-light" id="whiteDelBtn">삭제하기</button>
+                        <button type="button" class="btn btn-dark">결제하기</button>
+                    </div>
+                </div>
+            </div>
+            <!--주문 끝-->
+        </div>
+    </div>
+</section>
+<!--페이지소스 끝-->
+
+<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/order.js}"></script>
+</body>
+</html>
