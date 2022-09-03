@@ -2,6 +2,8 @@ package com.proj.KnitMarket.domain.Order;
 
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Item.Item;
+import com.proj.KnitMarket.dto.ItemRequestDto;
+import com.proj.KnitMarket.dto.OrderItemDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,7 +31,8 @@ public class OrderItem extends BaseEntity {
     private Order order;
 
     @Builder
-    public OrderItem(Item item, Order order) {
+    public OrderItem(Long id,Item item, Order order) {
+        this.id = id;
         this.item = item;
         this.order = order;
     }
