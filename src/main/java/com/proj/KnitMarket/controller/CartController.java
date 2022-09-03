@@ -35,7 +35,6 @@ public class CartController {
     //장바구니 추가
     @GetMapping(value ="/cartAdd/{itemId}")
     public String cart_add_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
-        log.info("CartController");
         Long userId = (Long) httpSession.getAttribute("id");
         String msg ="장바구니에 추가되었습니다", url ="/knitmarket/";
         if(userId==null){

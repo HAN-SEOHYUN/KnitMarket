@@ -61,6 +61,7 @@ public class CartService {
         return addSuccess;
     }
 
+    //장바구니조회
     @Transactional
     public List<CartItemDto> getCartItemList(Long userId){
         Long cartId = cartRepository.findCartByUser_Id(userId).getId();
@@ -80,6 +81,7 @@ public class CartService {
         return cartItemDtoList;
     }
 
+    //장바구니 상품 삭제
     @Transactional
     public void cartRemove(Long cartItemId){
         cartItemRepository.deleteById(cartItemId);
