@@ -38,13 +38,23 @@ public class Order extends BaseEntity {
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Builder
-    public Order(User user, LocalDateTime orderDate, OrderStatus orderStatus) {
+    public Order(User user, LocalDateTime orderDate, OrderStatus orderStatus,List<OrderItem>orderItems) {
         this.user = user;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
+        this.orderItems=orderItems;
     }
 
-    /*public void addOrderItem(OrderDto orderDto){
-        orderItems.add(orderDto.toEntity());
-    }*/
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(OrderItem orderItem : orderItems){
+            totalPrice += orderItem.getItem().getPrice();
+        }
+        return totalPrice;
+    }
+
+
+
+
+
 }
