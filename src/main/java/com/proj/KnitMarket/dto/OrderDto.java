@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.dto;
 
+import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
 import com.proj.KnitMarket.domain.Order.OrderItem;
@@ -23,6 +24,7 @@ public class OrderDto {
         return Order.builder()
                 .user(user)
                 .orderItems(orderItems)
+                .orderStatus(OrderStatus.ORDER)
                 .build();
     }
 
@@ -32,7 +34,4 @@ public class OrderDto {
         this.user = user;
         this.orderItems = orderItems;
     }
-
-
-
 }

@@ -76,4 +76,8 @@ public class Item extends BaseEntity {
     public void deleteItem(ItemResponseDto itemResponseDto){
         this.isDeleted = itemResponseDto.isDeleted();
     }
+
+    public void updateSellStatus(SellStatus sellStatus){
+        this.sellStatus = sellStatus;
+    }
 }
