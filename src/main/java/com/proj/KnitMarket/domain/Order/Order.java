@@ -4,6 +4,7 @@ import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.dto.OrderDto;
+import com.proj.KnitMarket.dto.OrderItemDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "order")
+@Table(name = "orders")
 @Entity
 public class Order extends BaseEntity {
 
@@ -29,18 +30,15 @@ public class Order extends BaseEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private LocalDateTime orderDate; //주문일
-
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus; //주문상태
+    private OrderStatus orderStatus = OrderStatus.ORDER; //주문상태
 
     @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
     @Builder
-    public Order(User user, LocalDateTime orderDate, OrderStatus orderStatus,List<OrderItem>orderItems) {
+    public Order(User user, OrderStatus orderStatus,List<OrderItem>orderItems) {
         this.user = user;
-        this.orderDate = orderDate;
         this.orderStatus = orderStatus;
         this.orderItems=orderItems;
     }
@@ -52,6 +50,19 @@ public class Order extends BaseEntity {
         }
         return totalPrice;
     }
+
+    /*public static Order createOrder(User user, List<OrderItem>orderItems){
+        OrderDto orderDto = OrderDto.builder()
+                .user(user)
+                .build();
+
+        for(OrderItem orderItem : orderItems){
+            orderDto.getOrderItems().add(orderItem);
+
+        }
+        return orderDto.toEntity();
+    }*/
+
 
 
 
