@@ -1,6 +1,7 @@
 package com.proj.KnitMarket.dto;
 
 import com.proj.KnitMarket.domain.Item.Item;
+import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
 import com.proj.KnitMarket.domain.Order.OrderItem;
 import lombok.Builder;

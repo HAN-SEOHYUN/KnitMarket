@@ -56,7 +56,7 @@
                             <form role="form" method="get">
                             <th:block th:if="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL} and (${session.role}=='user')">
                                 <button th:formaction="@{'/knitmarket/cartAdd/' + ${item.id} }" type="submit" class="btn btn-outline-success" >장바구니</button>
-                                <button type="button" class="btn btn-outline-danger">구매하기</button>
+                                <button th:formaction="@{'/knitmarket/order/' + ${item.id} }" type="submit" class="btn btn-outline-danger" >구매하기</button>
                             </th:block>
                             <div th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
                                 <h5>품절된 상품입니다</h5>
