@@ -17,11 +17,13 @@ import javax.transaction.Transactional;
 public class FileService {
     private final FileEntityRepository fileRepository;
 
+    //파일저장
     @Transactional
     public FileEntity save(FileRequestDto fileRequestDto){
         return fileRepository.save(fileRequestDto.toEntity());
     }
 
+    //파일아이디를 넣으면 파일객체를 불러오는 메서드
     @Transactional
     public FileResponseDto getFile(Long id){
         FileEntity fileEntity = fileRepository.findById(id).get();

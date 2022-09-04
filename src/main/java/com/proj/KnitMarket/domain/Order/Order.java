@@ -51,21 +51,4 @@ public class Order extends BaseEntity {
         return totalPrice;
     }
 
-    /*public static Order createOrder(User user, List<OrderItem>orderItems){
-        OrderDto orderDto = OrderDto.builder()
-                .user(user)
-                .build();
-
-        for(OrderItem orderItem : orderItems){
-            orderDto.getOrderItems().add(orderItem);
-
-        }
-        return orderDto.toEntity();
-    }*/
-
-
-
-
-
-
 }

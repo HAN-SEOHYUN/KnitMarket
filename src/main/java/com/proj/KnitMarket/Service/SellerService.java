@@ -29,18 +29,21 @@ public class SellerService {
         return sellerRepository.save(sellerDto.toEntity()).getId();
     }
 
+    //email 로 SELLER 찾기
     @Transactional
     public SellerResponseDto findByEmail(String email) {
         Seller entity = sellerRepository.findByEmail(email);
         return new SellerResponseDto(entity);
     }
 
+    //ID로 SELLER 찾기
     @Transactional
     public SellerResponseDto findById(Long sellerId){
         Seller seller = sellerRepository.findById(sellerId).orElseThrow(EntityNotFoundException::new);
         return new SellerResponseDto(seller);
     }
 
+    //SELLER 존재여부 CHECK
     @Transactional
     public boolean existsByEmail(String email) {
         return sellerRepository.existsByEmail(email);
@@ -66,7 +69,7 @@ public class SellerService {
         return itemResponseDtoList;
     }
 
-    //가게명 등록
+    //가게명 등록 및 수정
     @Transactional
     public void updateStore(Long sellerId, String store){
         Seller seller = sellerRepository.findById(sellerId).orElseThrow(EntityNotFoundException::new);
