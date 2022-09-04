@@ -12,8 +12,13 @@ import com.proj.KnitMarket.dto.OrderDto;
 import com.proj.KnitMarket.dto.OrderItemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +30,8 @@ public class OrderService {
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
+    //단일상품주문
+    @Transactional
      public Long order(Long itemId,String email){
          //orderItem 객체생성
          List<OrderItem> orderItems = new ArrayList<>();
@@ -55,6 +62,8 @@ public class OrderService {
 
         return order.getId();
      }
+
+
 
 
 }
