@@ -76,14 +76,18 @@ public class OrderService {
         return orderItem;
     }
 
-    //주문상품 목록을 주문에 넣어주는 메서드
+    //주문정보 입력해주는 메서드
     @Transactional
-    public void addOrder(List<OrderItem> orderItems,Order order){
-       order = Order.builder()
-               .orderItems(orderItems)
-               .orderStatus(OrderStatus.CANCEL)
-               .build();
-       orderRepository.save(order);
+    public Order addOrderInfo(List<OrderItem> orderItems,Order order,int totalPrice){
+        OrderDto orderDto = OrderDto.builder()
+                .id(order.getId())
+                .user(order.getUser())
+                .orderItems(orderItems)
+                .orderStatus(OrderStatus.CANCEL)
+                .totalPrice(totalPrice)
+                .build();
+
+       return orderRepository.save(orderDto.toEntity());
     }
 
     //주문객체를 생성해주는 메서드
@@ -94,10 +98,6 @@ public class OrderService {
        return orderRepository.save(orderDto.toEntity());
     }
 
-    //totalPrice set 해주는 메서드
-
-
-
      //장바구니 상품 전체 주문
     @Transactional
     public int orders(Long userId){
@@ -105,6 +105,7 @@ public class OrderService {
 
         //User정보를 가진 Order 객체 생성
         Order order = createOrder(user);
+        log.info("생성된 order={}",order.getId());
 
         int result = 0;
 
@@ -130,13 +131,12 @@ public class OrderService {
         }
 
         //생성된 order 객체에 orderItems 정보 넣기
-        addOrder(orderItems,order);
+        order = addOrderInfo(orderItems,order,totalPrice);
+        log.info("수정된 order ={}",order.getId());
 
-/*        //장바구니 비우기 => 결제할때 사용
-        cartService.cartRemoveAll(cart.getId());*/
+        //장바구니 비우기 => 결제할때 사용
+        // cartService.cartRemoveAll(cart.getId());
         return result;
     }
-
-
 
 }

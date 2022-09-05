@@ -36,10 +36,12 @@ public class Order extends BaseEntity {
     private int totalPrice;
 
     @Builder
-    public Order(User user, OrderStatus orderStatus,List<OrderItem>orderItems,int totalPrice) {
+    public Order(Long id,User user, OrderStatus orderStatus,List<OrderItem>orderItems,int totalPrice) {
+        this.id = id;
         this.user = user;
         this.orderStatus = orderStatus;
         this.orderItems=orderItems;
         this.totalPrice = totalPrice;
     }
+
 }

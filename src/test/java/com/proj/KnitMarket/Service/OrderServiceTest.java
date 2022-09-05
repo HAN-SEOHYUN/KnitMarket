@@ -23,8 +23,8 @@ class OrderServiceTest {
 
     @BeforeEach
     void clean(){
-        orderRepository.deleteAll();
         orderItemRepository.deleteAll();
+        orderRepository.deleteAll();
     }
 
     @Test
@@ -40,6 +40,22 @@ class OrderServiceTest {
         //then
         assertEquals(1L,orderRepository.count());
     }
+
+    @Test
+    @DisplayName("주문정보 입력테스트")
+    void test2(){
+        //given
+        Long userId = 3L;
+
+        //when
+        int result = orderService.orders(userId);
+
+        //then
+        assertEquals(1L, orderRepository.count());
+
+    }
+
+
 
 
 }
