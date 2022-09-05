@@ -27,4 +27,16 @@ $(function () {
 
         }
     });
+
+    //장바구니 주문하기 버튼 클릭 시
+    $(document).on('click', '#blackOrderBtn', function () {
+       var count = document.getElementsByClassName('card-body').length;
+       if(count<1){
+           alert("장바구니가 비어있습니다");
+       }else{
+           if(confirm("장바구니 상품을 주문하시겠습니까 ?")){
+               location.href="/knitmarket/order/cartItems";
+           }
+       }
+    });
 });
