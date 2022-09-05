@@ -2,13 +2,13 @@ package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.OrderService;
+import com.proj.KnitMarket.domain.Order.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,50 +21,28 @@ public class OrderController {
     private final OrderService orderService;
     private final CartService cartService;
 
-    @GetMapping("/order")
-    public String order_get() {
-
-        log.info("주문하기");
-
+    @GetMapping("/order/{orderId}")
+    public String order_get(RedirectAttributes rttr) {
+        Long orderId = (Long)rttr.getAttribute("orderId");
+        log.info("requestParam orderId={}",orderId);
         return "user/order";
     }
 
     //단일상품주문
     @GetMapping("/order/{itemId}")
-    public String order_item_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
-
+    public String order_item_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, RedirectAttributes rttr){
         String email = (String) httpSession.getAttribute("email");
-        Long orderId = orderService.order(itemId, email);
-
-        String url = "/knitmarket/", msg ="구매가 완료되었습니다";
-
-        model.addAttribute("url",url);
-        model.addAttribute("msg",msg);
-        return "/common/message";
+        Order order = orderService.order(itemId, email);
+        rttr.addAttribute("orderId",order.getId());
+        return "forward:/knitmarket/order";
     }
 
     //장바구니상품주문
     @GetMapping("/order/cartItems")
     public String order_items_post(Model model,HttpSession httpSession){
         Long userId = (Long) httpSession.getAttribute("id");
+        Long orderId = orderService.orders(userId);
 
-        int result = orderService.orders(userId);
-
-        String url, msg;
-
-        if(result==1){
-            url="/knitmarket/cartlist";
-            msg ="장바구니에 판매된 제품이 포함되어있습니다";
-        }else{
-            url="/knitmarket/";
-            msg ="주문이 완료되었습니다";
-        }
-        model.addAttribute("url",url);
-        model.addAttribute("msg",msg);
-        return "/common/message";
+        return "redirect:/knitmarket/order";
     }
-
-
-
-
 }

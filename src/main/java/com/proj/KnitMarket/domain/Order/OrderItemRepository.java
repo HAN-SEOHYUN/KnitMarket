@@ -2,5 +2,9 @@ package com.proj.KnitMarket.domain.Order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 public interface OrderItemRepository extends JpaRepository<OrderItem,Long> {
+    List<OrderItem> findOrderItemByOrder_Id(Long orderId);
+
 }
