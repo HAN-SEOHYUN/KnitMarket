@@ -61,7 +61,7 @@ public class CartService {
         return addSuccess;
     }
 
-    //장바구니조회
+    //장바구니상품조회 List<CartItemDto>
     @Transactional
     public List<CartItemDto> getCartItemList(Long userId){
         Long cartId = cartRepository.findCartByUser_Id(userId).getId();
@@ -81,9 +81,20 @@ public class CartService {
         return cartItemDtoList;
     }
 
-    //장바구니 상품 삭제
+    //장바구니조회 Cart
+    public Cart findUserCart(Long userId){
+        return cartRepository.findCartByUser_Id(userId);
+    }
+
+    //장바구니 개별 상품 삭제
     @Transactional
     public void cartRemove(Long cartItemId){
         cartItemRepository.deleteById(cartItemId);
+    }
+
+    //장바구니 비우기
+    @Transactional
+    public void cartRemoveAll(Long cartId){
+        cartItemRepository.deleteCartItemByCart_Id(cartId);
     }
 }

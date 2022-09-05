@@ -3,15 +3,12 @@ package com.proj.KnitMarket.domain.Order;
 import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Member.User;
-import com.proj.KnitMarket.dto.OrderDto;
-import com.proj.KnitMarket.dto.OrderItemDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,24 +28,18 @@ public class Order extends BaseEntity {
     private User user;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus orderStatus = OrderStatus.ORDER; //주문상태
+    private OrderStatus orderStatus = OrderStatus.CANCEL; //주문상태
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order",fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    private int totalPrice;
+
     @Builder
-    public Order(User user, OrderStatus orderStatus,List<OrderItem>orderItems) {
+    public Order(User user, OrderStatus orderStatus,List<OrderItem>orderItems,int totalPrice) {
         this.user = user;
         this.orderStatus = orderStatus;
         this.orderItems=orderItems;
+        this.totalPrice = totalPrice;
     }
-
-    public int getTotalPrice(){
-        int totalPrice = 0;
-        for(OrderItem orderItem : orderItems){
-            totalPrice += orderItem.getItem().getPrice();
-        }
-        return totalPrice;
-    }
-
 }

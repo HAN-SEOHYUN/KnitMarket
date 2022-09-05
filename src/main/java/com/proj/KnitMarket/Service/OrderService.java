@@ -1,23 +1,20 @@
 package com.proj.KnitMarket.Service;
 
+import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Item.ItemRepository;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Member.UserRepository;
-import com.proj.KnitMarket.domain.Order.Order;
-import com.proj.KnitMarket.domain.Order.OrderItem;
-import com.proj.KnitMarket.domain.Order.OrderRepository;
+import com.proj.KnitMarket.domain.Order.*;
+import com.proj.KnitMarket.dto.CartItemDto;
 import com.proj.KnitMarket.dto.OrderDto;
 import com.proj.KnitMarket.dto.OrderItemDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +26,8 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final CartService cartService;
 
     //단일상품주문
     @Transactional
@@ -48,6 +47,7 @@ public class OrderService {
          log.info("userName = {}",user.getName());
          OrderDto orderDto = OrderDto.builder()
                  .user(user)
+                 .orderStatus(OrderStatus.CANCEL)
                  .orderItems(orderItems)
                  .build();
 
@@ -63,6 +63,79 @@ public class OrderService {
         return order.getId();
      }
 
+     //장바구니 상품을 주문상품에 넣어주는 메서드
+    @Transactional
+    public OrderItem addOrderItem(Item item,Order order){
+        OrderItemDto orderItemDto = OrderItemDto.builder()
+                .item(item)
+                .order(order)
+                .build();
+
+        OrderItem orderItem =  orderItemRepository.save(orderItemDto.toEntity());
+        log.info("orderItem={}",orderItem.getId());
+        return orderItem;
+    }
+
+    //주문상품 목록을 주문에 넣어주는 메서드
+    @Transactional
+    public void addOrder(List<OrderItem> orderItems,Order order){
+       order = Order.builder()
+               .orderItems(orderItems)
+               .orderStatus(OrderStatus.CANCEL)
+               .build();
+       orderRepository.save(order);
+    }
+
+    //주문객체를 생성해주는 메서드
+    public Order createOrder(User user){
+        OrderDto orderDto = OrderDto.builder()
+                .user(user)
+                .build();
+       return orderRepository.save(orderDto.toEntity());
+    }
+
+    //totalPrice set 해주는 메서드
+
+
+
+     //장바구니 상품 전체 주문
+    @Transactional
+    public int orders(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
+
+        //User정보를 가진 Order 객체 생성
+        Order order = createOrder(user);
+
+        int result = 0;
+
+        //user의 장바구니와 장바구니 속 상품 목록 가져오기
+        Cart cart = cartService.findUserCart(user.getId());
+        List<CartItemDto> cartItems = cartService.getCartItemList(user.getId());
+
+        int totalPrice = 0;
+        List<OrderItem> orderItems = new ArrayList<>();
+
+        for(CartItemDto cartItemDto : cartItems){
+
+            // 이미 판매된 상품이 장바구니에 포함되어있으면 result = 1
+            if(cartItemDto.getItem().getSellStatus()!=SellStatus.SELL){
+                result= 1;
+                return result;
+            }
+            totalPrice += cartItemDto.getItem().getPrice();
+
+            //Item 을 주문상품(OrderItem) 에 넣어줌
+            OrderItem orderItem = addOrderItem(cartItemDto.getItem(), order);
+            orderItems.add(orderItem); //주문상품들을 주문상품 목록에 추가
+        }
+
+        //생성된 order 객체에 orderItems 정보 넣기
+        addOrder(orderItems,order);
+
+/*        //장바구니 비우기 => 결제할때 사용
+        cartService.cartRemoveAll(cart.getId());*/
+        return result;
+    }
 
 
 
