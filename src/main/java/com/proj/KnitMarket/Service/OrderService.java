@@ -8,6 +8,7 @@ import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.domain.Order.*;
 import com.proj.KnitMarket.dto.CartItemDto;
+import com.proj.KnitMarket.dto.ItemResponseDto;
 import com.proj.KnitMarket.dto.OrderDto;
 import com.proj.KnitMarket.dto.OrderItemDto;
 import lombok.RequiredArgsConstructor;
@@ -31,36 +32,22 @@ public class OrderService {
 
     //단일상품주문
     @Transactional
-     public Long order(Long itemId,String email){
-         //orderItem 객체생성
-         List<OrderItem> orderItems = new ArrayList<>();
-         Item item = itemRepository.findItemById(itemId);
-         log.info("itmeId = {}",itemId);
-         OrderItemDto orderItemDto = OrderItemDto.builder()
-                 .item(item)
-                 .build();
+     public Order order(Long itemId, String email){
+        //user 정보를 가진 객체 생성
+        User user = userRepository.findByEmail(email);
+        Order order = createOrder(user);
+        log.info("생성된 order={}",order.getId());
 
-         orderItems.add(orderItemDto.toEntity());
+        List<OrderItem> orderItems = new ArrayList<>();
+        Item item = itemRepository.findItemById(itemId);
 
-         //order 객체생성
-         User user = userRepository.findByEmail(email);
-         log.info("userName = {}",user.getName());
-         OrderDto orderDto = OrderDto.builder()
-                 .user(user)
-                 .orderStatus(OrderStatus.CANCEL)
-                 .orderItems(orderItems)
-                 .build();
+        OrderItem orderItem = addOrderItem(item,order);
+        orderItems.add(orderItem);
 
-         //order 객체 db저장 (Cascade로 인해 OrderItem 객체도 같이 저장)
-         Order order = orderRepository.save(orderDto.toEntity());
+        order = addOrderInfo(orderItems,order,item.getPrice());
+        log.info("수정된 orderId={}",order.getId());
 
-         //item SellStatus 변경
-         item.updateSellStatus(SellStatus.SOLD_OUT);
-         itemRepository.save(item);
-
-         log.info("orderId = {}",order.getId());
-
-        return order.getId();
+        return order;
      }
 
      //장바구니 상품을 주문상품에 넣어주는 메서드
@@ -72,7 +59,6 @@ public class OrderService {
                 .build();
 
         OrderItem orderItem =  orderItemRepository.save(orderItemDto.toEntity());
-        log.info("orderItem={}",orderItem.getId());
         return orderItem;
     }
 
@@ -100,7 +86,7 @@ public class OrderService {
 
      //장바구니 상품 전체 주문
     @Transactional
-    public int orders(Long userId){
+    public Long orders(Long userId){
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
         //User정보를 가진 Order 객체 생성
@@ -117,12 +103,6 @@ public class OrderService {
         List<OrderItem> orderItems = new ArrayList<>();
 
         for(CartItemDto cartItemDto : cartItems){
-
-            // 이미 판매된 상품이 장바구니에 포함되어있으면 result = 1
-            if(cartItemDto.getItem().getSellStatus()!=SellStatus.SELL){
-                result= 1;
-                return result;
-            }
             totalPrice += cartItemDto.getItem().getPrice();
 
             //Item 을 주문상품(OrderItem) 에 넣어줌
@@ -135,8 +115,8 @@ public class OrderService {
         log.info("수정된 order ={}",order.getId());
 
         //장바구니 비우기 => 결제할때 사용
-        // cartService.cartRemoveAll(cart.getId());
-        return result;
+        cartService.cartRemoveAll(cart.getId());
+        return order.getId();
     }
 
 }
