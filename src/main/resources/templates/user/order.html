@@ -16,27 +16,28 @@
                 <div class="order-list-wrapper-body">
                     <div class="order-list-card-wrapper">
                         <!--상품Card 시작-->
-                        <th:block class ="each-card-wrapper" >
+                        <th:block th:each="cartItem : ${cartList}" class ="each-card-wrapper">
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="/img/LOGO.png" class="img-fluid rounded-start">
+                                        <img th:src="@{/uploadImg/} + ${cartItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${cartItem.item.itemName}">
+                                        <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">상품명</h5>
-                                            <p class="card-text" >상품가격</p>
-                                            <p class="card-text"><small class="text-muted">상품가격</small></p>
+                                            <h5 class="card-title" th:text="${cartItem.item.itemName}"></h5>
+                                            <p class="card-text" th:text="${cartItem.item.price}"></p>
+                                            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(cartItem.regTime,'yyyy-MM-dd')}"></small></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div id='xWrap' style='display:inline-block'>
-                                <a href ='#' id='delBtn'>
+                                <a th:href="@{'/knitmarket/cartRemove/' + ${cartItem.id} }" id='delBtn' th:onclick ="return confirm('장바구니에서 삭제하시겠습니까 ?');">
                                     <i class='fa-solid fa-xmark'></i></a>
                             </div>
                             <div id='checkboxWrap' style='display:inline-block'>
-                                <input type="checkbox" name="delCheckbox">
+                                <input type="checkbox" name="delCheckbox" th:value="${cartItem.id}">
                             </div>
 
                         </th:block>
