@@ -19,19 +19,21 @@ public class OrderDto {
     private Long id;
     private User user;
     private List<OrderItem> orderItems;
+    private OrderStatus orderStatus;
 
     public Order toEntity(){
         return Order.builder()
                 .user(user)
                 .orderItems(orderItems)
-                .orderStatus(OrderStatus.ORDER)
+                .orderStatus(orderStatus)
                 .build();
     }
 
     @Builder
-    public OrderDto(Long id, User user, List<OrderItem> orderItems){
+    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems){
         this.id = id;
         this.user = user;
+        this.orderStatus = orderStatus;
         this.orderItems = orderItems;
     }
 }

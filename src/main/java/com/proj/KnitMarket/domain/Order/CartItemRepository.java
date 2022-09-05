@@ -10,4 +10,6 @@ public interface CartItemRepository extends JpaRepository<CartItem,Long> {
 
     @Override
     void deleteById(Long cartItemId);
+
+    void deleteCartItemByCart_Id(Long cartId);
 }
