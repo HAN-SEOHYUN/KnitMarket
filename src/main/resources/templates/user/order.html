@@ -52,13 +52,28 @@
                         </th:block>
                         <!--card 끝-->
                     </div>
+                    <div class = "order-info-wrapper">
+                        <div class="order-info-div">
+                            <h5>결제정보</h5>
+                            <hr>
+                            <div class = "order-info"><!--th:text="${order.getTotalPrice()}-->
+                                <label>총결제금액 : </label><span th:text="${#numbers.formatInteger(order.getTotalPrice(), 3, 'COMMA') + ' 원'}"></span>
+                            </div>
+                            <div class = "order-info">
+                                <label>상품수량 : </label><span th:text="${order.getOrderItems().size()}+' 개'"></span>
+                            </div>
+                        </div>
+                        <div class ="order-regulation-div">
+                            <input type="checkbox" id="agreeChk"><label for="agreeChk">개인정보 수집 및 이용 동의</label>
+                        </div>
 
-
-
+                    </div>
                     <div class="order-list-wrapper-footer">
                         <!--주문상품 정보-->
-                        <button type="button" class="btn btn-light" id="whiteDelBtn">삭제하기</button>
-                        <button type="button" class="btn btn-dark">결제하기</button>
+                        <form method="post" action="">
+                            <input type ="hidden" th:value="${order.getId()}">
+                        <button type="submit" class="btn btn-dark">결제하기</button>
+                        </form>
                     </div>
                 </div>
             </div>

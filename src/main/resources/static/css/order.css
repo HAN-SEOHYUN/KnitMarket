@@ -1,7 +1,6 @@
 .wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
     position: relative;
     overflow: hidden;
     height:auto;
@@ -9,15 +8,17 @@
 
 .order-list-wrapper-body {
     height: 86%;
+    min-height: 560px;
 }
 
 .order-list-wrapper-footer {
-    border: 1px solid black;
     height: auto;
+    width: 100%;
+    text-align: center;
+    margin-top: 46px;
 }
 
 .order-list-card-wrapper {
-    min-height: 465px;
     text-align: center;
 }
 
@@ -67,4 +68,47 @@ span#address-span {
 .user-address > span {
     margin-left: 14px;
 }
+
+.order-info-wrapper {
+    width: 54%;
+    margin: auto;
+    height: 200px;
+    padding: 34px;
+}
+
+.order-info-div > h5 {
+    font-size: 27px;
+    font-family: fantasy;
+    font-weight: bold;
+}
+
+.order-info {
+    margin-bottom: 15px;
+}
+
+.order-info > label {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+span {}
+
+.order-info > span {
+    float: right;
+    font-size: 22px;
+}
+
+.order-regulation-div > label {
+    margin-left: 10px;
+}
+
+button.btn.btn-dark {
+    width: 50%;
+}
+
+.order-regulation-div {
+    margin-top: 26px;
+}
+
+input#agreeChk {}
 

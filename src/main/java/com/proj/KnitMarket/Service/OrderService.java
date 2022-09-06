@@ -32,7 +32,7 @@ public class OrderService {
 
     //단일상품주문
     @Transactional
-     public List<OrderItemDto> order(Long itemId, String email){
+     public OrderDto order(Long itemId, String email){
         //user 정보를 가진 객체 생성
         User user = userRepository.findByEmail(email);
         Order order = createOrder(user);
@@ -44,13 +44,24 @@ public class OrderService {
         orderItems.add(orderItem);
 
         order = addOrderInfo(orderItems,order,item.getPrice());
-        return entityToDto(orderItems);
+
+        OrderDto orderDto = OrderDto.builder()
+                .id(order.getId())
+                .user(order.getUser())
+                .orderStatus(order.getOrderStatus())
+                .orderItems(order.getOrderItems())
+                .totalPrice(order.getTotalPrice())
+                .build();
+
+        return orderDto;
      }
 
      //List<orderItem> => List<orderItemDto>
     @Transactional
-    public List<OrderItemDto> entityToDto(List<OrderItem> orderItemList){
+    public List<OrderItemDto> entityToDto(OrderDto orderDto){
+        List<OrderItem> orderItemList = orderDto.getOrderItems();
         List<OrderItemDto> orderItemDtoList = new ArrayList<>();
+
         for(OrderItem orderItem : orderItemList){
             OrderItemDto orderItemDto = OrderItemDto.builder()
                     .id(orderItem.getId())
@@ -61,7 +72,6 @@ public class OrderService {
         }
         return orderItemDtoList;
     }
-
 
      //장바구니 상품을 주문상품에 넣어주는 메서드
     @Transactional
@@ -99,7 +109,7 @@ public class OrderService {
 
      //장바구니 상품 전체 주문
     @Transactional
-    public List<OrderItemDto> orders(Long userId){
+    public OrderDto orders(Long userId){
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
         //User정보를 가진 Order 객체 생성
@@ -130,7 +140,15 @@ public class OrderService {
         //장바구니 비우기 => 결제할때 사용
         cartService.cartRemoveAll(cart.getId());
 
-        return entityToDto(orderItems);
+        OrderDto orderDto = OrderDto.builder()
+                .id(order.getId())
+                .user(order.getUser())
+                .orderItems(order.getOrderItems())
+                .orderStatus(order.getOrderStatus())
+                .totalPrice(order.getTotalPrice())
+                .build();
+
+        return orderDto;
     }
 
 }

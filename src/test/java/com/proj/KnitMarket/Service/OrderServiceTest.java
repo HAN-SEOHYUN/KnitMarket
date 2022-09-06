@@ -2,6 +2,7 @@ package com.proj.KnitMarket.Service;
 
 import com.proj.KnitMarket.domain.Order.OrderItemRepository;
 import com.proj.KnitMarket.domain.Order.OrderRepository;
+import com.proj.KnitMarket.dto.OrderDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -48,10 +49,9 @@ class OrderServiceTest {
         Long userId = 3L;
 
         //when
-        int result = orderService.orders(userId);
+        OrderDto orderDto = orderService.orders(userId);
 
         //then
-        assertEquals(1L, orderRepository.count());
 
     }
 
