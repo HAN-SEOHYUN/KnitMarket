@@ -11,8 +11,25 @@
         <div class="row">
             <!--주문시작-->
             <div class="wrapper-div">
-                <div class="order-list-wrapper-top">
-                </div>
+                <!--주소-->
+                    <div class = "order-list-address-wrapper">
+                     <h5>주소확인</h5><span>주소가 올바른지 확인해주세요</span>
+                        <div class ="order-address-info-div">
+                            <div class="user-address"><label for="address-span">주소</label>
+                                <span id="address-span" class="user-information"
+                                      th:text="${address.address}"></span></div>
+                            <div class="user-address"><label for="addressDetail-span">상세주소</label>
+                                <span id="addressDetail-span" class="user-information"
+                                      th:text="${address.addressDetail}"></span></div>
+                            <div class="user-address"><label for="zipcode-span">우편번호</label>
+                                <span id="zipcode-span" class="user-information"
+                                      th:text="${address.zipcode}"></span></div>
+                            <div class="user-address"><label for="enterMethod-span">출입방법</label>
+                                <span id="enterMethod-span" class="user-information"
+                                      th:text="${address.enterMethod}"></span></div>
+                        </div>
+                        <div class = "order-list-address-update"><a th:href="@{/knitmarket/mypage}"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                    </div>
                 <div class="order-list-wrapper-body">
                     <div class="order-list-card-wrapper">
                         <!--상품Card 시작-->
@@ -35,6 +52,9 @@
                         </th:block>
                         <!--card 끝-->
                     </div>
+
+
+
                     <div class="order-list-wrapper-footer">
                         <!--주문상품 정보-->
                         <button type="button" class="btn btn-light" id="whiteDelBtn">삭제하기</button>

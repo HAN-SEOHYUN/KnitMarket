@@ -7,14 +7,6 @@
     height:auto;
 }
 
-.order-list-wrapper-top {
-    display: flex;
-    border: 1px solid black;
-    height: 70px;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .order-list-wrapper-body {
     height: 86%;
 }
@@ -26,9 +18,10 @@
 
 .order-list-card-wrapper {
     min-height: 465px;
+    text-align: center;
 }
 
-.card.mb-3 {width: 80%;height: auto;}
+.card.mb-3 {width: 54%;height: auto;}
 
 img.img-fluid.rounded-start {
     object-fit: contain;
@@ -36,5 +29,42 @@ img.img-fluid.rounded-start {
 
 .col-md-4 {width: 200px;height: 200px;}
 
+.card-body {
+    text-align: left;
+    padding: 26px;
+}
 
+.order-list-address-wrapper {width: 54%;border: 1px solid #d2d2d2;margin: auto;background: white;margin-top: 43px;padding: 27px;border-radius: 5px;}
+
+.order-list-address-wrapper > h5 {
+    font-size: 28px;
+    display: inline;
+    font-weight: bold;
+}
+
+.order-list-address-wrapper > span {display: inline-block;color: red;margin-left: 14px;font-weight: 500;}
+
+.order-address-info-div {
+    width: 91%;
+    margin: auto;
+    margin-top: 18px;
+    font-size: 18px;
+    display: inline-block;
+}
+
+.order-list-address-update {
+    font-size: 22px;
+    display: inline-block;
+}
+
+.user-address > label {
+    font-weight: 600;
+}
+
+span#address-span {
+}
+
+.user-address > span {
+    margin-left: 14px;
+}
 
