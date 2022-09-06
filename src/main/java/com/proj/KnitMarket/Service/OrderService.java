@@ -32,11 +32,10 @@ public class OrderService {
 
     //단일상품주문
     @Transactional
-     public Order order(Long itemId, String email){
+     public List<OrderItemDto> order(Long itemId, String email){
         //user 정보를 가진 객체 생성
         User user = userRepository.findByEmail(email);
         Order order = createOrder(user);
-        log.info("생성된 order={}",order.getId());
 
         List<OrderItem> orderItems = new ArrayList<>();
         Item item = itemRepository.findItemById(itemId);
@@ -45,10 +44,24 @@ public class OrderService {
         orderItems.add(orderItem);
 
         order = addOrderInfo(orderItems,order,item.getPrice());
-        log.info("수정된 orderId={}",order.getId());
-
-        return order;
+        return entityToDto(orderItems);
      }
+
+     //List<orderItem> => List<orderItemDto>
+    @Transactional
+    public List<OrderItemDto> entityToDto(List<OrderItem> orderItemList){
+        List<OrderItemDto> orderItemDtoList = new ArrayList<>();
+        for(OrderItem orderItem : orderItemList){
+            OrderItemDto orderItemDto = OrderItemDto.builder()
+                    .id(orderItem.getId())
+                    .item(orderItem.getItem())
+                    .order(orderItem.getOrder())
+                    .build();
+            orderItemDtoList.add(orderItemDto);
+        }
+        return orderItemDtoList;
+    }
+
 
      //장바구니 상품을 주문상품에 넣어주는 메서드
     @Transactional
