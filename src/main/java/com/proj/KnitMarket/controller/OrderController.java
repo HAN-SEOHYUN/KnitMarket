@@ -5,6 +5,7 @@ import com.proj.KnitMarket.Service.OrderService;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.dto.AddressDto;
+import com.proj.KnitMarket.dto.OrderDto;
 import com.proj.KnitMarket.dto.OrderItemDto;
 import com.proj.KnitMarket.dto.UserResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -32,9 +33,11 @@ public class OrderController {
         String email = (String) httpSession.getAttribute("email");
         UserResponseDto userResponseDto = userService.findByEmail(email);
         AddressDto addressDto = userService.getAddress(userResponseDto.getId());
-        List<OrderItemDto> orderItemDtoList = orderService.order(itemId, email);
+        OrderDto orderDto = orderService.order(itemId, email);
+        List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
         model.addAttribute("orderList",orderItemDtoList);
+        model.addAttribute("order",orderDto);
         model.addAttribute("address",addressDto);
         return "user/order";
     }
@@ -44,10 +47,12 @@ public class OrderController {
     public String order_items_post(Model model,HttpSession httpSession){
         Long userId = (Long) httpSession.getAttribute("id");
         AddressDto addressDto = userService.getAddress(userId);
-        List<OrderItemDto> orderItemDtoList = orderService.orders(userId);
+        OrderDto orderDto = orderService.orders(userId);
+        List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
         model.addAttribute("orderList",orderItemDtoList);
         model.addAttribute("address",addressDto);
+        model.addAttribute("order",orderDto);
         return "user/order";
     }
 }
