@@ -99,7 +99,7 @@ public class OrderService {
 
      //장바구니 상품 전체 주문
     @Transactional
-    public Long orders(Long userId){
+    public List<OrderItemDto> orders(Long userId){
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
 
         //User정보를 가진 Order 객체 생성
@@ -129,7 +129,8 @@ public class OrderService {
 
         //장바구니 비우기 => 결제할때 사용
         cartService.cartRemoveAll(cart.getId());
-        return order.getId();
+
+        return entityToDto(orderItems);
     }
 
 }
