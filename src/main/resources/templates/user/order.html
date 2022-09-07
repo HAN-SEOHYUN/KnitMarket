@@ -42,8 +42,8 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title" th:text="${orderItem.item.itemName}" id ="orderName"></h5>
-                                            <p class="card-text" th:text="${orderItem.item.price}" id = "price"></p>
+                                            <h5 class="card-title" th:text="${orderItem.item.itemName}"></h5>
+                                            <p class="card-text" th:text="${orderItem.item.price}" ></p>
                                             <p class="card-text"><small class="text-muted" th:text="${#temporals.format(orderItem.item.regTime,'yyyy-MM-dd')}"></small></p>
                                         </div>
                                     </div>
@@ -55,6 +55,8 @@
                     <div class = "order-info-wrapper">
                         <div class="order-info-div">
                             <input type="hidden" th:value="${order.getUser().getName()}" id ="userName">
+                            <input type="hidden" th:value="${order.getTotalPrice()}" id ="price">
+
                             <h5>결제정보</h5>
                             <hr>
                             <div class = "order-info"><!--th:text="${order.getTotalPrice()}-->
@@ -89,8 +91,8 @@
     var button = document.getElementById("payment-button");
     var orderId = document.getElementById('orderIdInput').value +"-"+new Date().getTime();
     //Error: `orderId`는 영문 대소문자, 숫자, 특수문자(-, _) 만 허용합니다. 6자 이상 64자 이하여야 합니다.
-    var orderName = document.getElementById('orderName').innerText;
-    var price = document.getElementById('price').innerHTML;
+    var orderName = '뜨개장터';
+    var price = document.getElementById('price').value;
     /* 테스트 종료 후 파라미터 값 변경 */
     var customerName = document.getElementById('userName').value;
 
