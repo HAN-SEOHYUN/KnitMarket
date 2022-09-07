@@ -7,10 +7,7 @@ import com.proj.KnitMarket.domain.Item.ItemRepository;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.domain.Order.*;
-import com.proj.KnitMarket.dto.CartItemDto;
-import com.proj.KnitMarket.dto.ItemResponseDto;
-import com.proj.KnitMarket.dto.OrderDto;
-import com.proj.KnitMarket.dto.OrderItemDto;
+import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -137,9 +134,6 @@ public class OrderService {
         order = addOrderInfo(orderItems,order,totalPrice);
         log.info("수정된 order ={}",order.getId());
 
-        //장바구니 비우기 => 결제할때 사용
-        cartService.cartRemoveAll(cart.getId());
-
         OrderDto orderDto = OrderDto.builder()
                 .id(order.getId())
                 .user(order.getUser())
@@ -151,4 +145,29 @@ public class OrderService {
         return orderDto;
     }
 
+    //결제 후 staus 변경 (orderStatus=결제완료 , itemSellStatus=품절)
+    @Transactional
+    public OrderDto changeStatus(Long orderId){
+      Order order=orderRepository.findOrderById(orderId);
+      List<OrderItem> orderItemList = order.getOrderItems();
+
+        //item SellStatus 변경
+        for(OrderItem orderItem : orderItemList){
+           Item item= orderItem.getItem();
+           item.updateSellStatus(SellStatus.SOLD_OUT);
+           itemRepository.save(item);
+        }
+
+        //order OrderStatus 변경
+        OrderDto orderDto = OrderDto.builder()
+                .id(order.getId())
+                .user(order.getUser())
+                .orderStatus(OrderStatus.ORDER)
+                .orderItems(order.getOrderItems())
+                .totalPrice(order.getTotalPrice())
+                .build();
+        orderRepository.save(orderDto.toEntity());
+
+        return orderDto;
+    }
 }
