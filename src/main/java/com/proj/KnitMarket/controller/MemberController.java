@@ -2,9 +2,7 @@ package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.Service.UserService;
-import com.proj.KnitMarket.dto.AddressDto;
-import com.proj.KnitMarket.dto.SellerResponseDto;
-import com.proj.KnitMarket.dto.UserResponseDto;
+import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -81,4 +80,22 @@ public class MemberController {
         model.addAttribute("msg",msg);
         return "/common/message";
     }
+
+    //사용자 주문목록
+    @GetMapping("orderList/{userId}")
+    public String orderList_get(@PathVariable("userId")Long userId,Model model){
+        List<OrderDto> orderDtoList = userService.selectOrderList(userId);
+        model.addAttribute("orderList",orderDtoList);
+        return "user/orderList";
+    }
+
+    //내 상품 (판매자가 게시한 상품 목록 조회)
+    @GetMapping(value = "/myItem/{sellerId}")
+    public String myItem_list_get(@PathVariable ("sellerId")Long sellerId, Model model,HttpSession httpSession){
+        List<ItemResponseDto> itemResponseDtoList = sellerService.getMyItemList(sellerId);
+        log.info("itemResponseDtoList={}",itemResponseDtoList.size());
+        model.addAttribute("myItemList",itemResponseDtoList);
+        return "seller/myItem";
+    }
+
 }

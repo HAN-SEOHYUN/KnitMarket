@@ -11,7 +11,6 @@ a:hover{
 .item-wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
     position: relative;
     overflow: hidden;
     height:auto;
@@ -27,7 +26,6 @@ header.header {
 
 .item-wrapper-top {
     display: flex;
-    border: 1px solid black;
     height: 70px;
     justify-content: space-between;
     align-items: center;
@@ -35,7 +33,6 @@ header.header {
 
 
 .item-wrapper-bottom {
-    border: 1px solid black;
     height: 70px;
 }
 
@@ -52,7 +49,10 @@ input.search-keyword {
 }
 
 .login-div {
-    padding: 20px;
+    padding: 10px;
+    background: #f5f0f0;
+    border-radius: 10px;
+    margin: auto;
 }
 
 .dropdown {
@@ -62,7 +62,8 @@ input.search-keyword {
 }
 
 .col-lg-3 {
-    display: -webkit-inline-box;
+    display: flex;
+    align-items: center;
 }
 
 .login-div > a {
@@ -90,6 +91,20 @@ body {
 
 .row > .wrapper-div {
     min-height: 580px;
+}
+
+.col-lg-6 {display: flex;align-items: center;}
+
+nav.header__menu {display: inline-block;width: 100%;}
+
+nav.header__menu > ul > li > a {
+    font-size: 22px;
+    font-family: IBM Plex Sans KR, sans-serif
+}
+
+ul {
+    display: flex;
+    justify-content: space-around;
 }
 
 

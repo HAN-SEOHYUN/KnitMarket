@@ -131,16 +131,6 @@ public class OrderController {
         }
     }
 
-    //사용자 주문목록
-    @GetMapping("orderList/{userId}")
-    public String orderList_get(@PathVariable("userId")Long userId,Model model){
-        List<OrderDto> orderDtoList = userService.selectOrderList(userId);
-        model.addAttribute("orderList",orderDtoList);
-        return "user/orderList";
-    }
-
-
-
 
     /* orderId 로 주문 상세 */
 
