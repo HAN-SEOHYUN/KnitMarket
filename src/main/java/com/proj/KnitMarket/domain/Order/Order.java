@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class Order extends BaseEntity {
     private int totalPrice;
 
     @Builder
-    public Order(Long id,User user, OrderStatus orderStatus,List<OrderItem>orderItems,int totalPrice) {
+    public Order(Long id, User user, OrderStatus orderStatus, List<OrderItem>orderItems, int totalPrice, LocalDateTime regTime) {
         this.id = id;
         this.user = user;
         this.orderStatus = orderStatus;

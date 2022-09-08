@@ -6,6 +6,9 @@ import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.OrderService;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.domain.Member.User;
+import com.proj.KnitMarket.domain.Order.Order;
+import com.proj.KnitMarket.domain.Order.OrderItem;
+import com.proj.KnitMarket.domain.Order.OrderRepository;
 import com.proj.KnitMarket.dto.AddressDto;
 import com.proj.KnitMarket.dto.OrderDto;
 import com.proj.KnitMarket.dto.OrderItemDto;
@@ -39,6 +42,7 @@ public class OrderController {
     private final OrderService orderService;
     private final CartService cartService;
     private final UserService userService;
+    private final OrderRepository orderRepository;
 
     @PostConstruct
     private void init() {
@@ -84,7 +88,10 @@ public class OrderController {
     }
 
     //결제
-    //http://localhost:8086/success?orderId=1234567&paymentKey=vG45eDbZnodP9BRQmyarYBdE4boBL8J07KzLNkE6AOMwXYWl&amount=19000
+    //http://localhost:8086/
+    // success?orderId=1234567
+    // &paymentKey=vG45eDbZnodP9BRQmyarYBdE4boBL8J07KzLNkE6AOMwXYWl
+    // &amount=19000
     private final String SECRET_KEY = "test_sk_qLlDJaYngro2Bjq0Y2KVezGdRpXx";
     @RequestMapping("/order/success")
     public String confirmPayment(
@@ -104,18 +111,22 @@ public class OrderController {
                 "https://api.tosspayments.com/v1/payments/" + paymentKey, request, JsonNode.class);
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) { //결제성공
-
             String [] temp = orderId.split("-");
             Long savedOrderId = Long.parseLong(temp[0]);
 
-            //order status 변경
-            //item sellstatus 변경
+            //order status 변경 & item sellstatus 변경
             OrderDto orderDto = orderService.changeStatus(savedOrderId);
 
             //장바구니 비우기
             cartService.cartRemoveAll(orderDto.getUser().getId());
 
-            return "success";
+            AddressDto addressDto = userService.getAddress(orderDto.getUser().getId());
+            List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
+
+            model.addAttribute("orderList",orderItemDtoList);
+            model.addAttribute("address",addressDto);
+            model.addAttribute("order",orderDto);
+            return "user/success";
         } else {
             log.info("결제실패");
             JsonNode failNode = responseEntity.getBody();
@@ -127,12 +138,15 @@ public class OrderController {
         }
     }
 
-    @RequestMapping("/order/fail")
+    //결제실패
+    /*@RequestMapping("/order/fail")
     public String failPayment(@RequestParam String message, @RequestParam String code, Model model) {
         model.addAttribute("message", message);
         model.addAttribute("code", code);
         return "redirect:/";
+    }*/
+
+
     }
 
 
-}

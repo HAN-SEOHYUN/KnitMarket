@@ -165,6 +165,7 @@ public class OrderService {
                 .orderStatus(OrderStatus.ORDER)
                 .orderItems(order.getOrderItems())
                 .totalPrice(order.getTotalPrice())
+                .regTime(order.getRegTime())
                 .build();
         orderRepository.save(orderDto.toEntity());
 
