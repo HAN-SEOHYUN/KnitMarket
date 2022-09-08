@@ -23,6 +23,7 @@ public class OrderDto {
     private OrderStatus orderStatus;
     private int totalPrice;
     private LocalDateTime regTime;
+    private String orderName;
 
     public Order toEntity(){
         return Order.builder()
@@ -35,13 +36,14 @@ public class OrderDto {
     }
 
     @Builder
-    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems,int totalPrice,LocalDateTime regTime){
+    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems,int totalPrice,LocalDateTime regTime,String orderName){
         this.id = id;
         this.user = user;
         this.orderStatus = orderStatus;
         this.orderItems = orderItems;
         this.totalPrice = totalPrice;
         this.regTime = regTime;
+        this.orderName = orderName;
     }
 
 }
