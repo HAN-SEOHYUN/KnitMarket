@@ -14,6 +14,7 @@
                 <!--주소-->
                     <div class = "order-list-address-wrapper">
                      <h5>주소확인</h5><span>주소가 올바른지 확인해주세요</span>
+                        <div class = "order-list-address-update"><a th:href="@{/knitmarket/mypage}"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         <div class ="order-address-info-div">
                             <div class="user-address"><label for="address-span">주소</label>
                                 <span id="address-span" class="user-information"
@@ -28,7 +29,6 @@
                                 <span id="enterMethod-span" class="user-information"
                                       th:text="${address.enterMethod}"></span></div>
                         </div>
-                        <div class = "order-list-address-update"><a th:href="@{/knitmarket/mypage}"><i class="fa-solid fa-pen-to-square"></i></a></div>
                     </div>
                 <div class="order-list-wrapper-body">
                     <div class="order-list-card-wrapper">
@@ -42,9 +42,20 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title" th:text="${orderItem.item.itemName}"></h5>
-                                            <p class="card-text" th:text="${orderItem.item.price}" ></p>
-                                            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(orderItem.item.regTime,'yyyy-MM-dd')}"></small></p>
+                                            <div><h5 class="card-title">상품명</h5><h5
+                                                    th:text="${orderItem.item.itemName}"></h5></div>
+                                            <div><label>상품금액</label>
+                                                <p class="card-text"
+                                                   th:text="${#numbers.formatInteger(orderItem.item.price, 3, 'COMMA') + ' 원'}"></p>
+                                            </div>
+                                            <div><label>판매자</label>
+                                                <p class="card-text"
+                                                   th:text="${orderItem.item.seller.store}"></p>
+                                            </div>
+                                            <div><label>상품등록일</label>
+                                                <p class="card-text"><small class="text-muted"
+                                                                            th:text="${#temporals.format(orderItem.item.regTime,'yyyy-MM-dd')}"></small>
+                                                </p></div>
                                         </div>
                                     </div>
                                 </div>

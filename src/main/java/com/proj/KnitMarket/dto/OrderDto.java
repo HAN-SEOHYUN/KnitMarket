@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,7 @@ public class OrderDto {
     private List<OrderItem> orderItems;
     private OrderStatus orderStatus;
     private int totalPrice;
+    private LocalDateTime regTime;
 
     public Order toEntity(){
         return Order.builder()
@@ -33,12 +35,13 @@ public class OrderDto {
     }
 
     @Builder
-    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems,int totalPrice){
+    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems,int totalPrice,LocalDateTime regTime){
         this.id = id;
         this.user = user;
         this.orderStatus = orderStatus;
         this.orderItems = orderItems;
         this.totalPrice = totalPrice;
+        this.regTime = regTime;
     }
 
 }

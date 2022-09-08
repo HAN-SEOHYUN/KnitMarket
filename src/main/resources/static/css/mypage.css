@@ -109,4 +109,16 @@ div#mypage-row {
     text-align: right;
 }
 
+.user-address-info > div {
+    display: flex;
+    justify-content: space-between;
+}
 
+.btn-div {
+    margin-top: 23px;
+}
+
+.member-information {
+    display: flex;
+    justify-content: space-between;
+}
