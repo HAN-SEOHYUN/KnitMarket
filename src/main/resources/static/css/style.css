@@ -416,13 +416,13 @@ ol {
 }
 
 .header__menu {
-	padding: 24px 0;
+	padding: 10px 0;
 }
 
 .header__menu ul li {
 	list-style: none;
 	display: inline-block;
-	margin-right: 50px;
+	margin-right: 20px;
 	position: relative;
 }
 

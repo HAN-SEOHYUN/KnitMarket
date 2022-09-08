@@ -97,14 +97,6 @@ public class ItemController {
         return "/common/message";
     }
 
-    //내 상품 (판매자가 게시한 상품 목록 조회)
-    @GetMapping(value = "/myItem")
-    public String myItem_list_get(Model model,HttpSession httpSession){
-        Long sellerId = (Long)httpSession.getAttribute("id");
-        List<ItemResponseDto> itemResponseDtoList = sellerService.getMyItemList(sellerId);
-        log.info("itemResponseDtoList={}",itemResponseDtoList.size());
-        model.addAttribute("myItemList",itemResponseDtoList);
-        return "seller/myItem";
-    }
+
 
 }
