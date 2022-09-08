@@ -5,6 +5,7 @@ import com.proj.KnitMarket.domain.Member.AddressRepository;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.dto.AddressDto;
+import com.proj.KnitMarket.dto.OrderDto;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityNotFoundException;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
+import java.util.List;
 
 @SpringBootTest
 class UserServiceTest {
@@ -105,6 +107,16 @@ class UserServiceTest {
                 .findById(addressId).orElseThrow(() -> new RuntimeException("주소가 존재하지 않습니다. addressId=" + address.getId()));
         assertEquals("주소수정됨", changedAddress.getAddressDetail());
 
+    }
+
+    @Test
+    @DisplayName("orderItem 갯수세기")
+    void test4(){
+       List<OrderDto> orderDtoList = userService.selectOrderList(3L);
+
+       for(OrderDto orderDto : orderDtoList){
+           assertEquals("height 테스트용4 외 2개", orderDto.getOrderName());
+       }
     }
 
 }

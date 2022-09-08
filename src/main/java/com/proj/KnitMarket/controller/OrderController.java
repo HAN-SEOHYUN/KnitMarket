@@ -9,10 +9,7 @@ import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
 import com.proj.KnitMarket.domain.Order.OrderItem;
 import com.proj.KnitMarket.domain.Order.OrderRepository;
-import com.proj.KnitMarket.dto.AddressDto;
-import com.proj.KnitMarket.dto.OrderDto;
-import com.proj.KnitMarket.dto.OrderItemDto;
-import com.proj.KnitMarket.dto.UserResponseDto;
+import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
@@ -88,10 +85,6 @@ public class OrderController {
     }
 
     //결제
-    //http://localhost:8086/
-    // success?orderId=1234567
-    // &paymentKey=vG45eDbZnodP9BRQmyarYBdE4boBL8J07KzLNkE6AOMwXYWl
-    // &amount=19000
     private final String SECRET_KEY = "test_sk_qLlDJaYngro2Bjq0Y2KVezGdRpXx";
     @RequestMapping("/order/success")
     public String confirmPayment(
@@ -137,6 +130,19 @@ public class OrderController {
             return "fail";
         }
     }
+
+    //사용자 주문목록
+    @GetMapping("orderList/{userId}")
+    public String orderList_get(@PathVariable("userId")Long userId,Model model){
+        List<OrderDto> orderDtoList = userService.selectOrderList(userId);
+        model.addAttribute("orderList",orderDtoList);
+        return "user/orderList";
+    }
+
+
+
+
+    /* orderId 로 주문 상세 */
 
     //결제실패
     /*@RequestMapping("/order/fail")
