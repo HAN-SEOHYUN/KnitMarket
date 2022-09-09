@@ -1,7 +1,6 @@
 .mypage-wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
     height: 700px;
     display: block;
     flex-wrap: wrap;
@@ -27,6 +26,7 @@ div#mypage-row {
     box-shadow: 2px 2px 2px 4px #80808029;
     margin-top: 80px;
     border-radius: 27px;
+    background: white;
 }
 
 .mypage-info-wrapper-div h5 {
@@ -47,15 +47,14 @@ div#mypage-row {
 }
 
 .btn-div {
-    margin-top: 1px;
-    margin-bottom: -5px;
-    text-align: right;
+    margin-top: 23px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .mypage-wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
     height: 700px;
     display: block;
     flex-wrap: wrap;
@@ -78,7 +77,7 @@ div#mypage-row {
     height: auto;
     padding: 27px;
     margin: auto;
-    box-shadow: 2px 2px 2px 4px #80808029;
+    box-shadow: 8px 8px 10px 4px #8080805c;
     margin-top: 80px;
     border-radius: 27px;
 }
@@ -103,22 +102,13 @@ div#mypage-row {
     margin-left: 14px;
 }
 
-.btn-div {
-    margin-top: 1px;
-    margin-bottom: -5px;
-    text-align: right;
-}
-
-.user-address-info > div {
+.user-address-info > div.user-address {
     display: flex;
     justify-content: space-between;
-}
-
-.btn-div {
-    margin-top: 23px;
 }
 
 .member-information {
     display: flex;
     justify-content: space-between;
 }
+
