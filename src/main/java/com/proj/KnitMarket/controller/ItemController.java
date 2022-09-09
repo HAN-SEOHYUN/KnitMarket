@@ -33,6 +33,16 @@ public class ItemController {
     public String item_register_get(Model model,HttpSession httpSession) {
         Long sellerId = (Long)httpSession.getAttribute("id");
         SellerResponseDto sellerResponseDto = sellerService.findById(sellerId);
+
+        if(sellerResponseDto.getStore()==null || sellerResponseDto.getStore().isEmpty()){
+            String url,msg;
+            url = "/knitmarket/mypage";
+            msg ="가게명을 먼저 등록해주세요";
+            model.addAttribute("url",url);
+            model.addAttribute("msg",msg);
+            return "/common/message";
+        }
+
         model.addAttribute("item", new ItemRequestDto());
         model.addAttribute("seller", sellerResponseDto);
         return "item/register";

@@ -19,5 +19,4 @@ function checkFields(){
         return false;
     }
 
-
 }
