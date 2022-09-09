@@ -5,6 +5,7 @@ import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.FileService;
 import com.proj.KnitMarket.Service.ItemService;
 import com.proj.KnitMarket.Service.SellerService;
+import com.proj.KnitMarket.domain.Member.SellerRepository;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +30,11 @@ public class ItemController {
 
     //상품등록_get
     @GetMapping(value = "/register")
-    public String item_register_get(Model model) {
+    public String item_register_get(Model model,HttpSession httpSession) {
+        Long sellerId = (Long)httpSession.getAttribute("id");
+        SellerResponseDto sellerResponseDto = sellerService.findById(sellerId);
         model.addAttribute("item", new ItemRequestDto());
-
+        model.addAttribute("seller", sellerResponseDto);
         return "item/register";
     }
 

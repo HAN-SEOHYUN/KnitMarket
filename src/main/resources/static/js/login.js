@@ -1,7 +1,5 @@
 $(function () {
-
-
-    $('.login-btn a').click(function(){
+    $('#kakaoLoginBtn').click(function(){
         var role = "";
         if ($('#checkbox_user').is(":checked")) {
             role = "user";

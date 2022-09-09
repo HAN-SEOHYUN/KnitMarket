@@ -17,7 +17,7 @@
                 </div>
                 <div class="item-wrapper-body">
                     <div class="item-form-div">
-                        <form th:action th:object="${item}" method="post" enctype="multipart/form-data">
+                        <form th:action th:object="${item}" method="post" enctype="multipart/form-data" onsubmit="checkFields()" id="frm">
                             <div class="product-info">
 
                                 <div class="input-group mb-3">
@@ -29,7 +29,7 @@
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">판매자</span>
-                                    <input type="text" id="seller" th:value="${session.name}" readonly
+                                    <input type="text" id="seller" th:value="${seller.store}" readonly
                                            class="form-control" aria-label="Sizing example input"
                                            aria-describedby="inputGroup-sizing-default">
                                 </div>
@@ -48,7 +48,7 @@
                                 </div>
 
                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">상품 사진</label>
+                                    <label for="formFile" class="form-label">상품사진을 첨부해주세요</label>
                                     <input class="form-control" type="file" id="formFile" th:field="*{file}">
                                 </div>
 
@@ -67,7 +67,6 @@
                             <div th:unless="${#strings.isEmpty(item.itemName)}">
                                 <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
                             </div>
-
                         </form>
                     </div>
 

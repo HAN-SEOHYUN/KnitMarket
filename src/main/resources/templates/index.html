@@ -19,7 +19,7 @@
                         <input type="text" class="search-keyword">&nbsp;
                         <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
                     </div>-->
-                    <div class="info-div" th:if="${session.id eq null}"><span>로그인 후 상품을 구매할 수 있습니다</span></div>
+                    <div class="info-div" th:if="${session.id eq null}"><i class="fa-solid fa-location-arrow"></i><span>&nbsp;로그인 후 상품을 구매할 수 있습니다</span></div>
                 </div>
 
                 <!--상품목록시작-->
@@ -27,14 +27,20 @@
 
                     <th:block th:each="item : ${itemList}">
                         <a th:href="@{'/knitmarket/detail/'+${item.id}}">
-                            <div class="card" style="width: 18rem;">
+                            <div class="card">
+                                <div class="card-img-div">
                                 <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" class="card-img-top"
                                      th:alt="${item.itemName}">
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title" th:text="${item.itemName}"></h5>
-                                    <p class="card-text" th:text="${item.price}"></p>
-                                    <span class="sold_out_span"
-                                          th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">품절</span>
+                                    <div class="card-itemName-div">
+                                        <h5 class="card-title" th:text="${item.itemName}"></h5>
+                                    </div>
+                                    <div class="card-itemInfo-div">
+                                        <p class="card-text" th:text="${#numbers.formatInteger(item.price, 3, 'COMMA') + ' 원'}"></p>
+                                        <span class="sold_out_span"
+                                              th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}"><i class="fa-solid fa-heart-circle-check"></i>&nbsp;품절</span>
+                                    </div>
                                 </div>
                             </div>
                         </a>
