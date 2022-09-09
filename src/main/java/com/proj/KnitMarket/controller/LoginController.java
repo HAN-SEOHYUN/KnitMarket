@@ -33,7 +33,7 @@ import java.util.HashMap;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
+@RequestMapping("/login")
 public class LoginController {
 
     private final KakaoLoginService kakao;

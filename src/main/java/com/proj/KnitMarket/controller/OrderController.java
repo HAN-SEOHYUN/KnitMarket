@@ -55,12 +55,25 @@ public class OrderController {
         });
     }
 
+    //주소정보 없으면 되돌아가기
+
+
     //단일상품주문
     @GetMapping("/order/{itemId}")
     public String order_item_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
         String email = (String) httpSession.getAttribute("email");
         UserResponseDto userResponseDto = userService.findByEmail(email);
         AddressDto addressDto = userService.getAddress(userResponseDto.getId());
+
+        if(addressDto.getId() == null){
+           String url,msg;
+           url = "/knitmarket/mypage";
+           msg = "주소등록 후 이용가능한 서비스입니다";
+           model.addAttribute("url",url);
+           model.addAttribute("msg",msg);
+           return "common/message";
+        }
+
         OrderDto orderDto = orderService.order(itemId, email);
         List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
@@ -75,6 +88,16 @@ public class OrderController {
     public String order_items_post(Model model,HttpSession httpSession){
         Long userId = (Long) httpSession.getAttribute("id");
         AddressDto addressDto = userService.getAddress(userId);
+
+        if(addressDto.getId() == null){
+            String url,msg;
+            url = "/knitmarket/mypage";
+            msg = "주소등록 후 이용가능한 서비스입니다";
+            model.addAttribute("url",url);
+            model.addAttribute("msg",msg);
+            return "common/message";
+        }
+
         OrderDto orderDto = orderService.orders(userId);
         List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
