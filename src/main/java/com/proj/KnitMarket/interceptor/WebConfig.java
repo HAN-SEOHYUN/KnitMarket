@@ -18,7 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoggerInterceptor())
-                .excludePathPatterns("/knitmarket/","/login/**","/css/**", "/img/**", "/plugin/**", "/uploadImg/**","/Source/**");
+                .addPathPatterns("/**")
+                .excludePathPatterns("/login/**","/css/**", "/img/**", "/plugin/**", "/uploadImg/**","/Source/**","/login","/","/item/detail/**");
     }
 
 }

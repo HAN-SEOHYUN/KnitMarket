@@ -22,12 +22,18 @@ public class LoggerInterceptor implements HandlerInterceptor {
             log.info("로그인 필요");
 
             msg ="로그인 후 이용가능한 서비스입니다";
-            url = "location.href = '" + request.getContextPath() + "/knitmarket/login';";
+            url = "location.href = '" + request.getContextPath() + "/login';";
+            log.info("request.getContextPath()={}",request.getContextPath());
             log.info("url={}",url);
+
 
             log.info("현재 위치 : " + request.getRequestURI());
             String requestURI = request.getRequestURI();
-            requestURI = requestURI.substring(requestURI.indexOf("/", 2));
+
+            Cookie cookie = new Cookie("tempURL", requestURI);
+            cookie.setPath("/");
+            cookie.setMaxAge(60*3);	//3분동안
+            response.addCookie(cookie);
 
             response.setContentType("text/html; charset = UTF-8");
             PrintWriter out = response.getWriter();
@@ -35,6 +41,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
             out.print("alert('" + msg + "');");
             out.print(url);
             out.print("</script>");
+            return false;
         }
 
         return true;

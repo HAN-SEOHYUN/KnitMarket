@@ -30,7 +30,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="/knitmarket/"><img src="/img/LOGO.png" alt="로고사진" id="logo"></a>
+                    <a href="/"><img src="/img/LOGO.png" alt="로고사진" id="logo"></a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -40,17 +40,17 @@
                         <li><a href="#">이용방법</a></li>
                         <li><a href="#">사이트소개</a></li>
                         <li th:if="${session.role}=='seller'"> <!-- 세션 role 이 seller 면 '상품등록' 아니라면 '연락처' -->
-                            <a th:href="@{/knitmarket/register}">상품등록</a> <!--타임리프 문자열비교-->
+                            <a th:href="@{/register}">상품등록</a> <!--타임리프 문자열비교-->
                         </li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-3">
                 <div class="login-div">
-                    <a th:href="@{/knitmarket/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
+                    <a th:href="@{/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
                     <th:block th:unless="${session.id eq null}">
                         <label>[[${session.name}]] 님 &nbsp;</label>
-                        <a th:href="@{/knitmarket/logout}" style="text-align: right;">로그아웃</a>
+                        <a th:href="@{/logout}" style="text-align: right;">로그아웃</a>
                     </th:block>
                 </div> <!--<i class="fa fa-solid fa-user"></i>-->
                 <div class="dropdown" th:if="!${session.id eq null}">
@@ -58,12 +58,12 @@
                         <i class="fa fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/knitmarket/mypage}">내정보</a></li>
-                        <li><a class="dropdown-item" th:href="@{/knitmarket/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mypage}">내정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
                         <th:block th:unless="${session.role=='user'}">
-                            <a class="dropdown-item" th:href="@{/knitmarket/myItem/} + ${session.id}">내상품</a>
+                            <a class="dropdown-item" th:href="@{/myItem/} + ${session.id}">내상품</a>
                         </th:block>
-                        <li th:if="${session.role=='user'}"><a class="dropdown-item" th:href="@{/knitmarket/orderList/} + ${session.id}">주문내역</a></li>
+                        <li th:if="${session.role=='user'}"><a class="dropdown-item" th:href="@{/orderList/} + ${session.id}">주문내역</a></li>
                     </ul>
                 </div>
             </div> <!--col-lg-3-->

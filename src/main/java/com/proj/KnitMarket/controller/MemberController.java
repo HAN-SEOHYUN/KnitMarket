@@ -16,13 +16,13 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
+@RequestMapping("/mypage")
 public class MemberController {
 
     private final UserService userService;
     private final SellerService sellerService;
 
-    @GetMapping(value="/mypage")
+    @GetMapping(value="/info")
     public String mypage_get(Model model,HttpSession httpSession){
         String role = (String)httpSession.getAttribute("role");
         Long memberId = (Long)httpSession.getAttribute("id");
@@ -49,7 +49,7 @@ public class MemberController {
         Long addressId = userService.save_address(addressDto,userId);
         log.info("저장된 addressId={}",addressId);
 
-        String url = "/knitmarket/mypage", msg ="주소등록이 완료되었습니다";
+        String url = "/mypage/info", msg ="주소등록이 완료되었습니다";
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
@@ -62,7 +62,7 @@ public class MemberController {
                                       Model model, @PathVariable(name="addressId")Long addressId){
         log.info("수정 예정 addressId={}",addressId);
         userService.updateAddress(addressId,addressDto);
-        String url ="/knitmarket/mypage", msg="주소수정이 완료되었습니다";
+        String url ="/mypage/info", msg="주소수정이 완료되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return"/common/message";
@@ -75,7 +75,7 @@ public class MemberController {
         log.info("sellerId={}",sellerId);
         sellerService.updateStore(sellerId, store);
 
-        String url ="/knitmarket/mypage", msg="가게명이 업데이트 되었습니다";
+        String url ="/mypage/info", msg="가게명이 업데이트 되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";

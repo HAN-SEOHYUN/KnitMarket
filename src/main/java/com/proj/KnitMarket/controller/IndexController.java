@@ -14,7 +14,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
 public class IndexController { //상품목록
 
     private final HttpSession httpSession;
@@ -27,7 +26,6 @@ public class IndexController { //상품목록
         model.addAttribute("itemList",itemDtoList);
         return "index";
     }
-
 }
 
 

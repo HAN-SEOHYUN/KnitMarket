@@ -22,7 +22,7 @@ $(function () {
         }
 
         if(result){
-            location.href = "/knitmarket/cartRemoveList/"+delCheckedList;
+            location.href = "/cart/cartRemoveList/"+delCheckedList;
         }else{
 
         }
@@ -35,7 +35,7 @@ $(function () {
            alert("장바구니가 비어있습니다");
        }else{
            if(confirm("장바구니 상품을 주문하시겠습니까 ?")){
-               location.href="/knitmarket/order/cartItems";
+               location.href="/order/cartItems";
            }
        }
     });

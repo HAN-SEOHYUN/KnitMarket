@@ -30,7 +30,7 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
+@RequestMapping("/order")
 public class OrderController {
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -59,7 +59,7 @@ public class OrderController {
 
 
     //단일상품주문
-    @GetMapping("/order/{itemId}")
+    @GetMapping("/{itemId}")
     public String order_item_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
         String email = (String) httpSession.getAttribute("email");
         UserResponseDto userResponseDto = userService.findByEmail(email);
@@ -67,7 +67,7 @@ public class OrderController {
 
         if(addressDto.getId() == null){
            String url,msg;
-           url = "/knitmarket/mypage";
+           url = "/mypage/info";
            msg = "주소등록 후 이용가능한 서비스입니다";
            model.addAttribute("url",url);
            model.addAttribute("msg",msg);
@@ -84,14 +84,14 @@ public class OrderController {
     }
 
     //장바구니상품주문
-    @GetMapping("/order/cartItems")
+    @GetMapping("/cartItems")
     public String order_items_post(Model model,HttpSession httpSession){
         Long userId = (Long) httpSession.getAttribute("id");
         AddressDto addressDto = userService.getAddress(userId);
 
         if(addressDto.getId() == null){
             String url,msg;
-            url = "/knitmarket/mypage";
+            url = "/mypage/info";
             msg = "주소등록 후 이용가능한 서비스입니다";
             model.addAttribute("url",url);
             model.addAttribute("msg",msg);
@@ -109,7 +109,7 @@ public class OrderController {
 
     //결제
     private final String SECRET_KEY = "test_sk_qLlDJaYngro2Bjq0Y2KVezGdRpXx";
-    @RequestMapping("/order/success")
+    @RequestMapping("/success")
     public String confirmPayment(
             @RequestParam String paymentKey, @RequestParam String orderId, @RequestParam Long amount,
             Model model) throws Exception {

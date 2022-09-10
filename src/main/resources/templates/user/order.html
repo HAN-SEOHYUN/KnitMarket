@@ -14,7 +14,7 @@
                 <!--주소-->
                     <div class = "order-list-address-wrapper">
                      <h5>주소확인</h5><span>주소가 올바른지 확인해주세요</span>
-                        <div class = "order-list-address-update"><a th:href="@{/knitmarket/mypage}"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                        <div class = "order-list-address-update"><a th:href="@{/mypage/info}"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         <div class ="order-address-info-div">
                             <div class="user-address"><label for="address-span">주소</label>
                                 <span id="address-span" class="user-information"
@@ -119,8 +119,8 @@
             orderId: orderId,
             orderName: orderName,
             customerName: customerName,
-            successUrl: window.location.origin + "/knitmarket/order/success",
-            failUrl: window.location.origin + "/knitmarket/order/fail",
+            successUrl: window.location.origin + "/order/success",
+            failUrl: window.location.origin + "/order/fail",
         };
         tossPayments.requestPayment(method, paymentData);
     });

@@ -26,7 +26,7 @@
                 <div class="item-wrapper-body">
 
                     <th:block th:each="item : ${itemList}">
-                        <a th:href="@{'/knitmarket/detail/'+${item.id}}">
+                        <a th:href="@{'/item/detail/'+${item.id}}">
                             <div class="card">
                                 <div class="card-img-div">
                                 <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" class="card-img-top"

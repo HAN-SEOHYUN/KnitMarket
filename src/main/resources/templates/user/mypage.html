@@ -101,12 +101,12 @@
                                                         </button>
                                                         <button type="submit" th:if="${#strings.isEmpty(address.id)}"
                                                                 class="btn btn-primary" id="save_btn"
-                                                                th:formaction="@{/knitmarket/address}">등록
+                                                                th:formaction="@{/mypage/address}">등록
                                                         </button>
                                                         <button type="submit"
                                                                 th:unless="${#strings.isEmpty(address.id)}"
                                                                 class="btn btn-primary" id="update_btn"
-                                                                th:formaction="@{'/knitmarket/address/' + ${address.id} }">
+                                                                th:formaction="@{'/mypage/address/' + ${address.id} }">
                                                             수정
                                                         </button>
                                                     </div>
@@ -171,7 +171,7 @@
                                                                 data-bs-dismiss="modal">닫기
                                                         </button>
                                                         <button type="submit" class="btn btn-primary"
-                                                                th:formaction="@{'/knitmarket/store/'+${member.id}}">등록
+                                                                th:formaction="@{'/mypage/store/'+${member.id}}">등록
                                                         </button>
                                                     </div>
                                                 </form>
