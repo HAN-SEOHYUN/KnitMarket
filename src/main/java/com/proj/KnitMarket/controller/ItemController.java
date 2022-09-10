@@ -19,7 +19,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
+@RequestMapping("/item")
 public class ItemController {
 
     private final ItemService itemService;
@@ -36,7 +36,7 @@ public class ItemController {
 
         if(sellerResponseDto.getStore()==null || sellerResponseDto.getStore().isEmpty()){
             String url,msg;
-            url = "/knitmarket/mypage";
+            url = "/mypage/info";
             msg ="가게명을 먼저 등록해주세요";
             model.addAttribute("url",url);
             model.addAttribute("msg",msg);
@@ -55,7 +55,7 @@ public class ItemController {
         String email = (String) httpSession.getAttribute("email");
         Long itemId = itemService.save(itemDto, email);
 
-        String url = "/knitmarket/", msg ="상품등록이 완료되었습니다";
+        String url = "/", msg ="상품등록이 완료되었습니다";
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
@@ -84,7 +84,7 @@ public class ItemController {
     @PostMapping(value = "/register/{itemId}")
     public String item_update_post(@ModelAttribute("item") ItemRequestDto itemRequestDto,Model model,@PathVariable(name="itemId")Long itemId) throws IOException {
         itemService.updateItem(itemId,itemRequestDto);
-        String url = "/knitmarket/", msg ="수정이 완료되었습니다";
+        String url = "/", msg ="수정이 완료되었습니다";
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
@@ -96,7 +96,7 @@ public class ItemController {
     public String item_delete_get(@PathVariable("itemId") Long id,HttpSession httpSession,Model model){
         Long sellerId = (Long) httpSession.getAttribute("id");
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
-        String url = "/knitmarket/", msg ="삭제가 완료되었습니다";
+        String url = "/", msg ="삭제가 완료되었습니다";
 
         if(sellerId == itemResponseDto.getSeller().getId()) { // 현재 로그인된 계정과 판매자 계정이 일치한다면
             log.info("deleteItem 메서드 실행 !");

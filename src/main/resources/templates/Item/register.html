@@ -62,10 +62,10 @@
                             </div>
 
                             <div th:if="${#strings.isEmpty(item.itemName)}">
-                                <button th:formaction="@{/knitmarket/register}" type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
+                                <button th:formaction="@{/item/register}" type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
                             </div>
                             <div th:unless="${#strings.isEmpty(item.itemName)}">
-                                <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
+                                <button th:formaction="@{'/item/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
                             </div>
                         </form>
                     </div>

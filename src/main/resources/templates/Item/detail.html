@@ -58,12 +58,12 @@
                                         th:if="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL} and (${session.role}=='user')">
                                     <div class="button-wrpper-div">
                                         <div class="btn1-div">
-                                            <button th:formaction="@{'/knitmarket/cartAdd/' + ${item.id} }"
+                                            <button th:formaction="@{'/cart/cartAdd/' + ${item.id} }"
                                                     type="submit" class="btn btn-outline-success"><i class="fa-solid fa-cart-shopping"></i>&nbsp;장바구니
                                             </button>
                                         </div>
                                         <div class="btn2-div">
-                                            <button th:formaction="@{'/knitmarket/order/' + ${item.id} }" type="submit"
+                                            <button th:formaction="@{'/order/' + ${item.id} }" type="submit"
                                                     class="btn btn-outline-danger"><i class="fa-solid fa-square-check"></i>&nbsp;구매하기
                                             </button>
                                         </div>
@@ -77,12 +77,12 @@
                                 <th:block th:if="(${session.role}=='seller') and (${item.seller.id}==${session.id})">
                                     <div class="button-wrpper-div">
                                         <div class="btn1-div">
-                                            <button th:formaction="@{'/knitmarket/register/' + ${item.id} }"
+                                            <button th:formaction="@{'/item/register/' + ${item.id} }"
                                                     type="submit" class="btn btn-outline-dark">수정하기
                                             </button>
                                         </div>
                                         <div class="btn2-div">
-                                            <button th:formaction="@{'/knitmarket/delete/' + ${item.id} }" type="submit"
+                                            <button th:formaction="@{'/item/delete/' + ${item.id} }" type="submit"
                                                     class="btn btn-outline-secondary">삭제하기
                                             </button>
                                         </div>
@@ -99,6 +99,5 @@
 <!--페이지소스 끝-->
 
 <footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
-<script type="text/javascript" th:src="@{/js/detail.js}"></script>
 </body>
 </html>

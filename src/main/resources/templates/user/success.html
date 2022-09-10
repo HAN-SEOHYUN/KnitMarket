@@ -84,7 +84,7 @@
                     <span class="content" th:text = "${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}">5000원</span>
                 </div>
                 <div class="order-success-footer">
-                    <button class="btn btn-dark">주문목록</button>
+                    <button class="btn btn-dark" th:formaction="@{'/order/orderList/' + ${order.user.id} }">주문목록</button>
                 </div>
             </div>
             <!--success 끝-->

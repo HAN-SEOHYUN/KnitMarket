@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
+@RequestMapping("/cart")
 public class CartController {
 /*commit test*/
     private final CartService cartService;
@@ -38,10 +38,10 @@ public class CartController {
     @GetMapping(value ="/cartAdd/{itemId}")
     public String cart_add_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
         Long userId = (Long) httpSession.getAttribute("id");
-        String msg ="장바구니에 추가되었습니다", url ="/knitmarket/";
+        String msg ="장바구니에 추가되었습니다", url ="/";
         if(userId==null){
             msg ="로그인 후 장바구니 이용이 가능합니다";
-            url = "/knitmarket/login";
+            url = "/login";
         }else{
             boolean addSuccess = cartService.save(userId, itemId);
             if(!addSuccess){
@@ -60,7 +60,7 @@ public class CartController {
 
         cartService.cartRemove(cartItemId);
 
-        String url = "/knitmarket/cartlist", msg ="삭제되었습니다";
+        String url = "/cart/cartlist", msg ="삭제되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "/common/message";
@@ -74,7 +74,7 @@ public class CartController {
             cartService.cartRemove(cartItemId);
         }
 
-        String url = "/knitmarket/cartlist", msg ="삭제되었습니다";
+        String url = "/cart/cartlist", msg ="삭제되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return"/common/message";
