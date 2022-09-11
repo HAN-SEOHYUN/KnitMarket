@@ -18,32 +18,37 @@
                         <!--상품Card 시작-->
                         <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper">
                             <a th:href="@{'/item/detail/'+${myItem.id}}">
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img th:src="@{/uploadImg/} + ${myItem.getOrginFileName()}"
-                                             class="img-fluid rounded-start" th:alt="${myItem.itemName}">
-                                        <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title" th:text="${myItem.itemName}"></h5>
-                                            <p class="card-text" th:text="${myItem.price}"></p>
-                                            <p class="card-text"><small class="text-muted"
-                                                                        th:text="${#temporals.format(myItem.regTime,'yyyy-MM-dd')}"></small>
-                                            </p>
-                                            <span class="sold_out_span"
-                                                  th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">품절</span>
+                                <div class="card mb-3">
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img th:src="@{/uploadImg/} + ${myItem.getOrginFileName()}"
+                                                 class="img-fluid rounded-start" th:alt="${myItem.itemName}">
+                                            <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${myItem.itemName}"></h5>
+                                                <div class="card-info">
+                                                    <label for="price">가격</label>
+                                                    <span class="card-text"
+                                                          th:text="${#numbers.formatInteger(myItem.price, 3, 'COMMA') + ' 원'}"
+                                                          id="price"></span>
+                                                </div>
+                                                <div class="card-info">
+                                                    <label for="regdate">판매일</label>
+                                                    <span class="card-text"><small class="text-muted"
+                                                                                   th:text="${#temporals.format(myItem.regTime,'yyyy-MM-dd')}"
+                                                                                   id="regdate"></small></span>
+                                                </div>
+                                                <span class="sold_out_span"
+                                                      th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}"><i
+                                                        class="fa-solid fa-heart-circle-check"></i>판매완료</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="옆에 추가할 것">
 
                             </a>
-                            </div>
-
                         </th:block>
                         <!--card 끝-->
                     </div>

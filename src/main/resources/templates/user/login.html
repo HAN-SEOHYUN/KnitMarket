@@ -8,58 +8,38 @@
 <link rel="stylesheet" href="/css/user/login.css" type="text/css">
 <script type="text/javascript" th:src="@{/js/login.js}"></script>
 
-
 <section class="hero">
     <div class="container">
         <div class="row">
             <div class="login-wrapper-div">
-
-
                 <div class="login-div-1">
-
                     <div class="login-div-2">
-
                         <div class="user-type-div">
-
                             <div class="form-check" id="type-buyer-div">
-                                <input class="form-check-input" type="checkbox" value="" id="checkbox_user" checked name="checkbox_role" onclick="checkOnlyOne(this)">
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox_user" checked
+                                       name="checkbox_role" onclick="checkOnlyOne(this)">
                                 <label class="form-check-label" for="checkbox_user">
                                     일반회원
                                 </label>
                             </div>
                             <div class="form-check" id="type-seller-div">
-                                <input class="form-check-input" type="checkbox" value="" id="checkbox_seller" name="checkbox_role" onclick="checkOnlyOne(this)">
+                                <input class="form-check-input" type="checkbox" value="" id="checkbox_seller"
+                                       name="checkbox_role" onclick="checkOnlyOne(this)">
                                 <label class="form-check-label" for="checkbox_seller">
                                     판매자
                                 </label>
                             </div>
-
-
                         </div>
-
 
                         <div class="kakaoLogin-div">
-
-                            <div class ="social-img">
+                            <div class="social-img">
                                 <img src="/img/KAKAOLOGO3.png" alt="카카오로고">
                             </div>
-                            <div id="btn-kakao" class="login-btn"><a href ="#" id="kakaoLoginBtn">카카오 로그인</a></div>
+                            <div id="btn-kakao" class="login-btn"><a href="#" id="kakaoLoginBtn">카카오 로그인</a></div>
 
                         </div>
-
-                      <!--  <div class="naverLogin-div">
-                            <div class ="social-img">
-                                <img src="/img/btnG_아이콘사각.png" alt="네이버로고" >
-                            </div>
-                            <div id="btn-naver" class="login-btn"><a href="#" style="color: white" id="naverLoginBtn">네이버 로그인</a></div>
-                        </div>-->
-
-
                     </div>
-
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -67,7 +47,5 @@
 
 <!--페이지소스 끝-->
 <footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
-
-
 </body>
 </html>

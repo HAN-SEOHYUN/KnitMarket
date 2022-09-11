@@ -12,8 +12,6 @@ $(function () {
         "&response_type=code";
         location.href = kakaoUrl;
     });//한개만 선택되게하기
-
-
 });
 
 function checkOnlyOne(element) {

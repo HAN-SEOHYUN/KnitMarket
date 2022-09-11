@@ -36,11 +36,11 @@
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="#">Home</a></li>
+                        <li class="active"><a th:href="@{/}">Home</a></li>
                         <li><a href="#">이용방법</a></li>
                         <li><a href="#">사이트소개</a></li>
                         <li th:if="${session.role}=='seller'"> <!-- 세션 role 이 seller 면 '상품등록' 아니라면 '연락처' -->
-                            <a th:href="@{/register}">상품등록</a> <!--타임리프 문자열비교-->
+                            <a th:href="@{/item/register}">상품등록</a> <!--타임리프 문자열비교-->
                         </li>
                     </ul>
                 </nav>
@@ -58,12 +58,12 @@
                         <i class="fa fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/mypage}">내정보</a></li>
-                        <li><a class="dropdown-item" th:href="@{/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mypage/info}">내정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/cart/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
                         <th:block th:unless="${session.role=='user'}">
-                            <a class="dropdown-item" th:href="@{/myItem/} + ${session.id}">내상품</a>
+                            <a class="dropdown-item" th:href="@{/mypage/myItem/} + ${session.id}">내상품</a>
                         </th:block>
-                        <li th:if="${session.role=='user'}"><a class="dropdown-item" th:href="@{/orderList/} + ${session.id}">주문내역</a></li>
+                        <li th:if="${session.role=='user'}"><a class="dropdown-item" th:href="@{/mypage/orderList/} + ${session.id}">주문내역</a></li>
                     </ul>
                 </div>
             </div> <!--col-lg-3-->
