@@ -55,6 +55,7 @@ input.search-keyword {
     border-radius: 10px;
     text-align: center;
     min-width: 120px;
+    box-shadow: 5px 5px 5px 1px lightgrey;
 }
 
 .dropdown {
