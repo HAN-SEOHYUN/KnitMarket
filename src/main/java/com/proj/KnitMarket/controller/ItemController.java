@@ -76,7 +76,9 @@ public class ItemController {
     public String item_update_get(Model model, @PathVariable(name = "itemId") Long itemId) {
         log.info("itemId ={}",itemId);
         ItemRequestDto itemRequestDto = itemService.getUpdateItem(itemId);
+        SellerResponseDto sellerResponseDto = sellerService.findById(itemRequestDto.getSeller().getId());
         model.addAttribute("item", itemRequestDto);
+        model.addAttribute("seller", sellerResponseDto);
         return "item/register";
     }
 

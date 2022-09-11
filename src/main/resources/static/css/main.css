@@ -140,8 +140,9 @@ img.card-img-top {
 }
 
 h5.card-title {
-    font-family: 'IBM Plex Sans KR';
-    font-size: 16px;
+    font-family: 'IBM Plex Sans KR',sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .card-itemName-div {

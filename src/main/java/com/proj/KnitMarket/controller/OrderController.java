@@ -154,6 +154,34 @@ public class OrderController {
         }
     }
 
+    //주문내역 상세
+    @GetMapping("/orderDetail/{orderId}")
+    public String order_detail_get(@PathVariable ("orderId") Long orderId, Model model){
+        Order order = orderRepository.findOrderById(orderId);
+
+        OrderDto orderDto = OrderDto.builder()
+                .id(order.getId())
+                .user(order.getUser())
+                .orderItems(order.getOrderItems())
+                .orderStatus(order.getOrderStatus())
+                .totalPrice(order.getTotalPrice())
+                .regTime(order.getRegTime())
+                .build();
+
+        AddressDto addressDto = userService.getAddress(orderDto.getUser().getId());
+        List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
+
+        model.addAttribute("orderList",orderItemDtoList);
+        model.addAttribute("address",addressDto);
+        model.addAttribute("order",orderDto);
+
+        return "user/success";
+    }
+
+
+
+
+
 
     /* orderId 로 주문 상세 */
 

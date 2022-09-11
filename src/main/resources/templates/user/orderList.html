@@ -27,7 +27,7 @@
                             <td th:text="${orderDto.orderName}"></td>
                             <td th:text="${#numbers.formatInteger(orderDto.totalPrice, 3, 'COMMA') + ' 원'}"></td>
                             <td th:text="${#temporals.format(orderDto.regTime,'yyyy-MM-dd')}"></td>
-                            <td><div><button class="btn btn-dark" >주문상세</button></div></td>
+                            <td><div><button type="button" class="btn btn-light" th:onclick="|location.href='@{/order/orderDetail/} + ${orderDto.id}'|">주문상세</button></div></td>
                         </tr>
                     </table>
                 </div>
