@@ -1,0 +1,75 @@
+.img-div {
+    width: 200px;
+}
+.guide-title {
+    display: flex;
+}
+
+.guide-title > div:nth-child(1) {
+}
+
+.guide-title h5 {
+    font-size: 38px;
+    font-family: 'Gowun Dodum',sans-serif;
+    font-weight: bold;
+    padding-top: 25px;
+    padding-left: 13px;
+}
+
+.step-div {
+    margin-top: 40px;
+    margin-bottom: 59px;
+}
+
+.step-title span {
+    display: inline-block;
+    font-size: 33px;
+    font-family: 'Nanum Gothic',sans-serif;
+    font-weight: bold;
+}
+
+.kakaoImg-div {
+    width: 314px;
+    display: inline-block;
+}
+
+.step-title {
+    margin-bottom: 42px;
+}
+
+span.desc-span {
+    font-size: 21px;
+    font-family: Nanum Gothic,sans-serif;
+    font-weight: bold;
+}
+
+img#myBtn {
+    width: 56px;
+}
+
+img#channelTalk-icon {
+    width: 68px;
+}
+
+.i-div {
+    width: 104px;
+    height: auto;
+    background: #f8f8f8;
+    text-align: center;
+    border-radius: 29px;
+    display: inline-block;
+    padding: 13px 11px 14px 10px;
+    box-shadow: 5px 5px 5px 1px lightgrey;
+    margin-right: 11px;
+}
+
+i.fa-solid.fa-check-to-slot {
+    font-size: 58px;
+}
+
+.i-div i {
+    font-size: 64px;
+    color: #68082c;
+}
+
+.step-title span {text-shadow: 1px 2px 4px gray;}
