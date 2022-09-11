@@ -37,8 +37,8 @@
                 <nav class="header__menu">
                     <ul>
                         <li class="active"><a th:href="@{/}">Home</a></li>
-                        <li><a href="#">이용방법</a></li>
                         <li><a href="#">사이트소개</a></li>
+                        <li><a th:href="@{/introduction}">이용방법</a></li>
                         <li th:if="${session.role}=='seller'"> <!-- 세션 role 이 seller 면 '상품등록' 아니라면 '연락처' -->
                             <a th:href="@{/item/register}">상품등록</a> <!--타임리프 문자열비교-->
                         </li>
@@ -49,8 +49,8 @@
                 <div class="login-div">
                     <a th:href="@{/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
                     <th:block th:unless="${session.id eq null}">
-                        <label>[[${session.name}]] 님 &nbsp;</label>
-                        <a th:href="@{/logout}" style="text-align: right;">로그아웃</a>
+                        <label>[[${session.name}]] 님</label>
+                        <a th:href="@{/logout}" style="text-align: right;"><br>로그아웃</a>
                     </th:block>
                 </div> <!--<i class="fa fa-solid fa-user"></i>-->
                 <div class="dropdown" th:if="!${session.id eq null}">

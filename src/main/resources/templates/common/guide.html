@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="/fragments/top.html :: fragment-header"></header>
+<!--페이지소스 시작-->
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <!--가이드 시작-->
+            <div class = "guide-wrapper">
+                <div class ="guide-header">
+                    <div class="guide-title">
+                        <img src="/img/LOGO.png" alt="로고사진" id="logo">
+                        <h5>이용방법</h5>
+                    </div>
+                </div>
+                <div class ="guide-body">
+                    <div class ="step-div">
+                        <div class ="step1">
+                            <div class="step-title">
+                                <h4>STEP 1.</h4><span>회원가입</span>
+                            </div>
+                            <div class="step-desc">
+                                <img src="/img/KAKAOLOGO2.png" alt="카카오로고"><span class="desc-span">버튼을 누르면&nbsp;</span><span
+                                    class="desc-span" id="step1-yellow-mark">정보 입력 없이</span><span class="desc-span">&nbsp;간편하게 회원가입 및 로그인이 가능합니다</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class ="step-div">
+                        <div class ="step2">
+                            <div class="step-title">
+                                <h4>STEP 2.</h4><span>주소등록</span>
+                            </div>
+                            <div class="step-desc">
+                                <span class="desc-span">로그인 후</span><img src="/img/MyBtn.png" alt="내정보버튼"><span class="desc-span">&nbsp;>&nbsp;내정보&nbsp;>&nbsp;주소등록 에서</span><span
+                                    class="desc-span" id="step2-mark">주소등록 및 수정이 가능합니다</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class ="step-div">
+                        <div class ="step3">
+                            <div class="step-title">
+                                <h4>STEP 3.</h4><span>상품구매</span>
+                            </div>
+                            <div class="step-desc">
+                                <span class="desc-span">주소등록을 완료하시면 상품구매가 가능합니다 상품은 주문일 기준 3~4일 이내에 발송됩니다</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class ="step-div">
+                        <div class ="step4">
+                            <div class="step-title">
+                                <h4>STEP 1.</h4><span>회원가입</span>
+                            </div>
+                            <div class="step-desc">
+                                <span class="desc-span">우측하단의&nbsp;</span><img src="/img/채널톡아이콘.png" alt="채널톡아이콘"><span class="desc-span">&nbsp;를 클릭하여 문의를 남겨주세요</span>
+                                <span class="desc-span">남겨주신 문의는 1시간 이내에 장터쥔장이 직접 답변드리고 있습니다<i class="fa-solid fa-face-laugh-beam"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!--가이드 끝-->
+        </div>
+    </div>
+</section>
+<!--페이지소스 끝-->
+
+<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+</body>
+</html>

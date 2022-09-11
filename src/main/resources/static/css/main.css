@@ -50,10 +50,11 @@ input.search-keyword {
 }
 
 .login-div {
-    padding: 10px;
+    padding: 3px 22px 3px 22px;
     background: #f5f0f0;
     border-radius: 10px;
-    margin: auto;
+    text-align: center;
+    min-width: 120px;
 }
 
 .dropdown {
@@ -151,4 +152,8 @@ h5.card-title {
 
 textarea {
     resize: none;
+}
+
+nav.header__menu ul {
+    min-width: 400px;
 }
