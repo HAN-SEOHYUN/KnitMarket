@@ -1,3 +1,4 @@
+/*
 package com.proj.KnitMarket.Service;
 
 import com.proj.KnitMarket.Constant.OrderStatus;
@@ -24,11 +25,13 @@ class OrderServiceTest {
     @Autowired
     private OrderRepository orderRepository;
 
-    /*@BeforeEach
+    */
+/*@BeforeEach
     void clean(){
         orderItemRepository.deleteAll();
         orderRepository.deleteAll();
-    }*/
+    }*//*
+
 
     @Test
     @DisplayName("단일주문정보입력")
@@ -74,4 +77,4 @@ class OrderServiceTest {
 
 
 
-}
+}*/
