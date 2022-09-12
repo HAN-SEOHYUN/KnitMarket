@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
-//action test
+//action test2
 @Slf4j
 @RequiredArgsConstructor
 @Controller
