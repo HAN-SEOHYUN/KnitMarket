@@ -1,0 +1,82 @@
+.order-success-wrapper {
+    flex: 0 0 100%;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    height:
+            auto;
+}
+
+.order-success-wrapper > div {
+    width: 54%;
+    margin: auto;
+}
+
+.order-success-wrapper > hr {
+    width: 54%;
+    margin: auto;
+}
+
+.user-info-div {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+span.name-span {
+    font-weight: bold;
+    color: #970f42;
+}
+
+span.desc-span2 {
+    color: #8f8787;
+}
+
+.order-success-wrapper > div {margin-top: 29px;margin-bottom: 29px;}
+
+.label {font-size: 22px;margin-bottom: 8px;font-weight: bold;}
+
+.content {margin-right: 14px;display: inline;font-size: 18px;}
+
+
+h3.label {
+    display: inline;
+}
+
+.order-success-orderId {
+    display: flex;
+    justify-content: space-between;
+}
+
+.address-div2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-success-payments > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order-success-totalPirce {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.mb-3 {
+    width: 80%;
+}
+
+button.btn.btn-dark {
+    width: 100%;
+}
+
+.address-div1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-body > div {display: flex;justify-content: space-between;margin-bottom: 11px;}
+
+.card-body {
+    margin-top: 15px;
+}
