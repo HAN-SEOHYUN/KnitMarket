@@ -11,8 +11,8 @@
         <div class="row">
             <!--주문목록 시작-->
             <div class="orderList-wrapper">
-                <div><h5 th:text="${session.name}"></h5><span>&nbsp;님 의 결제내역입니다</span></div>
-
+                <th:block th:if="${orderList.size() != 0}">
+                <div class ="order-List-title"><h5 th:text="${session.name}"></h5><span>&nbsp;님 의 결제내역입니다</span></div>
                 <div class="orderList-table-wrapper">
                     <table class="orderList-table">
                         <tr>
@@ -31,6 +31,15 @@
                         </tr>
                     </table>
                 </div>
+                </th:block>
+                <th:block th:unless="${orderList.size() != 0}">
+                    <div class ="empty-div">
+                        <h5>휑</h5>
+                    </div>
+                    <div class ="empty-p-div">
+                        <p>주문내역이 없습니다</p>
+                    </div>
+                </th:block>
             </div>
             <!--주문목록 끝-->
         </div>
