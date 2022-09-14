@@ -32,6 +32,11 @@ public class IndexController { //상품목록
 
         return "common/guide";
     }
+
+    @GetMapping("/guide")
+    public String guide(){
+        return "common/guide";
+    }
 }
 
 
