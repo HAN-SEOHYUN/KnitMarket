@@ -15,10 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 /*
@@ -170,4 +172,32 @@ public class LoginController {
 
         return "/common/message";
     }
+
+    //세션끊기
+    @GetMapping("/withdraw")
+    public String userdeleteSocial_post(HttpSession session, HttpServletResponse response,
+                                        Model model) {
+        Long no=(Long)session.getAttribute("no");
+
+        String access_Token = (String)session.getAttribute("access_Token");
+        log.info("access_Token={}",access_Token);
+
+        String msg="",url="";
+        int cnt =0;
+
+            if(access_Token!=null) {
+                kakao.unlink(access_Token);
+                log.info("카카오 세션 끊김");
+                msg ="카카오 세션끊기 OK.";
+                url ="/";
+
+                session.invalidate();
+            }
+
+        model.addAttribute("msg", msg);
+        model.addAttribute("url", url);
+
+        return "/common/message";
+    }
+
 }

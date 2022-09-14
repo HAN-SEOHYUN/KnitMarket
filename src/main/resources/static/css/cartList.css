@@ -90,4 +90,29 @@ span.sold_out_span {
     justify-content: space-between;
 }
 
+.empty-div > h5 {
+    font-size: 112px;
+    font-family: jua, sans-serif;
+    text-shadow: 2px 1px 3px;
+    color: #6a3f3f;
+    margin-top: 35px;
+    margin-right: 6px;
+}
+
+.empty-div {
+    background: #f6f6f6;
+    width: 272px;
+    margin: auto;
+    padding: 31px;
+    border-radius: 131px;
+    box-shadow: 2px 2px 11px 2px grey;
+    height: 245px;
+}
+
+.empty-p-div > p {
+    margin-top: 45px;
+    font-size: 20px;
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
+}
 
