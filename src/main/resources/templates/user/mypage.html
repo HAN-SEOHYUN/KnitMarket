@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/top.html :: fragment-head"></head>
+<head th:replace="fragments/top.html :: fragment-head"></head>
 <body>
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/mypage.css" type="text/css">
 <section class="hero">
@@ -189,7 +189,7 @@
     </div>
 </section>
 
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" th:src="@{/js/mypage.js}"></script>
 </body>
