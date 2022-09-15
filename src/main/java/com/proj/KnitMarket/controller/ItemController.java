@@ -40,7 +40,7 @@ public class ItemController {
             msg ="가게명을 먼저 등록해주세요";
             model.addAttribute("url",url);
             model.addAttribute("msg",msg);
-            return "/common/message";
+            return "common/message";
         }
 
         model.addAttribute("item", new ItemRequestDto());
@@ -59,7 +59,7 @@ public class ItemController {
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
 
     //상품상세_get
@@ -90,7 +90,7 @@ public class ItemController {
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
 
     //상품삭제_get
@@ -109,9 +109,7 @@ public class ItemController {
         log.info("삭제여부={}",itemResponseDto.isDeleted());
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
-
-
 
 }
