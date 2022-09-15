@@ -21,13 +21,26 @@
     height: auto;
 }
 
-.card.mb-3 {width: 80%;height: auto;}
+.card.mb-3 {width: 80%;
+    height: 200px;}
 
 img.img-fluid.rounded-start {
-    object-fit: contain;
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
 }
 
-.col-md-4 {width: 200px;height: 200px;}
+.col-md-4 {
+    /*width: 200px;
+    height: 200px;
+    overflow: hidden;*/
+
+    display: inline-block;
+    width: 198px;
+    overflow: hidden;
+}
 
 .cart-list-card-wrapper {
     min-height: 465px;
@@ -114,5 +127,9 @@ span.sold_out_span {
     font-size: 20px;
     font-family: 'Nanum Gothic';
     font-weight: bold;
+}
+
+.myItem-card-wrapper {
+    text-align: center;
 }
 

@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.Service;
 
+import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Member.Address;
@@ -95,7 +96,7 @@ public class UserService {
     //각 주문의 상품개수를 조회하여 orderName을 만들어 orderDto 로 리턴해주는 메서드
     @Transactional
     public List<OrderDto> selectOrderList(Long userId){
-        List<Order> orderList = orderRepository.findOrdersByUser_Id(userId);
+        List<Order> orderList = orderRepository.findOrdersByUser_IdAndOrderStatus(userId, OrderStatus.ORDER);
         List <OrderDto> orderDtoList = new ArrayList<>();
 
         int itemQty = 0;
