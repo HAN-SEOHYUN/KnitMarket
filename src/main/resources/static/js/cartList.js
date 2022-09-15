@@ -39,4 +39,10 @@ $(function () {
            }
        }
     });
+
+    //주문하러가기 버튼 클릭 시
+    $(document).on('click', '#indexBtn', function () {
+        location.href="/";
+    });
+
 });

@@ -2,6 +2,7 @@
     max-width: 100%;
     position: relative;
     height:auto;
+    min-height: 630px;
 }
 
 table {
