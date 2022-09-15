@@ -53,7 +53,7 @@ public class MemberController {
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
 
     //주소수정
@@ -65,7 +65,7 @@ public class MemberController {
         String url ="/mypage/info", msg="주소수정이 완료되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return"/common/message";
+        return"common/message";
     }
 
     //가게명 수정
@@ -78,7 +78,7 @@ public class MemberController {
         String url ="/mypage/info", msg="가게명이 업데이트 되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
 
     //사용자 주문목록

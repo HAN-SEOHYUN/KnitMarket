@@ -96,7 +96,7 @@ public class LoginController {
         model.addAttribute("url","/");
         model.addAttribute("msg","로그인 되었습니다");
 
-        return "/common/message";
+        return "common/message";
     }
 
     @RequestMapping(value = "/kakaoLogin/requestToken_user") // 일반회원로그인
@@ -152,7 +152,7 @@ public class LoginController {
         model.addAttribute("url","/");
         model.addAttribute("msg","로그인되었습니다");
 
-        return "/common/message";
+        return "common/message";
     }
 
     //로그아웃
@@ -170,7 +170,7 @@ public class LoginController {
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
 
-        return "/common/message";
+        return "common/message";
     }
 
     //세션끊기
@@ -197,7 +197,7 @@ public class LoginController {
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);
 
-        return "/common/message";
+        return "common/message";
     }
 
 }

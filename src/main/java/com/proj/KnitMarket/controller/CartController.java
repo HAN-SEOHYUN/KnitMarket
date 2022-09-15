@@ -50,7 +50,7 @@ public class CartController {
         }
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
 
     //장바구니 삭제 (한개)
@@ -63,7 +63,7 @@ public class CartController {
         String url = "/cart/cartlist", msg ="삭제되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return "/common/message";
+        return "common/message";
     }
 
     //장바구니 삭제 (여러개)
@@ -77,7 +77,7 @@ public class CartController {
         String url = "/cart/cartlist", msg ="삭제되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
-        return"/common/message";
+        return"common/message";
     }
 
 
