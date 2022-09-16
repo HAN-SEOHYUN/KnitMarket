@@ -33,7 +33,6 @@ public class ItemController {
     public String item_register_get(Model model,HttpSession httpSession) {
         Long sellerId = (Long)httpSession.getAttribute("id");
         SellerResponseDto sellerResponseDto = sellerService.findById(sellerId);
-
         if(sellerResponseDto.getStore()==null || sellerResponseDto.getStore().isEmpty()){
             String url,msg;
             url = "/mypage/info";
@@ -45,7 +44,7 @@ public class ItemController {
 
         model.addAttribute("item", new ItemRequestDto());
         model.addAttribute("seller", sellerResponseDto);
-        return "item/register";
+        return "Item/register";
     }
 
     //상품등록_post
@@ -68,7 +67,7 @@ public class ItemController {
     public String item_detail_get(Model model, @PathVariable("id") Long id) {
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
         model.addAttribute("item", itemResponseDto);
-        return "item/detail";
+        return "Item/detail";
     }
 
     //상품수정_get
@@ -79,7 +78,7 @@ public class ItemController {
         SellerResponseDto sellerResponseDto = sellerService.findById(itemRequestDto.getSeller().getId());
         model.addAttribute("item", itemRequestDto);
         model.addAttribute("seller", sellerResponseDto);
-        return "item/register";
+        return "Item/register";
     }
 
     //상품수정_post
