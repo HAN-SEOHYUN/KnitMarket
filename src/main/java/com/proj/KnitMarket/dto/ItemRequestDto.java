@@ -5,11 +5,10 @@ import com.proj.KnitMarket.domain.Item.FileEntity;
 import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Member.Seller;
 import lombok.*;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class ItemRequestDto {
 
