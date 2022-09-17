@@ -10,13 +10,13 @@
     <div class="container">
         <div class="row">
             <!--장바구니목록 시작-->
-            <div class="cart-list-wrapper-div">
+            <div class="cart-list-wrapper-div" style="min-height: 650px;">
                 <div class="cart-list-wrapper-top">
                 </div>
                 <div class="cart-list-wrapper-body">
                     <div class="myItem-card-wrapper">
                         <!--상품Card 시작-->
-                        <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper">
+                        <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper" th:if="${myItemList.size() != 0}">
                             <a th:href="@{'/item/detail/'+${myItem.id}}">
                                 <div class="card mb-3">
                                     <div class="row g-0">
@@ -49,6 +49,14 @@
                                 </div>
 
                             </a>
+                        </th:block>
+                        <th:block th:unless="${myItemList.size() != 0}">
+                            <div class ="empty-div">
+                                <h5>휑</h5>
+                            </div>
+                            <div class ="empty-p-div">
+                                <p>등록하신 상품이 없습니다</p>
+                            </div>
                         </th:block>
                         <!--card 끝-->
                     </div>

@@ -18,8 +18,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LoggerInterceptor())
-                //.addPathPatterns("/**")
-                .excludePathPatterns("/**");
+                .addPathPatterns("/cart/**")
+                .addPathPatterns("/item/**")
+                .addPathPatterns("/mypage/**")
+                .addPathPatterns("/order/**")
+                .excludePathPatterns("/item/detail/**");
         //https://kauth.kakao.com/**","/kakaoLogin/**","/css/**", "/img/**", "/plugin/**", "/uploadImg/**","/Source/**","/login","/","/js/**","/item/detail/**
     }
 }
