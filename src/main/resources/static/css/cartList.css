@@ -4,6 +4,7 @@
     position: relative;
     overflow: hidden;
     height:auto;
+    min-height: 650px;
 }
 
 .cart-list-wrapper-top {

@@ -69,11 +69,19 @@
                                         </div>
                                     </div>
                                 </th:block>
+                                <!--품절-->
                                 <div th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
                                     <div class ="sold-out-div">
                                     <h5>품절된 상품입니다</h5>
                                     </div>
                                 </div>
+                                <!--비로그인-->
+                                <th:block th:if="${session.role eq null}">
+                                    <div class ="sold-out-div">
+                                        <h5>로그인 후 상품구매가 가능합니다</h5>
+                                    </div>
+                                </th:block>
+
                                 <th:block th:if="(${session.role}=='seller') and (${item.seller.id}==${session.id})">
                                     <div class="button-wrpper-div">
                                         <div class="btn1-div">

@@ -82,7 +82,7 @@ public class MemberController {
     }
 
     //사용자 주문목록
-    @GetMapping("orderList/{userId}")
+    @GetMapping("/orderList/{userId}")
     public String orderList_get(@PathVariable("userId")Long userId,Model model){
         List<OrderDto> orderDtoList = userService.selectOrderList(userId);
         model.addAttribute("orderList",orderDtoList);
