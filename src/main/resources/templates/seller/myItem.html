@@ -21,9 +21,9 @@
                                 <div class="card mb-3">
                                     <div class="row g-0">
                                         <div class="col-md-4">
-                                            <img th:src="@{/uploadImg/} + ${myItem.getOrginFileName()}"
+                                            <img th:src="${#httpServletRequest.getContextPath()} + '/static/uploadImg/' + ${myItem.getOrginFileName()}"
                                                  class="img-fluid rounded-start" th:alt="${myItem.itemName}">
-                                            <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
+                                            <!--th:src="${#httpServletRequest.getContextPath()} + '/static/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
                                         </div>
                                         <div class="col-md-8">
                                             <div class="card-body">
