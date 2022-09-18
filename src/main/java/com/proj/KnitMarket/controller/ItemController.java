@@ -12,6 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
@@ -26,7 +30,7 @@ public class ItemController {
     private final FileService fileService;
     private final SellerService sellerService;
 
-    public String uploadDir = ConstUtil.UPLOAD_IMG_PATH_TEST; //이미지 저장할 폴더
+    public String uploadDir = ConstUtil.UPLOAD_IMG_PATH; //이미지 저장할 폴더
 
     //상품등록_get
     @GetMapping(value = "/register")
@@ -49,10 +53,14 @@ public class ItemController {
 
     //상품등록_post
     @PostMapping(value = "/register")
-    public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model) throws IOException {
+    public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model, MultipartHttpServletRequest request) throws IOException {
         log.info("상품등록컨트롤러");
         String email = (String) httpSession.getAttribute("email");
-        Long itemId = itemService.save(itemDto, email);
+
+        String path = request.getSession().getServletContext().getRealPath("/");
+        log.info("1차 path={}",path);
+
+        Long itemId = itemService.save(itemDto, email,path);
 
         String url = "/", msg ="상품등록이 완료되었습니다";
 

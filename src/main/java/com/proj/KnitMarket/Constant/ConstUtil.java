@@ -1,7 +1,10 @@
 package com.proj.KnitMarket.Constant;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 public interface ConstUtil {
-    String UPLOAD_IMG_PATH="uploadImg";
-    String UPLOAD_IMG_PATH_TEST
-            ="C:\\Users\\user\\Desktop\\proj\\Knitmarket\\src\\main\\resources\\static\\uploadImg\\";
+    String UPLOAD_IMG_PATH="static\\uploadImg\\";
+
+
 }
