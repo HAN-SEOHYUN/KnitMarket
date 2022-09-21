@@ -45,7 +45,7 @@ public class ItemService {
         if (itemDto.getFile() != null) {
 
             MultipartFile file = itemDto.getFile();
-            String filePath =path+ uploadDir + file.getOriginalFilename();
+            String filePath = path+ file.getOriginalFilename();
             log.info("2차 path ={}",filePath);
 
             file.transferTo(new File(filePath));
