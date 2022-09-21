@@ -4,7 +4,10 @@ package com.proj.KnitMarket.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
@@ -17,40 +20,54 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 
 import lombok.RequiredArgsConstructor;
 
+@Slf4j
+@Component
 @Service
 @RequiredArgsConstructor
 public class AmazonS3Service {
 
-    private final AmazonS3 amazonS3;
+    private final AmazonS3Client amazonS3Client;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
+    public String upload(MultipartFile multipartFile, String dirName) throws IOException {
+        File uploadFile = convert(multipartFile)
+                .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
 
-    public String searchIcon() {
-        String fileName = "static/img/searchicon.png";
-        return amazonS3.getUrl(bucket, fileName).toString();
+        return upload(uploadFile, dirName);
     }
 
-
-    public String uploadImg(String bucket, String fileName, MultipartFile multiFile) throws IOException {
-        File uploadFile = convert(multiFile);
-        amazonS3.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
-        return "uploadS3 success";
+    private String upload(File uploadFile, String dirName) {
+        String fileName = dirName + "/" + uploadFile.getName();
+        String uploadImageUrl = putS3(uploadFile, fileName);
+        removeNewFile(uploadFile);
+        return uploadImageUrl;
     }
 
-
-    public File convert(MultipartFile multiFile) throws IOException {
-        File uploadFile = new File(multiFile.getOriginalFilename());
-        FileOutputStream fos = new FileOutputStream(uploadFile);
-        fos.write(multiFile.getBytes());
-        fos.close();
-        return uploadFile;
+    private String putS3(File uploadFile, String fileName) {
+        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile).withCannedAcl(CannedAccessControlList.PublicRead));
+        return amazonS3Client.getUrl(bucket, fileName).toString();
     }
 
+    private void removeNewFile(File targetFile) {
+        if (targetFile.delete()) {
+            log.info("파일이 삭제되었습니다.");
+        } else {
+            log.info("파일이 삭제되지 못했습니다.");
+        }
+    }
 
-    public void deleteFile(String bucket, String deleteFile) {
-        amazonS3.deleteObject(new DeleteObjectRequest(bucket, deleteFile));
+    private Optional<File> convert(MultipartFile file) throws IOException {
+        File convertFile = new File(file.getOriginalFilename());
+        if(convertFile.createNewFile()) {
+            try (FileOutputStream fos = new FileOutputStream(convertFile)) {
+                fos.write(file.getBytes());
+            }
+            return Optional.of(convertFile);
+        }
+
+        return Optional.empty();
     }
 
 }
