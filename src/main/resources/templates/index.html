@@ -31,7 +31,7 @@
                                 <div class="card-img-div">
                         <!--            C:\Users\user\Desktop\proj\Knitmarket\src\main\webapp\static\uploadImg-->
          <!--                           src="${pageContext.request.contextPath}/images/test9.png-->
-                                <img th:src="${#httpServletRequest.getContextPath()} + '/static/uploadImg/'+ ${item.getOrginFileName()}" class="card-img-top"
+                                <img th:src="'http://knitmarket.shop/uploadImg/'+ ${item.getOrginFileName()}" class="card-img-top"
                                      th:alt="${item.itemName}">
                                 </div>
                                 <div class="card-body">
