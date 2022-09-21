@@ -1,10 +1,7 @@
 package com.proj.KnitMarket.controller;
 
 import com.proj.KnitMarket.Constant.ConstUtil;
-import com.proj.KnitMarket.Service.CartService;
-import com.proj.KnitMarket.Service.FileService;
-import com.proj.KnitMarket.Service.ItemService;
-import com.proj.KnitMarket.Service.SellerService;
+import com.proj.KnitMarket.Service.*;
 import com.proj.KnitMarket.domain.Member.SellerRepository;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +26,7 @@ public class ItemController {
     private final ItemService itemService;
     private final FileService fileService;
     private final SellerService sellerService;
+    private final AmazonS3Service amazonS3Service;
 
     public String uploadDir = ConstUtil.UPLOAD_IMG_PATH; //이미지 저장할 폴더
 
@@ -59,6 +57,8 @@ public class ItemController {
 
         String path = request.getSession().getServletContext().getRealPath("/");
         log.info("1차 path={}",path);
+
+        amazonS3Service.upload(itemDto.getFile(),"uploadImg");
 
         Long itemId = itemService.save(itemDto, email,path);
 
