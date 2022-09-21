@@ -10,7 +10,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @SpringBootApplication
 public class KnitMarketApplication {
 
-	public static final String APPLICATION_LOCATIONS = "spring.config.location="
+	public static void main(String[] args) {
+		SpringApplication.run(KnitMarketApplication.class, args);
+	}
+
+	/*public static final String APPLICATION_LOCATIONS = "spring.config.location="
 			+ "classpath:application.properties,"
 			+ "classpath:aws.yml";
 
@@ -19,5 +23,5 @@ public class KnitMarketApplication {
 				.properties(APPLICATION_LOCATIONS)
 				.run(args);
 	}
-
+*/
 }
