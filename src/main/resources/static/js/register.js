@@ -46,8 +46,6 @@ $(function () {
         })
     }
 
-
-
     $('#update_Btn').on('click', uploadImage_update);
 
     function uploadImage_update() {
