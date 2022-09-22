@@ -1,4 +1,5 @@
 function checkFields(){
+    console.log("checkFields 실행");
     var itemName = document.getElementById('itemName').value;
     var price = document.getElementById('price').value;
     var itemDesc = document.getElementById('itemDesc').value;
@@ -7,8 +8,8 @@ function checkFields(){
     console.log(price);
     console.log(itemDesc);
 
-    if(itemName == '' || itemDesc=='' || price==0){
-        alert("상품정보를 모두 입력해주세요");
+    if(itemName == '' || itemDesc=='' || price==0 || price.isNaN('abc')){
+        alert("상품정보를 올바르게 입력해주세요");
         event.preventDefault();
         return false;
     }
@@ -18,5 +19,29 @@ function checkFields(){
         event.preventDefault();
         return false;
     }
-
 }
+
+$(function () {
+    $('#save_Btn').on('click', uploadImage);
+    console.log("ajax 실행");
+
+    function uploadImage() {
+        var file = $('#formFile')[0].files[0];
+        var formData = new FormData();
+        let url = "/item/register";
+        formData.append('data', file);
+
+        $.ajax({
+            type: 'POST',
+            url: '/item/uploadImg',
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            location.replace(url);
+        }).fail(function (error) {
+            alert(error);
+        })
+    }
+});
+

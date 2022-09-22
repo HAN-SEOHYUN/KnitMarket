@@ -38,17 +38,13 @@ public class ItemService {
 
     //@Transactional : db 트랜잭션 자동으로 commit 해줌
     @Transactional //아이템 등록
-    public Long save(ItemRequestDto itemDto, String email,String path) throws IOException {
+    public Long save(ItemRequestDto itemDto, String email) throws IOException {
 
         Seller seller = sellerRepository.findByEmail(email);
 
         if (itemDto.getFile() != null) {
 
             MultipartFile file = itemDto.getFile();
-            String filePath = path+ file.getOriginalFilename();
-            log.info("2차 path ={}",filePath);
-
-            file.transferTo(new File(filePath));
 
             FileRequestDto fileDto = FileRequestDto.builder()
                     .orginFileName(file.getOriginalFilename())

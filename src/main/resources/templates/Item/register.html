@@ -21,9 +21,6 @@
                             <div class="product-info">
 
 
-
-
-
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">상품명</span>
                                     <input type="text" th:field="*{itemName}" class="form-control"
@@ -66,7 +63,7 @@
                             </div>
 
                             <div th:if="${item.id eq null}">
-                                <button th:formaction="@{/item/register}" type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
+                                <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
                             </div>
                             <div th:unless="${item.id eq null}">
                                 <button th:formaction="@{'/item/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>

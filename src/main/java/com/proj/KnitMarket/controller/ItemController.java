@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.ServletContext;
@@ -49,18 +50,18 @@ public class ItemController {
         return "Item/register";
     }
 
+    //상품등록_img
+    @PostMapping("/uploadImg")
+    public String upload(@RequestParam("data") MultipartFile multipartFile) throws IOException {
+       return amazonS3Service.upload(multipartFile,"uploadImg");
+    }
+
     //상품등록_post
     @PostMapping(value = "/register")
     public String item_register_post(@ModelAttribute("item") ItemRequestDto itemDto, HttpSession httpSession, Model model, MultipartHttpServletRequest request) throws IOException {
         log.info("상품등록컨트롤러");
         String email = (String) httpSession.getAttribute("email");
-
-        String path = request.getSession().getServletContext().getRealPath("/");
-        log.info("1차 path={}",path);
-
-        amazonS3Service.upload(itemDto.getFile(),"uploadImg");
-
-        Long itemId = itemService.save(itemDto, email,path);
+        Long itemId = itemService.save(itemDto, email);
 
         String url = "/", msg ="상품등록이 완료되었습니다";
 
