@@ -22,6 +22,7 @@ function checkFields(){
 }
 
 $(function () {
+
     $('#save_Btn').on('click', uploadImage);
     console.log("ajax 실행");
 
@@ -44,5 +45,33 @@ $(function () {
             location.replace("/");
         })
     }
+
+
+
+    $('#update_Btn').on('click', uploadImage_update);
+
+    function uploadImage_update() {
+        var file = $('#formFile')[0].files[0];
+        var formData = new FormData();
+        var itemId = $('#itemId').val();
+
+        let url = '/item/register/'+itemId;
+
+        formData.append('data', file);
+
+        $.ajax({
+            type: 'POST',
+            url: '/item/uploadImg',
+            data: formData,
+            processData: false,
+            contentType: false
+        }).success(function (data) {
+            location.replace(url);
+        }).fail(function (error) {
+            alert("상품등록에 실패했습니다. 다시 시도해주세요");
+            location.replace("/");
+        })
+    }
+
 });
 

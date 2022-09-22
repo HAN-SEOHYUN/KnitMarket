@@ -19,7 +19,7 @@
                     <div class="item-form-div">
                         <form th:action th:object="${item}" method="post" enctype="multipart/form-data" onsubmit="checkFields()" id="frm">
                             <div class="product-info">
-
+                                <input type="hidden" th:value="${item.getId()}" id ="itemId">
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">상품명</span>
@@ -66,7 +66,7 @@
                                 <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
                             </div>
                             <div th:unless="${item.id eq null}">
-                                <button th:formaction="@{'/item/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
+                                <button type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
                             </div>
                         </form>
                     </div>
