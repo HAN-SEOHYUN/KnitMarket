@@ -36,6 +36,4 @@ out/
 ### VS Code ###
 .vscode/
 
-.proerties
-
-aws.yml
+application.properties
