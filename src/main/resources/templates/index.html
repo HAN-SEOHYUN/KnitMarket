@@ -31,7 +31,9 @@
                                 <div class="card-img-div">
                         <!--            C:\Users\user\Desktop\proj\Knitmarket\src\main\webapp\static\uploadImg-->
          <!--                           src="${pageContext.request.contextPath}/images/test9.png-->
-                                <img th:src="'http://knitmarket.shop/uploadImg/'+ ${item.getOrginFileName()}" class="card-img-top"
+                                    <!--th:src="'http://knitmarket.shop/uploadImg/'+ ${item.getOrginFileName()}" -->
+                                    <!--https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/%EA%B5%AC%EB%A6%84.jpg-->
+                                <img th:src ="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/'+${item.getOrginFileName()}" class="card-img-top"
                                      th:alt="${item.itemName}">
                                 </div>
                                 <div class="card-body">
