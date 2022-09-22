@@ -43,8 +43,8 @@
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img th:src="${#httpServletRequest.getContextPath()} + '/static/uploadImg/' + ${orderItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${orderItem.item.itemName}">
-                                    <!--th:src="${#httpServletRequest.getContextPath()} + '/static/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
+                                    <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${orderItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${orderItem.item.itemName}">
+                                    <!--th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">

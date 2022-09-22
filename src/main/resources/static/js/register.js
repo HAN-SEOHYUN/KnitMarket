@@ -37,10 +37,11 @@ $(function () {
             data: formData,
             processData: false,
             contentType: false
-        }).done(function (data) {
+        }).success(function (data) {
             location.replace(url);
         }).fail(function (error) {
-            alert(error);
+            alert("상품등록에 실패했습니다. 다시 시도해주세요");
+            location.replace("/");
         })
     }
 });
