@@ -47,7 +47,7 @@
 
                             <div class="input-group">
                                 <span class="input-group-text">상품설명</span>
-                                <textarea class="form-control" aria-label="With textarea" th:text="${item.itemDesc}" readonly></textarea>
+                                <textarea style="overflow:auto" class="form-control" aria-label="With textarea" th:text="${item.itemDesc}" readonly></textarea>
                             </div>
 
                         </div><!--1-->
@@ -76,7 +76,7 @@
                                     </div>
                                 </div>
                                 <!--비로그인-->
-                                <th:block th:if="${session.role eq null}">
+                                <th:block th:if="${session.role eq null} and ${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
                                     <div class ="sold-out-div">
                                         <h5>로그인 후 상품구매가 가능합니다</h5>
                                     </div>
@@ -107,5 +107,6 @@
 <!--페이지소스 끝-->
 
 <footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/detail.js}"></script>
 </body>
 </html>

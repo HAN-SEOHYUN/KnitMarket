@@ -49,7 +49,8 @@
                                 </div>
 
                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">상품사진을 첨부해주세요</label>
+                                   <label for="formFile" class="form-label">상품사진을 첨부해주세요 (<span style="font-weight: bold; background: linear-gradient(to top, #970f422e 50%, transparent 30%)">정사각형 사진</span> 추천<i class="fa-regular fa-face-grin-squint"></i>)</label>
+                                    <span style="color: #c00101;font-weight: bold;font-size: 0.7em;">&nbsp;상품 정보 수정 시 사진을 재등록해주세요</span>
                                     <input class="form-control" type="file" id="formFile" th:field="*{file}">
                                 </div>
 
@@ -59,7 +60,6 @@
                                         <option value="SOLD_OUT">픔절</option>
                                     </select>
                                 </div>
-
                             </div>
 
                             <div th:if="${item.id eq null}">

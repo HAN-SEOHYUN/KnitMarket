@@ -8,14 +8,14 @@ function checkFields(){
     console.log(price);
     console.log(itemDesc);
 
-    if(itemName == '' || itemDesc=='' || price==0 || price.isNaN('abc')){
-        alert("상품정보를 올바르게 입력해주세요");
+    if(document.getElementById("formFile").files.length === 0){
+        alert("상품사진은 필수입력 사항입니다");
         event.preventDefault();
         return false;
     }
 
-    if(document.getElementById("formFile").files.length == 0){
-        alert("상품사진을 첨부해주세요");
+    if(itemName === '' || itemDesc==='' || price===0 || price.isNaN('abc')){
+        alert("누락된 상품정보가 있거나, 올바르게 입력되지 않았습니다.");
         event.preventDefault();
         return false;
     }
@@ -71,5 +71,17 @@ $(function () {
         })
     }
 
+});
+
+function adjustHeight() {
+    var textEle = $('textarea');
+    textEle[0].style.height = 'auto';
+    var textEleHeight = textEle.prop('scrollHeight');
+    textEle.css('height', textEleHeight);
+};
+
+var textEle = $('textarea');
+textEle.on('keyup', function() {
+    adjustHeight();
 });
 
