@@ -38,7 +38,7 @@ public class KakaoLoginService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=0a9af639b0425e40c10ad4d291ce4637");
-            sb.append("&redirect_uri=http://knitmarket.shop/kakaoLogin/requestToken_"+role); //수정
+            sb.append("&redirect_uri=http://localhost:8080/kakaoLogin/requestToken_"+role); //수정
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();

@@ -129,9 +129,11 @@ public class OrderController {
         if (responseEntity.getStatusCode() == HttpStatus.OK) { //결제성공
             String [] temp = orderId.split("-");
             Long savedOrderId = Long.parseLong(temp[0]);
+            log.info("savedOrderId={}",savedOrderId);
 
             //order status 변경 & item sellstatus 변경
             OrderDto orderDto = orderService.changeStatus(savedOrderId);
+            log.info ("orderDto={}" , orderDto.getUser().getId());
 
             //장바구니 비우기
             cartService.cartRemoveAll(orderDto.getUser().getId());
@@ -150,7 +152,7 @@ public class OrderController {
             model.addAttribute("message", failNode.get("message").asText());
             model.addAttribute("code", failNode.get("code").asText());
 
-            return "fail";
+            return "user/fail";
         }
     }
 

@@ -21,6 +21,7 @@ import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -58,6 +59,10 @@ public class UserService {
     public Long save_address(AddressDto addressDto,Long userId)throws IOException{
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         addressDto.setUser(user);
+
+        if(Objects.equals(addressDto.getEnterMethod(), "") ||addressDto.getEnterMethod().isEmpty()){
+            addressDto.setEnterMethod("없음");
+        }
         return addressRepository.save(addressDto.toEntity()).getId();
     }
 
@@ -87,6 +92,9 @@ public class UserService {
         Long userId = (Long)httpSession.getAttribute("id");
         User user = userRepository.findById(userId).orElseThrow(EntityNotFoundException::new);
         addressDto.setUser(user);
+        if(Objects.equals(addressDto.getEnterMethod(), "") ||addressDto.getEnterMethod().isEmpty()){
+            addressDto.setEnterMethod("없음");
+        }
         address.updateAddress(addressDto);
         addressRepository.save(address);
         return address.getId();
