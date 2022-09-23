@@ -104,7 +104,6 @@
     //Error: `orderId`는 영문 대소문자, 숫자, 특수문자(-, _) 만 허용합니다. 6자 이상 64자 이하여야 합니다.
     var orderName = '뜨개장터';
     var price = document.getElementById('price').value;
-    /* 테스트 종료 후 파라미터 값 변경 */
     var customerName = document.getElementById('userName').value;
 
     button.addEventListener("click", function () {
@@ -115,12 +114,12 @@
         }
         var method = "카드"; // "카드" 혹은 "가상계좌"
         var paymentData = {
-            amount: 100,
+            amount: price,
             orderId: orderId,
             orderName: orderName,
             customerName: customerName,
-            successUrl: window.location.origin + "/order/success",
-            failUrl: window.location.origin + "/order/fail",
+            successUrl: 'knitmarket.shop' + "/order/success",
+            failUrl: 'knitmarket.shop' + "/order/fail",
         };
         tossPayments.requestPayment(method, paymentData);
     });
