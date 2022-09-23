@@ -149,8 +149,18 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
+        String loginAlert = "로그인 되었습니다";
+
+        if(name == "최지원"){
+            loginAlert = "서현친구 지원 방문 축하합니다 ^^ 까미사진보내줘.";
+        }else if(name == "홍혜림"){
+            loginAlert ="서현친구 혜림 방문 축하합니다 ^^ 가지말라고 바짓가랑이 잡고싶은 심정";
+        }else if(name == "최주은"){
+            loginAlert ="서현친구 주은 방문 축하합니다 ^^ 아기고양이 고딩주은 돌려주라주라 ..";
+        }
+
         model.addAttribute("url","/");
-        model.addAttribute("msg","로그인되었습니다");
+        model.addAttribute("msg",loginAlert);
 
         return "common/message";
     }
