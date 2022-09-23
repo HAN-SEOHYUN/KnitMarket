@@ -118,8 +118,8 @@
             orderId: orderId,
             orderName: orderName,
             customerName: customerName,
-            successUrl: 'knitmarket.shop' + "/order/success",
-            failUrl: 'knitmarket.shop' + "/order/fail",
+            successUrl: window.location.origin + "/order/success",
+            failUrl: window.location.origin + "/order/fail",
         };
         tossPayments.requestPayment(method, paymentData);
     });
