@@ -1,4 +1,6 @@
 $(function () {
+    var userId = $('#userId').val();
+
     //X버튼 mouseover
     $(document).on('mouseover', '#xWrap', function () {
         $(this).css('background','#f3d2d2');
@@ -43,6 +45,11 @@ $(function () {
     //주문하러가기 버튼 클릭 시
     $(document).on('click', '#indexBtn', function () {
         location.href="/";
+    });
+
+    //주문목록 버튼 클릭 시
+    $(document).on('click', '#Btn-orderList', function () {
+        location.href="/mypage/orderList/"+userId;
     });
 
 });
