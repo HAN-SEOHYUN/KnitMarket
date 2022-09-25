@@ -38,10 +38,10 @@ public class IndexController { //상품목록
         return "common/guide";
     }
 
-/*    @GetMapping("/fail")
+    @GetMapping("/policy")
     public String fail(){
-        return "user/fail";
-    }*/
+        return "common/policy";
+    }
 }
 
 
