@@ -1,0 +1,46 @@
+.fail-wrapper {
+    min-height: 650px;
+    font-family: 'Nanum Gothic',sans-serif;
+}
+
+.fail-inner-div {
+    width: 1000px;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+.fail-inner-div:nth-child(1) {
+    font-size: 150px;
+    text-align: center;
+    color: #c7c9ca;
+
+}
+
+.fail-inner-div h3 {
+    font-weight: bold;
+    font-family: 'Nanum Gothic',sans-serif;
+}
+
+.fail-inner-div:nth-child(3) > div {
+    font-size: 20px;
+}
+
+.fail-inner-div h5 {
+    color: #a1a1a1;
+}
+
+.fail-inner-div:nth-child(5) {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-div {
+    margin: 0px 2px 0px 2px;
+}
+
+.fail-inner-div > i {
+    font-size: 160px;
+    color: #cacccd;
+}

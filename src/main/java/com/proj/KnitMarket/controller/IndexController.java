@@ -37,6 +37,11 @@ public class IndexController { //상품목록
     public String guide(){
         return "common/guide";
     }
+
+/*    @GetMapping("/fail")
+    public String fail(){
+        return "user/fail";
+    }*/
 }
 
 
