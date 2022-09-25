@@ -111,10 +111,11 @@ span.introduction-desc-p {
 
 span.top-p {
     font-size: 20px;
+    line-height: 30px;
 }
 
 .bottom-div {
-    text-align: center;
+    text-align: center;    margin-top: 44px;
 }
 
 span.bottom-p {
