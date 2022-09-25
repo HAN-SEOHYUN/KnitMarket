@@ -30,7 +30,7 @@ public class IndexController { //상품목록
     @GetMapping("/introduction")
     public String introduction(){
 
-        return "common/guide";
+        return "common/introduction";
     }
 
     @GetMapping("/guide")
