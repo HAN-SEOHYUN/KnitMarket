@@ -1,0 +1,72 @@
+.introduction-wrapper {font-family: 'Nanum Gothic',sans-serif;}
+
+.inner-div1 {
+    width: 900px;
+    margin: auto;
+}
+
+.inner-div1:first-child {
+}
+
+.introduction-title {
+    display: flex;
+}
+
+.logo-img-div {
+    width: 400px;
+}
+
+.top-div {
+    margin-top: 25px;
+    margin-bottom: 76px;
+}
+
+.inner-div1:nth-child(2) {
+}
+
+.img-inner-div {
+    display: flex;
+}
+
+.inner-div1:nth-child(3) {
+    margin-top: 74px;
+}
+
+.inner-div1:nth-child(4) {
+    margin-top: 59px;
+    margin-bottom: 20px;
+}
+
+i.fa-solid.fa-question {}
+
+.introduction-i-div i {
+    font-size: 53px;
+}
+
+.introduction-desc-wrapper {
+    display: flex;
+}
+
+.introduction-i-div {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.introduction-desc-div {height: 78px;line-height: 50px;align-items: center;display: flex;}
+
+.title-desc-div {padding-top: 116px;}
+
+.title-desc-div > span {
+    font-size: 30px;
+    font-family: 'Nanum Gothic',sans-serif;
+    font-weight: bold;
+    margin-left: 28px;
+}
+
+p.top-p {
+    font-size: 18px;
+}
+
+.inner-div1:nth-child(3) p {
+    font-size: 19px;
+}
