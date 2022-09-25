@@ -1,0 +1,56 @@
+.policy-wrapper {
+    min-height: 650px;
+    font-family: 'Nanum Gothic',sans-serif;
+}
+
+.policy-title > h3 > i {
+    color: #f3b319;
+}
+
+.policy-title {
+    text-align: center;
+}
+
+h3 {
+    font-family: 'Nanum Gothic',sans-serif;
+    font-weight: bold;
+}
+
+.policy-inner {
+    width: 900px;
+    margin: auto;
+}
+
+.title-div {
+    display: flex;
+}
+
+.policy-img {
+    font-size: 50px;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background: #f8f8f8;
+    color: #68082c;
+    box-shadow: 5px 5px 5px 1px lightgrey;
+    margin-right: 11px;
+}
+
+.title > h5 {font-family: 'Nanum Gothic',sans-serif;font-size: 30px;font-weight: bold;margin-top: 26px;margin-left: 11px;}
+
+.desc-div {
+    margin-top: 30px;
+}
+
+.policy-inner p {font-size: 18px;line-height: 38px; color: black;}
+
+.title-div {
+    margin-top: 39px;
+}
+
+.desc-div {
+    margin-bottom: 51px;
+}
+
+.title > h5 {
+    text-shadow: 1px 2px 4px gray;
+}

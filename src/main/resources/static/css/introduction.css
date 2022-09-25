@@ -1,4 +1,7 @@
-.introduction-wrapper {font-family: 'Nanum Gothic',sans-serif;}
+.introduction-wrapper {    font-family: 'Nanum Gothic',sans-serif;
+    background: #eee9dc99;
+    padding-top: 25px;
+    padding-bottom: 25px;}
 
 .inner-div1 {
     width: 900px;
@@ -10,6 +13,7 @@
 
 .introduction-title {
     display: flex;
+    justify-content: center;
 }
 
 .logo-img-div {
@@ -17,8 +21,13 @@
 }
 
 .top-div {
-    margin-top: 25px;
+    margin-top: 87px;
     margin-bottom: 76px;
+    text-align: center;
+    background: #fdfdfd;
+    box-shadow: 5px 5px 9px 1px #bcbbbb;
+    border-radius: 22px;
+    padding: 10px 0px 10px 0px;
 }
 
 .inner-div1:nth-child(2) {
@@ -45,6 +54,7 @@ i.fa-solid.fa-question {}
 
 .introduction-desc-wrapper {
     display: flex;
+    margin-bottom: 94px;
 }
 
 .introduction-i-div {
@@ -52,12 +62,16 @@ i.fa-solid.fa-question {}
     margin-right: 20px;
 }
 
-.introduction-desc-div {height: 78px;line-height: 50px;align-items: center;display: flex;}
-
-.title-desc-div {padding-top: 116px;}
+.introduction-desc-div
+{line-height: 50px;
+    align-items: center;
+    text-align: center;
+    width: 46%;
+    display: table;
+}
 
 .title-desc-div > span {
-    font-size: 30px;
+    font-size: 20px;
     font-family: 'Nanum Gothic',sans-serif;
     font-weight: bold;
     margin-left: 28px;
@@ -70,3 +84,44 @@ p.top-p {
 .inner-div1:nth-child(3) p {
     font-size: 19px;
 }
+
+.title-desc-div {
+    padding-left: 20px;
+    padding-top: 18px;
+}
+
+.desc-img-div {
+    width: 50%;
+}
+
+.introduction-desc-div span {
+    font-size: 21px;
+    font-family: 'IBM Plex Sans KR',sans-serif;
+}
+span.introduction-desc-p {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+
+span.introduction-desc-p {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+span.top-p {
+    font-size: 20px;
+}
+
+.bottom-div {
+    text-align: center;
+}
+
+span.bottom-p {
+    font-size: 20px;
+}
+
+img {
+    border-radius: 53px;
+}
+
