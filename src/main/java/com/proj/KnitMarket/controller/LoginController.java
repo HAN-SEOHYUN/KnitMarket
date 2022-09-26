@@ -5,6 +5,7 @@ import com.proj.KnitMarket.Service.KakaoLoginService;
 import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.domain.Member.User;
+import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.domain.Order.Cart;
 import com.proj.KnitMarket.domain.Order.CartRepository;
 import com.proj.KnitMarket.dto.CartDto;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Objects;
 /*
         session.setAttribute("id", userId);
         session.setAttribute("email", email);
@@ -41,6 +43,9 @@ public class LoginController {
     private final UserService userService;
     private final SellerService sellerService;
     private final CartRepository cartRepository;
+
+    //테스트용
+    private final UserRepository userRepository;
 
     @GetMapping("/login")
     public String login_get() {
@@ -207,6 +212,33 @@ public class LoginController {
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);
 
+        return "common/message";
+    }
+
+    //테스트 로그인
+    @PostMapping("/testLogin")
+    public String testLogin(@RequestParam ("testId")Long testId, @RequestParam("testPwd")String testPwd,HttpSession session,Model model){
+        log.info("testId={}",testId);
+        log.info("testPwd ={}",testPwd);
+        User user = userRepository.findByIdAndEmail(testId, testPwd);
+
+        String msg = "";
+        String url = "/";
+
+        if(user.getName()!=null || !Objects.equals(user.getName(), "")){
+            msg = "테스트 로그인되었습니다";
+            session.setAttribute("id", user.getId());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("name", user.getName());
+            session.setAttribute("role","user");
+            log.info("SUCCESS");
+        }else{
+            msg = "정보가 일치하지않습니다. 다시 로그인 해주십시오";
+            log.info("FAIL");
+        }
+
+        model.addAttribute("msg", msg);
+        model.addAttribute("url", url);
         return "common/message";
     }
 
