@@ -22,12 +22,15 @@ public class User extends BaseEntity {
 
     @Column
     private String email; //이메일
-   // private String hp; //전화번호
+
+    @Column
+    private String hp; //전화번호
 
     @Builder
-    public User(String name, String email) {
+    public User(String name, String email,String hp) {
         this.name = name;
         this.email = email;
+        this.hp = hp;
     }
 }
 

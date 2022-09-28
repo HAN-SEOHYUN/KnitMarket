@@ -75,7 +75,7 @@ public class LoginController {
 
         SellerRequestDto sellerRequestDto = null;
         Long sellerId;
-        String url="";
+        String url="/";
         String msg="";
 
         //db 중복 확인
@@ -84,10 +84,12 @@ public class LoginController {
             sellerId = sellerService.save(sellerRequestDto);
 
             log.info("신규회원가입 판매자번호={}", sellerId);
+            msg = name+"님, 회원가입을 축하드립니다 ! ";
 
         }else{ //기존회원로그인
             sellerId = sellerService.findByEmail(email).getId();
             log.info("기존판매자 회원번호 ={}",sellerId);
+            msg = name+"님, [판매자] 로그인되었습니다.";
         }
 
         //세션저장
@@ -98,8 +100,8 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
-        model.addAttribute("url","/");
-        model.addAttribute("msg","로그인 되었습니다");
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
 
         return "common/message";
     }
@@ -120,16 +122,17 @@ public class LoginController {
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
         String socialLoginKey = (String) userInfo.get("socialLoginKey");
+        String hp =(String) userInfo.get("phoneNumber");
 
         UserRequestDto userRequestDto = null;
         Long userId;
-        String url="";
-        String msg="";
+        String url="/";
+        String msg = "";
 
         //db 중복 확인
         if (!userService.existsByEmail(email)) { //신규가입
-            userRequestDto = new UserRequestDto(email, name);
-            User user = userService.save(userRequestDto);
+            userRequestDto = new UserRequestDto(email, name, hp);
+            User user = userService.save (userRequestDto);
             userId = user.getId();
 
             log.info("신규회원가입 회원번호={}", userId);
@@ -140,10 +143,12 @@ public class LoginController {
                     .build();
 
             Cart cart = cartRepository.save(createCartDto.toEntity());
+            msg =name+"님, 회원가입을 축하드립니다 !";
 
         }else{ //기존회원로그인
             userId = userService.findByEmail(email).getId();
             log.info("기존회원 회원번호 ={}",userId);
+            msg =name+"님, [사용자] 로그인되었습니다";
         }
 
         //세션저장
@@ -154,18 +159,18 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
-        String loginAlert = "로그인 되었습니다";
+
 
         if(name == "최지원"){
-            loginAlert = "서현친구 지원 방문 축하합니다 ^^ 까미사진보내줘.";
+            msg = "서현친구 지원 방문 축하합니다 ^^ 까미사진보내줘.";
         }else if(name == "홍혜림"){
-            loginAlert ="서현친구 혜림 방문 축하합니다 ^^ 가지말라고 바짓가랑이 잡고싶은 심정";
+            msg ="서현친구 혜림 방문 축하합니다 ^^ 가지말라고 바짓가랑이 잡고싶은 심정";
         }else if(name == "최주은"){
-            loginAlert ="서현친구 주은 방문 축하합니다 ^^ 아기고양이 고딩주은 돌려주라주라 ..";
+            msg ="서현친구 주은 방문 축하합니다 ^^ 아기고양이 고딩주은 돌려주라주라 ..";
         }
 
-        model.addAttribute("url","/");
-        model.addAttribute("msg",loginAlert);
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
 
         return "common/message";
     }
@@ -207,7 +212,12 @@ public class LoginController {
                 url ="/";
 
                 session.invalidate();
-            }
+            }else{
+                msg ="먼저 로그인을 해주세요";
+                url="/";
+        }
+
+
 
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);

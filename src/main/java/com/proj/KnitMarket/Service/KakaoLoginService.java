@@ -38,7 +38,7 @@ public class KakaoLoginService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=0a9af639b0425e40c10ad4d291ce4637");
-            sb.append("&redirect_uri=http://knitmarket.shop/kakaoLogin/requestToken_"+role); //수정
+            sb.append("&redirect_uri=http://localhost:8080/kakaoLogin/requestToken_"+role); //수정
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
@@ -113,13 +113,15 @@ public class KakaoLoginService {
 
             //id = 앱과 연결된 사용자 회원번호 ex) 2316363390
 
-            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+            String name = kakao_account.getAsJsonObject().get("name").getAsString();
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
             String socialLoginKey = element.getAsJsonObject().get("id").getAsString();
+            String phoneNumber = kakao_account.getAsJsonObject().get("phone_number").getAsString();
 
-            userInfo.put("name", nickname);
+            userInfo.put("name", name);
             userInfo.put("email", email);
             userInfo.put("socialLoginKey", socialLoginKey);
+            userInfo.put("phoneNumber", phoneNumber);
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
