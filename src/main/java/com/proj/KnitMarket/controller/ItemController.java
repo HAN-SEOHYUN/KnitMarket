@@ -36,7 +36,7 @@ public class ItemController {
     public String item_register_get(Model model,HttpSession httpSession) {
         Long sellerId = (Long)httpSession.getAttribute("id");
         SellerResponseDto sellerResponseDto = sellerService.findById(sellerId);
-        if(sellerResponseDto.getStore()==null || sellerResponseDto.getStore().isEmpty()){
+        if(sellerResponseDto.getStore()==null || sellerResponseDto.getStore().isEmpty() || sellerResponseDto.getAccountBank()==null || sellerResponseDto.getAccountName()==null || sellerResponseDto.getAccountNum()==null){
             String url,msg;
             url = "/mypage/info";
             msg ="판매자정보를 먼저 등록해주세요";
