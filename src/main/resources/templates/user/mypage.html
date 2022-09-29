@@ -122,17 +122,27 @@
 
                         <th:block th:unless="${session.role}=='user'">
                             <div class="seller-store-info">
-                                <h5>가게명</h5>
+                                <h5>판매자정보</h5>
 
                                 <th:block th:if="${member.store}!=null">
                                     <div class="seller-store-information"><label for="store">상호명</label>
                                         <span id="store" th:text="${member.store}"></span>
                                     </div>
+                                    <div class="seller-store-information"><label for="acBank">계좌은행</label>
+                                        <span id="acBank" th:text="${member.getAccountBank()}"></span>
+                                    </div>
+                                    <div class="seller-store-information"><label for="acNum">계좌번호</label>
+                                        <span id="acNum" th:text="${member.getAccountNum()}"></span>
+                                    </div>
+                                    <div class="seller-store-information"><label for="acName">예금주</label>
+                                        <span id="acName" th:text="${member.getAccountName()}"></span>
+                                    </div>
+
                                     <div class="btn-div">
                                         <div class ="btn-div">
                                         <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal1"
-                                                data-bs-whatever="@fat">수정하기
+                                                data-bs-whatever="@fat">수정
                                         </button>
                                         </div>
                                     </div>
@@ -140,7 +150,7 @@
 
                                 <th:block th:if="${member.store}==null">
                                     <div class="user-address">
-                                        <span id="store-empty-span" class="user-information">등록된 상호명이 없습니다</span></div>
+                                        <span id="store-empty-span" class="user-information">등록된 판매자정보가 없습니다</span></div>
                                     <div class="btn-div">
                                         <button type="button" class="btn btn-dark" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal1"
@@ -149,13 +159,13 @@
                                     </div>
                                 </th:block>
 
-                                <!--모달시작-->
+                                <!--가게명 모달시작-->
                                 <div class="modal fade" tabindex="-1" id="exampleModal1"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title">상호명을 입력해주세요</h5>
+                                                <h5 class="modal-title">판매자정보를 입력해주세요</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
@@ -165,6 +175,17 @@
                                                         <label for="recipient-name" class="col-form-label">가게이름</label>
                                                         <input type="text" class="form-control" id="recipient-name"
                                                                th:field="*{store}" name="store">
+                                                        <label for="recipient-name" class="col-form-label">계좌은행</label>
+                                                        <input type="text" class="form-control" id="accountBank"
+                                                               th:field="*{accountBank}" name="accountBank">
+
+                                                        <label for="recipient-name" class="col-form-label">계좌번호</label>
+                                                        <input type="text" class="form-control" id="accountNum"
+                                                               th:field="*{accountNum}" name="accountBank">
+
+                                                        <label for="recipient-name" class="col-form-label">예금주</label>
+                                                        <input type="text" class="form-control" id="accountName"
+                                                               th:field="*{accountName}" name="accountName">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -183,6 +204,8 @@
                             </div>
                         </th:block>
                     </div>
+
+
                 </div>
             </div>
         </div><!--장바구니목록 끝-->

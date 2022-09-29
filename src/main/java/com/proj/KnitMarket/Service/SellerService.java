@@ -69,11 +69,11 @@ public class SellerService {
         return itemResponseDtoList;
     }
 
-    //가게명 등록 및 수정
+    //판매자 정보 등록 및 수정
     @Transactional
-    public void updateStore(Long sellerId, String store){
+    public void updateStore(Long sellerId, String store , String accountBank, String accountNum, String accountName){
         Seller seller = sellerRepository.findById(sellerId).orElseThrow(EntityNotFoundException::new);
-        seller.updateStore(store);
+        seller.updateStore(store,accountBank, accountNum, accountName);
         sellerRepository.save(seller);
     }
 

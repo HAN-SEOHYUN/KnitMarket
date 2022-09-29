@@ -68,18 +68,20 @@ public class MemberController {
         return"common/message";
     }
 
-    //가게명 수정
+    //가게명 등록 및 수정
     @PostMapping(value="/store/{sellerId}")
-    public String store_save_post(@RequestParam("store")String store, Model model, @PathVariable(name ="sellerId")Long sellerId){
+    public String store_save_post(@RequestParam("store")String store, Model model, @PathVariable(name ="sellerId")Long sellerId,
+                                  @RequestParam("accountBank") String accountBank,@RequestParam("accountNum") String accountNum, @RequestParam("accountName")String accountName){
         log.info("store={}",store);
         log.info("sellerId={}",sellerId);
-        sellerService.updateStore(sellerId, store);
+        sellerService.updateStore(sellerId, store,accountBank, accountNum,accountName);
 
-        String url ="/mypage/info", msg="가게명이 업데이트 되었습니다";
+        String url ="/mypage/info", msg="판매자 정보가 업데이트 되었습니다";
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
         return "common/message";
     }
+
 
     //사용자 주문목록
     @GetMapping("/orderList/{userId}")
