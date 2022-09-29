@@ -72,6 +72,7 @@ public class LoginController {
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
         String socialLoginKey = (String) userInfo.get("socialLoginKey");
+        String hp = (String) userInfo.get("phoneNumber");
 
         SellerRequestDto sellerRequestDto = null;
         Long sellerId;
@@ -80,7 +81,7 @@ public class LoginController {
 
         //db 중복 확인
         if (!sellerService.existsByEmail(email)) { //신규가입
-            sellerRequestDto = new SellerRequestDto(email, name);
+            sellerRequestDto = new SellerRequestDto(email, name,hp);
             sellerId = sellerService.save(sellerRequestDto);
 
             log.info("신규회원가입 판매자번호={}", sellerId);
@@ -117,7 +118,7 @@ public class LoginController {
 
         //user email과 name, kakaoId 받아오기
         HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-        log.info("userInfo={}", userInfo);//여기까지 log에 찍힘
+        log.info("userInfo={}", userInfo);
 
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");

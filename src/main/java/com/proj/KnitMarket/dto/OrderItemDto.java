@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.dto;
 
+import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
