@@ -29,6 +29,4 @@ public class WebConfig implements WebMvcConfigurer {
         //https://kauth.kakao.com/**","/kakaoLogin/**","/css/**", "/img/**", "/plugin/**", "/uploadImg/**","/Source/**","/login","/","/js/**","/item/detail/**
     }
 
-
-
 }

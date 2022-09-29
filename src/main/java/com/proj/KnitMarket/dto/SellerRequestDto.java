@@ -14,17 +14,20 @@ public class SellerRequestDto {
     private String email;
     private String name;
     private String store;
+    private String hp;
 
     public Seller toEntity(){
         return Seller.builder()
                 .email(email)
                 .name(name)
+                .hp(hp)
                 .build();
     }
 
     @Builder
-    public SellerRequestDto(String email, String name) {
+    public SellerRequestDto(String email, String name,String hp) {
         this.email = email;
         this.name = name;
+        this.hp = hp;
     }
 }

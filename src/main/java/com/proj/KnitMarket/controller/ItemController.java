@@ -105,8 +105,15 @@ public class ItemController {
     @GetMapping(value = "/delete/{itemId}")
     public String item_delete_get(@PathVariable("itemId") Long id,HttpSession httpSession,Model model){
         Long sellerId = (Long) httpSession.getAttribute("id");
+
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
         String url = "/", msg ="삭제가 완료되었습니다";
+
+        if(itemResponseDto.isDeleted()){
+            url = "/";
+            msg ="판매된 상품은 삭제할 수 없습니다";
+            return "common/message";
+        }
 
         if(sellerId == itemResponseDto.getSeller().getId()) { // 현재 로그인된 계정과 판매자 계정이 일치한다면
             log.info("deleteItem 메서드 실행 !");
