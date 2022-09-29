@@ -39,7 +39,7 @@ public class ItemController {
         if(sellerResponseDto.getStore()==null || sellerResponseDto.getStore().isEmpty()){
             String url,msg;
             url = "/mypage/info";
-            msg ="가게명을 먼저 등록해주세요";
+            msg ="판매자정보를 먼저 등록해주세요";
             model.addAttribute("url",url);
             model.addAttribute("msg",msg);
             return "common/message";
