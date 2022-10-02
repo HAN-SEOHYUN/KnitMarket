@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.OrderService;
+import com.proj.KnitMarket.Service.SmsAPI;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
@@ -40,6 +41,7 @@ public class OrderController {
     private final CartService cartService;
     private final UserService userService;
     private final OrderRepository orderRepository;
+    private final SmsAPI smsAPI;
 
     @PostConstruct
     private void init() {
@@ -60,50 +62,50 @@ public class OrderController {
 
     //단일상품주문
     @GetMapping("/{itemId}")
-    public String order_item_get(@PathVariable("itemId")Long itemId, HttpSession httpSession, Model model){
+    public String order_item_get(@PathVariable("itemId") Long itemId, HttpSession httpSession, Model model) {
         String email = (String) httpSession.getAttribute("email");
         UserResponseDto userResponseDto = userService.findByEmail(email);
         AddressDto addressDto = userService.getAddress(userResponseDto.getId());
 
-        if(addressDto.getId() == null){
-           String url,msg;
-           url = "/mypage/info";
-           msg = "주소등록 후 이용가능한 서비스입니다";
-           model.addAttribute("url",url);
-           model.addAttribute("msg",msg);
-           return "common/message";
+        if (addressDto.getId() == null) {
+            String url, msg;
+            url = "/mypage/info";
+            msg = "주소등록 후 이용가능한 서비스입니다";
+            model.addAttribute("url", url);
+            model.addAttribute("msg", msg);
+            return "common/message";
         }
 
         OrderDto orderDto = orderService.order(itemId, email);
         List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
-        model.addAttribute("orderList",orderItemDtoList);
-        model.addAttribute("order",orderDto);
-        model.addAttribute("address",addressDto);
+        model.addAttribute("orderList", orderItemDtoList);
+        model.addAttribute("order", orderDto);
+        model.addAttribute("address", addressDto);
         return "user/order";
     }
 
     //장바구니상품주문
     @GetMapping("/cartItems")
-    public String order_items_post(Model model,HttpSession httpSession){
+    public String order_items_post(Model model, HttpSession httpSession) {
         Long userId = (Long) httpSession.getAttribute("id");
         AddressDto addressDto = userService.getAddress(userId);
 
-        if(addressDto.getId() == null){
-            String url,msg;
+        if (addressDto.getId() == null) {
+            String url, msg;
             url = "/mypage/info";
             msg = "주소등록 후 이용가능한 서비스입니다";
-            model.addAttribute("url",url);
-            model.addAttribute("msg",msg);
+            model.addAttribute("url", url);
+            model.addAttribute("msg", msg);
             return "common/message";
         }
 
         OrderDto orderDto = orderService.orders(userId);
         List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
-        model.addAttribute("orderList",orderItemDtoList);
-        model.addAttribute("address",addressDto);
-        model.addAttribute("order",orderDto);
+        model.addAttribute("orderList", orderItemDtoList);
+        model.addAttribute("address", addressDto);
+        model.addAttribute("order", orderDto);
         return "user/order";
     }
 
@@ -128,13 +130,13 @@ public class OrderController {
                 "https://api.tosspayments.com/v1/payments/" + paymentKey, request, JsonNode.class);
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) { //결제성공
-            String [] temp = orderId.split("-");
+            String[] temp = orderId.split("-");
             Long savedOrderId = Long.parseLong(temp[0]);
-            log.info("savedOrderId={}",savedOrderId);
+            log.info("savedOrderId={}", savedOrderId);
 
             //order status 변경 & item sellstatus 변경
             OrderDto orderDto = orderService.changeStatus(savedOrderId);
-            log.info ("orderDto={}" , orderDto.getUser().getId());
+            log.info("orderDto={}", orderDto.getUser().getId());
 
             //장바구니 비우기
             cartService.cartRemoveAll(orderDto.getUser().getId());
@@ -143,12 +145,14 @@ public class OrderController {
             List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
             //결제완료 문자 발송
+            smsAPI.sendSms(orderDto.getUser().getHp(), orderDto.getId(), orderDto.getUser().getName(), orderDto.getTotalPrice());
 
 
-            model.addAttribute("orderList",orderItemDtoList);
-            model.addAttribute("address",addressDto);
-            model.addAttribute("order",orderDto);
+            model.addAttribute("orderList", orderItemDtoList);
+            model.addAttribute("address", addressDto);
+            model.addAttribute("order", orderDto);
             return "user/success";
+
         } else {
             log.info("결제실패");
             JsonNode failNode = responseEntity.getBody();
@@ -162,7 +166,7 @@ public class OrderController {
 
     //주문내역 상세
     @GetMapping("/orderDetail/{orderId}")
-    public String order_detail_get(@PathVariable ("orderId") Long orderId, Model model){
+    public String order_detail_get(@PathVariable("orderId") Long orderId, Model model) {
         Order order = orderRepository.findOrderById(orderId);
 
         OrderDto orderDto = OrderDto.builder()
@@ -177,29 +181,12 @@ public class OrderController {
         AddressDto addressDto = userService.getAddress(orderDto.getUser().getId());
         List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
 
-        model.addAttribute("orderList",orderItemDtoList);
-        model.addAttribute("address",addressDto);
-        model.addAttribute("order",orderDto);
+        model.addAttribute("orderList", orderItemDtoList);
+        model.addAttribute("address", addressDto);
+        model.addAttribute("order", orderDto);
 
         return "user/success";
     }
-
-
-
-
-
-
-    /* orderId 로 주문 상세 */
-
-    //결제실패
-    /*@RequestMapping("/order/fail")
-    public String failPayment(@RequestParam String message, @RequestParam String code, Model model) {
-        model.addAttribute("message", message);
-        model.addAttribute("code", code);
-        return "redirect:/";
-    }*/
-
-
-    }
+}
 
 
