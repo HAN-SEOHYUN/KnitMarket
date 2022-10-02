@@ -109,6 +109,7 @@ public class OrderController {
 
     //결제
     private final String SECRET_KEY = "test_sk_qLlDJaYngro2Bjq0Y2KVezGdRpXx";
+
     @RequestMapping("/success")
     public String confirmPayment(
             @RequestParam String paymentKey, @RequestParam String orderId, @RequestParam Long amount,
@@ -140,6 +141,9 @@ public class OrderController {
 
             AddressDto addressDto = userService.getAddress(orderDto.getUser().getId());
             List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
+
+            //결제완료 문자 발송
+
 
             model.addAttribute("orderList",orderItemDtoList);
             model.addAttribute("address",addressDto);
