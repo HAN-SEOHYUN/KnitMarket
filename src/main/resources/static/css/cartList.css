@@ -26,21 +26,19 @@
     height: 200px;}
 
 img.img-fluid.rounded-start {
-    overflow: hidden;
     display: inline-block;
     width: auto;
     height: auto;
-    object-fit: cover;
+    min-height: 100%;
 }
 
 .col-md-4 {
-    /*width: 200px;
-    height: 200px;
-    overflow: hidden;*/
 
     display: inline-block;
+    height: 198px;
     width: 198px;
     overflow: hidden;
+
 }
 
 .cart-list-card-wrapper {
