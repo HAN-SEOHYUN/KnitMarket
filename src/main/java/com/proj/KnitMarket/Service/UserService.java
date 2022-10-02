@@ -9,6 +9,7 @@ import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.domain.Order.Order;
 import com.proj.KnitMarket.domain.Order.OrderItem;
+import com.proj.KnitMarket.domain.Order.OrderItemRepository;
 import com.proj.KnitMarket.domain.Order.OrderRepository;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
     private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
 
     @Transactional
     public User save(UserRequestDto userDto) {
@@ -112,14 +114,17 @@ public class UserService {
         OrderDto orderDto = new OrderDto();
 
         for(Order order : orderList){ //사용자의 주문갯수만큼
-            List<OrderItem> orderItemList = order.getOrderItems();
+            List<OrderItem> orderItemList = orderItemRepository.findOrderItemByOrder_Id(order.getId());
+            log.info("size={}",orderItemList.size());
 
             for(OrderItem orderItem : orderItemList){ //주문1개의 상품개수만큼
                 itemQty ++;
                 orderName = orderItem.getItem().getItemName();
+                log.info("orderItem={}",orderItem.getItem().getItemName());
+                log.info("itemQty={}",itemQty);
             }
 
-            if(itemQty>1){
+            if(itemQty>=2){
                 itemQty -= 1;
                 orderName = orderName + " 외 " + itemQty +"개";
             }
@@ -135,5 +140,8 @@ public class UserService {
         }
         return orderDtoList;
     }
+
+
+
 
 }

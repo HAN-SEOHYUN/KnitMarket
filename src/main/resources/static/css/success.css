@@ -80,3 +80,12 @@ button.btn.btn-dark {
 .card-body {
     margin-top: 15px;
 }
+
+img.img-fluid.rounded-start {
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    min-height: 100%;
+}
