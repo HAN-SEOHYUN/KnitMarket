@@ -25,7 +25,12 @@
 .card.mb-3 {width: 54%;height: auto;}
 
 img.img-fluid.rounded-start {
-    object-fit: contain;
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    min-height: 100%;
 }
 
 .col-md-4 {width: 200px;height: 200px;overflow: hidden;}
