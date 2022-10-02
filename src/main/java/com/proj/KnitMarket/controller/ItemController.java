@@ -109,9 +109,11 @@ public class ItemController {
         ItemResponseDto itemResponseDto = itemService.getItemDetail(id);
         String url = "/", msg ="삭제가 완료되었습니다";
 
-        if(itemResponseDto.isDeleted()){
+        if(!itemResponseDto.isDeleted()){
             url = "/";
             msg ="판매된 상품은 삭제할 수 없습니다";
+            model.addAttribute("url",url);
+            model.addAttribute("msg",msg);
             return "common/message";
         }
 

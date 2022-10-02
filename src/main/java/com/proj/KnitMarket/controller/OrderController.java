@@ -1,14 +1,12 @@
 package com.proj.KnitMarket.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proj.KnitMarket.Service.CartService;
 import com.proj.KnitMarket.Service.OrderService;
-import com.proj.KnitMarket.Service.SmsAPI;
 import com.proj.KnitMarket.Service.UserService;
-import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
-import com.proj.KnitMarket.domain.Order.OrderItem;
 import com.proj.KnitMarket.domain.Order.OrderRepository;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +39,6 @@ public class OrderController {
     private final CartService cartService;
     private final UserService userService;
     private final OrderRepository orderRepository;
-    private final SmsAPI smsAPI;
 
     @PostConstruct
     private void init() {
@@ -143,10 +140,6 @@ public class OrderController {
 
             AddressDto addressDto = userService.getAddress(orderDto.getUser().getId());
             List<OrderItemDto> orderItemDtoList = orderService.entityToDto(orderDto);
-
-            //결제완료 문자 발송
-            smsAPI.sendSms(orderDto.getUser().getHp(), orderDto.getId(), orderDto.getUser().getName(), orderDto.getTotalPrice());
-
 
             model.addAttribute("orderList", orderItemDtoList);
             model.addAttribute("address", addressDto);

@@ -22,7 +22,6 @@ public class IndexController { //상품목록
     @GetMapping("/")
     public String index(Model model) {
         List<ItemResponseDto> itemDtoList = itemService.getItemList();
-
         model.addAttribute("itemList",itemDtoList);
         return "index";
     }
