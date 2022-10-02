@@ -141,6 +141,7 @@ img.card-img-top {
     width: auto;
     height: auto;
     object-fit: cover;
+    min-height: 100%;
 }
 
 h5.card-title {
