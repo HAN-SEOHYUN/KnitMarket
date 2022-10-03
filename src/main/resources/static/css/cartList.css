@@ -98,7 +98,7 @@ span.sold_out_span {
 }
 
 .card-info {
-    width: 50%;
+    width: 95%;
     display: flex;
     justify-content: space-between;
 }
