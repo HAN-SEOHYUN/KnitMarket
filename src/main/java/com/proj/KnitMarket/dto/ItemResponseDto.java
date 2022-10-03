@@ -24,6 +24,7 @@ public class ItemResponseDto {
     private LocalDateTime regTime; // 등록시간
     private MultipartFile file;
     private boolean isDeleted;
+    private Long orderId;
 
     //entity=>dto
     public ItemResponseDto(Item entity){
@@ -39,7 +40,7 @@ public class ItemResponseDto {
     }
 
     @Builder
-    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String orginFileName,SellStatus sellStatus, LocalDateTime regTime, boolean isDeleted, Seller seller) {
+    public ItemResponseDto(Long id, String itemName, int price, String itemDesc, String orginFileName,SellStatus sellStatus, LocalDateTime regTime, boolean isDeleted, Seller seller, Long orderId) {
         this.id = id;
         this.itemName = itemName;
         this.price = price;
@@ -49,5 +50,6 @@ public class ItemResponseDto {
         this.regTime = regTime;
         this.isDeleted = isDeleted;
         this.seller = seller;
+        this.orderId = orderId;
     }
 }

@@ -22,7 +22,8 @@
     height: auto;
 }
 
-.card.mb-3 {width: 80%;
+.card.mb-3 {    min-width: 600px;
+    width: 600px;
     height: 200px;}
 
 img.img-fluid.rounded-start {
@@ -132,3 +133,11 @@ span.sold_out_span {
     text-align: center;
 }
 
+.side-div {
+    display: inline-block;
+    min-width: 100px;
+}
+
+.ordered-info-div {
+    display: inline-grid;
+}

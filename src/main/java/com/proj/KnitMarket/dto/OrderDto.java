@@ -1,6 +1,7 @@
 package com.proj.KnitMarket.dto;
 
 import com.proj.KnitMarket.Constant.OrderStatus;
+import com.proj.KnitMarket.domain.Member.Address;
 import com.proj.KnitMarket.domain.Member.User;
 import com.proj.KnitMarket.domain.Order.Order;
 import com.proj.KnitMarket.domain.Order.OrderItem;
@@ -24,6 +25,7 @@ public class OrderDto {
     private int totalPrice;
     private LocalDateTime regTime;
     private String orderName;
+    private Address address;
 
     public Order toEntity(){
         return Order.builder()
@@ -36,7 +38,7 @@ public class OrderDto {
     }
 
     @Builder
-    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems,int totalPrice,LocalDateTime regTime,String orderName){
+    public OrderDto(Long id, OrderStatus orderStatus,User user, List<OrderItem> orderItems,int totalPrice,LocalDateTime regTime,String orderName, Address address){
         this.id = id;
         this.user = user;
         this.orderStatus = orderStatus;
@@ -44,6 +46,7 @@ public class OrderDto {
         this.totalPrice = totalPrice;
         this.regTime = regTime;
         this.orderName = orderName;
+        this.address = address;
     }
 
 }

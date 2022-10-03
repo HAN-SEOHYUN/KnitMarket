@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="fragments/top.html :: fragment-header"></header>
+<!--페이지소스 시작-->
+<link rel="stylesheet" href="/css/success.css" type="text/css">
+
+<section class="hero">
+  <div class="container">
+    <div class="row">
+      <!--success 시작-->
+      <div class="order-success-wrapper">
+        <div class="order-success-header">
+
+          <div class="user-info-div">
+            <div class="order-success-header-div"><span class="desc-span1">판매된 상품의 배송정보 안내드립니다</span></div>
+          </div>
+         <span class="desc-span2">주문일 최대 3일내에 배송은 고객과의 약속입니다&nbsp;<i class="fa-regular fa-face-smile"></i><br>배송 지연 / 불가 시 반드시 관리자에게 연락부탁드립니다</span>
+        </div>
+        <hr>
+        <div class="order-success-orderId">
+          <h5 class="label">주문번호</h5>
+          <span class = "content" th:text="${order.getId()}"></span>
+        </div>
+        <hr>
+
+
+        <div class="order-success-payments">
+          <div class="orderInfo-div">
+            <span class="label">수령자</span>
+            <span class="content" th:text="${order.user.name}"></span>
+          </div>
+          <div class="orderInfo-div">
+            <span class="label">전화번호</span>
+            <span class="content" th:text="${order.user.hp}"></span>
+          </div>
+
+          <hr>
+          <div class="orderInfo-div">
+            <span class="label">우편번호</span>
+            <span class="content" th:text="${order.address.zipcode}"></span>
+          </div>
+          <div class="orderInfo-div">
+            <span class="label">배송주소</span>
+            <span class="content" th:text="${order.address.address}"></span>
+          </div>
+          <div class="orderInfo-div">
+            <span class="label">배송메세지</span>
+            <span class="content" th:text="${order.address.addressDetail}"></span>
+          </div>
+
+          <hr>
+          <div class="orderInfo-div">
+            <span class="label">주문일</span>
+            <span class="content" th:text="${#temporals.format(order.getRegTime(),'yyyy-MM-dd')}"></span>
+          </div>
+        </div>
+
+        <div class="order-success-footer">
+          <button class="btn btn-dark" type="button" th:onclick="|location.href='@{/mypage/myItem/} + ${session.id}'|">돌아가기</button>
+        </div>
+      </div>
+      <!--success 끝-->
+    </div>
+  </div>
+</section>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/success.js}"></script>
+</body>
+</html>
