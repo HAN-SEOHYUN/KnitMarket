@@ -17,8 +17,9 @@
                     <div class="myItem-card-wrapper">
                         <!--상품Card 시작-->
                         <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper" th:if="${myItemList.size() != 0}">
-                            <a th:href="@{'/item/detail/'+${myItem.id}}">
+
                                 <div class="card mb-3">
+
                                     <div class="row g-0">
                                         <div class="col-md-4">
                                             <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${myItem.getOrginFileName()}"
@@ -26,6 +27,7 @@
                                             <!--th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
                                         </div>
                                         <div class="col-md-8">
+                                            <a th:href="@{'/item/detail/'+${myItem.id}}">
                                             <div class="card-body">
                                                 <h5 class="card-title" th:text="${myItem.itemName}"></h5>
                                                 <div class="card-info">
@@ -40,15 +42,26 @@
                                                                                    th:text="${#temporals.format(myItem.regTime,'yyyy-MM-dd')}"
                                                                                    id="regdate"></small></span>
                                                 </div>
-                                                <span class="sold_out_span"
-                                                      th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}"><i
-                                                        class="fa-solid fa-heart-circle-check"></i>판매완료</span>
+
+
                                             </div>
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
 
-                            </a>
+                            <div class="side-div">
+                                <th:block th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
+                                    <div class ="ordered-info-div">
+                                        <span class="sold_out_span"><i class="fa-solid fa-heart-circle-check"></i>판매완료</span>
+                                        <input type="hidden" th:value="${myItem.orderId}" id ="input-orderId">
+                                        <button class="btn btn-outline-danger" type="submit" id="orderInfo-btn">배송정보</button>
+                                    </div>
+                                </th:block>
+                            </div>
+
+
                         </th:block>
                         <th:block th:unless="${myItemList.size() != 0}">
                             <div class ="empty-div">
@@ -71,5 +84,6 @@
 </section>
 <!--페이지소스 끝-->
 <footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/detail.js}"></script>
 </body>
 </html>

@@ -22,6 +22,7 @@ public class MemberController {
     private final UserService userService;
     private final SellerService sellerService;
 
+    //내 정보 조회
     @GetMapping(value="/info")
     public String mypage_get(Model model,HttpSession httpSession){
         String role = (String)httpSession.getAttribute("role");
@@ -60,7 +61,6 @@ public class MemberController {
     @PostMapping(value = "/address/{addressId}")
     public String address_update_post(@ModelAttribute("address") AddressDto addressDto ,
                                       Model model, @PathVariable(name="addressId")Long addressId){
-        log.info("수정 예정 addressId={}",addressId);
         userService.updateAddress(addressId,addressDto);
         String url ="/mypage/info", msg="주소수정이 완료되었습니다";
         model.addAttribute("url",url);
@@ -72,8 +72,6 @@ public class MemberController {
     @PostMapping(value="/store/{sellerId}")
     public String store_save_post(@RequestParam("store")String store, Model model, @PathVariable(name ="sellerId")Long sellerId,
                                   @RequestParam("accountBank") String accountBank,@RequestParam("accountNum") String accountNum, @RequestParam("accountName")String accountName){
-        log.info("store={}",store);
-        log.info("sellerId={}",sellerId);
         sellerService.updateStore(sellerId, store,accountBank, accountNum,accountName);
 
         String url ="/mypage/info", msg="판매자 정보가 업데이트 되었습니다";
@@ -95,9 +93,17 @@ public class MemberController {
     @GetMapping(value = "/myItem/{sellerId}")
     public String myItem_list_get(@PathVariable ("sellerId")Long sellerId, Model model,HttpSession httpSession){
         List<ItemResponseDto> itemResponseDtoList = sellerService.getMyItemList(sellerId);
-        log.info("itemResponseDtoList={}",itemResponseDtoList.size());
         model.addAttribute("myItemList",itemResponseDtoList);
         return "seller/myItem";
+    }
+
+    //배송정보 조회
+    @GetMapping(value = "/orderInfo/{orderId}")
+    public String orderInfo_get(@PathVariable ("orderId") Long orderId, Model model){
+    OrderDto orderDto = sellerService.getOrderInfo(orderId);
+    model.addAttribute("order", orderDto);
+
+        return "seller/orderInfo";
     }
 
 }
