@@ -29,5 +29,12 @@ function checkFields(){
         alert("모두 입력되지않았습니다. 다시 확인해주세요");
         event.preventDefault();
         return false;
+    }else{
+        if(store.length>8){
+            alert("상점명은 최대 8글자 입력 가능합니다");
+            event.preventDefault();
+            return false;
+        }
+
     }
 }
