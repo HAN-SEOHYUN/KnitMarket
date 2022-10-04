@@ -13,6 +13,9 @@ public class SellerResponseDto {
     private String name;
     private List<ItemResponseDto> items;
     private String store;
+    private String accountBank;
+    private String accountNum;
+    private String accountName;
 
     //entity to DTO
     public SellerResponseDto(Seller entity){
@@ -21,6 +24,9 @@ public class SellerResponseDto {
         this.name=entity.getName();
         this.items = entity.getItem().stream().map(ItemResponseDto::new).collect(Collectors.toList());
         this.store = entity.getStore();
+        this.accountBank = entity.getAccountBank();
+        this.accountNum = entity.getAccountNumber();
+        this.accountName = entity.getAccountName();
     }
 
 }

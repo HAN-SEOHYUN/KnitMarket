@@ -94,7 +94,8 @@ public class CartService {
 
     //장바구니 비우기
     @Transactional
-    public void cartRemoveAll(Long cartId){
-        cartItemRepository.deleteCartItemByCart_Id(cartId);
+    public void cartRemoveAll(Long userId){
+        Cart cart = cartRepository.findCartByUser_Id(userId);
+        cartItemRepository.deleteCartItemByCart_Id(cart.getId());
     }
 }

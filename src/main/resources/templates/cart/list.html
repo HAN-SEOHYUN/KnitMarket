@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/top.html :: fragment-head"></head>
+<head th:replace="fragments/top.html :: fragment-head"></head>
 <body>
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/cartList.css" type="text/css">
 
@@ -16,37 +16,64 @@
                 <div class="cart-list-wrapper-body">
                     <div class="cart-list-card-wrapper">
                         <!--상품Card 시작-->
-                        <th:block th:each="cartItem : ${cartList}" class ="each-card-wrapper">
-                            <div class="card mb-3">
+                        <th:block th:each="cartItem : ${cartList}" class ="each-card-wrapper" th:if="${cartList.size() != 0}">
+                            <div class="card mb-3"  >
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img th:src="@{/uploadImg/} + ${cartItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${cartItem.item.itemName}">
-                                        <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
+                                        <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${cartItem.item.itemName}">
+                                        <!--th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title" th:text="${cartItem.item.itemName}"></h5>
-                                            <p class="card-text" th:text="${cartItem.item.price}"></p>
-                                            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(cartItem.regTime,'yyyy-MM-dd')}"></small></p>
-                                        </div>
+                                            <div class="card-info">
+                                                <label for="price">가격</label>
+                                                <span class="card-text"
+                                                      th:text="${#numbers.formatInteger(cartItem.item.price, 3, 'COMMA') + ' 원'}"
+                                                      id="price"></span>
+                                            </div>
+                                            <div class="card-info">
+                                                <label for="seller">판매자</label>
+                                                <span class="card-text" th:text="${cartItem.item.seller.store}"
+                                                      id="seller"></span>
+                                            </div>
+                                            <div class="card-info">
+                                                <label for="regdate">판매일</label>
+                                                <span class="card-text"><small class="text-muted"
+                                                                               th:text="${#temporals.format(cartItem.regTime,'yyyy-MM-dd')}"
+                                                                               id="regdate"></small></span>
+                                            </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
                             <div id='xWrap' style='display:inline-block'>
-                                <a th:href="@{'/knitmarket/cartRemove/' + ${cartItem.id} }" id='delBtn' th:onclick ="return confirm('장바구니에서 삭제하시겠습니까 ?');">
+                                <a th:href="@{'/cart/cartRemove/' + ${cartItem.id} }" id='delBtn' th:onclick ="return confirm('장바구니에서 삭제하시겠습니까 ?');">
                                 <i class='fa-solid fa-xmark'></i></a>
                             </div>
                             <div id='checkboxWrap' style='display:inline-block'>
                                 <input type="checkbox" name="delCheckbox" th:value="${cartItem.id}">
                             </div>
-
+                            <!---->
+                        </th:block>
+                        <th:block th:unless="${cartList.size() != 0}">
+                            <div class ="empty-div">
+                                <h5>휑</h5>
+                            </div>
+                            <div class ="empty-p-div">
+                            <p>장바구니에 담긴 상품이 없습니다</p>
+                            </div>
                         </th:block>
                         <!--card 끝-->
                     </div>
-                    <div class="cart-list-wrapper-footer">
+                    <div class="cart-list-wrapper-footer" th:if="${cartList.size() != 0}">
                         <!--주문상품 정보-->
-                        <button type="button" class="btn btn-light" id="whiteDelBtn">삭제하기</button>
+                        <button type="button" class="btn btn-secondary" id="whiteDelBtn">삭제하기</button>
                         <button type="button" class="btn btn-dark" id ="blackOrderBtn">주문하기</button>
+                    </div>
+                    <div class="cart-list-wrapper-footer" th:unless="${cartList.size() != 0}">
+                        <!--주문상품 정보-->
+                        <button type="button" class="btn btn-dark" id="indexBtn">주문하러가기</button>
                     </div>
                 </div>
             </div>
@@ -56,7 +83,7 @@
 </section>
 <!--페이지소스 끝-->
 
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
 <script type="text/javascript" th:src="@{/js/cartList.js}"></script>
 </body>
 </html>

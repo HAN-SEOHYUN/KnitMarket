@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/top.html :: fragment-head"></head>
+<head th:replace="fragments/top.html :: fragment-head"></head>
 <body>
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/cartList.css" type="text/css">
 
@@ -10,40 +10,66 @@
     <div class="container">
         <div class="row">
             <!--장바구니목록 시작-->
-            <div class="cart-list-wrapper-div">
+            <div class="cart-list-wrapper-div" style="min-height: 650px;">
                 <div class="cart-list-wrapper-top">
                 </div>
                 <div class="cart-list-wrapper-body">
                     <div class="myItem-card-wrapper">
                         <!--상품Card 시작-->
-                        <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper">
-                            <a th:href="@{'/knitmarket/detail/'+${myItem.id}}">
-                            <div class="card mb-3">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img th:src="@{/uploadImg/} + ${myItem.getOrginFileName()}"
-                                             class="img-fluid rounded-start" th:alt="${myItem.itemName}">
-                                        <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title" th:text="${myItem.itemName}"></h5>
-                                            <p class="card-text" th:text="${myItem.price}"></p>
-                                            <p class="card-text"><small class="text-muted"
-                                                                        th:text="${#temporals.format(myItem.regTime,'yyyy-MM-dd')}"></small>
-                                            </p>
-                                            <span class="sold_out_span"
-                                                  th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">품절</span>
+                        <th:block th:each="myItem : ${myItemList}" class="each-card-wrapper" th:if="${myItemList.size() != 0}">
+
+                                <div class="card mb-3">
+
+                                    <div class="row g-0">
+                                        <div class="col-md-4">
+                                            <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${myItem.getOrginFileName()}"
+                                                 class="img-fluid rounded-start" th:alt="${myItem.itemName}">
+                                            <!--th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
+                                        </div>
+                                        <div class="col-md-8">
+                                            <a th:href="@{'/item/detail/'+${myItem.id}}">
+                                            <div class="card-body">
+                                                <h5 class="card-title" th:text="${myItem.itemName}"></h5>
+                                                <div class="card-info">
+                                                    <label for="price">가격</label>
+                                                    <span class="card-text"
+                                                          th:text="${#numbers.formatInteger(myItem.price, 3, 'COMMA') + ' 원'}"
+                                                          id="price"></span>
+                                                </div>
+                                                <div class="card-info">
+                                                    <label for="regdate">판매일</label>
+                                                    <span class="card-text"><small class="text-muted"
+                                                                                   th:text="${#temporals.format(myItem.regTime,'yyyy-MM-dd')}"
+                                                                                   id="regdate"></small></span>
+                                                </div>
+
+
+                                            </div>
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
+
+                            <div class="side-div">
+                                <th:block th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
+                                    <div class ="ordered-info-div">
+                                        <span class="sold_out_span"><i class="fa-solid fa-heart-circle-check"></i>판매완료</span>
+                                        <input type="hidden" th:value="${myItem.orderId}" id ="input-orderId">
+                                        <button class="btn btn-outline-danger" type="submit" id="orderInfo-btn">배송정보</button>
+                                    </div>
+                                </th:block>
                             </div>
 
-                            <div class="옆에 추가할 것">
 
-                            </a>
+                        </th:block>
+                        <th:block th:unless="${myItemList.size() != 0}">
+                            <div class ="empty-div">
+                                <h5>휑</h5>
                             </div>
-
+                            <div class ="empty-p-div">
+                                <p>등록하신 상품이 없습니다</p>
+                            </div>
                         </th:block>
                         <!--card 끝-->
                     </div>
@@ -57,7 +83,7 @@
     </div>
 </section>
 <!--페이지소스 끝-->
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
 <script type="text/javascript" th:src="@{/js/detail.js}"></script>
 </body>
 </html>

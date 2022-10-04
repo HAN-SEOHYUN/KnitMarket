@@ -14,7 +14,6 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
 public class IndexController { //상품목록
 
     private final HttpSession httpSession;
@@ -23,11 +22,25 @@ public class IndexController { //상품목록
     @GetMapping("/")
     public String index(Model model) {
         List<ItemResponseDto> itemDtoList = itemService.getItemList();
-
         model.addAttribute("itemList",itemDtoList);
         return "index";
     }
 
+    @GetMapping("/introduction")
+    public String introduction(){
+
+        return "common/introduction";
+    }
+
+    @GetMapping("/guide")
+    public String guide(){
+        return "common/guide";
+    }
+
+    @GetMapping("/policy")
+    public String fail(){
+        return "common/policy";
+    }
 }
 
 

@@ -1,3 +1,5 @@
+/*
+
 package com.proj.KnitMarket.Service;
 
 import com.proj.KnitMarket.domain.Member.Seller;
@@ -39,4 +41,25 @@ class SellerServiceTest {
         assertEquals("가게명", changedSeller.getStore());
 
     }
+
+
+    @Test
+    @DisplayName("계좌정보 등록")
+    void test2() {
+        //given
+        Long sellerId = 1L;
+
+        //when
+        Seller savedSeller = sellerRepository.findById(sellerId).orElseThrow(() -> new RuntimeException("판매자 정보가 없습니다. sellerId=" + sellerId));
+        savedSeller.updateAccount("국민은행","35620104183748","한서현");
+
+        //then
+        Seller changedSeller = sellerRepository.findById(sellerId).orElseThrow(() -> new RuntimeException("판매자 정보가 없습니다. sellerId=" + sellerId));
+        assertEquals("국민은행", changedSeller.getAccountBank());
+
+    }
+
+
+
 }
+*/

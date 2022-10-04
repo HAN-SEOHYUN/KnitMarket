@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/top.html :: fragment-head"></head>
+<head th:replace="fragments/top.html :: fragment-head"></head>
 <body>
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/seller/register.css" type="text/css">
 
@@ -17,8 +17,9 @@
                 </div>
                 <div class="item-wrapper-body">
                     <div class="item-form-div">
-                        <form th:action th:object="${item}" method="post" enctype="multipart/form-data">
+                        <form th:action th:object="${item}" method="post" enctype="multipart/form-data" onsubmit="checkFields()" id="frm">
                             <div class="product-info">
+                                <input type="hidden" th:value="${item.getId()}" id ="itemId">
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">상품명</span>
@@ -29,11 +30,13 @@
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">판매자</span>
-                                    <input type="text" id="seller" th:value="${session.name}" readonly
+                                    <input type="text" id="seller" th:value="${seller.store}" readonly
                                            class="form-control" aria-label="Sizing example input"
                                            aria-describedby="inputGroup-sizing-default">
                                 </div>
-
+                                <div style="text-align: left;">
+                                    <span id ="price-intro" style="font-family: 'Nanum Gothic',sans-serif;"><i class="fa-solid fa-circle-exclamation" style="color: darkred"></i>&nbsp;<span style="font-weight: bold; background: linear-gradient(to top, #970f422e 50%, transparent 30%)">배송비를 포함</span>한 상품금액을 입력해주세요</span>
+                                </div>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">상품금액</span>
                                     <input type="text" id="price" th:field="*{price}" class="form-control"
@@ -48,7 +51,8 @@
                                 </div>
 
                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">상품 사진</label>
+                                   <label for="formFile" class="form-label">상품사진을 첨부해주세요 (<span style="font-weight: bold; background: linear-gradient(to top, #970f422e 50%, transparent 30%)">정사각형 사진</span> 추천<i class="fa-regular fa-face-grin-squint"></i>)</label>
+                                    <span style="color: #c00101;font-weight: bold;font-size: 0.7em;">&nbsp;상품 정보 수정 시 사진을 재등록해주세요</span>
                                     <input class="form-control" type="file" id="formFile" th:field="*{file}">
                                 </div>
 
@@ -58,16 +62,14 @@
                                         <option value="SOLD_OUT">픔절</option>
                                     </select>
                                 </div>
-
                             </div>
 
-                            <div th:if="${#strings.isEmpty(item.itemName)}">
-                                <button th:formaction="@{/knitmarket/register}" type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
+                            <div th:if="${item.id eq null}">
+                                <button type="submit" class="btn btn-dark" id="save_Btn">상품등록</button>
                             </div>
-                            <div th:unless="${#strings.isEmpty(item.itemName)}">
-                                <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
+                            <div th:unless="${item.id eq null}">
+                                <button type="submit" class="btn btn-dark" id="update_Btn">상품수정</button>
                             </div>
-
                         </form>
                     </div>
 
@@ -79,7 +81,7 @@
 </section>
 <!--페이지소스 끝-->
 
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
 <script type="text/javascript" th:src="@{/js/register.js}"></script>
 </body>
 </html>

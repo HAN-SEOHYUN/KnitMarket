@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/top.html :: fragment-head"></head>
+<head th:replace="fragments/top.html :: fragment-head"></head>
 <body>
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/order.css" type="text/css">
 
@@ -14,6 +14,7 @@
                 <!--주소-->
                     <div class = "order-list-address-wrapper">
                      <h5>주소확인</h5><span>주소가 올바른지 확인해주세요</span>
+                        <div class = "order-list-address-update"><a th:href="@{/mypage/info}"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         <div class ="order-address-info-div">
                             <div class="user-address"><label for="address-span">주소</label>
                                 <span id="address-span" class="user-information"
@@ -28,7 +29,6 @@
                                 <span id="enterMethod-span" class="user-information"
                                       th:text="${address.enterMethod}"></span></div>
                         </div>
-                        <div class = "order-list-address-update"><a th:href="@{/knitmarket/mypage}"><i class="fa-solid fa-pen-to-square"></i></a></div>
                     </div>
                 <div class="order-list-wrapper-body">
                     <div class="order-list-card-wrapper">
@@ -37,14 +37,25 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img th:src="@{/uploadImg/} + ${orderItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${orderItem.item.itemName}">
-                                        <!--th:src="@{/uploadImg/} + ${cartItem.item.getOrginFileName()}"-->
+                                        <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${orderItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${orderItem.item.itemName}">
+                                        <!--th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title" th:text="${orderItem.item.itemName}"></h5>
-                                            <p class="card-text" th:text="${orderItem.item.price}"></p>
-                                            <p class="card-text"><small class="text-muted" th:text="${#temporals.format(orderItem.item.regTime,'yyyy-MM-dd')}"></small></p>
+                                            <div><h5 class="card-title">상품명</h5><h5
+                                                    th:text="${orderItem.item.itemName}"></h5></div>
+                                            <div><label>상품금액</label>
+                                                <p class="card-text"
+                                                   th:text="${#numbers.formatInteger(orderItem.item.price, 3, 'COMMA') + ' 원'}"></p>
+                                            </div>
+                                            <div><label>판매자</label>
+                                                <p class="card-text"
+                                                   th:text="${orderItem.item.seller.store}"></p>
+                                            </div>
+                                            <div><label>상품등록일</label>
+                                                <p class="card-text"><small class="text-muted"
+                                                                            th:text="${#temporals.format(orderItem.item.regTime,'yyyy-MM-dd')}"></small>
+                                                </p></div>
                                         </div>
                                     </div>
                                 </div>
@@ -54,6 +65,9 @@
                     </div>
                     <div class = "order-info-wrapper">
                         <div class="order-info-div">
+                            <input type="hidden" th:value="${order.getUser().getName()}" id ="userName">
+                            <input type="hidden" th:value="${order.getTotalPrice()}" id ="price">
+
                             <h5>결제정보</h5>
                             <hr>
                             <div class = "order-info"><!--th:text="${order.getTotalPrice()}-->
@@ -70,10 +84,8 @@
                     </div>
                     <div class="order-list-wrapper-footer">
                         <!--주문상품 정보-->
-                        <form method="post" action="">
-                            <input type ="hidden" th:value="${order.getId()}">
-                        <button type="submit" class="btn btn-dark">결제하기</button>
-                        </form>
+                            <input type ="hidden" th:value="${order.getId()}" id ="orderIdInput">
+                        <button type="button" class="btn btn-dark" id="payment-button">결제하기</button>
                     </div>
                 </div>
             </div>
@@ -83,7 +95,34 @@
 </section>
 <!--페이지소스 끝-->
 
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
-<script type="text/javascript" th:src="@{/js/order.js}"></script>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
+<script src="https://js.tosspayments.com/v1"></script>
+<script>
+    var tossPayments = TossPayments("test_ck_OAQ92ymxN34v4YvAZYyrajRKXvdk");
+    var button = document.getElementById("payment-button");
+    var orderId = document.getElementById('orderIdInput').value +"-"+new Date().getTime();
+    //Error: `orderId`는 영문 대소문자, 숫자, 특수문자(-, _) 만 허용합니다. 6자 이상 64자 이하여야 합니다.
+    var orderName = '뜨개장터';
+    var price = document.getElementById('price').value;
+    var customerName = document.getElementById('userName').value;
+
+    button.addEventListener("click", function () {
+        if(document.getElementById("agreeChk").checked === false){
+            alert("개인정보 수집 이용에 동의해주세요");
+            event.preventDefault();
+            return false;
+        }
+        var method = "카드"; // "카드" 혹은 "가상계좌"
+        var paymentData = {
+            amount: price,
+            orderId: orderId,
+            orderName: orderName,
+            customerName: customerName,
+            successUrl: window.location.origin + "/order/success",
+            failUrl: window.location.origin + "/order/fail",
+        };
+        tossPayments.requestPayment(method, paymentData);
+    });
+</script>
 </body>
 </html>

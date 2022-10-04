@@ -1,4 +1,6 @@
 $(function () {
+    var userId = $('#userId').val();
+
     //X버튼 mouseover
     $(document).on('mouseover', '#xWrap', function () {
         $(this).css('background','#f3d2d2');
@@ -22,7 +24,7 @@ $(function () {
         }
 
         if(result){
-            location.href = "/knitmarket/cartRemoveList/"+delCheckedList;
+            location.href = "/cart/cartRemoveList/"+delCheckedList;
         }else{
 
         }
@@ -35,8 +37,19 @@ $(function () {
            alert("장바구니가 비어있습니다");
        }else{
            if(confirm("장바구니 상품을 주문하시겠습니까 ?")){
-               location.href="/knitmarket/order/cartItems";
+               location.href="/order/cartItems";
            }
        }
     });
+
+    //주문하러가기 버튼 클릭 시
+    $(document).on('click', '#indexBtn', function () {
+        location.href="/";
+    });
+
+    //주문목록 버튼 클릭 시
+    $(document).on('click', '#Btn-orderList', function () {
+        location.href="/mypage/orderList/"+userId;
+    });
+
 });

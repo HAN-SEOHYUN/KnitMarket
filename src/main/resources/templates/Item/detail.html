@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="/fragments/top.html :: fragment-head"></head>
+<head th:replace="fragments/top.html :: fragment-head"></head>
 <body>
-<header th:replace="/fragments/top.html :: fragment-header"></header>
+<header th:replace="fragments/top.html :: fragment-header"></header>
 <!--페이지소스 시작-->
 <link rel="stylesheet" href="/css/detail.css" type="text/css">
 
@@ -14,7 +14,7 @@
                 <div class="detail-div" id="detail-wrapper-div">
 
                     <div class="detail-img-div">
-                        <img th:src="@{/uploadImg/} + ${item.getOrginFileName()}" alt="${item.itemName}">
+                        <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${item.getOrginFileName()}" alt="${item.itemName}">
 
                     </div>
                     <div class="detail-info-div">
@@ -24,58 +24,90 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">상품명</span>
                                 <input type="text" class="form-control" aria-label="Username"
-                                       aria-describedby="basic-addon1" th:value="${item.itemName}">
+                                       aria-describedby="basic-addon1" th:value="${item.itemName}" readonly>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text">가격</span>
                                 <input type="text" class="form-control" aria-label="Username"
-                                       aria-describedby="basic-addon1" th:value="${item.price}">
+                                       aria-describedby="basic-addon1" th:value="${item.price}" readonly>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text">판매자</span>
                                 <input type="text" class="form-control" aria-label="Username"
-                                       aria-describedby="basic-addon1" th:value="${item.seller.name}">
+                                       aria-describedby="basic-addon1" th:value="${item.seller.store}" readonly>
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text">등록일</span>
                                 <input type="text" class="form-control" aria-label="Username"
-                                       aria-describedby="basic-addon1" th:value="${#temporals.format(item.getRegTime(),'yyyy-MM-dd')}">
+                                       aria-describedby="basic-addon1" th:value="${#temporals.format(item.getRegTime(),'yyyy-MM-dd')}" readonly>
                             </div>
 
                             <div class="input-group">
                                 <span class="input-group-text">상품설명</span>
-                                <textarea class="form-control" aria-label="With textarea" th:text="${item.itemDesc}"></textarea>
+                                <textarea style="overflow:auto" class="form-control" aria-label="With textarea" th:text="${item.itemDesc}" readonly></textarea>
                             </div>
 
                         </div><!--1-->
 
                         <div class="detail-info-div-2">
                             <form role="form" method="get">
-                            <th:block th:if="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL} and (${session.role}=='user')">
-                                <button th:formaction="@{'/knitmarket/cartAdd/' + ${item.id} }" type="submit" class="btn btn-outline-success" >장바구니</button>
-                                <button th:formaction="@{'/knitmarket/order/' + ${item.id} }" type="submit" class="btn btn-outline-danger" >구매하기</button>
-                            </th:block>
-                            <div th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
-                                <h5>품절된 상품입니다</h5>
-                            </div>
-                            <th:block th:if="(${session.role}=='seller') and (${item.seller.id}==${session.id})">
-                                <button th:formaction="@{'/knitmarket/register/' + ${item.id} }" type="submit" class="btn btn-outline-dark">수정하기</button>
-                                <button th:formaction="@{'/knitmarket/delete/' + ${item.id} }" type="submit" class="btn btn-outline-secondary">삭제하기</button>
-                            </th:block>
+                                <th:block
+                                        th:if="${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL} and (${session.role}=='user')">
+                                    <div class="button-wrpper-div">
+                                        <div class="btn1-div">
+                                            <button th:formaction="@{'/cart/cartAdd/' + ${item.id} }"
+                                                    type="submit" class="btn btn-outline-success"><i class="fa-solid fa-cart-shopping"></i>&nbsp;장바구니
+                                            </button>
+                                        </div>
+                                        <div class="btn2-div">
+                                            <button th:formaction="@{'/order/' + ${item.id} }" type="submit"
+                                                    class="btn btn-outline-danger"><i class="fa-solid fa-square-check"></i>&nbsp;구매하기
+                                            </button>
+                                        </div>
+                                    </div>
+                                </th:block>
+                                <!--품절-->
+                                <div th:if="${item.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
+                                    <div class ="sold-out-div">
+                                    <h5>품절된 상품입니다</h5>
+                                    </div>
+                                </div>
+                                <!--비로그인-->
+                                <th:block th:if="${session.role eq null} and ${item.sellStatus==T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
+                                    <div class ="sold-out-div">
+                                        <h5>로그인 후 상품구매가 가능합니다</h5>
+                                    </div>
+                                </th:block>
+
+                                <th:block th:if="(${session.role}=='seller') and (${item.seller.id}==${session.id})">
+                                    <div class="button-wrpper-div">
+                                        <div class="btn1-div">
+                                            <button th:formaction="@{'/item/register/' + ${item.id} }"
+                                                    type="submit" class="btn btn-outline-dark">수정하기
+                                            </button>
+                                        </div>
+                                        <div class="btn2-div">
+                                            <button th:formaction="@{'/item/delete/' + ${item.id} }" type="submit"
+                                                    class="btn btn-outline-secondary">삭제하기
+                                            </button>
+                                        </div>
+                                    </div>
+                                </th:block>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div><!--상품상세 끝-->
+            </div>
+            <!--상품상세 끝-->
         </div>
     </div>
 </section>
 <!--페이지소스 끝-->
 
-<footer th:replace="/fragments/bottom.html :: fragment-footer"></footer>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
 <script type="text/javascript" th:src="@{/js/detail.js}"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.domain.Order;
 
+import com.proj.KnitMarket.Constant.OrderStatus;
 import com.proj.KnitMarket.domain.BaseEntity;
 import com.proj.KnitMarket.domain.Item.Item;
 import lombok.AccessLevel;
@@ -27,6 +28,7 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="order_id")
     private Order order;
+
 
     @Builder
     public OrderItem(Long id,Item item, Order order) {

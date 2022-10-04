@@ -1,9 +1,9 @@
 .login-wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
-    height:700px;
+    height:550px;
     position: relative;
+    min-height: 650px;
 }
 
 .login-div-1 {
@@ -18,7 +18,6 @@
 .select-user-type {
     display: -webkit-box;
     margin: auto;
-    border: 1px solid;
     width: 90%;
     height: 45px;
     margin-top: 16px;
@@ -43,6 +42,7 @@
 img {
     max-width: 100%;
     display: flex;
+    border-radius : 10px;
 }
 
 .social-img {
@@ -58,23 +58,28 @@ img {
 }
 
 .user-type-div {
-    background: #CC6D58;
-    color: white;
+    color: black;
+    font-size: 21px;
+    font-family: 'Nanum Gothic', sans-serif;
     font-weight: bold;
-    font-size: 18px;
 }
 
 .kakaoLogin-div {
-    background: #F2CCB5;
+    background: #fee500;
     border-radius: 5px;
 }
 
 .naverLogin-div {
-    background: #F2CCB5;
+    background: #03c75a;
     border-radius: 5px;
 }
 
 .googleLogin-div {
-    background: #F2CCB5;
+    background: #e9e9e9;
     border-radius: 5px;
+}
+
+.login-btn > a {
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
 }

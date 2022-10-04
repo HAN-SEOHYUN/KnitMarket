@@ -1,0 +1,87 @@
+.orderList-wrapper {
+    max-width: 100%;
+    position: relative;
+    height:auto;
+    min-height: 630px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table.orderList-table {
+    width: 900px;
+    margin: auto;
+}
+
+tr {
+    text-align: center;
+    height: 49px;
+}
+
+.orderList-wrapper > .order-List-title {
+    width: 400px;
+    margin: 27px;
+    display: flex;
+    font-family: jua,sans-serif;
+}
+
+.orderList-wrapper > .order-List-title > span {
+    font-size: 30px;
+}
+
+.orderList-wrapper > .order-List-title > h5 {
+    font-size: 36px;
+    font-family: 'Jua', sans-serif;
+    color: #970f42;
+}
+
+.orderList-table-wrapper {
+    margin-top: 80px;
+}
+
+tbody > tr:first-child {    font-size: 22px;
+    font-family: 'Nanum Gothic',sans-serif;
+    background: #faf5f6;
+}
+
+td {
+    font-size: 20px;
+}
+
+tbody {
+    background: white;
+    border-radius: 31px;
+    box-shadow: 5px 5px 10px 5px #afadad;
+}
+
+.empty-div > h5 {
+    font-size: 112px;
+    font-family: jua, sans-serif;
+    text-shadow: 2px 1px 3px;
+    color: #6a3f3f;
+    margin-top: 35px;
+    margin-right: 6px;
+}
+
+.empty-div {
+    background: #f6f6f6;
+    width: 272px;
+    margin: auto;
+    padding: 31px;
+    border-radius: 131px;
+    box-shadow: 2px 2px 11px 2px grey;
+    height: 245px;
+    text-align: center;
+}
+
+.empty-p-div > p {
+    margin-top: 45px;
+    font-size: 20px;
+    font-family: 'Nanum Gothic',sans-serif;
+    font-weight: bold;
+}
+
+.empty-p-div {
+    text-align: center;
+}

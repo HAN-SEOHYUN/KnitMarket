@@ -1,15 +1,14 @@
 .wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
     position: relative;
     overflow: hidden;
     height:auto;
+    min-height: 650px;
 }
 
 .cart-list-wrapper-top {
     display: flex;
-    border: 1px solid black;
     height: 70px;
     justify-content: space-between;
     align-items: center;
@@ -20,19 +19,125 @@
 }
 
 .cart-list-wrapper-footer {
-    border: 1px solid black;
     height: auto;
 }
 
-.card.mb-3 {width: 80%;height: auto;}
+.card.mb-3 {    min-width: 600px;
+    width: 600px;
+    height: 200px;}
 
 img.img-fluid.rounded-start {
-    object-fit: contain;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    min-height: 100%;
 }
 
-.col-md-4 {width: 200px;height: 200px;}
+.col-md-4 {
+
+    display: inline-block;
+    height: 198px;
+    width: 198px;
+    overflow: hidden;
+
+}
 
 .cart-list-card-wrapper {
     min-height: 465px;
+    text-align : center;
 }
 
+.col-md-8 {
+    text-align: left;
+}
+
+.card-body h5 {
+    font-size: 28px;
+    margin-bottom: 26px;
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+
+div#xWrap {
+    font-size: 26px;
+    margin: 10px;
+}
+
+input[type="checkbox"] {
+    width: 20px; /*Desired width*/
+    height: 20px; /*Desired height*/
+    cursor: pointer;
+}
+
+.cart-list-wrapper-footer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+span.sold_out_span {
+    float: right;
+    font-size: 22px;
+    color: #970f42;
+    font-family: 'jua',sans-serif;
+}
+
+
+.cart-list-wrapper-footer button {
+    width: 40%;
+}
+
+.card-info label {
+    font-size: 18px;
+    font-family: 'Nanum Gothic',sans-serif;
+    font-weight: bold;
+}
+
+.card-info {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.empty-div > h5 {
+    font-size: 112px;
+    font-family: jua, sans-serif;
+    text-shadow: 2px 1px 3px;
+    color: #6a3f3f;
+    margin-top: 35px;
+    margin-right: 6px;
+}
+
+.empty-div {
+    background: #f6f6f6;
+    width: 272px;
+    margin: auto;
+    padding: 31px;
+    border-radius: 131px;
+    box-shadow: 2px 2px 11px 2px grey;
+    height: 245px;
+}
+
+.empty-p-div > p {
+    margin-top: 45px;
+    font-size: 20px;
+    font-family: 'Nanum Gothic';
+    font-weight: bold;
+}
+
+.myItem-card-wrapper {
+    text-align: center;
+}
+
+.side-div {
+    display: inline-block;
+    min-width: 100px;
+}
+
+.ordered-info-div {
+    display: inline-grid;
+}

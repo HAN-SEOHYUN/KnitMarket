@@ -5,6 +5,7 @@ import com.proj.KnitMarket.Service.KakaoLoginService;
 import com.proj.KnitMarket.Service.SellerService;
 import com.proj.KnitMarket.Service.UserService;
 import com.proj.KnitMarket.domain.Member.User;
+import com.proj.KnitMarket.domain.Member.UserRepository;
 import com.proj.KnitMarket.domain.Order.Cart;
 import com.proj.KnitMarket.domain.Order.CartRepository;
 import com.proj.KnitMarket.dto.CartDto;
@@ -15,12 +16,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Objects;
 /*
         session.setAttribute("id", userId);
         session.setAttribute("email", email);
@@ -33,13 +37,15 @@ import java.util.HashMap;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/knitmarket")
 public class LoginController {
 
     private final KakaoLoginService kakao;
     private final UserService userService;
     private final SellerService sellerService;
     private final CartRepository cartRepository;
+
+    //테스트용
+    private final UserRepository userRepository;
 
     @GetMapping("/login")
     public String login_get() {
@@ -49,7 +55,6 @@ public class LoginController {
         return "user/login";
     }
 
-    //http://localhost:8086/knitmarket/kakaoLogin/requestToken_seller
     @RequestMapping(value = "/kakaoLogin/requestToken_seller") // 판매자 회원 로그인
     public String kakaoLoginRequestToken_seller(@RequestParam("code") String code, Model model,
                                          HttpServletRequest request) {
@@ -66,22 +71,25 @@ public class LoginController {
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
         String socialLoginKey = (String) userInfo.get("socialLoginKey");
+        String hp = (String) userInfo.get("phoneNumber");
 
         SellerRequestDto sellerRequestDto = null;
         Long sellerId;
-        String url="";
+        String url="/";
         String msg="";
 
         //db 중복 확인
         if (!sellerService.existsByEmail(email)) { //신규가입
-            sellerRequestDto = new SellerRequestDto(email, name);
+            sellerRequestDto = new SellerRequestDto(email, name,hp);
             sellerId = sellerService.save(sellerRequestDto);
 
             log.info("신규회원가입 판매자번호={}", sellerId);
+            msg = name+"님, 회원가입을 축하드립니다 ! ";
 
         }else{ //기존회원로그인
             sellerId = sellerService.findByEmail(email).getId();
             log.info("기존판매자 회원번호 ={}",sellerId);
+            msg = name+"님, [판매자] 로그인되었습니다.";
         }
 
         //세션저장
@@ -92,10 +100,10 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
-        model.addAttribute("url","/knitmarket/");
-        model.addAttribute("msg","로그인 되었습니다");
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
 
-        return "/common/message";
+        return "common/message";
     }
 
     @RequestMapping(value = "/kakaoLogin/requestToken_user") // 일반회원로그인
@@ -109,21 +117,22 @@ public class LoginController {
 
         //user email과 name, kakaoId 받아오기
         HashMap<String, Object> userInfo = kakao.getUserInfo(access_Token);
-        log.info("userInfo={}", userInfo);//여기까지 log에 찍힘
+        log.info("userInfo={}", userInfo);
 
         String name = (String) userInfo.get("name");
         String email = (String) userInfo.get("email");
         String socialLoginKey = (String) userInfo.get("socialLoginKey");
+        String hp =(String) userInfo.get("phoneNumber");
 
         UserRequestDto userRequestDto = null;
         Long userId;
-        String url="";
-        String msg="";
+        String url="/";
+        String msg = "";
 
         //db 중복 확인
         if (!userService.existsByEmail(email)) { //신규가입
-            userRequestDto = new UserRequestDto(email, name);
-            User user = userService.save(userRequestDto);
+            userRequestDto = new UserRequestDto(email, name, hp);
+            User user = userService.save (userRequestDto);
             userId = user.getId();
 
             log.info("신규회원가입 회원번호={}", userId);
@@ -134,10 +143,12 @@ public class LoginController {
                     .build();
 
             Cart cart = cartRepository.save(createCartDto.toEntity());
+            msg =name+"님, 회원가입을 축하드립니다 !";
 
         }else{ //기존회원로그인
             userId = userService.findByEmail(email).getId();
             log.info("기존회원 회원번호 ={}",userId);
+            msg =name+"님, [사용자] 로그인되었습니다";
         }
 
         //세션저장
@@ -148,10 +159,20 @@ public class LoginController {
         session.setAttribute("name", name);
         session.setAttribute("role",role);
 
-        model.addAttribute("url","/knitmarket/");
-        model.addAttribute("msg","로그인되었습니다");
 
-        return "/common/message";
+
+        if(name == "최지원"){
+            msg = "서현친구 지원 방문 축하합니다 ^^ 까미사진보내줘.";
+        }else if(name == "홍혜림"){
+            msg ="서현친구 혜림 방문 축하합니다 ^^ 가지말라고 바짓가랑이 잡고싶은 심정";
+        }else if(name == "최주은"){
+            msg ="서현친구 주은 방문 축하합니다 ^^ 아기고양이 고딩주은 돌려주라주라 ..";
+        }
+
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+
+        return "common/message";
     }
 
     //로그아웃
@@ -164,15 +185,71 @@ public class LoginController {
         session.removeAttribute("name");
         session.removeAttribute("role");
 
-        String url = "/knitmarket/", msg ="로그아웃되었습니다";
+        String url = "/", msg ="로그아웃되었습니다";
 
         model.addAttribute("url",url);
         model.addAttribute("msg",msg);
 
-        return "/common/message";
+        return "common/message";
     }
 
+    //세션끊기
+    @GetMapping("/withdraw")
+    public String userdeleteSocial_post(HttpSession session, HttpServletResponse response,
+                                        Model model) {
+        Long no=(Long)session.getAttribute("no");
+
+        String access_Token = (String)session.getAttribute("access_Token");
+        log.info("access_Token={}",access_Token);
+
+        String msg="",url="";
+        int cnt =0;
+
+            if(access_Token!=null) {
+                kakao.unlink(access_Token);
+                log.info("카카오 세션 끊김");
+                msg ="카카오 세션끊기 OK.";
+                url ="/";
+
+                session.invalidate();
+            }else{
+                msg ="먼저 로그인을 해주세요";
+                url="/";
+        }
 
 
+
+        model.addAttribute("msg", msg);
+        model.addAttribute("url", url);
+
+        return "common/message";
+    }
+
+    //테스트 로그인
+    @PostMapping("/testLogin")
+    public String testLogin(@RequestParam ("testId")Long testId, @RequestParam("testPwd")String testPwd,HttpSession session,Model model){
+        log.info("testId={}",testId);
+        log.info("testPwd ={}",testPwd);
+        User user = userRepository.findByIdAndEmail(testId, testPwd);
+
+        String msg = "";
+        String url = "/";
+
+        if(user.getName()!=null || !Objects.equals(user.getName(), "")){
+            msg = "테스트 로그인되었습니다";
+            session.setAttribute("id", user.getId());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("name", user.getName());
+            session.setAttribute("role","user");
+            log.info("SUCCESS");
+        }else{
+            msg = "정보가 일치하지않습니다. 다시 로그인 해주십시오";
+            log.info("FAIL");
+        }
+
+        model.addAttribute("msg", msg);
+        model.addAttribute("url", url);
+        return "common/message";
+    }
 
 }

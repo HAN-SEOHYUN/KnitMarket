@@ -11,14 +11,15 @@ a:hover{
 .item-wrapper-div {
     flex: 0 0 100%;
     max-width: 100%;
-    border: 1px solid #000000;
     position: relative;
     overflow: hidden;
     height:auto;
+    min-height: 650px;
 }
 
 img#logo {
-    width: 206px;
+    height: 100%;
+    width: 100%;
 }
 
 header.header {
@@ -27,15 +28,13 @@ header.header {
 
 .item-wrapper-top {
     display: flex;
-    border: 1px solid black;
     height: 70px;
-    justify-content: space-between;
+    justify-content: end;
     align-items: center;
 }
 
 
 .item-wrapper-bottom {
-    border: 1px solid black;
     height: 70px;
 }
 
@@ -52,7 +51,12 @@ input.search-keyword {
 }
 
 .login-div {
-    padding: 20px;
+    padding: 3px 22px 3px 22px;
+    background: #f5f0f0;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 120px;
+    box-shadow: 5px 5px 5px 1px lightgrey;
 }
 
 .dropdown {
@@ -62,13 +66,15 @@ input.search-keyword {
 }
 
 .col-lg-3 {
-    display: -webkit-inline-box;
+    display: flex;
+    align-items: center;
 }
 
 .login-div > a {
     color: #000000;
     text-decoration: none;
     font-weight: bold;
+    font-family: 'IBM Plex Sans KR',sans-serif;
 }
 
 .login-div > a:hover {
@@ -77,11 +83,7 @@ input.search-keyword {
 
 .card {
     display: inline-block;
-    margin: 41px;
-}
-
-.item-wrapper-body {
-    height: 86%;
+    margin: 20px;
 }
 
 body {
@@ -92,4 +94,83 @@ body {
     min-height: 580px;
 }
 
+.col-lg-6 {display: flex;align-items: center;}
 
+nav.header__menu {display: inline-block;width: 100%;}
+
+nav.header__menu > ul > li > a {
+    font-size: 22px;
+    font-family: IBM Plex Sans KR, sans-serif
+}
+
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info-div > span {
+    font-family: Nanum Gothic, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-itemInfo-div {display: flex;justify-content: space-between;height: 25px;
+    overflow: hidden;}
+
+.card-body p {font-size: 17px;font-family: 'Nanum Gothic';color: #6f6f6f;font-weight: 400;line-height: 26px;margin: 0 0 15px 0;}
+
+.card-itemInfo-div > span {font-family: 'IBM Plex Sans KR';font-size: 18px;color: #a90303;font-weight: bold;}
+
+.card {min-width: 200px;width: 25%;}
+
+.container {
+    width: 70%;
+}
+
+.item-wrapper-body {text-align: center;}
+
+.card-img-div {
+    overflow: hidden;
+    display: inline-block;
+    height:250px;
+}
+
+img.card-img-top {
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    min-height: 100%;
+}
+
+h5.card-title {
+    font-family: 'IBM Plex Sans KR',sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.card-itemName-div {
+    display: flex;
+}
+
+textarea {
+    resize: none;
+}
+
+nav.header__menu ul {
+    min-width: 400px;
+}
+
+div#bottom-col-lg-3 {
+    display: inline-block;
+}
+
+ul.bottom-ul {
+    display: inline-block;
+    width: 600px;
+}
+
+.footer__about {
+    margin-left: 100px;
+}

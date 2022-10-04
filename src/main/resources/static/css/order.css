@@ -25,10 +25,15 @@
 .card.mb-3 {width: 54%;height: auto;}
 
 img.img-fluid.rounded-start {
-    object-fit: contain;
+    overflow: hidden;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    min-height: 100%;
 }
 
-.col-md-4 {width: 200px;height: 200px;}
+.col-md-4 {width: 200px;height: 200px;overflow: hidden;}
 
 .card-body {
     text-align: left;
@@ -46,11 +51,10 @@ img.img-fluid.rounded-start {
 .order-list-address-wrapper > span {display: inline-block;color: red;margin-left: 14px;font-weight: 500;}
 
 .order-address-info-div {
-    width: 91%;
+    width: 98%;
     margin: auto;
-    margin-top: 18px;
+    margin-top: 24px;
     font-size: 18px;
-    display: inline-block;
 }
 
 .order-list-address-update {
@@ -110,5 +114,19 @@ button.btn.btn-dark {
     margin-top: 26px;
 }
 
-input#agreeChk {}
+.card-body > div {
+    display: flex;
+    justify-content: space-between;
+}
+.card-body > div:nth-child(1) {
+    margin-bottom: 17px;
+}
 
+.card-body > div:nth-child(1) > h5 {
+    font-size: 20px;
+    font-weight: 500;
+}
+.order-address-info-div > div {
+    display: flex;
+    justify-content: space-between;
+}

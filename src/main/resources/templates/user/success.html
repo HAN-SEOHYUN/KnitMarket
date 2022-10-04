@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/top.html :: fragment-head"></head>
+<body>
+<header th:replace="fragments/top.html :: fragment-header"></header>
+<!--페이지소스 시작-->
+<link rel="stylesheet" href="/css/success.css" type="text/css">
+
+<section class="hero">
+    <div class="container">
+        <div class="row">
+            <!--success 시작-->
+            <div class="order-success-wrapper">
+                <div class="order-success-header">
+
+                    <div class="user-info-div">
+                        <div class ="order-success-header-div"><span class="name-span" th:text="${order.user.name}"></span><span class="name-span-sub">님</span></div>
+                        <div class="order-success-header-div"><span class="desc-span1">결제가 완료되었습니다</span></div>
+                    </div>
+                    <span class="desc-span2">고객님이 뜨개장터에서 토스페이먼츠 결제서비스를 통해 결제하신 내역입니다</span>
+                </div>
+                <hr>
+                <div class="order-success-orderId">
+                    <h5 class="label">주문번호</h5>
+                    <span class = "content" th:text="${order.getId()}"></span>
+                </div>
+                <hr>
+                <div class ="order-success-address">
+                    <div class="address-div1">
+                        <div><h3 class="label">배송지</h3></div>
+                        <div>
+                            <span class="content" th:text="${address.address} + ${address.addressDetail}">서울특별시 대흥동 고산 16길 48-6 202호</span>
+                        </div>
+                    </div>
+                    <div class="address-div2">
+                        <span class="label">배송메세지</span>
+                        <span class="content" th:text="${address.enterMethod}"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="order-success-item">
+                    <!--item-card 시작-->
+                    <th:block th:each="orderItem : ${orderList}" class ="each-card-wrapper">
+                        <div class="card mb-3">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${orderItem.item.file.getOrginFileName()}" class="img-fluid rounded-start" th:alt="${orderItem.item.itemName}">
+                                    <!--th:src="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/' + ${cartItem.item.getOrginFileName()}"-->
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <div><label>상품명</label>
+                                            <span class="card-title" th:text="${orderItem.item.itemName}"></span></div>
+                                        <div><label>판매자</label>
+                                            <p class="card-text" th:text="${orderItem.item.seller.store}"></p></div>
+                                        <div><label>상품금액</label>
+                                            <p class="card-text"
+                                               th:text="${#numbers.formatInteger(orderItem.item.price, 3, 'COMMA') + ' 원'}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </th:block>
+                    <!--item-card 끝-->
+                </div>
+                <hr>
+                <div class="order-success-payments">
+                    <div class="payment-method">
+                        <span class="label">결제수단</span>
+                        <span class="content">카드</span>
+                    </div>
+                    <div class="payment-status">
+                        <span class="label">결제상태</span>
+                        <span class="content" th:text="${order.getOrderStatus()}"></span>
+                    </div>
+                    <div class="payment-time">
+                        <span class="label">결제일시</span>
+                        <span class="content" th:text="${#temporals.format(order.getRegTime(),'yyyy-MM-dd')}"></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="order-success-totalPirce">
+                    <span class="label">결제금액</span>
+                    <span class="content" th:text = "${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}">5000원</span>
+                </div>
+                <div class="order-success-footer">
+<!--                    <button class="btn btn-dark" type="button" th:formaction="@{'/order/orderDetail/' + ${order.user.id} }">주문목록</button>-->
+                    <button class="btn btn-dark" type="button" th:onclick="|location.href='@{/mypage/orderList/} + ${order.user.id}'|">주문목록</button>
+                </div>
+            </div>
+            <!--success 끝-->
+        </div>
+    </div>
+</section>
+<footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
+<script type="text/javascript" th:src="@{/js/success.js}"></script>
+</body>
+</html>

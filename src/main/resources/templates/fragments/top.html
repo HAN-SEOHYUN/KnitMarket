@@ -17,6 +17,9 @@
 
     <!-- Css Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Gowun+Dodum&family=IBM+Plex+Sans+KR&family=Jua&family=Nanum+Gothic&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="/css/style.css" type="text/css">
     <link rel="stylesheet" href="/css/main.css" type="text/css">
@@ -27,46 +30,40 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="/knitmarket/"><img src="/img/LOGO.png" alt="로고사진" id="logo"></a>
+                    <a href="/"><img src="/img/LOGO.png" alt="로고사진" id="logo"></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="#">이용방법</a></li>
-                        <li><a href="#">사이트소개</a></li>
-                        <li><a href="#">장터가기</a></li>
-                        <li> <!-- 세션 role 이 seller 면 '상품등록' 아니라면 '연락처' -->
-                            <a th:href="@{/knitmarket/register}" th:if="${session.role}=='seller'">상품등록</a> <!--타임리프 문자열비교-->
-                            <th:block th:unless="${session.role}=='seller'">
-                                <a th:href="@{/knitmarket/}">연락처</a>
-                            </th:block>
-
+                        <li class="active"><a th:href="@{/}">장터가기</a></li>
+                        <li><a th:href="@{/introduction}">사이트소개</a></li>
+                        <li><a th:href="@{/guide}">이용방법</a></li>
+                        <li th:if="${session.role}=='seller'"> <!-- 세션 role 이 seller 면 '상품등록' 아니라면 '연락처' -->
+                            <a th:href="@{/item/register}">상품등록</a> <!--타임리프 문자열비교-->
                         </li>
                     </ul>
                 </nav>
             </div>
             <div class="col-lg-3">
                 <div class="login-div">
-                    <a th:href="@{/knitmarket/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
+                    <a th:href="@{/login}" th:if="${session.id eq null}" style="text-align: right;">로그인</a>
                     <th:block th:unless="${session.id eq null}">
-                        <label>[[${session.name}]] 님 &nbsp;</label>
-                        <a th:href="@{/knitmarket/logout}" style="text-align: right;">로그아웃</a>
+                        <label>[[${session.name}]] 님</label>
+                        <a th:href="@{/logout}" style="text-align: right;"><br>로그아웃</a>
                     </th:block>
                 </div> <!--<i class="fa fa-solid fa-user"></i>-->
-                <div class="dropdown">
+                <div class="dropdown" th:if="!${session.id eq null}">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-solid fa-user"></i>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/knitmarket/mypage}">내정보</a></li>
-                        <li><a class="dropdown-item" th:href="@{/knitmarket/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
+                        <li><a class="dropdown-item" th:href="@{/mypage/info}">내정보</a></li>
+                        <li><a class="dropdown-item" th:href="@{/cart/cartlist}" th:if="${session.role=='user'}">장바구니</a></li>
                         <th:block th:unless="${session.role=='user'}">
-                            <a class="dropdown-item" th:href="@{/knitmarket/myItem}">내상품</a>
+                            <a class="dropdown-item" th:href="@{/mypage/myItem/} + ${session.id}">내상품</a>
                         </th:block>
-
-                        <li><a class="dropdown-item" href="#">주문내역</a></li>
+                        <li th:if="${session.role=='user'}"><a class="dropdown-item" th:href="@{/mypage/orderList/} + ${session.id}">주문내역</a></li>
                     </ul>
                 </div>
             </div> <!--col-lg-3-->

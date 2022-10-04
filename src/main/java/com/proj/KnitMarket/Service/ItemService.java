@@ -34,7 +34,7 @@ public class ItemService {
     private final FileEntityRepository fileRepository;
     private final FileService fileService;
 
-    public String uploadDir = ConstUtil.UPLOAD_IMG_PATH_TEST; //이미지 저장할 폴더
+    public String uploadDir = ConstUtil.UPLOAD_IMG_PATH; //이미지 저장할 폴더
 
     //@Transactional : db 트랜잭션 자동으로 commit 해줌
     @Transactional //아이템 등록
@@ -45,8 +45,6 @@ public class ItemService {
         if (itemDto.getFile() != null) {
 
             MultipartFile file = itemDto.getFile();
-            String filePath = uploadDir + file.getOriginalFilename();
-            file.transferTo(new File(filePath));
 
             FileRequestDto fileDto = FileRequestDto.builder()
                     .orginFileName(file.getOriginalFilename())

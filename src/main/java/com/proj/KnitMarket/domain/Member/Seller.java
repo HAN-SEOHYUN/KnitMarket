@@ -35,13 +35,31 @@ public class Seller extends BaseEntity {
     @OrderBy("id asc")
     private List<Item> item = new ArrayList<>(); // 판매자가 판매중인 상품들
 
+    @Column
+    private String hp; //전화번호
+
+    @Column
+    private String accountBank; //계좌은행
+
+    @Column
+    private String accountNumber; //계좌번호
+
+    @Column
+    private String accountName; //계좌주
+
+
     @Builder
-    public Seller(String name, String email) {
+    public Seller(String name, String email,String hp) {
         this.name = name;
         this.email = email;
+        this.hp = hp;
     }
 
-    public void updateStore(String store){
+    public void updateStore(String store, String accountBank, String accountNumber, String accountName){
         this.store = store;
+        this.accountBank = accountBank;
+        this.accountNumber = accountNumber;
+        this.accountName = accountName;
     }
+
 }

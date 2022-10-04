@@ -1,5 +1,8 @@
+/*
 package com.proj.KnitMarket.Service;
 
+import com.proj.KnitMarket.Constant.OrderStatus;
+import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.Order.OrderItemRepository;
 import com.proj.KnitMarket.domain.Order.OrderRepository;
 import com.proj.KnitMarket.dto.OrderDto;
@@ -22,11 +25,13 @@ class OrderServiceTest {
     @Autowired
     private OrderRepository orderRepository;
 
-    @BeforeEach
+    */
+/*@BeforeEach
     void clean(){
         orderItemRepository.deleteAll();
         orderRepository.deleteAll();
-    }
+    }*//*
+
 
     @Test
     @DisplayName("단일주문정보입력")
@@ -55,7 +60,21 @@ class OrderServiceTest {
 
     }
 
+    @Test
+    @DisplayName("결제 후 item status 변경테스트 ")
+    void test3(){
+        //given
+        Long orderId = 229L;
+        //when
+        OrderDto orderDto = orderService.changeStatus(orderId);
+        //then
+        //assertEquals("SOLD_OUT",orderDto.getOrderItems().get(0).getItem().getSellStatus());
+        //assertEquals(OrderStatus.ORDER,orderDto.getOrderStatus());
+
+
+    }
 
 
 
-}
+
+}*/
