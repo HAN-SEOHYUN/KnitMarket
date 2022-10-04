@@ -55,7 +55,6 @@ public class LoginController {
         return "user/login";
     }
 
-    //http://localhost:8086/kakaoLogin/requestToken_seller
     @RequestMapping(value = "/kakaoLogin/requestToken_seller") // 판매자 회원 로그인
     public String kakaoLoginRequestToken_seller(@RequestParam("code") String code, Model model,
                                          HttpServletRequest request) {
