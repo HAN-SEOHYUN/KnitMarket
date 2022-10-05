@@ -50,6 +50,7 @@ $(function () {
            if(confirm("장바구니 상품을 주문하시겠습니까 ?")){
                location.href="/order/cartItems";
            }
+           //TEST
        }
 
 
