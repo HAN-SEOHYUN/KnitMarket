@@ -34,9 +34,22 @@
 <li>데이터베이스 : Hibernate, MariaDB</li>
 <li>배포 : AWS EC2, S3, RDS, ELB</li>
 <hr>
-<p>스토리보드, DB설계를 포함한 프로젝트의 자세한 소개와<BR>
-프로젝트 진행 중 배운 지식과 마주친 오류들은<BR>
-개인 블로그에 [springBoot & JPA 프로젝트] 말머리를 달아 게시글로 정리했습니다.<p>
 
+<h3>프로젝트소개</h3>
+<li>기획</li>
+<li>기능소개</li>
+<li>스토리보드</li>
+<li>DB설계</li>
+<li>TIME LOG</li>
+<br>
+<p>위 내용을 포함한 프로젝트의 자세한 소개와<BR>
+프로젝트 진행 중 배운 지식과 마주친 오류들은<BR>
+개인 블로그에 [springBoot & JPA 프로젝트] 말머리를 달아 <b>게시글로 정리했습니다.</b><p>
 <h2>https://feelfreetothink.tistory.com/111</h2>
+
+<br>
+<h3>아쉬운 점 & 보완할 점</h3>
+<h2>https://feelfreetothink.tistory.com/129</h2>
+
+
 
