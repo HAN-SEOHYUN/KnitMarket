@@ -66,7 +66,6 @@ public class SellerService {
         List<ItemResponseDto> itemResponseDtoList = new ArrayList<>();
         List<OrderItem> orderItemList = orderItemRepository.findOrderItemByOrder_OrderStatusAndItem_Seller_Id(OrderStatus.ORDER, sellerId);
 
-
         for (Item item : itemLists) {
             ItemResponseDto itemResponseDto = ItemResponseDto.builder()
                     .id(item.getId())

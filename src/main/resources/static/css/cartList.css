@@ -56,6 +56,7 @@ img.img-fluid.rounded-start {
     margin-bottom: 26px;
     font-family: 'Nanum Gothic';
     font-weight: bold;
+    display: inline-block;
 }
 
 .card-body {

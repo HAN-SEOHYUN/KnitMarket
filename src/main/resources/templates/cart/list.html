@@ -26,6 +26,7 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title" th:text="${cartItem.item.itemName}"></h5>
+                                            <span class ="sold_out_span" id="sold-out-span" th:if="${cartItem.getSellStatus()!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">이미 판매된 상품입니다</span>
                                             <div class="card-info">
                                                 <label for="price">가격</label>
                                                 <span class="card-text"

@@ -1,5 +1,6 @@
 package com.proj.KnitMarket.dto;
 
+import com.proj.KnitMarket.Constant.SellStatus;
 import com.proj.KnitMarket.domain.Item.Item;
 import com.proj.KnitMarket.domain.Order.Cart;
 import com.proj.KnitMarket.domain.Order.CartItem;
@@ -17,6 +18,7 @@ public class CartItemDto {
     private Cart cart;
     private Item item;
     private LocalDateTime regTime;
+    private SellStatus sellStatus;
 
     public CartItem toEntity(){
         return CartItem.builder()
