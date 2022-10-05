@@ -75,6 +75,9 @@ public class CartService {
                     .item(cartItem.getItem())
                     .regTime(cartItem.getRegTime())
                     .build();
+            //sellstatus 추가
+            Item item = itemRepository.findItemById(cartItem.getItem().getId());
+            cartItemDto.setSellStatus(item.getSellStatus());
 
             cartItemDtoList.add(cartItemDto);
         }

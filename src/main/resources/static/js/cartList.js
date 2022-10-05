@@ -33,13 +33,26 @@ $(function () {
     //장바구니 주문하기 버튼 클릭 시
     $(document).on('click', '#blackOrderBtn', function () {
        var count = document.getElementsByClassName('card-body').length;
-       if(count<1){
-           alert("장바구니가 비어있습니다");
+
+       //이미 품절된 상품이 포함되었을 시 이벤트 중지
+       const soldoutlist = new Array();
+       var soldout_Item_NUM = 0;
+
+       $("#sold-out-span").each(function (index, item) {
+           soldout_Item_NUM++;
+       });
+
+       if(soldout_Item_NUM>0){
+            alert("품절된 상품이 포함되어있습니다. /n 삭제 후 재시도해주세요");
+            event.preventDefault();
+            return flase;
        }else{
            if(confirm("장바구니 상품을 주문하시겠습니까 ?")){
                location.href="/order/cartItems";
            }
        }
+
+
     });
 
     //주문하러가기 버튼 클릭 시
