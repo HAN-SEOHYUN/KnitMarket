@@ -43,7 +43,7 @@ $(function () {
        });
 
        if(soldout_Item_NUM>0){
-            alert("품절된 상품이 포함되어있습니다. /n 삭제 후 재시도해주세요");
+            alert("품절된 상품이 포함되어있습니다. 삭제 후 재시도해주세요");
             event.preventDefault();
             return false; //
        }else{
