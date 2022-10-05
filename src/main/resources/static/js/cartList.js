@@ -1,6 +1,5 @@
 $(function () {
     var userId = $('#userId').val();
-    //test
 
     //X버튼 mouseover
     $(document).on('mouseover', '#xWrap', function () {
