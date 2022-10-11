@@ -10,6 +10,7 @@ import com.proj.KnitMarket.domain.Order.*;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class OrderService {
+
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;

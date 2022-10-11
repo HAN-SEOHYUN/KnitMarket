@@ -11,6 +11,7 @@ import com.proj.KnitMarket.domain.Order.OrderRepository;
 import com.proj.KnitMarket.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,12 @@ import java.util.Map;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+
+    @Value("tosspayments.ck")
+    private String tossPayments_ck;
+
+    @Value("tosspayments.sk")
+    private String tossPayments_sk;
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -107,14 +114,13 @@ public class OrderController {
     }
 
     //결제
-    private final String SECRET_KEY = "test_sk_qLlDJaYngro2Bjq0Y2KVezGdRpXx";
 
     @RequestMapping("/success")
     public String confirmPayment(
             @RequestParam String paymentKey, @RequestParam String orderId, @RequestParam Long amount,
             Model model) throws Exception {
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Basic " + Base64.getEncoder().encodeToString((SECRET_KEY + ":").getBytes()));
+        headers.set("Authorization", "Basic " + Base64.getEncoder().encodeToString((tossPayments_sk + ":").getBytes()));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         Map<String, String> payloadMap = new HashMap<>();
