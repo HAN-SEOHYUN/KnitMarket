@@ -1,6 +1,5 @@
 package com.proj.KnitMarket.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proj.KnitMarket.Service.CartService;
@@ -33,10 +32,10 @@ import java.util.Map;
 @RequestMapping("/order")
 public class OrderController {
 
-    @Value("tosspayments.ck")
+    @Value("${tosspayments.ck}")
     private String tossPayments_ck;
 
-    @Value("tosspayments.sk")
+    @Value("${tosspayments.sk}")
     private String tossPayments_sk;
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -120,6 +119,7 @@ public class OrderController {
             @RequestParam String paymentKey, @RequestParam String orderId, @RequestParam Long amount,
             Model model) throws Exception {
         HttpHeaders headers = new HttpHeaders();
+        log.info("tossPayments_sk={}",tossPayments_sk);
         headers.set("Authorization", "Basic " + Base64.getEncoder().encodeToString((tossPayments_sk + ":").getBytes()));
         headers.setContentType(MediaType.APPLICATION_JSON);
 

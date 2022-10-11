@@ -109,7 +109,7 @@ public class UserService {
         List<Order> orderList = orderRepository.findOrdersByUser_IdAndOrderStatus(userId, OrderStatus.ORDER);
         List <OrderDto> orderDtoList = new ArrayList<>();
 
-        int itemQty = 0;
+
         String orderName = "";
         OrderDto orderDto = new OrderDto();
 
@@ -117,15 +117,12 @@ public class UserService {
             List<OrderItem> orderItemList = orderItemRepository.findOrderItemByOrder_Id(order.getId());
             log.info("size={}",orderItemList.size());
 
-            for(OrderItem orderItem : orderItemList){ //주문1개의 상품개수만큼
-                itemQty ++;
-                orderName = orderItem.getItem().getItemName();
-                log.info("orderItem={}",orderItem.getItem().getItemName());
-                log.info("itemQty={}",itemQty);
-            }
+            int itemQty = orderItemList.size()-1;
+            orderName = orderItemList.get(0).getItem().getItemName();
+            log.info("itemQty={}",itemQty);
+            log.info("orderName={}",orderName);
 
-            if(itemQty>=2){
-                itemQty -= 1;
+            if(2<=orderItemList.size()){
                 orderName = orderName + " 외 " + itemQty +"개";
             }
 
