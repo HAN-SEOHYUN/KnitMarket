@@ -98,10 +98,10 @@
 <footer th:replace="fragments/bottom.html :: fragment-footer"></footer>
 <script src="https://js.tosspayments.com/v1"></script>
 <script>
-    var tossPayments = TossPayments("test_ck_OAQ92ymxN34v4YvAZYyrajRKXvdk");
+    var tossPayments = TossPayments("live_ck_mnRQoOaPz8LZJqXOLdNVy47BMw6v"); //라이브 클라이언트키
     var button = document.getElementById("payment-button");
     var orderId = document.getElementById('orderIdInput').value +"-"+new Date().getTime();
-    //Error: `orderId`는 영문 대소문자, 숫자, 특수문자(-, _) 만 허용합니다. 6자 이상 64자 이하여야 합니다.
+
     var orderName = '뜨개장터';
     var price = document.getElementById('price').value;
     var customerName = document.getElementById('userName').value;
