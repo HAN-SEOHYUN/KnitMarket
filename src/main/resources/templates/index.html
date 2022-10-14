@@ -12,14 +12,11 @@
             <div class="item-wrapper-div">
 
                 <div class="item-wrapper-top">
-                    <!--<div class="search-area">
-                        <select>
-                            <option>옵션</option>
-                        </select>&nbsp;
-                        <input type="text" class="search-keyword">&nbsp;
-                        <button type="button" class="btn btn-outline-secondary" id="search-btn">검색</button>
-                    </div>-->
-                    <div class="info-div" th:if="${session.id eq null}"><i class="fa-solid fa-location-arrow"></i><span>&nbsp;오픈예정인 웹서비스입니다.(테스트 ID/PW : 1004/test123)</span></div>
+                    <!--오픈예정인 웹서비스입니다.(테스트 ID/PW : 1004/test123)-->
+                    <div class="info-div" th:if="${session.id eq null}"><span>&nbsp;PC 접속을 권장합니다.(모바일 접속 X)&nbsp;</span></div>
+                    <div class="info-div" th:if="${session.id eq null}"><i class="fa-solid fa-location-arrow"></i><span>&nbsp;로그인 후 상품구매 가능합니다&nbsp;<i class="fa-regular fa-face-grin-wide"></i></span></div>
+
+
                 </div>
 
                 <!--상품목록시작-->
@@ -29,10 +26,6 @@
                         <a th:href="@{'/item/detail/'+${item.id}}">
                             <div class="card">
                                 <div class="card-img-div">
-                        <!--            C:\Users\user\Desktop\proj\Knitmarket\src\main\webapp\static\uploadImg-->
-         <!--                           src="${pageContext.request.contextPath}/images/test9.png-->
-                                    <!--th:src="'http://knitmarket.shop/uploadImg/'+ ${item.getOrginFileName()}" -->
-                                    <!--https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/%EA%B5%AC%EB%A6%84.jpg-->
                                 <img th:src ="'https://knitmarket-s3.s3.ap-northeast-2.amazonaws.com/uploadImg/'+${item.getOrginFileName()}" class="card-img-top"
                                      th:alt="${item.itemName}">
                                 </div>
@@ -49,17 +42,8 @@
                             </div>
                         </a>
                     </th:block>
-
-
                 </div>
                 <!--상품목록 끝-->
-
-                <!--페이징시작-->
-                <div class="item-wrapper-bottom">
-
-
-                </div>
-                <!--페이징끝-->
 
             </div>
         </div>
