@@ -29,7 +29,7 @@ header.header {
 .item-wrapper-top {
     display: flex;
     height: 70px;
-    justify-content: end;
+    justify-content: space-between;
     align-items: center;
 }
 
