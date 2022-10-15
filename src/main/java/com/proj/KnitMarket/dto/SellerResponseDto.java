@@ -16,6 +16,7 @@ public class SellerResponseDto {
     private String accountBank;
     private String accountNum;
     private String accountName;
+    private String hp;
 
     //entity to DTO
     public SellerResponseDto(Seller entity){
@@ -27,6 +28,7 @@ public class SellerResponseDto {
         this.accountBank = entity.getAccountBank();
         this.accountNum = entity.getAccountNumber();
         this.accountName = entity.getAccountName();
+        this.hp = entity.getHp();
     }
 
 }
