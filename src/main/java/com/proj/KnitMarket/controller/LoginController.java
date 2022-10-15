@@ -82,7 +82,7 @@ public class LoginController {
 
         //db 중복 확인
         if (!sellerService.existsByEmail(email)) { //신규가입
-            sellerRequestDto = new SellerRequestDto(email, name,hp);
+            sellerRequestDto = new SellerRequestDto(email, name,hp,socialLoginKey);
             sellerId = sellerService.save(sellerRequestDto);
 
             log.info("신규회원가입 판매자번호={}", sellerId);
@@ -134,7 +134,7 @@ public class LoginController {
 
         //db 중복 확인
         if (!userService.existsByEmail(email)) { //신규가입
-            userRequestDto = new UserRequestDto(email, name, hp);
+            userRequestDto = new UserRequestDto(email, name, hp,socialLoginKey);
             User user = userService.save (userRequestDto);
             userId = user.getId();
 
@@ -211,7 +211,7 @@ public class LoginController {
             if(access_Token!=null) {
                 kakao.unlink(access_Token);
                 log.info("카카오 세션 끊김");
-                msg ="카카오 세션끊기 OK.";
+                msg ="세션끊기 OK.";
                 url ="/";
 
                 session.invalidate();
@@ -257,7 +257,7 @@ public class LoginController {
 
     //네이버 판매자 로그인
     @RequestMapping("/naverLogin/requestToken_seller")
-    public String authNaver(@RequestParam String code, @RequestParam String state,
+    public String authNaver_seller(@RequestParam String code, @RequestParam String state,
                              Model model, HttpServletRequest request,
                             HttpServletResponse response)
             throws JsonProcessingException {
@@ -283,7 +283,7 @@ public class LoginController {
 
         //db 중복 확인
         if (!sellerService.existsByEmail(email)) { //신규가입
-            sellerRequestDto = new SellerRequestDto(email, name,hp);
+            sellerRequestDto = new SellerRequestDto(email, name,hp,id);
             sellerId = sellerService.save(sellerRequestDto);
 
             log.info("신규회원가입 판매자번호={}", sellerId);
@@ -312,5 +312,66 @@ public class LoginController {
 
 
     //네이버 사용자 로그인
+    @RequestMapping("/naverLogin/requestToken_user")
+    public String authNaver_user(@RequestParam String code, @RequestParam String state,
+                            Model model, HttpServletRequest request,
+                            HttpServletResponse response)
+            throws JsonProcessingException {
+        String role = "user";
+        log.info("code : {}", code);
+
+        String accessToken = naver.getAccessToken(code, state);
+        log.info("accessToken : {}", accessToken);
+
+        JsonNode json = naver.getNaverUserInfo(accessToken);
+        log.info("json : {}", json);
+
+        String id = json.get("id").asText();
+        String name = json.get("name").asText();
+        String email = json.get("email").asText();
+        String hp = json.get("mobile").asText().replace("-", "");
+        log.info("id={}, name={}, email={}, mobile={}", id, name, email, hp);
+
+        UserRequestDto userRequestDto = null;
+        Long userId;
+        String url="/";
+        String msg = "";
+
+        //db 중복 확인
+        if (!userService.existsByEmail(email)) { //신규가입
+            userRequestDto = new UserRequestDto(email, name, hp, id);
+            User user = userService.save (userRequestDto);
+            userId = user.getId();
+
+            log.info("신규회원가입 회원번호={}", userId);
+
+            //장바구니 생성
+            CartDto createCartDto = CartDto.builder()
+                    .user(user)
+                    .build();
+
+            Cart cart = cartRepository.save(createCartDto.toEntity());
+            msg =name+"님, 회원가입을 축하드립니다 !";
+
+        }else{ //기존회원로그인
+            userId = userService.findByEmail(email).getId();
+            log.info("기존회원 회원번호 ={}",userId);
+            msg =name+"님, [사용자] 로그인되었습니다";
+        }
+
+
+        //세션저장
+        HttpSession session=request.getSession();
+        session.setAttribute("id", userId);
+        session.setAttribute("email", email);
+        session.setAttribute("access_Token",id); //로그아웃때 필요한 ID
+        session.setAttribute("name", name);
+        session.setAttribute("role",role);
+
+        model.addAttribute("url",url);
+        model.addAttribute("msg",msg);
+
+        return "common/message";
+    }
 
 }
