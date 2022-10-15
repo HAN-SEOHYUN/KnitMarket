@@ -29,8 +29,9 @@
 }
 
 .kakaoImg-div {
-    width: 314px;
-    display: inline-block;
+    width: 330px;
+    display: flex;
+    margin-bottom: 17px;
 }
 
 .step-title {
@@ -41,6 +42,7 @@ span.desc-span {
     font-size: 21px;
     font-family: Nanum Gothic,sans-serif;
     font-weight: bold;
+    display: inline-block;
 }
 
 img#myBtn {

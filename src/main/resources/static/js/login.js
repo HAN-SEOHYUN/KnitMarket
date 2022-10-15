@@ -26,7 +26,7 @@ $(function () {
         var kakaoUrl = "https://nid.naver.com/oauth2.0/authorize?" +
             "response_type=code" +
             "&client_id=AU7orLrqqxELyBf6vaPd" +
-            "&redirect_uri=http://localhost:8080/naverLogin/requestToken_" + role +
+            "&redirect_uri=http://knitmarket.shop/naverLogin/requestToken_" + role +
             "&state=STATE_STRING";
         location.href = kakaoUrl;
     });//한개만 선택되게하기

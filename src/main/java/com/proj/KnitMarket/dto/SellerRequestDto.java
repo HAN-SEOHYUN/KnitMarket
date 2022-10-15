@@ -15,19 +15,22 @@ public class SellerRequestDto {
     private String name;
     private String store;
     private String hp;
+    private String social_private_key;
 
     public Seller toEntity(){
         return Seller.builder()
                 .email(email)
                 .name(name)
                 .hp(hp)
+                .social_private_key(social_private_key)
                 .build();
     }
 
     @Builder
-    public SellerRequestDto(String email, String name,String hp) {
+    public SellerRequestDto(String email, String name,String hp,String social_private_key) {
         this.email = email;
         this.name = name;
         this.hp = hp;
+        this.social_private_key = social_private_key;
     }
 }

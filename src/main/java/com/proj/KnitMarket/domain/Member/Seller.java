@@ -47,12 +47,16 @@ public class Seller extends BaseEntity {
     @Column
     private String accountName; //계좌주
 
+    @Column
+    private String social_private_key; //소셜 로그인 키
+
 
     @Builder
-    public Seller(String name, String email,String hp) {
+    public Seller(String name, String email,String hp, String social_private_key) {
         this.name = name;
         this.email = email;
         this.hp = hp;
+        this.social_private_key = social_private_key;
     }
 
     public void updateStore(String store, String accountBank, String accountNumber, String accountName){
