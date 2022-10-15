@@ -13,11 +13,14 @@
                 <div class="mypage-info-wrapper-div">
 
                     <div class="member-information-div">
-                        <h5>내 정보</h5>
+                        <h5 style="display: inline-block;">내 정보</h5><span style="display: inline-block;float: right;color: red;font-size: 14px;">
+                        내 정보는 수정할 수 없습니다.</span>
                         <div class="member-information"><label for="name">이름</label>
                             <span id="name" th:text="${member.name}"></span></div>
                         <div class="member-information"><label for="email">이메일</label>
                             <span id="email" class="user-information" th:text="${member.email}"></span></div>
+                        <div class="member-information"><label for="hp">전화번호</label>
+                            <span id="hp" class="user-information" th:text="${member.hp}"></span></div>
                     </div>
                     <!---->
                     <div class="member-second-information-div">
