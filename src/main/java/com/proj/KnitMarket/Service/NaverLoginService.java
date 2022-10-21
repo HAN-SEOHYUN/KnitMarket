@@ -75,17 +75,7 @@ public class NaverLoginService {
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(responseBody);
 
-        /*Long id = jsonNode.get("response").get("id").asLong();
-        String nickname = jsonNode.get("response").get("nickname").asText();*/
         JsonNode jsonResponse = jsonNode.get("response");
-
-        /*return NaverUserInfoDto.builder()
-                .id(id)
-                .nickname(nickname)
-                .profileImage(profileImage)
-                .build();*/
         return jsonResponse;
     }
-
-
 }
