@@ -163,7 +163,6 @@ public class LoginController {
         session.setAttribute("role",role);
 
 
-
         if(name == "최지원"){
             msg = "서현친구 지원 방문 축하합니다 ^^ 까미사진보내줘.";
         }else if(name == "홍혜림"){
@@ -358,7 +357,6 @@ public class LoginController {
             log.info("기존회원 회원번호 ={}",userId);
             msg =name+"님, [사용자] 로그인되었습니다";
         }
-
 
         //세션저장
         HttpSession session=request.getSession();
