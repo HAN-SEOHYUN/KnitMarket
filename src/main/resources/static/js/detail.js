@@ -5,12 +5,12 @@ $('textarea').each(function () {
     this.style.height = (this.scrollHeight) + 'px';
 });
 
-$(function () {
+/*$(function () {
     $(document).on('click', '#orderInfo-btn', function () {
-
         var orderId = $('#input-orderId').val();
-        var url = '/mypage/orderInfo/';
+        console.log("orderId="+orderId);
+        var url = '/mypage/orderInfo/'+orderId;
 
-        location.href=url+orderId;
+        location.href=url;
     });
-});
+});*/
