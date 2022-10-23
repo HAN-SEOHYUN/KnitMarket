@@ -55,8 +55,8 @@
                                 <th:block th:if="${myItem.sellStatus!=T(com.proj.KnitMarket.Constant.SellStatus).SELL}">
                                     <div class ="ordered-info-div">
                                         <span class="sold_out_span"><i class="fa-solid fa-heart-circle-check"></i>판매완료</span>
-                                        <input type="hidden" th:value="${myItem.orderId}" id ="input-orderId">
-                                        <button class="btn btn-outline-danger" th:onclick="|location.href='@{/mypage/orderInfo/} + ${myItem.orderId}'|" id="orderInfo-btn">배송정보</button>
+                                        <input type="hidden" th:value="${myItem.getOrderId()}" id ="input-orderId">
+                                        <button class="btn btn-outline-danger" type="button" th:onclick="|location.href='@{/mypage/orderInfo/} + ${myItem.getOrderId()}'|" id="orderInfo-btn">배송정보</button>
                                     </div>
                                 </th:block>
                             </div>
