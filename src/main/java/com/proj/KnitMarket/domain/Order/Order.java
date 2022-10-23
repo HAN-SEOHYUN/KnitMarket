@@ -37,6 +37,7 @@ public class Order extends BaseEntity {
     private int totalPrice;
 
 
+
     @Builder
     public Order(Long id, User user, OrderStatus orderStatus, List<OrderItem>orderItems, int totalPrice, LocalDateTime regTime) {
         this.id = id;
