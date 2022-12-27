@@ -8,7 +8,7 @@
 <li>포트폴리오용으로 만든 서비스로, 뜨개장터는 수익을 창출하지 않습니다.</li>
 <br><br>
 <h3>장터가기<h3>
-<h3><a href ="https://www.knitmarket.shop/">https://www.knitmarket.shop/</a></h3>
+<h3><strike>https://www.knitmarket.shop/</strike></h3>
 
 <br>
 <h3>Dependency</h3>
