@@ -9,6 +9,7 @@
 <br><br>
 <h3>장터가기<h3>
 <h3><strike>https://www.knitmarket.shop/</strike></h3>
+<p>서비스 종료되어 서버에서 프로젝트를 내렸습니다.</p>
 
 <br>
 <h3>Dependency</h3>
